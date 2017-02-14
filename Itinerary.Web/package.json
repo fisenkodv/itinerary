@@ -2,9 +2,9 @@
   "name": "itinerary-web",
   "version": "1.0.0",
   "scripts": {
-    "build-dev": "ng build --target=development --verbose",
+    "build-dev": "ng build --target=development",
     "build-production": "ng build --target=production",
-    "watch-dev": "ng build --target=development --watch --verbose",
+    "watch-dev": "ng build --target=development --watch",
     "watch-production": "ng build --target=production"
   },
   "dependencies": {
