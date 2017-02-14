@@ -278,3 +278,4 @@ __pycache__/
 # !tools/packages.config
 Itinerary.Web/.awcache/
 Itinerary.Web/Client/dist/
+Itinerary.Web/wwwroot/dist/

@@ -8,22 +8,6 @@ namespace Itinerary.Web.Server.Api
   [Route( "api/[controller]" )]
   public class TestController : Controller
   {
-    /*
-    private IHubContext _hub;
-    private ILogger<TestController> _logger;
-    private string uploadDirectory;
-
-    public TestController(ILogger<TestController> logger, IHostingEnvironment environment, IConnectionManager connectionManager) //, IHostingEnvironment environment
-    {
-        _hub = connectionManager.GetHubContext<ChatHub>();
-        _logger = logger;
-        IHostingEnvironment  _environment = environment;
-        var location = System.Reflection.Assembly.GetEntryAssembly().Location;
-        uploadDirectory = _environment.WebRootPath + $@"/{"uploads"}";
-        Directory.CreateDirectory(uploadDirectory);      //Should be in startup
-    }
-    */
-
     private static string[] Names = new[]
                                     {
                                       "Mark Pieszak", "Angular mcAngular", "Redux-man", "Nintendo"
