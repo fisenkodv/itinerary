@@ -18,7 +18,7 @@ npm install
 The dev middleware feature means you don’t normally need to invoke Webpack manually. But if you do want to run Webpack manually on the command line, you can run the following:
 
 ```
-node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js 
+node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js
 node node_modules/webpack/bin/webpack.js
 ```
 

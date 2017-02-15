@@ -1,4 +1,4 @@
-// Load required polyfills and testing libraries
+﻿// Load required polyfills and testing libraries
 import 'angular2-universal-polyfills';
 import 'zone.js/dist/long-stack-trace-zone';
 import 'zone.js/dist/proxy.js';
@@ -18,8 +18,8 @@ __karma__.loaded = function () {};
 
 // First, initialize the Angular testing environment
 testing.getTestBed().initTestEnvironment(
-    testingBrowser.BrowserDynamicTestingModule,
-    testingBrowser.platformBrowserDynamicTesting()
+  testingBrowser.BrowserDynamicTestingModule,
+  testingBrowser.platformBrowserDynamicTesting()
 );
 
 // Then we find all the tests

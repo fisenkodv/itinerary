@@ -276,6 +276,6 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/**
 # !tools/packages.config
-Itinerary.Web/.awcache/
-Itinerary.Web/Client/dist/
+npm-debug.log
+Itinerary.Web/ClientApp/dist/
 Itinerary.Web/wwwroot/dist/

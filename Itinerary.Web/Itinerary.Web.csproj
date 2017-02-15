@@ -46,9 +46,13 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="npm-debug.log" />
     <None Remove="yarn.lock" />
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\favicon.ico" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->

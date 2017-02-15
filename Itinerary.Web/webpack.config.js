@@ -1,4 +1,4 @@
-const path = require('path');
+﻿const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
