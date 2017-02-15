@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="npm-debug.log" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Gray.Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-alpha1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.0" />
