@@ -1,5 +1,3 @@
-// TODO(gdi2290): switch to DLLs
-
 // Polyfills
 
 // import 'ie-shim'; // Internet Explorer 9 support
@@ -31,13 +29,9 @@ import 'zone.js/dist/zone';
 
 if ('production' === ENV) {
   // Production
-
 } else {
-
   // Development
   Error.stackTraceLimit = Infinity;
-
   /* tslint:disable no-var-requires */
   require('zone.js/dist/long-stack-trace-zone');
-
 }
