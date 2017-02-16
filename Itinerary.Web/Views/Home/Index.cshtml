@@ -1,9 +1,10 @@
-﻿@{ ViewData["Title"] = "Home Page"; }
+@{
+    ViewData["Title"] = "Home Page";
+}
 
-<itinerary-app asp-prerender-module="ClientApp/dist/main-server">Loading...</itinerary-app>
+<app>Loading...</app>
 
-<script src="~/dist/vendor.js" asp-append-version="true"></script>
-
+<!--<script src="~/dist/vendor.js" asp-append-version="true"></script>-->
 @section scripts {
-  <script src="~/dist/main-client.js" asp-append-version="true"></script>
+    <!--<script src="~/dist/main-client.js" asp-append-version="true"></script>-->
 }
