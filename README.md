@@ -11,7 +11,7 @@ npm install
 2. Set an environment variable to tell ASP.NET to run in development mode:
 * If you’re using PowerShell in Windows, execute ```$Env:ASPNETCORE_ENVIRONMENT = "Development"```
 * If you’re using cmd.exe in Windows, execute ```setx ASPNETCORE_ENVIRONMENT "Development"```, and then restart your command prompt to make the change take effect
-* If you’re using Mac/Linux, execute export ```ASPNETCORE_ENVIRONMENT=Development```
+* If you’re using Mac/Linux, execute ```export ASPNETCORE_ENVIRONMENT=Development```
 3. Start your the app by running ```dotnet run```. It will listen on port 5000, so point your browser to [http://localhost:5000](http://localhost:5000) to see it.
 
 #### Invoking Webpack manually ####
@@ -38,8 +38,6 @@ dotnet publish -c Release
 
 This will produce a ready-to-deploy production build of your application. It includes .NET code compiled in Release mode, and invokes Webpack with the ```--env.prod``` flag to produce a production build of front-end assets. Equivalently, you can use the Publish option from Visual Studio’s Build menu.
 
-### Itinerary.Api
-
-
 ## Links
+* [Microsoft ASP.NET Core JavaScript Services](https://github.com/aspnet/JavaScriptServices)
 * [Building Single Page Applications on ASP.NET Core with JavaScriptServices](https://blogs.msdn.microsoft.com/webdev/2017/02/14/building-single-page-applications-on-asp-net-core-with-javascriptservices/)

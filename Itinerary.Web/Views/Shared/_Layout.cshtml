@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Itinerary_Web</title>
+        <base href="/" />
+        <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+    </head>
+    <body>
+        @RenderBody()
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@ViewData["Title"] - Itinerary</title>
-  <base href="/" />
-  <!--<link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />-->
-
-  <script type="text/javascript" asp-append-version="true" src="~/polyfills.bundle.js" defer></script>
-  <script type="text/javascript" asp-append-version="true" src="~/vendor.bundle.js" defer></script>
-  <script type="text/javascript" asp-append-version="true" src="~/main.bundle.js" defer></script>
-</head>
-</head>
-
-<body>
-  @RenderBody() @RenderSection("scripts", required: false)
-</body>
-
+        @RenderSection("scripts", required: false)
+    </body>
 </html>
