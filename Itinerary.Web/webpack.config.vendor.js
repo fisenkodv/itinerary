@@ -33,6 +33,8 @@ module.exports = (env) => {
         'event-source-polyfill',
         'jquery',
         'zone.js',
+        'hammerjs',
+        '@angular/material/core/theming/prebuilt/deeppurple-amber.css'
       ]
     },
     output: {
