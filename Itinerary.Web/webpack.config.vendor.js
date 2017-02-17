@@ -1,10 +1,10 @@
-const path = require('path');
+﻿const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 
 module.exports = (env) => {
-  const extractCSS = new ExtractTextPlugin('vendor.css');
+  const extractCss = new ExtractTextPlugin('vendor.css');
   const isDevBuild = !(env && env.prod);
   const sharedConfig = {
     stats: { modules: false },
@@ -53,11 +53,11 @@ module.exports = (env) => {
     output: { path: path.join(__dirname, 'wwwroot', 'dist') },
     module: {
       rules: [
-        { test: /\.css(\?|$)/, use: extractCSS.extract({ use: 'css-loader' }) }
+        { test: /\.css(\?|$)/, use: extractCss.extract({ use: 'css-loader' }) }
       ]
     },
     plugins: [
-      extractCSS,
+      extractCss,
       new webpack.DllPlugin({
         path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
         name: '[name]_[hash]'
@@ -72,7 +72,7 @@ module.exports = (env) => {
     resolve: { mainFields: ['main'] },
     output: {
       path: path.join(__dirname, 'ClientApp', 'dist'),
-      libraryTarget: 'commonjs2',
+      libraryTarget: 'commonjs2'
     },
     module: {
       rules: [{ test: /\.css(\?|$)/, use: ['to-string-loader', 'css-loader'] }]

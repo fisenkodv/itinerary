@@ -1,5 +1,5 @@
 {
-  "name": "Itinerary_Web",
+  "name": "itinerary-web",
   "version": "0.0.0",
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js"
