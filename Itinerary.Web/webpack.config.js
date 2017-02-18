@@ -31,8 +31,8 @@ module.exports = (env) => {
   const clientBundleConfig = merge(sharedConfig, {
     entry: {
       'main-client': './ClientApp/boot-client.ts',
-      'polyfills': './ClientApp/polyfills.ts',
-      'styles': './ClientApp/app/styles.scss'
+      //'polyfills': './ClientApp/polyfills.ts',
+      'styles': './ClientApp/styles/main.scss'
     },
     output: { path: path.join(__dirname, clientBundleOutputDir) },
     plugins: [

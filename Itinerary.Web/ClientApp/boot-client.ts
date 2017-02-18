@@ -2,7 +2,6 @@
 import { enableProdMode } from '@angular/core';
 import { platformUniversalDynamic } from 'angular2-universal';
 import { AppModule } from './app/app.module';
-//import 'bootstrap';
 const rootElemTagName = 'itinerary-root'; // Update this if you change your root component selector
 
 // Enable either Hot Module Reloading or production mode
