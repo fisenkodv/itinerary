@@ -19,7 +19,7 @@ module.exports = (env) => {
         { test: /\.ts$/, include: /ClientApp/, use: ['awesome-typescript-loader?silent=true', 'angular2-template-loader'] },
         { test: /\.html$/, use: 'html-loader?minimize=false' },
         { test: /\.css$/, use: ['to-string-loader', 'css-loader'] },
-        { test: /\.scss$/, use: ['to-string-loader', 'css-loader', 'sass-loader'] },
+        { test: /\.scss$/, use: ['to-string-loader', 'style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader'] },
         { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
       ]
     },
@@ -29,7 +29,11 @@ module.exports = (env) => {
   // Configuration for client-side bundle suitable for running in browsers
   const clientBundleOutputDir = './wwwroot/dist';
   const clientBundleConfig = merge(sharedConfig, {
-    entry: { 'main-client': './ClientApp/boot-client.ts' },
+    entry: {
+      'main-client': './ClientApp/boot-client.ts',
+      'polyfills': './ClientApp/polyfills.ts',
+      'styles': './ClientApp/app/styles.scss'
+    },
     output: { path: path.join(__dirname, clientBundleOutputDir) },
     plugins: [
       new webpack.DllReferencePlugin({

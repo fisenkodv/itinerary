@@ -1,29 +1,33 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { UniversalModule } from 'angular2-universal';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './components/app/app.component'
-import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
+
+import { AppComponent } from './app.component';
+
+
+
+
+import { BrowserModule } from '@angular/platform-browser';
+
 
 @NgModule({
-  bootstrap: [AppComponent],
   declarations: [
-    AppComponent,
-    NavMenuComponent,
-    CounterComponent,
-    FetchDataComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
-    UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
-    MaterialModule,
+    //UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
+    BrowserModule,
+    MaterialModule.forRoot(),
+    FormsModule,
+    HttpModule,
     AppRoutingModule
-  ]
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
