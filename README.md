@@ -2,7 +2,7 @@
 
 ## Projects
 ### Itinerary.Web
-#### Steps to run: ####
+#### Steps to run ####
 1. Restore both the .NET and NPM dependencies. Execute the following commands:
 ```
 dotnet restore
@@ -37,6 +37,9 @@ dotnet publish -c Release
 ```
 
 This will produce a ready-to-deploy production build of your application. It includes .NET code compiled in Release mode, and invokes Webpack with the ```--env.prod``` flag to produce a production build of front-end assets. Equivalently, you can use the Publish option from Visual Studio’s Build menu.
+
+## Guidelines ##
+1. [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)
 
 ## Links
 * [Microsoft ASP.NET Core JavaScript Services](https://github.com/aspnet/JavaScriptServices)
