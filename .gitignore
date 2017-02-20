@@ -279,3 +279,4 @@ __pycache__/
 Itinerary.Web/.awcache/
 Itinerary.Web/Client/dist/
 Itinerary.Web/wwwroot/dist/
+Itinerary.Web/ClientApp/dist/
