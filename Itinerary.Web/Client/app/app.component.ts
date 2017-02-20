@@ -6,5 +6,5 @@
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Itinerary works!';
+  title = 'Itinerary worksfdsafd!';
 }

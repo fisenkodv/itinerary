@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "Client",
-      "outDir": "wwwroot",
+      "outDir": "wwwroot/dist",
       "assets": [
         "assets",
         "favicon.ico"
