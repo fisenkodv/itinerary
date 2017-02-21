@@ -2,7 +2,11 @@
   "name": "itinerary-web",
   "version": "0.0.0",
   "scripts": {
-    "test": "karma start ClientApp/test/karma.conf.js"
+    "test": "karma start ClientApp/test/karma.conf.js",
+    "build:dev": "node node_modules/webpack/bin/webpack.js",
+    "build-vendor:dev": "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js",
+    "build:prod": "node node_modules/webpack/bin/webpack.js --env.prod",
+    "build-vendor:prod": "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod"
   },
   "dependencies": {
     "@angular/common": "^2.4.8",

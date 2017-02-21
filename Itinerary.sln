@@ -3,7 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Web", "Itinerary.Web\Itinerary.Web.csproj", "{E5F66C00-4C7A-4221-B873-ABE5C67813C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Web", "src\Itinerary.Web\Itinerary.Web.csproj", "{E5F66C00-4C7A-4221-B873-ABE5C67813C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9642DFEB-4937-484F-BDB0-B3808731A114}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Tests", "test\Itinerary.Tests\Itinerary.Tests.csproj", "{50ED1CCE-680B-467A-9B73-89B3D30F0857}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +40,24 @@ Global
 		{E5F66C00-4C7A-4221-B873-ABE5C67813C6}.Release|x64.Build.0 = Release|x64
 		{E5F66C00-4C7A-4221-B873-ABE5C67813C6}.Release|x86.ActiveCfg = Release|x86
 		{E5F66C00-4C7A-4221-B873-ABE5C67813C6}.Release|x86.Build.0 = Release|x86
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|x64.ActiveCfg = Debug|x64
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|x64.Build.0 = Debug|x64
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|x86.ActiveCfg = Debug|x86
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|x86.Build.0 = Debug|x86
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|x64.ActiveCfg = Release|x64
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|x64.Build.0 = Release|x64
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|x86.ActiveCfg = Release|x86
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5F66C00-4C7A-4221-B873-ABE5C67813C6} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
+		{50ED1CCE-680B-467A-9B73-89B3D30F0857} = {9642DFEB-4937-484F-BDB0-B3808731A114}
 	EndGlobalSection
 EndGlobal
