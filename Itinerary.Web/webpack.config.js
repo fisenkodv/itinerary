@@ -9,7 +9,7 @@ module.exports = (env) => {
   const sharedConfig = {
     stats: { modules: false },
     context: __dirname,
-    resolve: { extensions: ['.js', '.ts'] },
+    resolve: { extensions: ['.js', '.ts', '.scss'] },
     output: {
       filename: '[name].js',
       publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
@@ -32,7 +32,7 @@ module.exports = (env) => {
     entry: {
       'main-client': './ClientApp/boot-client.ts',
       //'polyfills': './ClientApp/polyfills.ts',
-      'styles': './ClientApp/styles/main.scss'
+      'styles': ['./ClientApp/styles/main.scss', './ClientApp/styles/itinerary-theme.scss']
     },
     output: { path: path.join(__dirname, clientBundleOutputDir) },
     plugins: [

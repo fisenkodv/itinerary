@@ -1,4 +1,4 @@
-<div>
+<div [class.dark-theme]="isDarkTheme">
   <md-toolbar color="primary">
     <span>
       <md-icon class="icon-20">card_travel</md-icon>
@@ -10,7 +10,7 @@
   </md-toolbar>
   <md-menu x-position="before" #menu="mdMenu">
     <button md-menu-item (click)="openDialog()">Settings</button>
-    <button md-menu-item>Toggle Theme</button>
+    <button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle Theme</button>
     <button md-menu-item>Help</button>
   </md-menu>
   <md-sidenav-container>

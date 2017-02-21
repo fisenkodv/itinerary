@@ -23,6 +23,7 @@ export class AppComponent {
 
   @ViewChild('sidenav') sidenav: MdSidenav;
   currentPlace = {};
+  isDarkTheme = false;
 
   constructor(public dialog: MdDialog, public vcr: ViewContainerRef) {
 
