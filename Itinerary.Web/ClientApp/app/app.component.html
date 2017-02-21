@@ -1,0 +1,51 @@
+<div [class.dark-theme]="isDarkTheme">
+  <md-toolbar color="primary">
+    <span>
+      <md-icon class="icon-20">card_travel</md-icon>
+      Itinerary
+    </span>
+    <button md-icon-button [md-menu-trigger-for]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>
+  </md-toolbar>
+  <md-menu x-position="before" #menu="mdMenu">
+    <button md-menu-item (click)="openDialog()">Settings</button>
+    <button md-menu-item (click)="isDarkTheme=!isDarkTheme">Toggle Theme</button>
+    <button md-menu-item>Help</button>
+  </md-menu>
+  <md-sidenav-container>
+    <md-sidenav align="end" mode="side" #sidenav>
+      <md-tab-group>
+        <md-tab>
+          <template md-tab-label>Details</template>
+          <p>Name: {{currentPlace.name}}</p>
+          <p>Human: {{currentPlace.name}}</p>
+          <p>Age: {{currentPlace.age}}</p>
+          <button md-raised-button md-button (click)="sidenav.close()" color="accent">CLOSE</button>
+        </md-tab>
+        <md-tab>
+          <template md-tab-label>Feed</template>
+        </md-tab>
+      </md-tab-group>
+    </md-sidenav>
+    <md-grid-list cols="4" rowHeight="200px">
+      <md-grid-tile *ngFor="let place of places" [rowspan]="place.rows">
+        <img [src]="getPlaceFileName(place.name)" alt="photo of {{place.name}}">
+        <md-grid-tile-footer>
+          <h3 md-line>{{place.name}}</h3>
+          <span md-line>{{place.name}}</span>
+          <button md-icon-button (click)="showPlace(place)">
+            <md-icon>info</md-icon>
+          </button>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+  </md-sidenav-container>
+</div>
+
+
+
+<!--<h1>
+  {{title}}
+</h1>
+<router-outlet></router-outlet>-->

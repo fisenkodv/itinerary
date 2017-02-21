@@ -3,37 +3,12 @@
     "moduleResolution": "node",
     "target": "es5",
     "sourceMap": true,
-    "rootDir": ".",
-    "baseUrl": ".",
-    "declaration": false,
-    "outDir": "wwwroot/dist",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipDefaultLibCheck": true,
     "lib": [ "es6", "dom" ],
-    "types": [
-      "hammerjs",
-      "jasmine",
-      "node",
-      "source-map",
-      "selenium-webdriver",
-      "uglify-js",
-      "webpack"
-    ],
-    "paths": {
-      "app" : ["./Client/app" ],
-      "app-shared": [ "./Client/shared" ],
-      "app-containers": [ "./Client/containers" ],
-      "app-components": [ "./Client/components" ]
-    }
+    "types": [ "node" ]
   },
-  "exclude": [ "bin", "wwwroot", "node_modules" ],
-  "compileOnSave": false,
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true,
-    "useCache": true
-  },
-  "buildOnSave": false,
+  "exclude": [ "bin", "node_modules" ],
   "atom": { "rewriteTsconfig": false }
 }

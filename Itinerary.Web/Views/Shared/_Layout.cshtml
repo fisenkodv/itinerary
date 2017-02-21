@@ -1,23 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>@ViewData["Title"] - Itinerary</title>
-  <base href="/" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>@ViewData[ "Title" ] - Itinerary Web</title>
+  <base href="/"/>
+  <!--<link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true"/>-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-
 <body>
-  @RenderBody()
+@RenderBody()
 
-  @RenderSection("scripts", required: false)
-
-  <script type="text/javascript" src="~/dist/inline.bundle.js" asp-append-version="true"></script>
-  <script type="text/javascript" src="~/dist/polyfills.bundle.js" asp-append-version="true"></script>
-  <script type="text/javascript" src="~/dist/styles.bundle.js" asp-append-version="true"></script>
-  <script type="text/javascript" src="~/dist/vendor.bundle.js" asp-append-version="true"></script>
-  <script type="text/javascript" src="~/dist/main.bundle.js" asp-append-version="true"></script>
+@RenderSection( "scripts", required: false )
 </body>
-
 </html>

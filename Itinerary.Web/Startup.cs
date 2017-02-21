@@ -11,9 +11,9 @@ namespace Itinerary.Web
   {
     public Startup( IHostingEnvironment env )
     {
-      IConfigurationBuilder builder = new ConfigurationBuilder()
+      var builder = new ConfigurationBuilder()
         .SetBasePath( env.ContentRootPath )
-        .AddJsonFile( "appsettings.json", optional: false, reloadOnChange: true )
+        .AddJsonFile( "appsettings.json", optional: true, reloadOnChange: true )
         .AddJsonFile( $"appsettings.{env.EnvironmentName}.json", optional: true )
         .AddEnvironmentVariables();
       Configuration = builder.Build();
@@ -37,14 +37,11 @@ namespace Itinerary.Web
       if ( env.IsDevelopment() )
       {
         app.UseDeveloperExceptionPage();
-        app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-        {
-          HotModuleReplacement = true
-        });
-
-        // Browser Link is not compatible with Kestrel 1.1.0
-        // For details on enabling Browser Link, see https://go.microsoft.com/fwlink/?linkid=840936
-        // app.UseBrowserLink();
+        app.UseWebpackDevMiddleware(
+          new WebpackDevMiddlewareOptions
+          {
+            HotModuleReplacement = true
+          } );
       }
       else
       {
@@ -59,6 +56,10 @@ namespace Itinerary.Web
           routes.MapRoute(
             name: "default",
             template: "{controller=Home}/{action=Index}/{id?}" );
+
+          routes.MapSpaFallbackRoute(
+            name: "spa-fallback",
+            defaults: new { controller = "Home", action = "Index" } );
         } );
     }
   }

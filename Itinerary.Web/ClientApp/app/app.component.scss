@@ -1,0 +1,30 @@
+/* app styles here */
+
+.icon-20 {
+  font-size: 20px;
+}
+
+md-toolbar-row {
+  justify-content: space-between;
+}
+
+md-sidenav-container {
+  height: 100vh;
+}
+
+md-sidenav {
+  width: 320px;
+}
+
+[md-raised-button] {
+  width: 100%;
+}
+
+md-grid-list {
+  max-width: 1403px;
+  margin: 16px;
+}
+
+p {
+  margin: 16px;
+}

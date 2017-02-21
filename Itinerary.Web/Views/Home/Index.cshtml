@@ -1,9 +1,13 @@
 ﻿@{
-  ViewData[ "Title" ] = "Itenerary";
+  ViewData[ "Title" ] = "Home Page";
 }
 
 <itinerary-root>Loading...</itinerary-root>
 
-@section scripts {
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+<script src="~/dist/styles.js" asp-append-version="true"></script>
+<!--<script src="~/dist/polyfills.js" asp-append-version="true"></script>-->
 
+@section scripts {
+  <script src="~/dist/main-client.js" asp-append-version="true"></script>
 }
