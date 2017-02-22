@@ -1,4 +1,4 @@
-const path = require('path');
+﻿const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
@@ -16,7 +16,7 @@ module.exports = (env) => {
     },
     module: {
       rules: [
-        { test: /\.ts$/, include: /ClientApp/, use: ['awesome-typescript-loader?silent=true', 'angular2-template-loader'] },
+        { test: /\.ts$/, include: /Client/, use: ['awesome-typescript-loader?silent=true', 'angular2-template-loader'] },
         { test: /\.html$/, use: 'html-loader?minimize=false' },
         { test: /\.css$/, use: ['to-string-loader', 'css-loader'] },
         { test: /\.scss$/, use: ['to-string-loader', 'style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader'] },
@@ -30,9 +30,9 @@ module.exports = (env) => {
   const clientBundleOutputDir = './wwwroot/dist';
   const clientBundleConfig = merge(sharedConfig, {
     entry: {
-      'main-client': './ClientApp/boot-client.ts',
-      //'polyfills': './ClientApp/polyfills.ts',
-      'styles': ['./ClientApp/styles/main.scss', './ClientApp/styles/itinerary-theme.scss']
+      'main': './Client/boot-client.ts',
+      //'polyfills': './Client/polyfills.ts',
+      'styles': ['./Client/styles/main.scss', './Client/styles/itinerary-theme.scss']
     },
     output: { path: path.join(__dirname, clientBundleOutputDir) },
     plugins: [
@@ -55,18 +55,18 @@ module.exports = (env) => {
   // Configuration for server-side (prerendering) bundle suitable for running in Node
   const serverBundleConfig = merge(sharedConfig, {
     resolve: { mainFields: ['main'] },
-    entry: { 'main-server': './ClientApp/boot-server.ts' },
+    entry: { 'main-server': './Client/boot-server.ts' },
     plugins: [
       new webpack.DllReferencePlugin({
         context: __dirname,
-        manifest: require('./ClientApp/dist/vendor-manifest.json'),
+        manifest: require('./Client/dist/vendor-manifest.json'),
         sourceType: 'commonjs2',
         name: './vendor'
       })
     ],
     output: {
       libraryTarget: 'commonjs',
-      path: path.join(__dirname, './ClientApp/dist')
+      path: path.join(__dirname, './Client/dist')
     },
     target: 'node',
     devtool: 'inline-source-map'
