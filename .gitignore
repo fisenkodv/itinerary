@@ -277,5 +277,5 @@ __pycache__/
 # tools/**
 # !tools/packages.config
 npm-debug.log
-Itinerary.Web/wwwroot/dist/
+src/Itinerary.Web/wwwroot/dist/
 src/Itinerary.Web/ClientApp/dist/
