@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Common", "src\Iti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.DataAccess", "src\Itinerary.DataAccess\Itinerary.DataAccess.csproj", "{E912125E-1F1C-4AEF-90E7-9DC0CDC5F982}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Crawler", "src\Itinerary.Crawler\Itinerary.Crawler.csproj", "{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,18 @@ Global
 		{E912125E-1F1C-4AEF-90E7-9DC0CDC5F982}.Release|x64.Build.0 = Release|x64
 		{E912125E-1F1C-4AEF-90E7-9DC0CDC5F982}.Release|x86.ActiveCfg = Release|x86
 		{E912125E-1F1C-4AEF-90E7-9DC0CDC5F982}.Release|x86.Build.0 = Release|x86
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Debug|x64.ActiveCfg = Debug|x64
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Debug|x64.Build.0 = Debug|x64
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Debug|x86.ActiveCfg = Debug|x86
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Debug|x86.Build.0 = Debug|x86
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Release|x64.ActiveCfg = Release|x64
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Release|x64.Build.0 = Release|x64
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Release|x86.ActiveCfg = Release|x86
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,5 +103,6 @@ Global
 		{50ED1CCE-680B-467A-9B73-89B3D30F0857} = {9642DFEB-4937-484F-BDB0-B3808731A114}
 		{F8AB7668-2CBE-4FC0-9CE4-4D866DB9CE7E} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 		{E912125E-1F1C-4AEF-90E7-9DC0CDC5F982} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
+		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 	EndGlobalSection
 EndGlobal
