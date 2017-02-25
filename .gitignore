@@ -279,3 +279,4 @@ __pycache__/
 npm-debug.log
 src/Itinerary.Web/wwwroot/dist/
 src/Itinerary.Web/Client/dist/
+src/Itinerary.Crawler/download/

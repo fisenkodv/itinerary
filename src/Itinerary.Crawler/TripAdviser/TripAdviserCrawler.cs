@@ -64,7 +64,7 @@ namespace Itinerary.Crawler.TripAdviser
     {
       var httpClient = new HttpClient();
       Directory.CreateDirectory( path: "download" );
-      string segmentFilename = $"download\\{lat:0.0000}_{lng:0.0000}_{zoom}_{size}.json";
+      string segmentFilename = GetDownloadedFilePath( $"{lat:0.0000}_{lng:0.0000}_{zoom}_{size}.json" );
       byte[] json;
       if ( !File.Exists( segmentFilename ) )
       {
@@ -100,7 +100,7 @@ namespace Itinerary.Crawler.TripAdviser
         foreach ( Attraction attraction in map.Attractions )
         {
           _logger.LogDebug( $"Attraction: {attraction.CustomHover.Title}" );
-          string attractionFilename = $@"download\{attraction.LocId}.html";
+          string attractionFilename = GetDownloadedFilePath( $"{attraction.LocId}.html" );
           string html;
           if ( !File.Exists( attractionFilename ) )
           {
@@ -145,6 +145,11 @@ namespace Itinerary.Crawler.TripAdviser
             _logger.LogDebug( $"Attraction {attraction.CustomHover.Title} already exists." );
         }
       }
+    }
+
+        private string GetDownloadedFilePath( string fileName )
+    {
+      return Path.Combine( "download", fileName );
     }
   }
 }

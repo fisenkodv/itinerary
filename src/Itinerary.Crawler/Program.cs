@@ -1,7 +1,6 @@
 ﻿using System;
 using Itinerary.Crawler.TripAdviser;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 
 namespace Itinerary.Crawler
 {
