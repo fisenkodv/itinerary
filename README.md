@@ -38,6 +38,9 @@ dotnet publish -c Release
 
 This will produce a ready-to-deploy production build of your application. It includes .NET code compiled in Release mode, and invokes Webpack with the ```--env.prod``` flag to produce a production build of front-end assets. Equivalently, you can use the Publish option from Visual Studio’s Build menu.
 
+## Google API
+* Places API ```AIzaSyAHtJrpKyxsARFESBwI-a0qaWjsD5ZW-3w```
+
 ## Guidelines ##
 1. [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)
 
