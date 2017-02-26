@@ -1,29 +1,29 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
-import 'hammerjs';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import 'hammerjs';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SettingsDialogComponent } from './settings-dialog/settings-dialog.component';
 
-import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { AttractionsComponent } from './attractions/attractions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SettingsDialogComponent
+    AttractionsComponent
   ],
   entryComponents: [
-    AppComponent,
-    SettingsDialogComponent
+    AppComponent
   ],
   imports: [
     //UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
     BrowserModule,
     MaterialModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule
   ],
