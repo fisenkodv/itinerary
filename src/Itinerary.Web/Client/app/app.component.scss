@@ -1,10 +1,4 @@
-/* app styles here */
-
-.icon-20 {
-  //font-size: 20px;
-}
-
-md-toolbar-row {
+﻿md-toolbar-row {
   justify-content: space-between;
 }
 
@@ -14,4 +8,9 @@ md-sidenav-container {
 
 md-sidenav {
   width: 320px;
+}
+
+.flexDemoContainer {
+  border: solid 1px #FF0000;
+  box-sizing: content-box !important;
 }

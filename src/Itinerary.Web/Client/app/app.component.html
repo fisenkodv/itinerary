@@ -1,4 +1,4 @@
-<div>
+﻿<div>
   <md-toolbar color="primary">
     <span>
       <md-icon class="icon-20">map</md-icon>
@@ -14,4 +14,11 @@
     <button md-menu-item>Help</button>
   </md-menu>
   <router-outlet></router-outlet>
+</div>
+
+<div class="flexDemoContainer">
+  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+    <div fxFlex> I'm above on mobile, and left on larger devices. </div>
+    <div fxFlex> I'm below on mobile, and right on larger devices. </div>
+  </div>
 </div>

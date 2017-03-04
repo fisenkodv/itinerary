@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import 'hammerjs';
@@ -22,6 +23,7 @@ import { AttractionsComponent } from './attractions/attractions.component';
     //UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
     BrowserModule,
     MaterialModule.forRoot(),
+    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,

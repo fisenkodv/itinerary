@@ -8,15 +8,18 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Itinerary.Crawler.TripAdviser.Entities;
+using LiteDB;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Itinerary.Crawler.TripAdviser
 {
-  internal class TripAdviserCrawler
+  internal class TripAdviserCrawler : IDisposable
   {
     private readonly TimeSpan _delay;
     private readonly ILogger _logger;
+    private readonly LiteDatabase _liteDatabase;
     private readonly HashSet<Attraction> _attractions = new HashSet<Attraction>();
 
     private static readonly Regex CategoryRegex = new Regex(
@@ -30,13 +33,12 @@ namespace Itinerary.Crawler.TripAdviser
 
     private static readonly Regex ReviewsRegex = new Regex( pattern: "(?<reviews>[0-9,.]+) review" );
 
-    public TripAdviserCrawler(TimeSpan delay, ILogger logger )
+    public TripAdviserCrawler( string outputFile, TimeSpan delay, ILogger logger )
     {
       _delay = delay;
       _logger = logger;
+      _liteDatabase = new LiteDatabase( outputFile );
     }
-
-    public IEnumerable<Attraction> Attractions => _attractions;
 
     public void Run( double startLat, double startLng, double endLat, double endLng, double zoom, double size )
     {
@@ -51,105 +53,84 @@ namespace Itinerary.Crawler.TripAdviser
       }
     }
 
-    public void Dump( string filename )
+    private LiteCollection<Segment> GetSegmentsCollection()
     {
-      using ( var writer = new StreamWriter( File.Create( filename ) ) )
-      {
-        var serializer = new JsonSerializer();
-        serializer.Serialize( writer, _attractions );
-      }
+      return _liteDatabase.GetCollection<Segment>( "segments" );
     }
 
     private async void ReadSegment( double lat, double lng, double zoom, double size )
     {
+      Segment segment =
+        GetSegmentsCollection()
+          .FindOne( x => x.Latitude == lat && x.Longitude == lng && x.Zoom == zoom && x.Size == size );
+
       var httpClient = new HttpClient();
-      Directory.CreateDirectory( path: "download" );
-      string segmentFilename = GetDownloadedFilePath( $"{lat:0.0000}_{lng:0.0000}_{zoom}_{size}.json" );
-      byte[] json;
-      if ( !File.Exists( segmentFilename ) )
+      if ( segment == null )
       {
         string url =
           $"https://www.tripadvisor.com/GMapsLocationController?Action=update&from=Attractions&g=35805&geo=35805&mapProviderFeature=ta-maps-gmaps3&validDates=false&mc={lat},{lng}&mz={zoom}&mw={size}&mh={size}&pinSel=v2&origLocId=35805&sponsors=&finalRequest=false&includeMeta=false&trackPageView=false";
-        //Thread.Sleep(Delay);
-        Thread.Sleep( TimeSpan.FromSeconds( value: 0.1 ) );
-        json = await httpClient.GetByteArrayAsync( url );
+
+        Thread.Sleep( TimeSpan.FromSeconds( 0.1 ) );
+        byte[] json = await httpClient.GetByteArrayAsync( url );
 
         _logger.LogDebug( $"Read segment {lat}, {lng}. {json.Length} bytes." );
 
-
-        var str = Encoding.UTF8.GetString( json );
-
-        if ( json.Length > 400000 )
-          throw new Exception( message: "Too much items. Increase zoom." );
-
-        File.WriteAllBytes( segmentFilename, json );
-      }
-      else
-      {
-        json = File.ReadAllBytes( segmentFilename );
-      }
-
-      using ( var sr = new StreamReader( new MemoryStream( json ) ) )
-      using ( var jsonTextReader = new JsonTextReader( sr ) )
-      {
-        var serializer = new JsonSerializer();
-        var map = serializer.Deserialize<Map>( jsonTextReader );
-
-        _logger.LogInformation( $"Found {map.Attractions.Count} attractions" );
-
-        foreach ( Attraction attraction in map.Attractions )
+        using ( var streamReader = new StreamReader( new MemoryStream( json ) ) )
+        using ( var jsonTextReader = new JsonTextReader( streamReader ) )
         {
-          _logger.LogDebug( $"Attraction: {attraction.CustomHover.Title}" );
-          string attractionFilename = GetDownloadedFilePath( $"{attraction.LocId}.html" );
-          string html;
-          if ( !File.Exists( attractionFilename ) )
+          var serializer = new JsonSerializer();
+          var map = serializer.Deserialize<Map>( jsonTextReader );
+
+          segment = new Segment() { Latitude = lat, Longitude = lng, Zoom = zoom, Size = size, Map = map };
+          _logger.LogInformation( $"Found {map.Attractions.Count} attractions" );
+
+          GetSegmentsCollection().Insert( segment );
+
+          foreach (Attraction attraction in segment.Map.Attractions)
           {
+            _logger.LogDebug($"Attraction: {attraction.CustomHover.Title}");
+
             string infoUrl =
-              $"https://www.tripadvisor.com{attraction.CustomHover.Url.Replace( "Action=info", "Action=infoCardAttr" )}";
+              $"https://www.tripadvisor.com{attraction.CustomHover.Url.Replace("Action=info", "Action=infoCardAttr")}";
 
-            _logger.LogDebug( $"{attraction.LocId}: {infoUrl}" );
-            Thread.Sleep( _delay );
+            Thread.Sleep(_delay);
 
-            html = await httpClient.GetStringAsync( infoUrl );
-            File.WriteAllText( attractionFilename, html );
+            string html = await httpClient.GetStringAsync(infoUrl);
+            string imgUrl = ImgRegex.Match(html).Value;
+            string reviews = ReviewsRegex.Match(html).Groups[groupname: "reviews"].Value;
+            string rating = RatingRegex.Match(html).Groups[groupname: "rating"].Value;
+            string categories = CategoryRegex.Match(html).Groups[groupname: "category"].Value.Trim('\r', '\n', ' ');
+
+            _logger.LogDebug($"reviews: {reviews}, rating: {rating}, categories: {categories}, image: {imgUrl}");
+
+            attraction.Categories =
+              (categories ?? string.Empty)
+              .Split(separator: new[] { ',' }, options: StringSplitOptions.RemoveEmptyEntries)
+              .Select(c => c.Trim(' '))
+              .ToArray();
+
+            attraction.ImgUrl = imgUrl;
+
+            if (!string.IsNullOrEmpty(reviews))
+              attraction.Reviews = int.Parse(reviews, NumberStyles.AllowThousands);
+
+            if (!string.IsNullOrEmpty(rating))
+              attraction.Rating = float.Parse(rating);
+
+            if (!_attractions.Contains(attraction))
+              _attractions.Add(attraction);
+            else
+              _logger.LogDebug($"Attraction {attraction.CustomHover.Title} already exists.");
           }
-          else
-          {
-            html = File.ReadAllText( attractionFilename );
-          }
 
-          string imgUrl = ImgRegex.Match( html ).Value;
-          string reviews = ReviewsRegex.Match( html ).Groups[ groupname: "reviews" ].Value;
-          string rating = RatingRegex.Match( html ).Groups[ groupname: "rating" ].Value;
-          string categories = CategoryRegex.Match( html ).Groups[ groupname: "category" ].Value.Trim( '\r', '\n', ' ' );
-
-          _logger.LogDebug( $"reviews: {reviews}, rating: {rating}, categories: {categories}, image: {imgUrl}" );
-
-          attraction.Categories =
-            ( categories ?? string.Empty )
-            .Split( separator: new[] { ',' }, options: StringSplitOptions.RemoveEmptyEntries )
-            .Select( c => c.Trim( ' ' ) )
-            .ToArray();
-
-          attraction.ImgUrl = imgUrl;
-
-          if ( !string.IsNullOrEmpty( reviews ) )
-            attraction.Reviews = int.Parse( reviews, NumberStyles.AllowThousands );
-
-          if ( !string.IsNullOrEmpty( rating ) )
-            attraction.Rating = float.Parse( rating );
-
-          if ( !_attractions.Contains( attraction ) )
-            _attractions.Add( attraction );
-          else
-            _logger.LogDebug( $"Attraction {attraction.CustomHover.Title} already exists." );
+          GetSegmentsCollection().Update(segment);
         }
       }
     }
 
-        private string GetDownloadedFilePath( string fileName )
+    public void Dispose()
     {
-      return Path.Combine( "download", fileName );
+      _liteDatabase.Dispose();
     }
   }
 }
