@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Itinerary.DataAccess.Interfaces;
+using Itinerary.DataAccess.LiteDB;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
@@ -25,10 +27,14 @@ namespace Itinerary.Web
     }
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices( IServiceCollection services )
+    public void ConfigureServices( IServiceCollection services, IConfiguration configuration )
     {
       // Add framework services.
       services.AddMvc();
+
+      //services.AddTransient( typeof( IGenericRepository<> ), typeof( LiteDbRepository<> ) );
+      //services.AddSingleton<IUnitOfWork>(
+      //  new LiteDbUnitOfWork( configuration.GetConnectionString( "DefaultConnection" ) ) );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
