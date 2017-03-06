@@ -4,9 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using Itinerary.Crawler.TripAdviser.Entities;
 using LiteDB;
 using Microsoft.Extensions.Logging;
@@ -42,15 +42,43 @@ namespace Itinerary.Crawler.TripAdviser
 
     public void Run( double startLat, double startLng, double endLat, double endLng, double zoom, double size )
     {
+      int index = 0;
       double area = ( startLat - endLat ) * ( endLng - startLng );
+
+      _logger.LogInformation( "Reading existing data..." );
+
+      Dictionary<string, Segment> segments = GetSegmentsCollection()
+        .Find( x => x.Zoom == zoom && x.Size == size )
+        .ToDictionary( x => GetKey( x.Latitude, x.Longitude ), x => x );
+
+      _logger.LogInformation( "Preparing points..." );
+
+      var coordinates = new List<Tuple<double, double>>();
       for ( double lat = endLat; lat <= startLat; lat += zoom * 10 / size )
       for ( double lng = startLng; lng <= endLng; lng += zoom * 10 / size )
       {
-        double covered = ( lat - endLat ) * ( endLng - startLng ) + ( lng - startLng ) * zoom * 10 / size;
-        ReadSegment( lat, lng, zoom, size );
-
-        _logger.LogInformation( $"{covered / area * 100}% complete" );
+        if ( !segments.ContainsKey( GetKey( lat, lng ) ) )
+          coordinates.Add( new Tuple<double, double>( lat, lng ) );
       }
+
+      Parallel.ForEach(
+        coordinates, coordinate =>
+                     {
+                       double lat = coordinate.Item1;
+                       double lng = coordinate.Item2;
+
+                       ReadSegment( lat, lng, zoom, size );
+
+                       Interlocked.Increment( ref index );
+                       //double covered = ( lat - endLat ) * ( endLng - startLng ) +
+                       //                 ( lng - startLng ) * zoom * 10 / size;
+                       _logger.LogInformation( $"{index * 100.0 / coordinates.Count} complete" );
+                     } );
+    }
+
+    private string GetKey( double lat, double lng )
+    {
+      return $"{lat}{lng}";
     }
 
     private LiteCollection<Segment> GetSegmentsCollection()
@@ -60,13 +88,9 @@ namespace Itinerary.Crawler.TripAdviser
 
     private async void ReadSegment( double lat, double lng, double zoom, double size )
     {
-      Segment segment =
-        GetSegmentsCollection()
-          .FindOne( x => x.Latitude == lat && x.Longitude == lng && x.Zoom == zoom && x.Size == size );
-
-      var httpClient = new HttpClient();
-      if ( segment == null )
+      try
       {
+        var httpClient = new HttpClient();
         string url =
           $"https://www.tripadvisor.com/GMapsLocationController?Action=update&from=Attractions&g=35805&geo=35805&mapProviderFeature=ta-maps-gmaps3&validDates=false&mc={lat},{lng}&mz={zoom}&mw={size}&mh={size}&pinSel=v2&origLocId=35805&sponsors=&finalRequest=false&includeMeta=false&trackPageView=false";
 
@@ -81,50 +105,57 @@ namespace Itinerary.Crawler.TripAdviser
           var serializer = new JsonSerializer();
           var map = serializer.Deserialize<Map>( jsonTextReader );
 
-          segment = new Segment() { Latitude = lat, Longitude = lng, Zoom = zoom, Size = size, Map = map };
+          var segment = new Segment() { Latitude = lat, Longitude = lng, Zoom = zoom, Size = size, Map = map };
           _logger.LogInformation( $"Found {map.Attractions.Count} attractions" );
 
           GetSegmentsCollection().Insert( segment );
 
-          foreach (Attraction attraction in segment.Map.Attractions)
+          foreach ( Attraction attraction in segment.Map.Attractions )
           {
-            _logger.LogDebug($"Attraction: {attraction.CustomHover.Title}");
+            _logger.LogDebug( $"Attraction: {attraction.CustomHover.Title}" );
 
             string infoUrl =
-              $"https://www.tripadvisor.com{attraction.CustomHover.Url.Replace("Action=info", "Action=infoCardAttr")}";
+              $"https://www.tripadvisor.com{attraction.CustomHover.Url.Replace( "Action=info", "Action=infoCardAttr" )}";
 
-            Thread.Sleep(_delay);
+            Thread.Sleep( _delay );
 
-            string html = await httpClient.GetStringAsync(infoUrl);
-            string imgUrl = ImgRegex.Match(html).Value;
-            string reviews = ReviewsRegex.Match(html).Groups[groupname: "reviews"].Value;
-            string rating = RatingRegex.Match(html).Groups[groupname: "rating"].Value;
-            string categories = CategoryRegex.Match(html).Groups[groupname: "category"].Value.Trim('\r', '\n', ' ');
+            string html = await httpClient.GetStringAsync( infoUrl );
+            string imgUrl = ImgRegex.Match( html ).Value;
+            string reviews = ReviewsRegex.Match( html ).Groups[ groupname: "reviews" ].Value;
+            string rating = RatingRegex.Match( html ).Groups[ groupname: "rating" ].Value;
+            string categories = CategoryRegex
+              .Match( html )
+              .Groups[ groupname: "category" ]
+              .Value.Trim( '\r', '\n', ' ' );
 
-            _logger.LogDebug($"reviews: {reviews}, rating: {rating}, categories: {categories}, image: {imgUrl}");
+            _logger.LogDebug( $"reviews: {reviews}, rating: {rating}, categories: {categories}, image: {imgUrl}" );
 
             attraction.Categories =
-              (categories ?? string.Empty)
-              .Split(separator: new[] { ',' }, options: StringSplitOptions.RemoveEmptyEntries)
-              .Select(c => c.Trim(' '))
+              ( categories ?? string.Empty )
+              .Split( separator: new[] { ',' }, options: StringSplitOptions.RemoveEmptyEntries )
+              .Select( c => c.Trim( ' ' ) )
               .ToArray();
 
             attraction.ImgUrl = imgUrl;
 
-            if (!string.IsNullOrEmpty(reviews))
-              attraction.Reviews = int.Parse(reviews, NumberStyles.AllowThousands);
+            if ( !string.IsNullOrEmpty( reviews ) )
+              attraction.Reviews = int.Parse( reviews, NumberStyles.AllowThousands );
 
-            if (!string.IsNullOrEmpty(rating))
-              attraction.Rating = float.Parse(rating);
+            if ( !string.IsNullOrEmpty( rating ) )
+              attraction.Rating = float.Parse( rating );
 
-            if (!_attractions.Contains(attraction))
-              _attractions.Add(attraction);
+            if ( !_attractions.Contains( attraction ) )
+              _attractions.Add( attraction );
             else
-              _logger.LogDebug($"Attraction {attraction.CustomHover.Title} already exists.");
+              _logger.LogDebug( $"Attraction {attraction.CustomHover.Title} already exists." );
           }
 
-          GetSegmentsCollection().Update(segment);
+          GetSegmentsCollection().Update( segment );
         }
+      }
+      catch ( Exception e )
+      {
+        _logger.LogError( e.Message );
       }
     }
 

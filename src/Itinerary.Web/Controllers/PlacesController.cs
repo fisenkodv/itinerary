@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Itinerary.Common;
+using Itinerary.Common.Entities;
 using Itinerary.DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +17,9 @@ namespace Itinerary.Web.Controllers
     }
 
     [HttpGet( "[action]" )]
-    public IEnumerable<Place> Places()
+    public IEnumerable<Place> Search()
     {
-      return _unitOfWork.PlacesRepository.Get( _ => true );
+      return _unitOfWork.PlacesRepository.Get( _ => true ).Take( 100 );
     }
   }
 }

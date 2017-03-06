@@ -1,5 +1,5 @@
 ﻿using System;
-using Itinerary.Common;
+using Itinerary.Common.Entities;
 using Itinerary.DataAccess.Interfaces;
 using LiteDB;
 
@@ -30,16 +30,11 @@ namespace Itinerary.DataAccess.LiteDB
       GC.SuppressFinalize( obj: this );
     }
 
-    public IGenericRepository<Place, string> PlacesRepository
-      => new LiteDbRepository<Place>( GetCollection<Place>( "places" ) );
+    public IRepository<Place> PlacesRepository
+      => new LiteDbRepository<Place>( _database );
 
     public void Save()
     {
-    }
-
-    private LiteCollection<TEntity> GetCollection<TEntity>( string collectionName )
-    {
-      return _database.GetCollection<TEntity>( collectionName );
     }
   }
 }

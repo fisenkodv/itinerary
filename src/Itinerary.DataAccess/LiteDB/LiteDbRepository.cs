@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Itinerary.Common;
+using Itinerary.Common.Entities;
 using Itinerary.DataAccess.Interfaces;
 using LiteDB;
 
 namespace Itinerary.DataAccess.LiteDB
 {
-  public class LiteDbRepository<TEntity> : IGenericRepository<TEntity, string>
-    where TEntity : EntityBase<string>
+  public class LiteDbRepository<TEntity> : IRepository<TEntity>
+    where TEntity : EntityBase
   {
     private readonly LiteCollection<TEntity> _collection;
 
-    public LiteDbRepository( LiteCollection<TEntity> collection )
+    public LiteDbRepository( LiteDatabase database )
     {
-      _collection = collection;
+      _collection = GetCollection( database );
     }
 
     public IEnumerable<TEntity> Get( Expression<Func<TEntity, bool>> predicate )
@@ -22,14 +22,14 @@ namespace Itinerary.DataAccess.LiteDB
       return _collection.Find( predicate );
     }
 
-    public TEntity GetById( string id )
+    public TEntity GetById( Guid id )
     {
       return _collection.FindOne( x => x.Id == id );
     }
 
     public TEntity Insert( TEntity entity )
     {
-      entity.Id = _collection.Insert( entity ).AsString;
+      entity.Id = _collection.Insert( entity ).AsGuid;
       return entity;
     }
 
@@ -49,7 +49,7 @@ namespace Itinerary.DataAccess.LiteDB
       _collection.Update( entities );
     }
 
-    public void Delete( string id )
+    public void Delete( Guid id )
     {
       _collection.Delete( x => x.Id == id );
     }
@@ -76,7 +76,12 @@ namespace Itinerary.DataAccess.LiteDB
 
     public bool Exists( Expression<Func<TEntity, bool>> predicate )
     {
-      throw new NotImplementedException();
+      return _collection.Exists( predicate );
+    }
+
+    private LiteCollection<TEntity> GetCollection( LiteDatabase database )
+    {
+      return database.GetCollection<TEntity>( Utils.GetCollectionName<TEntity>() );
     }
   }
 }

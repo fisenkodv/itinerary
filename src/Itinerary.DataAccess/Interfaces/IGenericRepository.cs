@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Itinerary.Common;
+using Itinerary.Common.Entities;
 
 namespace Itinerary.DataAccess.Interfaces
 {
   public interface IGenericRepository<TEntity, in TKey>
-    where TEntity : EntityBase<TKey>
+    where TEntity : IEntityBase<TKey>
     where TKey : IEquatable<TKey>
   {
     IEnumerable<TEntity> Get( Expression<Func<TEntity, bool>> predicate );

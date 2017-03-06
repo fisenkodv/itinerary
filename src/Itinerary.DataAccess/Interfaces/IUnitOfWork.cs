@@ -1,11 +1,11 @@
 ﻿using System;
-using Itinerary.Common;
+using Itinerary.Common.Entities;
 
 namespace Itinerary.DataAccess.Interfaces
 {
   public interface IUnitOfWork : IDisposable
   {
-    IGenericRepository<Place, string> PlacesRepository { get; }
+    IRepository<Place> PlacesRepository { get; }
 
     void Save();
   }

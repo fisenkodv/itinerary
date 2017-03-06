@@ -11,7 +11,7 @@ namespace Itinerary.Web
       this IServiceCollection services,
       IConfiguration configuration )
     {
-      services.AddTransient( typeof( IGenericRepository<,> ), typeof( LiteDbRepository<> ) );
+      services.AddTransient( typeof( IRepository<> ), typeof( LiteDbRepository<> ) );
       services.AddSingleton<IUnitOfWork>(
         new LiteDbUnitOfWork( configuration.GetConnectionString( "DefaultConnection" ) ) );
 
