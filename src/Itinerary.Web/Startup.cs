@@ -1,7 +1,9 @@
-﻿using Itinerary.DataAccess.Interfaces;
+﻿using System.IO.Compression;
+using Itinerary.DataAccess.Interfaces;
 using Itinerary.DataAccess.LiteDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,14 +29,21 @@ namespace Itinerary.Web
     }
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices( IServiceCollection services, IConfiguration configuration )
+    public void ConfigureServices( IServiceCollection services )
     {
+      services.Configure<GzipCompressionProviderOptions>(
+        options => options.Level = CompressionLevel.Optimal);
+      services.AddResponseCompression(options =>
+      {
+        options.Providers.Add<GzipCompressionProvider>();
+      });
+
       // Add framework services.
       services.AddMvc();
 
-      //services.AddTransient( typeof( IGenericRepository<> ), typeof( LiteDbRepository<> ) );
-      //services.AddSingleton<IUnitOfWork>(
-      //  new LiteDbUnitOfWork( configuration.GetConnectionString( "DefaultConnection" ) ) );
+      services.AddTransient( typeof( IGenericRepository<,> ), typeof( LiteDbRepository<> ) );
+      services.AddSingleton<IUnitOfWork>(
+        new LiteDbUnitOfWork( Configuration.GetConnectionString( "DefaultConnection" ) ) );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +63,7 @@ namespace Itinerary.Web
         app.UseExceptionHandler( "/Home/Error" );
       }
 
+      app.UseResponseCompression();
       app.UseStaticFiles();
 
       app.UseMvc(
