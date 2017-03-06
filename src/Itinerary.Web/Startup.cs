@@ -1,6 +1,4 @@
 ﻿using System.IO.Compression;
-using Itinerary.DataAccess.Interfaces;
-using Itinerary.DataAccess.LiteDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -41,9 +39,7 @@ namespace Itinerary.Web
       // Add framework services.
       services.AddMvc();
 
-      services.AddTransient( typeof( IGenericRepository<,> ), typeof( LiteDbRepository<> ) );
-      services.AddSingleton<IUnitOfWork>(
-        new LiteDbUnitOfWork( Configuration.GetConnectionString( "DefaultConnection" ) ) );
+      services.AddCustomServices( Configuration );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
