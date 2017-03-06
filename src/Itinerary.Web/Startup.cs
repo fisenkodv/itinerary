@@ -29,12 +29,12 @@ namespace Itinerary.Web
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices( IServiceCollection services )
     {
-      services.Configure<GzipCompressionProviderOptions>(
-        options => options.Level = CompressionLevel.Optimal);
-      services.AddResponseCompression(options =>
-      {
-        options.Providers.Add<GzipCompressionProvider>();
-      });
+      //services.Configure<GzipCompressionProviderOptions>(
+      //  options => options.Level = CompressionLevel.Optimal);
+      //services.AddResponseCompression(options =>
+      //{
+      //  options.Providers.Add<GzipCompressionProvider>();
+      //});
 
       // Add framework services.
       services.AddMvc();
@@ -59,7 +59,7 @@ namespace Itinerary.Web
         app.UseExceptionHandler( "/Home/Error" );
       }
 
-      app.UseResponseCompression();
+      //app.UseResponseCompression();
       app.UseStaticFiles();
 
       app.UseMvc(

@@ -1,5 +1,4 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
-import { MdSidenav, MdDialog, MdDialogConfig } from '@angular/material';
+﻿import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'itinerary-root',

@@ -20,7 +20,6 @@ import { AttractionsComponent } from './attractions/attractions.component';
     AppComponent
   ],
   imports: [
-    //UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
     BrowserModule,
     MaterialModule.forRoot(),
     FlexLayoutModule,

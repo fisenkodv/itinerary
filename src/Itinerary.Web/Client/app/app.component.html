@@ -1,9 +1,9 @@
-﻿<div>
+﻿<div fxLayout="column">
   <md-toolbar color="primary">
     <span>
       <md-icon class="icon-20">map</md-icon>
     </span>
-    <span>Itinerary</span>
+    <span fxFlex fxFlexAlign="center">Itinerary</span>
     <button md-icon-button [md-menu-trigger-for]="menu">
       <md-icon>more_vert</md-icon>
     </button>
@@ -17,7 +17,7 @@
 </div>
 
 <div class="flexDemoContainer">
-  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+  <div  fxLayout.xs="column" fxLayout.sm="column" fxFlex>
     <div fxFlex> I'm above on mobile, and left on larger devices. </div>
     <div fxFlex> I'm below on mobile, and right on larger devices. </div>
   </div>
