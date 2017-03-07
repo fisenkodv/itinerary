@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 
 @Component({
-  selector: 'attractions',
-  templateUrl: 'attractions.component.html',
-  styleUrls: ['attractions.component.scss']
+  selector: 'places',
+  templateUrl: 'places.component.html',
+  styleUrls: ['places.component.scss']
 })
-export class AttractionsComponent implements OnInit {
+
+export class PlacesComponent implements OnInit {
   stateCtrl: FormControl;
   filteredStates: any;
 
@@ -63,7 +64,7 @@ export class AttractionsComponent implements OnInit {
     'Washington',
     'West Virginia',
     'Wisconsin',
-    'Wyoming',
+    'Wyoming'
   ];
 
   categories = [
@@ -71,6 +72,11 @@ export class AttractionsComponent implements OnInit {
     { value: 'park', viewValue: 'Parks' },
     { value: 'cinema', viewValue: 'Cinemas' }
   ];
+
+  title: string = 'My first angular2-google-maps project';
+  lat: number = 42.209722;
+  lng: number = -85.588611;
+  zoom: number = 10;
 
   constructor() {
     this.stateCtrl = new FormControl();

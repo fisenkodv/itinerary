@@ -23,9 +23,6 @@
     "@types/node": "^7.0.5",
     "angular2-platform-node": "~2.1.0-rc.1",
     "angular2-template-loader": "^0.6.2",
-    "angular2-universal": "^2.1.0-rc.1",
-    "angular2-universal-patch": "^0.2.1",
-    "angular2-universal-polyfills": "^2.1.0-rc.1",
     "aspnet-prerendering": "^2.0.3",
     "aspnet-webpack": "^1.0.28",
     "es6-shim": "^0.35.3",
@@ -35,11 +32,13 @@
     "preboot": "^4.5.2",
     "rxjs": "^5.2.0",
     "typescript": "^2.2.1",
-    "zone.js": "^0.7.7"
+    "zone.js": "^0.7.7",
+    "angular2-google-maps": "^0.17.0" 
   },
   "devDependencies": {
     "@types/chai": "^3.4.35",
     "@types/jasmine": "^2.5.43",
+    "@types/google-maps": "^3.2.0",
     "chai": "^3.5.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.5.0",

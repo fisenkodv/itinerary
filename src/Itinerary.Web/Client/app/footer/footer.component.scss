@@ -1,3 +1,8 @@
+﻿@import '../../styles/_variables';
+
 .footer {
-  //
+  &__title {
+    padding: $itinerary-elements-padding;
+    text-align: center;
+  }
 }

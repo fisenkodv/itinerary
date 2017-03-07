@@ -1,4 +1,4 @@
-# Itinerary Web Application
+﻿# Itinerary Web Application
 
 ## Projects
 ### Itinerary.Web
@@ -40,6 +40,7 @@ This will produce a ready-to-deploy production build of your application. It inc
 
 ## Google API
 * Places API ```AIzaSyAHtJrpKyxsARFESBwI-a0qaWjsD5ZW-3w```
+* Google Maps JavaScript API ```AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M```
 
 ## Guidelines ##
 1. [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)

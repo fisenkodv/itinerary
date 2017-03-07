@@ -1,6 +1,4 @@
-/* tslint:disable:no-unused-variable */
-
-import {} from '@types/jasmine';
+﻿import {} from '@types/jasmine';
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';

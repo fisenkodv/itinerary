@@ -6,19 +6,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import 'hammerjs';
 
+import { AgmCoreModule } from 'angular2-google-maps/core';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { AttractionsComponent } from './attractions/attractions.component';
+import { PlacesComponent } from './places/places.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AttractionsComponent
+    PlacesComponent
   ],
   entryComponents: [
     AppComponent
@@ -30,7 +32,10 @@ import { AttractionsComponent } from './attractions/attractions.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

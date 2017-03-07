@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
-import { AttractionsComponent } from './attractions/attractions.component';
+import { PlacesComponent } from './places/places.component';
 
 const routes: Routes = [
-  { path: '', component: AttractionsComponent }
+  { path: '', component: PlacesComponent }
 ];
 
 @NgModule({
