@@ -1,28 +1,31 @@
-﻿<md-sidenav-container>
-    <md-sidenav align="start" mode="side" opened="true" class="col-md-2 col-lg-2">
+﻿<section fxLayout="column" class="attractions">
+  <md-sidenav-container fxLayout="row" fxFlex="grow">
+    <md-sidenav fxFlex align="start" mode="side" opened="true">
       <md-tab-group>
         <md-tab>
           <template md-tab-label>
             Search
           </template>
-          <md-input-container>
-            <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
-          </md-input-container>
+          <div fxLayout="column">
+            <md-input-container>
+              <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+            </md-input-container>
+            <md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let state of filteredStates | async" [value]="state">
+                {{ state }}
+              </md-option>
+            </md-autocomplete>
+            <md-slider [max]="100" [min]="0" [step]="1" [thumb-label]="true" [vertical]="false">
+            </md-slider>
+            <md-select placeholder="Categories" [(ngModel)]="selectedCategory" name="food">
+              <md-option *ngFor="let category of categories" [value]="category.value">
+                {{category.viewValue}}
+              </md-option>
+            </md-select>
 
-          <md-autocomplete #auto="mdAutocomplete">
-            <md-option *ngFor="let state of filteredStates | async" [value]="state">
-              {{ state }}
-            </md-option>
-          </md-autocomplete>
-          <md-slider [max]="100" [min]="0" [step]="1" [thumb-label]="true" [vertical]="false">
-          </md-slider>
-          <md-select placeholder="Categories" [(ngModel)]="selectedCategory" name="food">
-            <md-option *ngFor="let category of categories" [value]="category.value">
-              {{category.viewValue}}
-            </md-option>
-          </md-select>
+            <button md-raised-button md-button color="accent">CLOSE</button>
+          </div>
 
-          <button md-raised-button md-button color="accent">CLOSE</button>
         </md-tab>
         <md-tab>
           <template md-tab-label>
@@ -32,7 +35,8 @@
       </md-tab-group>
     </md-sidenav>
 
-  <div class="col-md-9 col-lg-9">
-    Map
-  </div>
-</md-sidenav-container>
+    <div fxFlex>
+      Map
+    </div>
+  </md-sidenav-container>
+</section>

@@ -1,24 +1,5 @@
-﻿<div fxLayout="column">
-  <md-toolbar color="primary">
-    <span>
-      <md-icon class="icon-20">map</md-icon>
-    </span>
-    <span fxFlex fxFlexAlign="center">Itinerary</span>
-    <button md-icon-button [md-menu-trigger-for]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>
-  </md-toolbar>
-  <md-menu x-position="before" #menu="mdMenu">
-    <button md-menu-item>Settings</button>
-    <button md-menu-item>Toggle Theme</button>
-    <button md-menu-item>Help</button>
-  </md-menu>
+﻿﻿<div class="container" fxLayout="column">
+  <header></header>
   <router-outlet></router-outlet>
-</div>
-
-<div class="flexDemoContainer">
-  <div  fxLayout.xs="column" fxLayout.sm="column" fxFlex>
-    <div fxFlex> I'm above on mobile, and left on larger devices. </div>
-    <div fxFlex> I'm below on mobile, and right on larger devices. </div>
-  </div>
+  <footer></footer>
 </div>
