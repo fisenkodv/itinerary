@@ -1,0 +1,14 @@
+<md-toolbar class="header" color="primary">
+  <span>
+    <md-icon>map</md-icon>
+  </span>
+  <span class="header__title" fxFlex="grow">Itinerary</span>
+  <button md-icon-button [md-menu-trigger-for]="menu">
+    <md-icon>more_vert</md-icon>
+  </button>
+</md-toolbar>
+<md-menu x-position="before" #menu="mdMenu">
+  <button md-menu-item>Settings</button>
+  <button md-menu-item>Toggle Theme</button>
+  <button md-menu-item>Help</button>
+</md-menu>

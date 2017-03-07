@@ -9,18 +9,21 @@ import 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import { AttractionsComponent } from './attractions/attractions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    FooterComponent,
     AttractionsComponent
   ],
   entryComponents: [
     AppComponent
   ],
   imports: [
-    //UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
     BrowserModule,
     MaterialModule.forRoot(),
     FlexLayoutModule,
