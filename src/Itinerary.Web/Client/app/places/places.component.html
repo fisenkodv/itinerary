@@ -1,15 +1,18 @@
 ﻿<section class="places" fxLayout="row" fxFlex="grow">
   <div class="places__sidenav" fxFlex="noshrink">
     <div fxLayout="column" fxLayoutAlign="center stretch">
+      
+      
       <md-input-container fxFlex="grow">
-        <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+        <!--<input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">-->
+        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
       </md-input-container>
 
-      <md-autocomplete fxFlex="grow" #auto="mdAutocomplete">
+      <!--<md-autocomplete fxFlex="grow" #auto="mdAutocomplete">
         <md-option *ngFor="let state of filteredStates | async" [value]="state">
           {{ state }}
         </md-option>
-      </md-autocomplete>
+      </md-autocomplete>-->
 
       <md-slider fxFlex="grow" [max]="100" [min]="0" [step]="1" [thumb-label]="true" [vertical]="false">
       </md-slider>
