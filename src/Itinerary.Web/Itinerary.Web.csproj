@@ -21,6 +21,7 @@
     <Content Remove="Client\**" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Itinerary.Business\Itinerary.Business.csproj" />
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
     <ProjectReference Include="..\Itinerary.DataAccess\Itinerary.DataAccess.csproj" />
   </ItemGroup>

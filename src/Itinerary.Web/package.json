@@ -1,6 +1,6 @@
 {
   "name": "itinerary-web",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js",
     "build:dev": "node node_modules/webpack/bin/webpack.js",
@@ -33,7 +33,7 @@
     "rxjs": "^5.2.0",
     "typescript": "^2.2.1",
     "zone.js": "^0.7.7",
-    "angular2-google-maps": "^0.17.0" 
+    "angular2-google-maps": "^0.17.0"
   },
   "devDependencies": {
     "@types/chai": "^3.4.35",
@@ -64,6 +64,8 @@
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-hot-middleware": "^2.17.1",
-    "webpack-merge": "^4.0.0"
+    "webpack-merge": "^4.0.0",
+    "tslint": "^4.5.1",
+    "codelyzer": "^2.0.0-beta.4"
   }
 }

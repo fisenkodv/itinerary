@@ -30,7 +30,7 @@ module.exports = (env) => {
   const clientBundleOutputDir = './wwwroot/dist';
   const clientBundleConfig = merge(sharedConfig, {
     entry: {
-      'main': './Client/boot-client.ts',
+      'main': './Client/main.ts',
       //'polyfills': './Client/polyfills.ts',
       'styles': ['./Client/styles/main.scss']
     },
@@ -52,25 +52,5 @@ module.exports = (env) => {
       ])
   });
 
-  // Configuration for server-side (prerendering) bundle suitable for running in Node
-  const serverBundleConfig = merge(sharedConfig, {
-    resolve: { mainFields: ['main'] },
-    entry: { 'main-server': './Client/boot-server.ts' },
-    plugins: [
-      new webpack.DllReferencePlugin({
-        context: __dirname,
-        manifest: require('./Client/dist/vendor-manifest.json'),
-        sourceType: 'commonjs2',
-        name: './vendor'
-      })
-    ],
-    output: {
-      libraryTarget: 'commonjs',
-      path: path.join(__dirname, './Client/dist')
-    },
-    target: 'node',
-    devtool: 'inline-source-map'
-  });
-
-  return [clientBundleConfig, serverBundleConfig];
+  return [clientBundleConfig];
 };

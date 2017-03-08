@@ -1,5 +1,6 @@
 ﻿<section class="places" fxLayout="row" fxFlex="grow">
   <div class="places__sidenav" fxFlex="noshrink">
+    <h2>Search Places</h2>
     <div fxLayout="column" fxLayoutAlign="center stretch">
 
       <md-input-container fxFlex="grow">
@@ -9,13 +10,6 @@
       <md-slider fxFlex="grow" [max]="100" [min]="0" [step]="1" [thumb-label]="true" [vertical]="false">
       </md-slider>
 
-      <md-select fxFlex="grow" placeholder="Categories" [(ngModel)]="selectedCategory" name="food">
-        <md-option *ngFor="let category of categories" [value]="category.value">
-          {{category.viewValue}}
-        </md-option>
-      </md-select>
-
-      <button md-raised-button md-button color="accent">CLOSE</button>
     </div>
   </div>
 

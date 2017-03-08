@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using Itinerary.Business.Places;
 using Itinerary.Common.Entities;
-using Itinerary.DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Web.Controllers
@@ -9,17 +8,17 @@ namespace Itinerary.Web.Controllers
   [Route( "api/[controller]" )]
   public class PlacesController : Controller
   {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IPlacesService _placesService;
 
-    public PlacesController( IUnitOfWork unitOfWork )
+    public PlacesController( IPlacesService placesService )
     {
-      _unitOfWork = unitOfWork;
+      _placesService = placesService;
     }
 
     [HttpGet( "[action]" )]
-    public IEnumerable<Place> Search()
+    public IEnumerable<Place> Search(double lat, double lng, double radius)
     {
-      return _unitOfWork.PlacesRepository.Get( _ => true ).Take( 100 );
+      return _placesService.Search( lat, lng, radius );
     }
   }
 }

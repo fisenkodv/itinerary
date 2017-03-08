@@ -63,24 +63,5 @@ module.exports = (env) => {
     ])
   });
 
-  const serverBundleConfig = merge(sharedConfig, {
-    target: 'node',
-    resolve: { mainFields: ['main'] },
-    output: {
-      path: path.join(__dirname, 'Client', 'dist'),
-      libraryTarget: 'commonjs2'
-    },
-    module: {
-      rules: [{ test: /\.css(\?|$)/, use: ['to-string-loader', 'css-loader'] }]
-    },
-    entry: { vendor: ['aspnet-prerendering'] },
-    plugins: [
-      new webpack.DllPlugin({
-        path: path.join(__dirname, 'Client', 'dist', '[name]-manifest.json'),
-        name: '[name]_[hash]'
-      })
-    ]
-  });
-
-  return [clientBundleConfig, serverBundleConfig];
+  return [clientBundleConfig];
 }

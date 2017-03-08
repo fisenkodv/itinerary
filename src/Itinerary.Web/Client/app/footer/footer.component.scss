@@ -1,8 +1,37 @@
 ﻿@import '../../styles/_variables';
+@import '../../styles/_themes.scss';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
+
+@mixin _mat-footer-color($palette) {
+  background: mat-color($palette);
+  color: mat-color($palette, default-contrast);
+}
 
 .footer {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  background: mat-color($background, app-bar);
+  color: mat-color($foreground, text);
+
   &__title {
     padding: $itinerary-elements-padding;
     text-align: center;
+  }
+
+  &--primary {
+    @include _mat-footer-color($primary);
+  }
+
+  &--accent {
+    @include _mat-footer-color($accent);
+  }
+
+  &--warn {
+    @include _mat-footer-color($warn);
   }
 }
