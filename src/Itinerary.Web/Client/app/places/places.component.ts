@@ -1,8 +1,6 @@
 ﻿import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
-//import '../shared/googlemaps';// '@types/googlemaps/index.d';
-
 import { MapsAPILoader } from 'angular2-google-maps/core';
 
 @Component({
