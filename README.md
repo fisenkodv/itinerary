@@ -18,8 +18,8 @@ npm install
 The dev middleware feature means you don’t normally need to invoke Webpack manually. But if you do want to run Webpack manually on the command line, you can run the following:
 
 ```
-node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js
-node node_modules/webpack/bin/webpack.js
+npm run build-vendor:dev
+npm run build:dev
 ```
 
 The first line repackages all of your vendor dependencies, i.e., third party libraries such as Angular or React and all their dependencies. You only need to run this if you modify your third-party dependencies, such as if you update to a newer version of your chosen SPA framework.
@@ -37,6 +37,9 @@ dotnet publish -c Release
 ```
 
 This will produce a ready-to-deploy production build of your application. It includes .NET code compiled in Release mode, and invokes Webpack with the ```--env.prod``` flag to produce a production build of front-end assets. Equivalently, you can use the Publish option from Visual Studio’s Build menu.
+
+#### Itinerary API ####
+Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\Itinerary.postman_collection.json```
 
 ## Google API
 * Places API ```AIzaSyAHtJrpKyxsARFESBwI-a0qaWjsD5ZW-3w```
