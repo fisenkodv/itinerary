@@ -1,7 +1,7 @@
 ﻿import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
-import '@types/googlemaps/index.d';
+//import '../shared/googlemaps';// '@types/googlemaps/index.d';
 
 import { MapsAPILoader } from 'angular2-google-maps/core';
 
@@ -10,16 +10,15 @@ import { MapsAPILoader } from 'angular2-google-maps/core';
   templateUrl: 'places.component.html',
   styleUrls: ['places.component.scss']
 })
-
 export class PlacesComponent implements OnInit {
- 
+
   categories = [
     { value: 'museum', viewValue: 'Museums' },
     { value: 'park', viewValue: 'Parks' },
     { value: 'cinema', viewValue: 'Cinemas' }
   ];
 
- public latitude: number;
+  public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
   public zoom: number;
@@ -30,10 +29,10 @@ export class PlacesComponent implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) {
- 
+
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
@@ -46,25 +45,27 @@ export class PlacesComponent implements OnInit {
 
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement,
+      {
+        types: []
       });
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+      autocomplete.addListener("place_changed",
+        () => {
+          this.ngZone.run(() => {
+            //get the place result
+            let place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
+            //verify result
+            if (place.geometry === undefined || place.geometry === null) {
+              return;
+            }
 
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+            //set latitude, longitude and zoom
+            this.latitude = place.geometry.location.lat();
+            this.longitude = place.geometry.location.lng();
+            this.zoom = 12;
+          });
         });
-      });
     });
   }
 

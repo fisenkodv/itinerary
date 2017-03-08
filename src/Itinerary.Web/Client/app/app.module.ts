@@ -34,7 +34,8 @@ import { PlacesComponent } from './places/places.component';
     HttpModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M'
+      apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M',
+      libraries: ["places"]
     })
   ],
   providers: [],
