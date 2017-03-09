@@ -12,6 +12,7 @@ using LiteDB;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+using Itinerary.Common.Entities;
 
 namespace Itinerary.Crawler.TripAdviser
 {
@@ -29,7 +30,7 @@ namespace Itinerary.Crawler.TripAdviser
       new Regex( pattern: "https://media-cdn.tripadvisor.com/media/photo-[^']+.jpg" );
 
     private static readonly Regex RatingRegex =
-      new Regex( pattern: @"src=""https://static.tacdn.com/img2/x.gif"" alt=""(?<rating>[0-9,.]+) of 5 stars""" );
+      new Regex( pattern: "(?<rating>[0-9,.]+) of 5 bubbles");
 
     private static readonly Regex ReviewsRegex = new Regex( pattern: "(?<reviews>[0-9,.]+) review" );
 
@@ -38,6 +39,33 @@ namespace Itinerary.Crawler.TripAdviser
       _delay = delay;
       _logger = logger;
       _liteDatabase = new LiteDatabase( outputFile );
+    }
+
+    public void ConvertToWebDb( string outputFile )
+    {
+      using ( var db = new LiteDatabase( outputFile ) )
+      {
+        var places = new List<Place>();
+        foreach ( Segment segment in GetSegmentsCollection().FindAll() )
+        {
+          if ( segment.Map.Attractions.Any() )
+          {
+            if(segment.Map.Attractions.Any(x=>x.CustomHover.Title== "Al Sabo Preserve"))
+              Console.WriteLine( "fdsfa" );
+            places.AddRange(
+              segment.Map.Attractions.Select(
+                attraction => new Place()
+                              {
+                                Location = new Location() { Latitude = attraction.Lat, Longitude = attraction.Lng },
+                                Name = attraction.CustomHover.Title,
+                                Rating = attraction.Rating,
+                                Reviews = attraction.Reviews
+                              } ) );
+          }
+        }
+
+        db.GetCollection<Place>( "places" ).Insert( places );
+      }
     }
 
     public void Run( double startLat, double startLng, double endLat, double endLng, double zoom, double size )
@@ -76,7 +104,7 @@ namespace Itinerary.Crawler.TripAdviser
                      } );
     }
 
-    private string GetKey( double lat, double lng )
+    private static string GetKey( double lat, double lng )
     {
       return $"{lat}{lng}";
     }

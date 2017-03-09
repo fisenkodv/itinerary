@@ -16,9 +16,9 @@ namespace Itinerary.Web.Controllers
     }
 
     [HttpGet( "[action]" )]
-    public IEnumerable<Place> Search(double lat, double lng, double radius)
+    public IEnumerable<Place> Search( double lat, double lng, double radius, double rating )
     {
-      return _placesService.Search( lat, lng, radius );
+      return _placesService.Search( lat, lng, radius, rating );
     }
   }
 }

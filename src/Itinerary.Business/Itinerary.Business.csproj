@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="10.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
     <ProjectReference Include="..\Itinerary.DataAccess\Itinerary.DataAccess.csproj" />
   </ItemGroup>

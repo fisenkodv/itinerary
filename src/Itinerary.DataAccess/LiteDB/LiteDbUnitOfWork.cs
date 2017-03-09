@@ -5,7 +5,7 @@ using LiteDB;
 
 namespace Itinerary.DataAccess.LiteDB
 {
-  public class LiteDbUnitOfWork : IUnitOfWork
+  public sealed class LiteDbUnitOfWork : IUnitOfWork
   {
     private readonly LiteDatabase _database;
     private bool _disposed;
@@ -15,7 +15,7 @@ namespace Itinerary.DataAccess.LiteDB
       _database = new LiteDatabase( connectionString );
     }
 
-    protected virtual void Dispose( bool disposing )
+    private void Dispose( bool disposing )
     {
       if ( !_disposed )
         if ( disposing )
