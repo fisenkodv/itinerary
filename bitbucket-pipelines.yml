@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: microsoft/dotnet:onbuild
+image: microsoft/dotnet:1.1.0-sdk-msbuild
 
 pipelines:
   default:
