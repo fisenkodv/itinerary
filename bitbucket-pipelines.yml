@@ -1,4 +1,4 @@
-# This is a sample build configuration for .NET Core.
+﻿# This is a sample build configuration for .NET Core.
 # Check our guides at https://confluence.atlassian.com/x/5Q4SMw for more examples.
 # Only use spaces to indent your .yml configuration.
 # -----
@@ -8,7 +8,10 @@ image: microsoft/dotnet:onbuild
 pipelines:
   default:
     - step:
-        script: # Modify the commands below to build your repository.
+        script:
+          # Generate build number
+          - BUILD_NUMBER=`git log --oneline | wc -l`
+          - echo "Build number':' ${BUILD_NUMBER}"
           - dotnet restore
-          - dotnet build Itinerary.sln
-          #- dotnet test TestName
+          - dotnet build src/Itinerary.Web
+          - dotnet test tests/Itinerary.Tests
