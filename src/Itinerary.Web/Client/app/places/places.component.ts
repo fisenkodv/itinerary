@@ -20,7 +20,6 @@ export class PlacesComponent implements OnInit {
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) {
-
   }
 
   ngOnInit() {
@@ -34,9 +33,9 @@ export class PlacesComponent implements OnInit {
 
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement,
-      {
-        types: []
-      });
+        {
+          types: []
+        });
       autocomplete.addListener('place_changed',
         () => {
           this.ngZone.run(() => {
