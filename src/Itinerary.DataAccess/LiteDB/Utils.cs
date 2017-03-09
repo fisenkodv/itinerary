@@ -13,9 +13,8 @@ namespace Itinerary.DataAccess.LiteDB
                                 : GetCollectionNameFromType( typeof( TEntity ) );
 
       if ( string.IsNullOrEmpty( collectionName ) )
-      {
         throw new ArgumentException( "Collection name cannot be empty for this entity" );
-      }
+
       return $"{collectionName.ToLower()}s";
     }
 
@@ -37,10 +36,8 @@ namespace Itinerary.DataAccess.LiteDB
       if ( !typeof( EntityBase ).GetTypeInfo().IsAssignableFrom( entitytype ) )
         return entitytype;
       Type baseType = entitytype.GetTypeInfo().BaseType;
-      if ( baseType == typeof( EntityBase ) )
-        return entitytype;
-      // No attribute found, get the basetype
-      return GetBaseEntity( baseType );
+
+      return baseType == typeof( EntityBase ) ? entitytype : GetBaseEntity( baseType );
     }
   }
 }

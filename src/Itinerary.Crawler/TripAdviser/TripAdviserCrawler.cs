@@ -11,7 +11,6 @@ using Itinerary.Crawler.TripAdviser.Entities;
 using LiteDB;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 using Itinerary.Common.Entities;
 
 namespace Itinerary.Crawler.TripAdviser
@@ -30,7 +29,7 @@ namespace Itinerary.Crawler.TripAdviser
       new Regex( pattern: "https://media-cdn.tripadvisor.com/media/photo-[^']+.jpg" );
 
     private static readonly Regex RatingRegex =
-      new Regex( pattern: "(?<rating>[0-9,.]+) of 5 bubbles");
+      new Regex( pattern: "(?<rating>[0-9,.]+) of 5 bubbles" );
 
     private static readonly Regex ReviewsRegex = new Regex( pattern: "(?<reviews>[0-9,.]+) review" );
 
@@ -48,20 +47,21 @@ namespace Itinerary.Crawler.TripAdviser
         var places = new List<Place>();
         foreach ( Segment segment in GetSegmentsCollection().FindAll() )
         {
-          if ( segment.Map.Attractions.Any() )
-          {
-            if(segment.Map.Attractions.Any(x=>x.CustomHover.Title== "Al Sabo Preserve"))
-              Console.WriteLine( "fdsfa" );
-            places.AddRange(
-              segment.Map.Attractions.Select(
-                attraction => new Place()
-                              {
-                                Location = new Location() { Latitude = attraction.Lat, Longitude = attraction.Lng },
-                                Name = attraction.CustomHover.Title,
-                                Rating = attraction.Rating,
-                                Reviews = attraction.Reviews
-                              } ) );
-          }
+          if ( !segment.Map.Attractions.Any() ) continue;
+
+          IEnumerable<Place> attractionPlaces =
+            from attraction in segment.Map.Attractions
+            let location = new Location() { Latitude = attraction.Lat, Longitude = attraction.Lng }
+            let place = new Place()
+                        {
+                          Location = location,
+                          Name = attraction.CustomHover.Title,
+                          Rating = attraction.Rating,
+                          Reviews = attraction.Reviews
+                        }
+            select place;
+
+          places.AddRange( attractionPlaces );
         }
 
         db.GetCollection<Place>( "places" ).Insert( places );
@@ -130,7 +130,7 @@ namespace Itinerary.Crawler.TripAdviser
         using ( var streamReader = new StreamReader( new MemoryStream( json ) ) )
         using ( var jsonTextReader = new JsonTextReader( streamReader ) )
         {
-          var serializer = new JsonSerializer();
+          var serializer = new Newtonsoft.Json.JsonSerializer();
           var map = serializer.Deserialize<Map>( jsonTextReader );
 
           var segment = new Segment() { Latitude = lat, Longitude = lng, Zoom = zoom, Size = size, Map = map };
