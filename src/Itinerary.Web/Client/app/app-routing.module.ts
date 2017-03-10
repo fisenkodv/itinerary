@@ -2,10 +2,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
-import { PlacesComponent } from './places/places.component';
-
 const routes: Routes = [
-  { path: '', component: PlacesComponent }
+  { path: '', redirectTo: 'places', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -14,4 +12,5 @@ const routes: Routes = [
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

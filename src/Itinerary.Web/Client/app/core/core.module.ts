@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [],
   exports: [],
   declarations: [],
-  providers: [],
+  providers: []
 })
 
 export class CoreModule { }
