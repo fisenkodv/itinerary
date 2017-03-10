@@ -1,8 +1,9 @@
-﻿import 'angular2-universal-polyfills/browser';
+﻿import './app/polyfills';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-import { platformUniversalDynamic } from 'angular2-universal';
 import { AppModule } from './app/app.module';
-const rootElemTagName = 'itinerary-root'; // Update this if you change your root component selector
+
+const rootElemTagName = 'itinerary-root';
 
 // Enable either Hot Module Reloading or production mode
 if (module['hot']) {
@@ -19,7 +20,7 @@ if (module['hot']) {
 }
 
 // Boot the application, either now or when the DOM content is loaded
-const platform = platformUniversalDynamic();
+const platform = platformBrowserDynamic();
 const bootApplication = () => { platform.bootstrapModule(AppModule); };
 if (document.readyState === 'complete') {
   bootApplication();

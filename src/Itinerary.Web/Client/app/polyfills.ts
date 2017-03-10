@@ -1,4 +1,4 @@
-// This file includes polyfills needed by Angular and is loaded before the app.
+﻿// This file includes polyfills needed by Angular and is loaded before the app.
 // You can add your own extra polyfills to this file.
 import 'core-js/es6/symbol';
 import 'core-js/es6/object';
@@ -17,6 +17,12 @@ import 'core-js/es6/reflect';
 
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
+
+//import 'es6-promise';
+//import 'es6-shim';
+//import 'ie-shim';
+//import 'reflect-metadata';
+//import './zone-browser';
 
 // If you need to support the browsers/features below, uncomment the import
 // and run `npm install import-name-here';
