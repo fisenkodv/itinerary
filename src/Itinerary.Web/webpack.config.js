@@ -4,7 +4,6 @@ const merge = require('webpack-merge');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
 module.exports = (env) => {
-  // Configuration in common to both client-side and server-side bundles
   const isDevBuild = !(env && env.prod);
   const sharedConfig = {
     stats: { modules: false },
@@ -31,7 +30,6 @@ module.exports = (env) => {
   const clientBundleConfig = merge(sharedConfig, {
     entry: {
       'main': './Client/main.ts',
-      //'polyfills': './Client/polyfills.ts',
       'styles': ['./Client/styles/main.scss']
     },
     output: { path: path.join(__dirname, clientBundleOutputDir) },

@@ -71,7 +71,6 @@ namespace Itinerary.Crawler.TripAdviser
     public void Run( double startLat, double startLng, double endLat, double endLng, double zoom, double size )
     {
       int index = 0;
-      double area = ( startLat - endLat ) * ( endLng - startLng );
 
       _logger.LogInformation( "Reading existing data..." );
 
@@ -81,25 +80,23 @@ namespace Itinerary.Crawler.TripAdviser
 
       _logger.LogInformation( "Preparing points..." );
 
-      var coordinates = new List<Tuple<double, double>>();
+      var coordinates = new List<(double lat, double lng)>();
       for ( double lat = endLat; lat <= startLat; lat += zoom * 10 / size )
       for ( double lng = startLng; lng <= endLng; lng += zoom * 10 / size )
       {
         if ( !segments.ContainsKey( GetKey( lat, lng ) ) )
-          coordinates.Add( new Tuple<double, double>( lat, lng ) );
+          coordinates.Add( ( lat: lat, lng: lng ) );
       }
 
       Parallel.ForEach(
         coordinates, coordinate =>
                      {
-                       double lat = coordinate.Item1;
-                       double lng = coordinate.Item2;
+                       double lat = coordinate.lat;
+                       double lng = coordinate.lng;
 
                        ReadSegment( lat, lng, zoom, size );
 
                        Interlocked.Increment( ref index );
-                       //double covered = ( lat - endLat ) * ( endLng - startLng ) +
-                       //                 ( lng - startLng ) * zoom * 10 / size;
                        _logger.LogInformation( $"{index * 100.0 / coordinates.Count} complete" );
                      } );
     }
