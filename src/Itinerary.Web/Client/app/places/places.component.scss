@@ -11,8 +11,8 @@ places {
     width: $itinerary-search-sidebar-width;
   }
 
-  &__sidenav-container {
-    //height: 100%;
+  &__title {
+    padding-right: $itinerary-elements-padding;
   }
 }
 
