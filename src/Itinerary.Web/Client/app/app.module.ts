@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { PlacesModule } from './places/places.module';
+import { PlacesService } from './shared/places.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { PlacesModule } from './places/places.module';
     AppRoutingModule,
     PlacesModule
   ],
-  providers: [],
+  providers: [PlacesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

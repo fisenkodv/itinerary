@@ -34,4 +34,11 @@
   &--warn {
     @include _mat-footer-color($warn);
   }
+
+  &__heart.mat-icon {
+    $size: 12px;
+    font-size: $size;
+    width: $size;
+    height: $size;
+  }
 }

@@ -2,6 +2,8 @@
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 
+import { Place, Location, PlacesService } from '../shared/places.service';
+
 @Component({
   selector: 'places',
   templateUrl: 'places.component.html',
@@ -19,7 +21,8 @@ export class PlacesComponent implements OnInit {
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone) {
+    private ngZone: NgZone,
+    private placeseService: PlacesService) {
   }
 
   ngOnInit() {
@@ -59,6 +62,10 @@ export class PlacesComponent implements OnInit {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 12;
+        this.placeseService.search(this.latitude, this.longitude, 20, 5)
+          .subscribe(next => {
+            //debugger;
+          });
       });
     }
   }
