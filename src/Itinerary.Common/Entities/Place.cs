@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace Itinerary.Common.Entities
+﻿namespace Itinerary.Common.Entities
 {
   public class Place : EntityBase
   {

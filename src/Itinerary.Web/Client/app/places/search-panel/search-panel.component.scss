@@ -1,0 +1,7 @@
+@import '../../../styles/_variables';
+
+.search-panel {
+  &__title {
+    padding-right: $itinerary-elements-padding;
+  }
+}
