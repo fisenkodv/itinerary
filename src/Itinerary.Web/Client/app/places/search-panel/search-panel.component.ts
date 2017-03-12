@@ -9,15 +9,13 @@ import { MapsAPILoader } from 'angular2-google-maps/core';
   styleUrls: ['search-panel.component.scss']
 })
 export class SearchPanelComponent implements OnInit {
-  public searchControl: FormControl;
-
   @ViewChild('search')
   public searchElementRef: ElementRef;
+  public searchControl: FormControl;
 
   constructor(
     private ngZone: NgZone,
     private mapsAPILoader: MapsAPILoader
-
   ) { }
 
   ngOnInit() {
