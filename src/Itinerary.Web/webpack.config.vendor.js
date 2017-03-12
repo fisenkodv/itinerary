@@ -8,7 +8,7 @@ module.exports = (env) => {
   const isDevBuild = !(env && env.prod);
   const sharedConfig = {
     stats: { modules: false },
-    resolve: { extensions: ['.js'] },
+    resolve: { extensions: ['.js', 'scss'] },
     module: {
       rules: [
         { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
@@ -28,7 +28,8 @@ module.exports = (env) => {
         'es6-promise',
         'event-source-polyfill',
         'zone.js',
-        'hammerjs'
+        'hammerjs',
+        './Client/styles/vendor.scss'
       ]
     },
     output: {
@@ -46,7 +47,7 @@ module.exports = (env) => {
     output: { path: path.join(__dirname, 'wwwroot', 'dist') },
     module: {
       rules: [
-        { test: /\.css(\?|$)/, use: extractCss.extract({ use: 'css-loader' }) }
+        { test: /\.(css|scss)(\?|$)/, use: extractCss.extract({ use: ['css-loader', 'sass-loader'] }) }
       ]
     },
     plugins: [

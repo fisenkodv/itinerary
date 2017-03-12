@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "scripts": {
     "test": "karma start ClientApp/test/karma.conf.js",
-    "build:dev": "node node_modules/webpack/bin/webpack.js",
+    "build-app:dev": "node node_modules/webpack/bin/webpack.js",
     "build-vendor:dev": "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js",
-    "build:prod": "node node_modules/webpack/bin/webpack.js --env.prod",
-    "build-vendor:prod": "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod"
+    "build-app:prod": "node node_modules/webpack/bin/webpack.js --env.prod",
+    "build-vendor:prod": "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod",
+    "build:dev": "npm run build-vendor:dev & npm run build-app:dev",
+    "build:prod": "npm run build-vendor:prod & npm run build-app:prod"
   },
   "dependencies": {
     "@angular/common": "^2.4.9",
