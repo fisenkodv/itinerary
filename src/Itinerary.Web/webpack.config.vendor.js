@@ -29,7 +29,7 @@ module.exports = (env) => {
         'event-source-polyfill',
         'zone.js',
         'hammerjs',
-        './Client/styles/vendor.scss'
+        './Client/styles/main.scss'
       ]
     },
     output: {

@@ -1,7 +1,60 @@
+﻿@import '~@angular/material/toolbar/toolbar';
+@import '../../styles/_theme';
+
+$navigation-link-font-size: 16px !default;
+$navigation-link-border-size: 4px !default;
+
 .header {
   &__title {
-    text-align: center;
     font-family: 'Clicker Script';
     font-size: 50px;
   }
+}
+
+.more-button {
+  order: 2;
+}
+
+.navigation-container {
+  order: 1;
+}
+
+.navigation {
+  height: 100%;
+
+  &__link {
+    display: inline-block;
+    padding: 0 $mat-toolbar-padding;
+    font-size: $navigation-link-font-size;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: mat-color(map-get($theme, primary), default-contrast);
+    border-bottom: $navigation-link-border-size solid transparent;
+
+    &--active,
+    &:hover {
+      border-bottom: $navigation-link-border-size solid mat-color(map-get($theme, accent));
+    }
+  }
+}
+
+@mixin navigation-height($height) {
+  .navigation {
+    &__link {
+      height: $height - $navigation-link-border-size;
+      line-height: $height;
+    }
+  }
+}
+
+@include navigation-height($mat-toolbar-height-desktop);
+
+// Specific height for mobile devices in portrait mode.
+@media ($mat-xsmall) and (orientation: portrait) {
+  @include navigation-height($mat-toolbar-height-mobile-portrait);
+}
+
+// Specific height for mobile devices in landscape mode.
+@media ($mat-small) and (orientation: landscape) {
+  @include navigation-height($mat-toolbar-height-mobile-landscape);
 }
