@@ -58,9 +58,9 @@ module.exports = function (options) {
      */
     entry: {
 
-      'polyfills': './src/polyfills.browser.ts',
-      'main':      AOT ? './src/main.browser.aot.ts' :
-                  './src/main.browser.ts'
+      'polyfills': './Client/polyfills.browser.ts',
+      'main':      AOT ? './Client/main.browser.aot.ts' :
+                  './Client/main.browser.ts'
 
     },
 
@@ -79,7 +79,7 @@ module.exports = function (options) {
       extensions: ['.ts', '.js', '.json'],
 
       // An array of directory names to be resolved to the current directory
-      modules: [helpers.root('src'), helpers.root('node_modules')],
+      modules: [helpers.root('Client'), helpers.root('node_modules')],
 
     },
 
@@ -154,7 +154,7 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           use: ['to-string-loader', 'css-loader'],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('Client', 'styles')]
         },
 
         /*
@@ -165,7 +165,7 @@ module.exports = function (options) {
         {
           test: /\.scss$/,
           use: ['to-string-loader', 'css-loader', 'sass-loader'],
-          exclude: [helpers.root('src', 'styles')]
+          exclude: [helpers.root('Client', 'styles')]
         },
 
         /* Raw loader support for *.html
@@ -176,7 +176,7 @@ module.exports = function (options) {
         {
           test: /\.html$/,
           use: 'raw-loader',
-          exclude: [helpers.root('src/index.html')]
+          exclude: [helpers.root('Client/index.html')]
         },
 
         /*
@@ -250,7 +250,7 @@ module.exports = function (options) {
       new ContextReplacementPlugin(
         // The (\\|\/) piece accounts for path separators in *nix and Windows
         /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
-        helpers.root('src'), // location of your src
+        helpers.root('Client'), // location of your src
         {
           // your Angular Async Route paths relative to this root directory
         }
@@ -265,8 +265,8 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
-        { from: 'src/assets', to: 'assets' },
-        { from: 'src/meta'}
+        { from: 'Client/assets', to: 'assets' },
+        { from: 'Client/meta'}
       ]),
 
 
@@ -279,7 +279,7 @@ module.exports = function (options) {
        * See: https://github.com/ampedandwired/html-webpack-plugin
        */
       new HtmlWebpackPlugin({
-        template: 'src/index.html',
+        template: 'Client/index.html',
         title: METADATA.title,
         chunksSortMode: 'dependency',
         metadata: METADATA,

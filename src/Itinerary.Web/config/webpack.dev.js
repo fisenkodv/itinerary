@@ -14,7 +14,6 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 /**
  * Webpack Constants
@@ -108,50 +107,26 @@ module.exports = function (options) {
          exclude: [/\.(spec|e2e)\.ts$/]
        },
 
-        // /*
-        //  * css loader support for *.css files (styles directory only)
-        //  * Loads external css styles into the DOM, supports HMR
-        //  *
-        //  */
-        // {
-        //   test: /\.css$/,
-        //   use: ['style-loader', 'css-loader'],
-        //   include: [helpers.root('src', 'styles')]
-        // },
-
-        // /*
-        //  * sass loader support for *.scss files (styles directory only)
-        //  * Loads external sass styles into the DOM, supports HMR
-        //  *
-        //  */
-        // {
-        //   test: /\.scss$/,
-        //   use: ['style-loader', 'css-loader', 'sass-loader'],
-        //   include: [helpers.root('src', 'styles')]
-        // },
-
-         /*
-         * Extract CSS files from .src/styles directory to external CSS file
+        /*
+         * css loader support for *.css files (styles directory only)
+         * Loads external css styles into the DOM, supports HMR
+         *
          */
         {
           test: /\.css$/,
-          loader: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: 'css-loader'
-          }),
-          include: [helpers.root('src', 'styles')]
+          use: ['style-loader', 'css-loader'],
+          include: [helpers.root('Client', 'styles')]
         },
 
         /*
-         * Extract and compile SCSS files from .src/styles directory to external CSS file
+         * sass loader support for *.scss files (styles directory only)
+         * Loads external sass styles into the DOM, supports HMR
+         *
          */
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: 'css-loader!sass-loader'
-          }),
-          include: [helpers.root('src', 'styles')]
+          use: ['style-loader', 'css-loader', 'sass-loader'],
+          include: [helpers.root('Client', 'styles')]
         },
 
       ]
@@ -159,13 +134,7 @@ module.exports = function (options) {
     },
 
     plugins: [
-      /**
-       * Plugin: ExtractTextPlugin
-       * Description: Extracts imported CSS files into external stylesheet
-       *
-       * See: https://github.com/webpack/extract-text-webpack-plugin
-       */
-      new ExtractTextPlugin('[name].css'),
+
       /**
        * Plugin: DefinePlugin
        * Description: Define free variables.

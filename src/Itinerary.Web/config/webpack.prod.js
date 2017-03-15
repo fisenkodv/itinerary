@@ -66,7 +66,7 @@ module.exports = function (env) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-filename
        */
-      filename: '[name].[chunkhash].bundle.js',
+      filename: '[name].bundle.js',
 
       /**
        * The filename of the SourceMaps for the JavaScript files.
@@ -74,7 +74,7 @@ module.exports = function (env) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
        */
-      sourceMapFilename: '[name].[chunkhash].bundle.map',
+      sourceMapFilename: '[name].bundle.map',
 
       /**
        * The filename of non-entry chunks as relative path
@@ -82,7 +82,7 @@ module.exports = function (env) {
        *
        * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
        */
-      chunkFilename: '[id].[chunkhash].chunk.js'
+      chunkFilename: '[id].chunk.js'
 
     },
 
@@ -99,7 +99,7 @@ module.exports = function (env) {
             fallback: 'style-loader',
             use: 'css-loader'
           }),
-          include: [helpers.root('src', 'styles')]
+          include: [helpers.root('Client', 'styles')]
         },
 
         /*
@@ -111,7 +111,7 @@ module.exports = function (env) {
             fallback: 'style-loader',
             use: 'css-loader!sass-loader'
           }),
-          include: [helpers.root('src', 'styles')]
+          include: [helpers.root('Client', 'styles')]
         },
 
       ]
@@ -142,7 +142,7 @@ module.exports = function (env) {
        *
        * See: https://github.com/webpack/extract-text-webpack-plugin
        */
-      new ExtractTextPlugin('[name].[contenthash].css'),
+      new ExtractTextPlugin('[name].css'),
 
       /**
        * Plugin: DefinePlugin
