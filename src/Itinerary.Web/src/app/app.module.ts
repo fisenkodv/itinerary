@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import 'hammerjs';
+import '../styles/styles.scss';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

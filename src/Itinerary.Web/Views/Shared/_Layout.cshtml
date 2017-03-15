@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>@ViewData[ "Title" ] - Itinerary Web</title>
   <base href="/"/>
-  <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="~/dist/main.css" asp-append-version="true"/>
+
+  <script type="text/javascript" src="~/dist/polyfills.dll.js" defer></script>
+  <script type="text/javascript" src="~/dist/vendor.dll.js" defer></script>
+  <script type="text/javascript" src="~/dist/polyfills.bundle.js" defer></script>
+  <script type="text/javascript" src="~/dist/vendor.bundle.js" defer></script>
+  <script type="text/javascript" src="~/dist/main.bundle.js" defer></script></head>
 </head>
 <body>
 @RenderBody()
