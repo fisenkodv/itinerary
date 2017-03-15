@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Custom Type Definitions
  * When including 3rd party modules you also need to include the type definition for the module
  * if they don't provide one within the module. You can try to install it with @types
@@ -83,7 +83,7 @@ type AsyncRoutes = {
   [component: string]: Es6PromiseLoader |
                                Function |
                 FactoryEs6PromiseLoader |
-                         FactoryPromise
+                         FactoryPromise ;
 };
 
 type IdleCallbacks = Es6PromiseLoader |

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @author: @AngularClass
  */
 
@@ -79,7 +79,7 @@ module.exports = function (options) {
       extensions: ['.ts', '.js', '.json'],
 
       // An array of directory names to be resolved to the current directory
-      modules: [helpers.root('Client'), helpers.root('node_modules')],
+      modules: [helpers.root('Client'), helpers.root('node_modules')]
 
     },
 
@@ -194,7 +194,7 @@ module.exports = function (options) {
           use: 'file-loader'
         }
 
-      ],
+      ]
 
     },
 
@@ -265,8 +265,8 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
-        { from: 'Client/assets', to: 'assets' },
-        { from: 'Client/meta'}
+        { from: 'Client/assets', to: '../assets' },
+        { from: 'Client/meta', to: '..' }
       ]),
 
 

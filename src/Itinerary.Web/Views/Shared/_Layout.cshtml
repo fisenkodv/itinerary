@@ -2,17 +2,31 @@
 <html>
 <head>
   <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>@ViewData[ "Title" ] - Itinerary Web</title>
-  <base href="/"/>
-  <link rel="stylesheet" href="~/dist/main.css" asp-append-version="true"/>
 
-  <script type="text/javascript" src="~/dist/polyfills.dll.js" defer></script>
-  <script type="text/javascript" src="~/dist/vendor.dll.js" defer></script>
-  <script type="text/javascript" src="~/dist/polyfills.bundle.js" defer></script>
-  <script type="text/javascript" src="~/dist/vendor.bundle.js" defer></script>
-  <script type="text/javascript" src="~/dist/main.bundle.js" defer></script></head>
+  <title>@ViewData[ "Title" ] - Itinerary Web</title>
+
+  <meta name="description" content="Itinerary is it your starting point for searching interesting places and planning your trip">
+
+  <base href="/"/>
+
+  <environment names="Development">
+    <script type="text/javascript" src="~/dist/polyfills.dll.js" asp-append-version="true" defer></script>
+    <script type="text/javascript" src="~/dist/vendor.dll.js" asp-append-version="true" defer></script>
+    <script type="text/javascript" src="~/dist/polyfills.bundle.js" asp-append-version="true" defer></script>
+    <script type="text/javascript" src="~/dist/vendor.bundle.js" asp-append-version="true" defer></script>
+    <script type="text/javascript" src="~/dist/main.bundle.js" asp-append-version="true" defer></script>
+  </environment>
+
+  <environment names="Staging,Production">
+    <link rel="stylesheet" href="~/dist/main.css" asp-append-version="true"/>
+    <script type="text/javascript" src="~/dist/polyfills.bundle.js" asp-append-version="true" defer></script>
+    <script type="text/javascript" src="~/dist/vendor.bundle.js" asp-append-version="true" defer></script>
+    <script type="text/javascript" src="~/dist/main.bundle.js" asp-append-version="true" defer></script>
+  </environment>
 </head>
+
 <body>
 @RenderBody()
 

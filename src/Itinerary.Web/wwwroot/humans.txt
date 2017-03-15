@@ -1,4 +1,4 @@
-# humanstxt.org/
+﻿# humanstxt.org/
 # The humans responsible & technology colophon
 
 # TEAM
@@ -8,10 +8,8 @@
 # THANKS
 
   <name>
-  PatrickJS -- @gdi2290
-  AngularClass -- @AngularClass
 
 # TECHNOLOGY COLOPHON
 
   HTML5, CSS3
-  Angular2, TypeScript, Webpack
+  Angular 2, TypeScript, Webpack

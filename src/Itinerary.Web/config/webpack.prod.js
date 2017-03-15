@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @author: @AngularClass
  */
 
@@ -160,7 +160,7 @@ module.exports = function (env) {
         'process.env': {
           'ENV': JSON.stringify(METADATA.ENV),
           'NODE_ENV': JSON.stringify(METADATA.ENV),
-          'HMR': METADATA.HMR,
+          'HMR': METADATA.HMR
         }
       }),
 
@@ -207,7 +207,7 @@ module.exports = function (env) {
           if_return: true,
           join_vars: true,
           negate_iife: false // we need this for lazy v8
-        },
+        }
       }),
 
       /**
@@ -300,7 +300,7 @@ module.exports = function (env) {
           },
 
         }
-      }),
+      })
 
       /**
        * Plugin: BundleAnalyzerPlugin
