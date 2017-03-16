@@ -1,54 +1,19 @@
-﻿const path = require('path');
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+/**
+ * @author: @AngularClass
+ */
 
-module.exports = (env) => {
-  const isDevBuild = !(env && env.prod);
-  const sharedConfig = {
-    stats: { modules: false },
-    context: __dirname,
-    resolve: { extensions: ['.js', '.ts', '.scss'] },
-    output: {
-      filename: '[name].js',
-      publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
-    },
-    module: {
-      rules: [
-        { test: /\.ts$/, include: /Client/, use: ['awesome-typescript-loader?silent=true', 'angular2-template-loader'] },
-        { test: /\.html$/, use: 'html-loader?minimize=false' },
-        { test: /\.css$/, use: ['to-string-loader', 'css-loader'] },
-        { test: /\.scss$/, use: ['to-string-loader', 'style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader'] },
-        { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
-      ]
-    },
-    plugins: [new CheckerPlugin()]
-  };
-
-  // Configuration for client-side bundle suitable for running in browsers
-  const clientBundleOutputDir = './wwwroot/dist';
-  const clientBundleConfig = merge(sharedConfig, {
-    entry: {
-      'main': './Client/main.ts',
-      'styles': ['./Client/styles/main.scss']
-    },
-    output: { path: path.join(__dirname, clientBundleOutputDir) },
-    plugins: [
-      new webpack.DllReferencePlugin({
-        context: __dirname,
-        manifest: require('./wwwroot/dist/vendor-manifest.json')
-      })
-    ].concat(isDevBuild ? [
-      // Plugins that apply in development builds only
-      new webpack.SourceMapDevToolPlugin({
-        filename: '[file].map', // Remove this line if you prefer inline source maps
-        moduleFilenameTemplate: path.relative(clientBundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
-      })
-    ] : [
-        // Plugins that apply in production builds only
-        new webpack.optimize.UglifyJsPlugin()
-      ])
-  });
-
-  return [clientBundleConfig];
-};
+// Look in ./config folder for webpack.dev.js
+switch (process.env.NODE_ENV) {
+  case 'prod':
+  case 'production':
+    module.exports = require('./config/webpack.prod')({env: 'production'});
+    break;
+  case 'test':
+  case 'testing':
+    module.exports = require('./config/webpack.test')({env: 'test'});
+    break;
+  case 'dev':
+  case 'development':
+  default:
+    module.exports = require('./config/webpack.dev')({env: 'development'});
+}

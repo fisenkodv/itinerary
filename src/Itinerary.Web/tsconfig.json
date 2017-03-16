@@ -1,17 +1,44 @@
-﻿{
+{
   "compilerOptions": {
-    "moduleResolution": "node",
     "target": "es5",
-    "sourceMap": true,
-    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "skipDefaultLibCheck": true,
-    "lib": [ "es6", "dom" ],
-    "types": [ "node", "googlemaps" ]
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "strictNullChecks": false,
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "hammerjs",
+      "jasmine",
+      "node",
+      "source-map",
+      "uglify-js",
+      "webpack",
+      "googlemaps"
+    ]
   },
-  "atom": { "rewriteTsconfig": false },
   "exclude": [
-    "bin",
-    "node_modules"
-  ]
+    "node_modules",
+    "dist"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

@@ -16,9 +16,13 @@
     <!-- Files not to show in IDE -->
     <None Remove="npm-debug.log" />
     <None Remove="yarn.lock" />
+    <Compile Remove="dll\**" />
 
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="Client\**" />
+    <Content Remove="dll\**" />
+    <EmbeddedResource Remove="dll\**" />
+    <None Remove="dll\**" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Itinerary.Business\Itinerary.Business.csproj" />

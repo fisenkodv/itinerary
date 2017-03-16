@@ -1,8 +1,13 @@
-{
+﻿{
+  "extends": [
+    "tslint:recommended"
+  ],
   "rulesDirectory": [
-    //"node_modules/codelyzer"
+    "node_modules/codelyzer"
   ],
   "rules": {
+    "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
+    "interface-name": [false, "always-prefix"],
     "callable-types": true,
     "class-name": true,
     "comment-format": [
@@ -10,7 +15,7 @@
       "check-space"
     ],
     "curly": true,
-    "eofline": true,
+    "eofline": false,
     "forin": true,
     "import-blacklist": [true, "rxjs"],
     "import-spacing": true,
@@ -99,7 +104,7 @@
     ],
 
     "directive-selector": [true, "attribute", "itinerary", "camelCase"],
-    "component-selector": [true, "element", "itinerary", "kebab-case"],
+    "component-selector": [ true, "element", "itinerary", "dashed-case", "kebab-case" ],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,

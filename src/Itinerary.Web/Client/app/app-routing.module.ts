@@ -11,6 +11,5 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }]
 })
-
 export class AppRoutingModule {
 }

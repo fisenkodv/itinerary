@@ -25,6 +25,6 @@ export class PlacesService {
 
   search(latitude: number, longitude: number, radius: number, rating: number): Observable<Place[]> {
     return this.http.get(`${AppSettings.itineraryApiBaseUrl}/places/search?lat=${latitude}&lng=${longitude}&radius=${radius}&rating=${rating}`)
-      .map(response => <Place[]>response.json())
+      .map(response => <Place[]>response.json());
   }
 }
