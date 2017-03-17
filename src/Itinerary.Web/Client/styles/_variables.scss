@@ -1,2 +1,9 @@
-﻿$itinerary-elements-padding: 10px;
+﻿@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
+
+$itinerary-elements-padding: 10px;
 $itinerary-search-sidebar-width: 360px;
+
+$itinerary-palette-primary: mat-palette($mat-deep-purple);
+$itinerary-palette-accent: mat-palette($mat-yellow);
+$itinerary-light-theme: mat-light-theme($itinerary-palette-primary, $itinerary-palette-accent);

@@ -1,5 +1,5 @@
 ﻿@import '~@angular/material/toolbar/toolbar';
-@import '../../styles/_theme';
+@import '../../styles/_variables';
 
 $navigation-link-font-size: 16px !default;
 $navigation-link-border-size: 4px !default;
@@ -28,12 +28,12 @@ $navigation-link-border-size: 4px !default;
     font-size: $navigation-link-font-size;
     text-decoration: none;
     text-transform: uppercase;
-    color: mat-color(map-get($theme, primary), default-contrast);
+    color: mat-color(map-get($itinerary-light-theme, primary), default-contrast);
     border-bottom: $navigation-link-border-size solid transparent;
 
     &--active,
     &:hover {
-      border-bottom: $navigation-link-border-size solid mat-color(map-get($theme, accent));
+      border-bottom: $navigation-link-border-size solid mat-color(map-get($itinerary-light-theme, accent));
     }
   }
 }
