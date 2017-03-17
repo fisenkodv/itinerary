@@ -1,6 +1,6 @@
-﻿import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+﻿import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'places', pathMatch: 'full' }

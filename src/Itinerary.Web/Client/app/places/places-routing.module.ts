@@ -1,6 +1,6 @@
-﻿import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+﻿import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { PlacesComponent } from './places.component';
 

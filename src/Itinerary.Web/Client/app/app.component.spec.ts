@@ -1,6 +1,7 @@
-﻿import {} from '@types/jasmine';
-import { TestBed, async } from '@angular/core/testing';
+﻿import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { } from '@types/jasmine';
+
 import { AppComponent } from './app.component';
 
 describe('AppComponent',

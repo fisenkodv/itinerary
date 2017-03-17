@@ -1,10 +1,10 @@
-﻿import { NgModule, ApplicationRef } from '@angular/core';
+﻿import { ApplicationRef, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
-import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { createInputTransfer, createNewHosts, removeNgStyles } from '@angularclass/hmr';
 
 import 'hammerjs';
 
@@ -69,7 +69,7 @@ export class AppModule {
     this.appState._state = store.state;
     // set input values
     if ('restoreInputValues' in store) {
-      let restoreInputValues = store.restoreInputValues;
+      const restoreInputValues = store.restoreInputValues;
       setTimeout(restoreInputValues);
     }
 

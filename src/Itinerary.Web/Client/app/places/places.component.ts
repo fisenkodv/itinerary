@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 
-import { Place, Location, PlacesService } from '../shared/places.service';
+import { Location, Place, PlacesService } from '../shared/places.service';
 
 @Component({
   selector: 'places',
