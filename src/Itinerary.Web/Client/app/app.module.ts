@@ -16,6 +16,7 @@ import { AppState, InternalStateType } from './app.service';
 import { envProviders } from './environment';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { HomeModule } from './home/home.module';
 import { PlacesModule } from './places/places.module';
 import { PlacesService } from './shared/places.service';
 
@@ -47,6 +48,7 @@ type StoreType = {
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
+    HomeModule,
     PlacesModule
   ],
   providers: [

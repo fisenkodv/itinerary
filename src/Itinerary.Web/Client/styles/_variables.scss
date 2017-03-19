@@ -4,6 +4,6 @@
 $itinerary-elements-padding: 10px;
 $itinerary-search-sidebar-width: 360px;
 
-$itinerary-palette-primary: mat-palette($mat-deep-purple);
-$itinerary-palette-accent: mat-palette($mat-yellow);
+$itinerary-palette-primary: mat-palette($mat-deep-purple, 500);
+$itinerary-palette-accent: mat-palette($mat-yellow, 500);
 $itinerary-light-theme: mat-light-theme($itinerary-palette-primary, $itinerary-palette-accent);

@@ -3,10 +3,10 @@
     <span class="header__title" fxFlex="grow">Itinerary</span>
     <div class="navigation-container">
       <nav class="navigation">
-        <a class="navigation__link" [routerLink]="['/home']">Home</a>
-        <a class="navigation__link navigation__link--active" [routerLink]="['/places']">Places</a>
-        <a class="navigation__link" [routerLink]="['/places']">Travels</a>
-        <a class="navigation__link" [routerLink]="['/places']">Etc</a>
+        <a class="navigation__link" [routerLink]="['/home']" [routerLinkActive]="'navigation__link--active'">Home</a>
+        <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">Places</a>
+        <a class="navigation__link" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">Travels</a>
+        <a class="navigation__link" [routerLink]="['/etc']" [routerLinkActive]="'navigation__link--active'">Etc</a>
       </nav>
     </div>
     <button class="more-button" md-icon-button [md-menu-trigger-for]="menu">
