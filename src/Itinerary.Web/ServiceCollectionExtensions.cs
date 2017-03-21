@@ -1,6 +1,9 @@
-﻿using Itinerary.Business.Places;
-using Itinerary.DataAccess.Interfaces;
-using Itinerary.DataAccess.LiteDB;
+﻿using Itinerary.Business.Api.Google;
+using Itinerary.Business.Services.Places;
+using Itinerary.DataAccess.Repository;
+using Itinerary.DataAccess.Repository.Interfaces;
+using Itinerary.DataAccess.Repository.Interfaces.Generic;
+using Itinerary.DataAccess.Repository.LiteDb;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,9 +15,14 @@ namespace Itinerary.Web
       this IServiceCollection services,
       IConfiguration configuration )
     {
-      services.AddTransient( typeof( IRepository<> ), typeof( LiteDbRepository<> ) );
-      services.AddSingleton<IUnitOfWork>(
-        new LiteDbUnitOfWork( configuration.GetConnectionString( "DefaultConnection" ) ) );
+      services.AddSingleton( configuration.GetGoogleClientSecrets() );
+
+      services.AddSingleton<IRepositoryConfiguration>(
+        new RepositoryConfiguration(configuration.GetConnectionString("DefaultConnection")));
+
+      services.AddTransient( typeof( IGuidKeyRepository<> ), typeof( LiteDbRepository<> ) );
+      services.AddTransient( typeof( IPlacesRepository ), typeof( PlacesRepository ) );
+
       services.AddTransient<IPlacesService, PlacesService>();
 
       return services;

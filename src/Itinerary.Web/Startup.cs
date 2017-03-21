@@ -30,13 +30,10 @@ namespace Itinerary.Web
     public void ConfigureServices( IServiceCollection services )
     {
       services.Configure<GzipCompressionProviderOptions>(
-       options => options.Level = CompressionLevel.Optimal);
-      services.AddResponseCompression(options =>
-      {
-       options.Providers.Add<GzipCompressionProvider>();
-      });
+        options => options.Level = CompressionLevel.Optimal );
+      services.AddResponseCompression( options => { options.Providers.Add<GzipCompressionProvider>(); } );
 
-      // Add framework services.
+      services.AddMemoryCache();
       services.AddMvc();
 
       services.AddCustomServices( Configuration );

@@ -1,7 +1,12 @@
-import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { MapsAPILoader } from 'angular2-google-maps/core';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+
+import { Autocomplete, PlacesService } from '../../shared/places.service';
 
 @Component({
   selector: 'search-panel',
@@ -9,37 +14,27 @@ import { MapsAPILoader } from 'angular2-google-maps/core';
   styleUrls: ['search-panel.component.scss']
 })
 export class SearchPanelComponent implements OnInit {
-  @ViewChild('search')
-  public searchElementRef: ElementRef;
   public searchControl: FormControl;
+  public filteredPlaces: Autocomplete[];
 
   constructor(
     private ngZone: NgZone,
-    private mapsAPILoader: MapsAPILoader
-  ) { }
+    private placesService: PlacesService
+  ) {
+    this.searchControl = new FormControl();
+  }
 
   ngOnInit() {
-    this.searchControl = new FormControl();
+    this.searchControl.valueChanges
+      .debounceTime(200)
+      .switchMap(keyword => this.placesService.autocomplete(<string>keyword))
+      .subscribe(value => {
+        this.filteredPlaces = value;
+      });
+  }
 
-    this.mapsAPILoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement,
-        {
-          types: []
-        });
-      autocomplete.addListener('place_changed',
-        () => {
-          this.ngZone.run(() => {
-            const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-            if (place.geometry === undefined || place.geometry === null) {
-              return;
-            }
-
-            // this.latitude = place.geometry.location.lat();
-            // this.longitude = place.geometry.location.lng();
-            // this.zoom = 12;
-          });
-        });
-    });
+  displayFn(autocomplete: Autocomplete): string {
+    console.dir(autocomplete);
+    return autocomplete ? autocomplete.description : "";
   }
 }

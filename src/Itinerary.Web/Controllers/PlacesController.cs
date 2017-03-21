@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using Itinerary.Business.Places;
-using Itinerary.Common.Entities;
+using Itinerary.Business.Services.Places;
+using Itinerary.Common.Models;
+using Itinerary.DataAccess.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Web.Controllers
@@ -13,6 +14,12 @@ namespace Itinerary.Web.Controllers
     public PlacesController( IPlacesService placesService )
     {
       _placesService = placesService;
+    }
+
+    [HttpGet( "[action]" )]
+    public IEnumerable<Autocomplete> Autocomplete( string keyword )
+    {
+      return _placesService.Autocomplete( keyword );
     }
 
     [HttpGet( "[action]" )]

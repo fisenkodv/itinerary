@@ -8,10 +8,10 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Itinerary.Crawler.TripAdviser.Entities;
+using Itinerary.DataAccess.Domain;
 using LiteDB;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Itinerary.Common.Entities;
 
 namespace Itinerary.Crawler.TripAdviser
 {

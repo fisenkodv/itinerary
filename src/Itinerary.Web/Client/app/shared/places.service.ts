@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+﻿import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
@@ -18,13 +18,27 @@ export class Place {
   }
 }
 
+export class Autocomplete {
+  constructor(
+    public id: string,
+    public description: string) {
+  }
+}
+
 @Injectable()
 export class PlacesService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   search(latitude: number, longitude: number, radius: number, rating: number): Observable<Place[]> {
-    return this.http.get(`${AppSettings.itineraryApiBaseUrl}/places/search?lat=${latitude}&lng=${longitude}&radius=${radius}&rating=${rating}`)
+    return this.http.get(`${AppSettings
+        .itineraryApiBaseUrl}/places/search?lat=${latitude}&lng=${longitude}&radius=${radius}&rating=${rating}`)
       .map(response => <Place[]>response.json());
+  }
+
+  autocomplete(keyword: string): Observable<Autocomplete[]> {
+    return this.http.get(`${AppSettings
+        .itineraryApiBaseUrl}/places/autocomplete?keyword=${keyword}`)
+      .map(response => <Autocomplete[]>response.json());
   }
 }
