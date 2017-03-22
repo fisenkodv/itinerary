@@ -2,20 +2,15 @@
   <h2>Search Places</h2>
   <div fxLayout="column" fxLayoutAlign="center stretch">
 
-    <!--<md-input-container fxFlex="grow">
-      <input mdInput placeholder="search for location" type="text" #search [formControl]="searchControl">
-    </md-input-container>-->
-    
-    <md-input-container>
+    <md-input-container fxFlex="grow">
       <input type="text" mdInput [formControl]="searchControl" [mdAutocomplete]="auto">
     </md-input-container>
 
-    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-      <md-option *ngFor="let option of filteredPlaces" [value]="option">
-        {{ option.description }}
+    <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayPlace.bind(this)">
+      <md-option *ngFor="let place of filteredPlaces" [value]="place">
+        {{ place.description }}
       </md-option>
     </md-autocomplete>
-    
 
     <section fxFlex="grow" fxLayout="row">
       <label class="search-panel__title" fxFlexAlign="center" fxFlex="nogrow">Distance:</label>

@@ -1,5 +1,6 @@
-﻿import { Component, OnInit, ElementRef, NgZone, ViewChild } from '@angular/core';
+﻿import { Component, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MdAutocompleteTrigger } from '@angular/material/autocomplete';
 
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';
@@ -30,7 +31,7 @@ export class SearchPanelComponent implements OnInit {
       });
   }
 
-  displayFn(autocomplete: Autocomplete): string {
+  displayPlace(autocomplete: Autocomplete): string {
     if (autocomplete != null && autocomplete.id) {
       this.placesService
         .details(autocomplete.id)
