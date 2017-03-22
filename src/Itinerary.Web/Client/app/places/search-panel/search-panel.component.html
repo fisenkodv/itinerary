@@ -4,6 +4,7 @@
 
     <md-input-container fxFlex="grow">
       <input type="text" mdInput [formControl]="searchControl" [mdAutocomplete]="auto">
+      <md-placeholder>Select location</md-placeholder>
     </md-input-container>
 
     <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayPlace.bind(this)">
@@ -14,13 +15,13 @@
 
     <section fxFlex="grow" fxLayout="row">
       <label class="search-panel__title" fxFlexAlign="center" fxFlex="nogrow">Distance:</label>
-      <md-slider fxFlex="grow" [max]="100" [min]="0" [step]="1" [thumb-label]="true" [vertical]="false">
+      <md-slider fxFlex="grow" [max]="1000" [min]="0" [step]="1" [thumb-label]="true" [vertical]="false" [value]="distance" (change)="changeDistanceHandler($event)">
       </md-slider>
     </section>
 
     <section fxFlex="grow" fxLayout="row">
       <label class="search-panel__title" fxFlexAlign="center" fxFlex="nogrow">Rating:</label>
-      <md-slider fxFlex="grow" [max]="5" [min]="0" [step]="0.1" [thumb-label]="true" [vertical]="false">
+      <md-slider fxFlex="grow" [max]="5" [min]="0" [step]="0.1" [thumb-label]="true" [vertical]="false" [value]="rating" (change)="changeRatingHandler($event)">
       </md-slider>
     </section>
 

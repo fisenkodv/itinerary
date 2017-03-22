@@ -1,11 +1,9 @@
 ﻿<section class="places" fxLayout="row" fxFlex="grow">
   <div class="places__sidenav" fxFlex="noshrink">
-   <search-panel></search-panel>
+   <search-panel (search)="searchHandler($event)"></search-panel>
   </div>
 
   <div class="places__map" fxFlex="grow">
-    <sebm-google-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-      <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude"></sebm-google-map-marker>
-    </sebm-google-map>
+    <search-map [searchCriteria]="searchCriteria"></search-map>
   </div>
 </section>

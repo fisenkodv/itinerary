@@ -1,11 +1,11 @@
-﻿import { Http } from '@angular/http';
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { AppSettings } from '../core/appSettings';
 
 export class Location {
-  constructor(public latitude: number, public longitude: number) {
+  constructor(public lat: number, public lng: number) {
   }
 }
 
@@ -26,7 +26,7 @@ export class Autocomplete {
 }
 
 export class PlaceDetails {
-  constructor(location: Location) {
+  constructor(public location: Location) {
   }
 }
 

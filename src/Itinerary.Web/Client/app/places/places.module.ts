@@ -10,6 +10,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { AppSettings } from '../core/appSettings';
 import { PlacesRoutingModule } from './places-routing.module';
 import { PlacesComponent } from './places.component';
+import { SearchMapComponent } from './search-map/search-map.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 
 @NgModule({
@@ -27,7 +28,7 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
     })
   ],
   exports: [],
-  declarations: [PlacesComponent, SearchPanelComponent],
+  declarations: [PlacesComponent, SearchPanelComponent, SearchMapComponent],
   providers: []
 })
 export class PlacesModule {
