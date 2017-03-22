@@ -32,7 +32,6 @@ export class PlacesComponent implements OnInit {
         this.zoom = 12;
         this.placeseService.search(this.latitude, this.longitude, 20, 5)
           .subscribe(next => {
-            //debugger;
           });
       });
     }

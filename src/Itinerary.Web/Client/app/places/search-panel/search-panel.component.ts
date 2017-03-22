@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 
-import { Autocomplete, PlacesService } from '../../shared/places.service';
+import { Autocomplete, PlaceDetails, PlacesService } from '../../shared/places.service';
 
 @Component({
   selector: 'search-panel',
@@ -17,10 +17,7 @@ export class SearchPanelComponent implements OnInit {
   public searchControl: FormControl;
   public filteredPlaces: Autocomplete[];
 
-  constructor(
-    private ngZone: NgZone,
-    private placesService: PlacesService
-  ) {
+  constructor(private placesService: PlacesService) {
     this.searchControl = new FormControl();
   }
 
@@ -34,7 +31,13 @@ export class SearchPanelComponent implements OnInit {
   }
 
   displayFn(autocomplete: Autocomplete): string {
-    console.dir(autocomplete);
+    if (autocomplete != null && autocomplete.id) {
+      this.placesService
+        .details(autocomplete.id)
+        .subscribe(next => {
+          console.dir(next);
+        });
+    }
     return autocomplete ? autocomplete.description : "";
   }
 }
