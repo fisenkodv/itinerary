@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Search.Entities.Common
+namespace Itinerary.Business.Api.Google.Places.Common.Entities
 {
   public class Geometry
   {

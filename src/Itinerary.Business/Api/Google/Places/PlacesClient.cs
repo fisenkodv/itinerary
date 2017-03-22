@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Itinerary.Business.Api.Google.Places.Autocomplete.Entities;
 using Itinerary.Business.Api.Google.Places.Autocomplete.ParameterBuilder;
+using Itinerary.Business.Api.Google.Places.Details.Entities;
+using Itinerary.Business.Api.Google.Places.Details.ParameterBuilder;
 using Itinerary.Business.Api.Google.Places.Search.Entities.Nearby;
 using Itinerary.Business.Api.Google.Places.Search.Entities.Radar;
 using Itinerary.Business.Api.Google.Places.Search.Entities.Text;
@@ -29,6 +31,11 @@ namespace Itinerary.Business.Api.Google.Places
     public static Task<AutocompleteResult> Autocomplete( IAutocompleteHttpQueryBuilder httpQueryBuilder )
     {
       return GetResponse<AutocompleteResult>( httpQueryBuilder );
+    }
+
+    public static Task<DetailsResult> Details( IDetailsHttpQueryBuilder httpQueryBuilder )
+    {
+      return GetResponse<DetailsResult>( httpQueryBuilder );
     }
 
     private static Task<T> GetResponse<T>( IHttpQueryBuilder httpQueryBuilder )

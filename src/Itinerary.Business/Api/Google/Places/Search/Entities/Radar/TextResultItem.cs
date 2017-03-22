@@ -1,4 +1,5 @@
-﻿using Itinerary.Business.Api.Google.Places.Search.Entities.Common;
+﻿using Itinerary.Business.Api.Google.Places.Common.Entities;
+using Itinerary.Business.Api.Google.Places.Search.Entities.Common;
 using Newtonsoft.Json;
 
 namespace Itinerary.Business.Api.Google.Places.Search.Entities.Radar

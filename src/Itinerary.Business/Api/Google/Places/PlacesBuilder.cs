@@ -1,4 +1,5 @@
 ﻿using Itinerary.Business.Api.Google.Places.Autocomplete.ParameterBuilder;
+using Itinerary.Business.Api.Google.Places.Details.ParameterBuilder;
 using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.Interfaces;
 using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.QueryBuilder;
 
@@ -25,11 +26,6 @@ namespace Itinerary.Business.Api.Google.Places
       return new AutocompleteHttpQueryBuilder( _apiKey );
     }
 
-    private static string GetApiKey( GoogleClientSecrets clientSecrets )
-    {
-      return clientSecrets[ ApiName ];
-    }
-
     public INearbyHttpQueryBuilder NearbySearch()
     {
       return new NearbyHttpQueryBuilder( _apiKey );
@@ -43,6 +39,16 @@ namespace Itinerary.Business.Api.Google.Places
     public IRadarHttpQueryBuilder RadarSearch()
     {
       return new RadarHttpQueryBuilder( _apiKey );
+    }
+
+    public IDetailsHttpQueryBuilder Details()
+    {
+      return new DetailsHttpQueryBuilder( _apiKey );
+    }
+
+    private static string GetApiKey( GoogleClientSecrets clientSecrets )
+    {
+      return clientSecrets[ ApiName ];
     }
   }
 }

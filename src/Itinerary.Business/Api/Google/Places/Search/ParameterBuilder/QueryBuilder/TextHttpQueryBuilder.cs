@@ -1,6 +1,6 @@
-﻿using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.Interfaces;
+﻿using Itinerary.Business.Api.Google.Places.Common.Types;
+using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.Interfaces;
 using Itinerary.Business.Api.Google.Places.Search.Types;
-using Itinerary.Business.Api.Google.Places.Types;
 
 namespace Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.QueryBuilder
 {

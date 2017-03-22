@@ -23,6 +23,12 @@ namespace Itinerary.Web.Controllers
     }
 
     [HttpGet( "[action]" )]
+    public object Details( string placeId )
+    {
+      return null;
+    }
+
+    [HttpGet( "[action]" )]
     public IEnumerable<Place> Search( double lat, double lng, double radius, double rating )
     {
       return _placesService.Search( lat, lng, radius, rating );

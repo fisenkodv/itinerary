@@ -2,11 +2,13 @@
 using Itinerary.Business.Api.Google.Places.Autocomplete.Entities;
 using Itinerary.Business.Api.Google.Places.Autocomplete.ParameterBuilder;
 using Itinerary.Business.Api.Google.Places.Autocomplete.Types;
+using Itinerary.Business.Api.Google.Places.Common.Types;
+using Itinerary.Business.Api.Google.Places.Details.Entities;
+using Itinerary.Business.Api.Google.Places.Details.ParameterBuilder;
 using Itinerary.Business.Api.Google.Places.Search.Entities.Nearby;
 using Itinerary.Business.Api.Google.Places.Search.Entities.Radar;
 using Itinerary.Business.Api.Google.Places.Search.Entities.Text;
 using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.Interfaces;
-using Itinerary.Business.Api.Google.Places.Types;
 using Xunit;
 
 namespace Itinerary.Tests
@@ -77,6 +79,21 @@ namespace Itinerary.Tests
 
       Assert.NotNull( results );
       Assert.NotEmpty( results.Predictions );
+    }
+
+    [Fact]
+    public async void Details()
+    {
+      IDetailsHttpQueryBuilder detailsHttpQueryBuilder =
+        PlacesBuilder.Create( GoogleClientSecretsStorage.Instance.ClientSecrets )
+                     .Details()
+                     .Place( "ChIJuZIxSXmdF4gRCTBXSdL4fNo" );
+
+      DetailsResult results = await PlacesClient.Details( detailsHttpQueryBuilder );
+
+      Assert.NotNull( results );
+      Assert.NotNull( results.Result );
+      Assert.Equal( "Kalamazoo, MI, USA", results.Result.FormattedAddress );
     }
   }
 }

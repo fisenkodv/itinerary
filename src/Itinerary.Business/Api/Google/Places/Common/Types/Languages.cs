@@ -1,6 +1,6 @@
 ﻿using Itinerary.Business.Api.Google.Attributes;
 
-namespace Itinerary.Business.Api.Google.Places.Types
+namespace Itinerary.Business.Api.Google.Places.Common.Types
 {
   public enum Languages
   {
