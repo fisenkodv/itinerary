@@ -4,6 +4,8 @@ using Itinerary.Business.Api.Google;
 using Itinerary.Business.Api.Google.Places;
 using Itinerary.Business.Api.Google.Places.Autocomplete.ParameterBuilder;
 using Itinerary.Business.Api.Google.Places.Autocomplete.Types;
+using Itinerary.Business.Api.Google.Places.Details.Entities;
+using Itinerary.Business.Api.Google.Places.Details.ParameterBuilder;
 using Itinerary.Common;
 using Itinerary.Common.Models;
 using Itinerary.DataAccess.Domain;
@@ -41,7 +43,7 @@ namespace Itinerary.Business.Services.Places
     public IEnumerable<Autocomplete> Autocomplete( string keyword )
     {
       string key = $"autosuggest_{keyword}";
-      if ( !_memoryCache.TryGetValue( key, out object autosuggestItems ) )
+      if ( !_memoryCache.TryGetValue( key, out IEnumerable<Autocomplete> autosuggestItems ) )
       {
         IAutocompleteHttpQueryBuilder
           autocompleteQueryBuilder =
@@ -60,7 +62,32 @@ namespace Itinerary.Business.Services.Places
         _memoryCache.Set( key, autosuggestItems );
       }
 
-      return autosuggestItems as IEnumerable<Autocomplete>;
+      return autosuggestItems;
+    }
+
+    public PlaceDetails Details( string placeId )
+    {
+      string key = $"details_{placeId}";
+      if ( !_memoryCache.TryGetValue( key, out PlaceDetails placeDetails ) )
+      {
+        IDetailsHttpQueryBuilder
+          detailsHttpQueryBuilder =
+            PlacesBuilder.Create( _googleClientSecrets )
+                         .Details()
+                         .Place( placeId );
+
+        Result place = PlacesClient
+          .Details( detailsHttpQueryBuilder )
+          .Result
+          .Result;
+
+        placeDetails =
+          new PlaceDetails( new Common.Models.Location( place.Geometry.Location.Langitude, place.Geometry.Location.Longitude ) );
+
+        _memoryCache.Set( key, placeDetails );
+      }
+
+      return placeDetails;
     }
   }
 }

@@ -9,5 +9,7 @@ namespace Itinerary.Business.Services.Places
     IEnumerable<Place> Search( double lat, double lng, double radius, double rating );
 
     IEnumerable<Autocomplete> Autocomplete( string keyword );
+
+    PlaceDetails Details( string placeId );
   }
 }

@@ -23,9 +23,9 @@ namespace Itinerary.Web.Controllers
     }
 
     [HttpGet( "[action]" )]
-    public object Details( string placeId )
+    public PlaceDetails Details( string placeId )
     {
-      return null;
+      return _placesService.Details( placeId );
     }
 
     [HttpGet( "[action]" )]
