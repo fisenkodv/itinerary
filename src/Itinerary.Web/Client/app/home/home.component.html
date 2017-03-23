@@ -8,57 +8,61 @@
         <p class="">Search intersting placese and plan you trip!</p>
       </li>
       <li>
-        <a md-raised-button color="primary" [routerLink]="['/places']">Search Places</a>
+        <a md-raised-button color="accent" [routerLink]="['/places']">Search Places</a>
       </li>
     </ul>
   </div>
 </div>
 
 <div class="details">
-
   <div fxFlex class="divider">
-    <h2 class="divider__title">About us</h2>
+    <h2 class="divider__title">About Itinerary</h2>
   </div>
-
   <section fxFlex fxFlexAlign="center" class="text-center">
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit explicabo assumenda eligendi ex exercitationem harum
-      deleniti quaerat beatae ducimus dolor voluptates magnam, reiciendis pariatur culpa tempore quibusdam quidem, saepe
-      eius.
+    <p>Do you want to spend less time planning your trip without missing anything? Then this site is for you! You will easily
+      find all the most interesting and popular places, but also you will quickly build and maintain the best route here.
     </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit explicabo assumenda eligendi ex exercitationem harum
-      deleniti quaerat beatae ducimus dolor voluptates magnam, reiciendis pariatur culpa tempore quibusdam quidem, saepe
-      eius.
-    </p>
-
   </section>
 
   <div fxFlex class="divider">
-    <h2 class="divider__title">Our team</h2>
+    <h2 class="divider__title">Our Features</h2>
   </div>
-
   <section fxFlex>
-
-    <div fxLayout='row' fxLayoutAlign="center">
-      <md-card fxFlex="33">
+    <div fxLayout='row' fxLayoutAlign="space-around start">
+      <md-card fxFlex="45">
         <md-card-header>
-          <div md-card-avatar class="example-header-image"></div>
-          <md-card-title>Dmitry Fisenko</md-card-title>
-          <md-card-subtitle>Software Engineer at EPAM Systems</md-card-subtitle>
+          <md-card-title>Places</md-card-title>
+          <md-card-subtitle>Search interesting places</md-card-subtitle>
         </md-card-header>
-        <img md-card-image src="assets/img/team/dmitry_fisenko.jpg">
+        <img md-card-image src="assets/img/travel-plans.jpg">
         <md-card-content>
-          <p>
-            Dmitry Fisenko is Software Engineer at EPAM Systems.
-          </p>
+          <ul class="features-list">
+            <li>Specify the search area</li>
+            <li>Set the place ranking</li>
+            <li>Choose and keep your liked points</li>
+          </ul>
         </md-card-content>
         <md-card-actions>
-          <a md-button href="https://www.linkedin.com/in/fisenkodv">LINKEDIN</a>
-          <a md-button href="https://www.facebook.com/fisenkodv">FACEBOOK</a>
+          <a md-button [routerLink]="['/places']">START USING IT</a>
+        </md-card-actions>
+      </md-card>
+      <md-card fxFlex="45">
+        <md-card-header>
+          <md-card-title>Route</md-card-title>
+          <md-card-subtitle>Build and maintain the best route</md-card-subtitle>
+        </md-card-header>
+        <img md-card-image src="assets/img/travel-notes.jpg">
+        <md-card-content>
+          <ul class="features-list">
+            <li>Create a new map or use the points you saved earlier.</li>
+            <li>Set the start and end point of the journey-the route is ready.</li>
+            <li>Embark on a journey!</li>
+          </ul>
+        </md-card-content>
+        <md-card-actions>
+          <a md-button [disabled]="true" [routerLink]="['/home']">COMING SOON</a>
         </md-card-actions>
       </md-card>
     </div>
-
   </section>
-
 </div>

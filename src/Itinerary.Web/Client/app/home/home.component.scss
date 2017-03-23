@@ -1,13 +1,8 @@
+@import '~@angular/material/toolbar/toolbar';
 @import '../../styles/_variables';
 
-:host {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-
 .splash {
-  background: url("../../assets/img/home-background.png")no-repeat center center fixed;
+  background: url("../../assets/img/home-background.jpg")no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -17,7 +12,7 @@
   height: calc(100vh - 64px);//TODO!
 
   &__overlay {
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .2);
 
     &--center {
       display: -webkit-flex;
@@ -30,7 +25,7 @@
       -ms-flex-align: center;
       align-items: center;
       height: 100%;
-      color: #fff;
+      color: mat-color(map-get($itinerary-light-theme, primary), default-contrast);
     }
   }
 }
@@ -44,7 +39,7 @@
 .details {
   width: 960px;//TODO
   margin: 0 auto;
-  padding-bottom: $itinerary-elements-padding * 2;
+  padding-bottom: $itinerary-elements-padding * 10;
 }
 
 .divider {
@@ -60,8 +55,8 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-top: 45px;
-  margin-bottom: 45px;
+  margin-top: $itinerary-elements-padding * 3;
+  margin-bottom: $itinerary-elements-padding * 3;
 
   &:before,
   &:after {
@@ -84,4 +79,9 @@
 
 .text-center {
   text-align: center;
+}
+
+.features-list {
+  padding: 0;
+  list-style: none;
 }

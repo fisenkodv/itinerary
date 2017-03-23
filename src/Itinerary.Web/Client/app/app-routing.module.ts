@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'travels', redirectTo: 'home' },
-  { path: 'etc', redirectTo: 'home' }
+  { path: 'travels', redirectTo: 'home' }
 ];
 
 @NgModule({
