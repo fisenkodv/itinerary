@@ -1,6 +1,6 @@
-﻿<section class="search-panel">
-  <h2>Search Places</h2>
-  <div fxLayout="column" fxLayoutAlign="center stretch">
+﻿<section class="search-panel" fxLayout="column">
+  <h2 fxFlex="grow">Search Places</h2>
+  <div fxLayout="column">
 
     <md-input-container fxFlex="grow">
       <input type="text" mdInput [formControl]="searchControl" [mdAutocomplete]="auto">
@@ -13,16 +13,20 @@
       </md-option>
     </md-autocomplete>
 
-    <section fxFlex="grow" fxLayout="row">
-      <label class="search-panel__title" fxFlexAlign="center" fxFlex="nogrow">Distance:</label>
-      <md-slider fxFlex="grow" [max]="1000" [min]="0" [step]="1" [thumb-label]="true" [vertical]="false" [value]="distance" (change)="changeDistanceHandler($event)">
-      </md-slider>
+    <section fxFlex="grow">
+      <div fxLayout="row">
+        <label class="search-panel__title" fxFlexAlign="center" fxFlex="nogrow">Distance:</label>
+        <md-slider fxFlex="grow" [max]="1000" [min]="0" [step]="1" [thumb-label]="true" [vertical]="false" [value]="distance" (change)="changeDistanceHandler($event)">
+        </md-slider>
+      </div>
     </section>
 
-    <section fxFlex="grow" fxLayout="row">
-      <label class="search-panel__title" fxFlexAlign="center" fxFlex="nogrow">Rating:</label>
-      <md-slider fxFlex="grow" [max]="5" [min]="0" [step]="0.1" [thumb-label]="true" [vertical]="false" [value]="rating" (change)="changeRatingHandler($event)">
-      </md-slider>
+    <section fxFlex="grow">
+      <div fxLayout="row">
+        <label class="search-panel__title" fxFlexAlign="center" fxFlex="nogrow">Rating:</label>
+        <md-slider fxFlex="grow" [max]="5" [min]="0" [step]="0.1" [thumb-label]="true" [vertical]="false" [value]="rating" (change)="changeRatingHandler($event)">
+        </md-slider>
+      </div>
     </section>
 
   </div>
