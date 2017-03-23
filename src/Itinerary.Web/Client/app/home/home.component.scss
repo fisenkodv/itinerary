@@ -1,8 +1,10 @@
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
 @import '~@angular/material/toolbar/toolbar';
 @import '../../styles/_variables';
 
 .splash {
-  background: url("../../assets/img/home-background.jpg")no-repeat center center fixed;
+  background: url("../../assets/img/home-background.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -60,8 +62,9 @@
 
   &:before,
   &:after {
+    $line-color: mat-color(mat-palette($mat-grey, 500));
     content: '';
-    background: #666;//TODO
+    background: $line-color;
     height: 1px;
     -webkit-flex: 1;
     -ms-flex: 1;
