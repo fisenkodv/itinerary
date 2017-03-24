@@ -48,6 +48,31 @@ Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\It
 ## Guidelines ##
 1. [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)
 
+## Deployment to Digital Ocean
+
+### Create build
+```dotnet publish src/Itinerary.Web/Itinerary.Web.csproj -o ../../release/```
+
+### Copy to Digital Ocean
+```rsync -a release/ root@174.138.76.175:/var/www/itinerary -v```
+
+### Copy nginx config from/to configs dir
+From ```rsync -a root@174.138.76.175:/etc/nginx/nginx.conf .```
+
+To ```rsync -a nginx.conf root@174.138.76.175:/etc/nginx/nginx.conf```
+
+### Copy supervisor config from/to configs dir
+From ```rsync -a root@174.138.76.175:/etc/supervisor/conf.d/itinerary.conf .```
+
+To ```rsync -a itinerary.conf root@174.138.76.175:/etc/supervisor/conf.d/itinerary.conf```
+### Connect to Digital Ocean
+```ssh root@174.138.76.175```
+
+### Pathes
+nginx ```/etc/nginx/nginx.conf```
+
+supervisor ```/etc/supervisor/conf.d/itinerary.conf```
+
 ## Links
 * [Microsoft ASP.NET Core JavaScript Services](https://github.com/aspnet/JavaScriptServices)
 * [Building Single Page Applications on ASP.NET Core with JavaScriptServices](https://blogs.msdn.microsoft.com/webdev/2017/02/14/building-single-page-applications-on-asp-net-core-with-javascriptservices/)
