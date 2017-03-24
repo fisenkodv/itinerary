@@ -73,6 +73,11 @@ nginx ```/etc/nginx/nginx.conf```
 
 supervisor ```/etc/supervisor/conf.d/itinerary.conf```
 
+### Certificates
+All sertificates are placed in ```/etc/letsencrypt/live/itinerary.site/```
+```letsencrypt certonly  --webroot --webroot-path=/var/www/itinerary_cert -d itinerary.site -d www.itinerary.site -d itinerary.reise -d www.itinerary.reise```
+
 ## Links
 * [Microsoft ASP.NET Core JavaScript Services](https://github.com/aspnet/JavaScriptServices)
 * [Building Single Page Applications on ASP.NET Core with JavaScriptServices](https://blogs.msdn.microsoft.com/webdev/2017/02/14/building-single-page-applications-on-asp-net-core-with-javascriptservices/)
+* [How To Secure Nginx with Let's Encrypt on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04)
