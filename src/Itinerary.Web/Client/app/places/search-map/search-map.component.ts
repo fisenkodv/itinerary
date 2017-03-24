@@ -1,6 +1,6 @@
 ﻿import { Component, Input, OnInit } from '@angular/core';
 
-import { Autocomplete, Location, PlaceDetails, PlacesService } from '../../shared/places.service';
+import { Place, PlacesService } from '../../shared/places.service';
 import { SearchCriteria } from '../search-criteria';
 
 @Component({
@@ -12,6 +12,7 @@ export class SearchMapComponent implements OnInit {
   public latitude: number;
   public longitude: number;
   public zoom: number;
+  public places: Place[];
 
   private distance: number;
   private rating: number;
@@ -22,6 +23,8 @@ export class SearchMapComponent implements OnInit {
       this.longitude = value.location.lng;
       this.distance = value.distance;
       this.rating = value.rating;
+
+      this.searchPlaces();
     }
   }
   constructor(private placesService: PlacesService) {
@@ -29,5 +32,13 @@ export class SearchMapComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  private searchPlaces() {
+    this.placesService.search(this.latitude, this.longitude, this.distance, this.rating)
+      .subscribe((places: Place[]) => {
+        console.log(places);
+        this.places = places;
+      });
   }
 }

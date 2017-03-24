@@ -65,18 +65,10 @@ export class SearchPanelComponent implements OnInit {
 
   private setCurrentPosition() {
     if (navigator.geolocation) {
-      try {
-        navigator.geolocation.getCurrentPosition((position) => {
-          this.location = new Location(position.coords.latitude, position.coords.longitude);
-          this.raiseSearch();
-          // this.placeseService.search(this.latitude, this.longitude, 20, 5)
-          //   .subscribe((next) => {
-          //   });
-        });
-      }
-      catch (error) {
-        console.log(error);
-      }
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.location = new Location(position.coords.latitude, position.coords.longitude);
+        this.raiseSearch();
+      });
     }
   }
 
