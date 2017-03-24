@@ -16,4 +16,8 @@
     padding: $itinerary-elements-padding * 2;
     width: $itinerary-search-sidebar-width;
   }
+
+  &__map {
+    display: flex;
+  }
 }
