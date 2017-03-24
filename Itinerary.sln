@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		bitbucket-pipelines.yml = bitbucket-pipelines.yml
 		README.md = README.md
+		configs\itinerary.conf = configs\itinerary.conf
+		configs\nginx.conf = configs\nginx.conf
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Tests", "test\Itinerary.Tests\Itinerary.Tests.csproj", "{50ED1CCE-680B-467A-9B73-89B3D30F0857}"

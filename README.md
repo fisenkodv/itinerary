@@ -58,13 +58,16 @@ Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\It
 
 ### Copy nginx config from/to configs dir
 From ```rsync -a root@174.138.76.175:/etc/nginx/nginx.conf .```
+or ```pscp root@itinerary.site:/etc/nginx/nginx.conf .```
 
 To ```rsync -a nginx.conf root@174.138.76.175:/etc/nginx/nginx.conf```
 
 ### Copy supervisor config from/to configs dir
 From ```rsync -a root@174.138.76.175:/etc/supervisor/conf.d/itinerary.conf .```
+or ```pscp root@itinerary.site:/etc/supervisor/conf.d/itinerary.conf .```
 
 To ```rsync -a itinerary.conf root@174.138.76.175:/etc/supervisor/conf.d/itinerary.conf```
+
 ### Connect to Digital Ocean
 ```ssh root@174.138.76.175```
 
