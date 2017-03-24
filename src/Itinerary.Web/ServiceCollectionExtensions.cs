@@ -18,7 +18,7 @@ namespace Itinerary.Web
       services.AddSingleton( configuration.GetGoogleClientSecrets() );
 
       services.AddSingleton<IRepositoryConfiguration>(
-        new RepositoryConfiguration(configuration.GetConnectionString("DefaultConnection")));
+        new RepositoryConfiguration( configuration.GetConnectionString( "DefaultConnection" ) ) );
 
       services.AddTransient( typeof( IGuidKeyRepository<> ), typeof( LiteDbRepository<> ) );
       services.AddTransient( typeof( IPlacesRepository ), typeof( PlacesRepository ) );

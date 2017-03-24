@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { AppSettings } from '../core/appSettings';
@@ -33,23 +33,23 @@ export class PlaceDetails {
 @Injectable()
 export class PlacesService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   search(latitude: number, longitude: number, radius: number, rating: number): Observable<Place[]> {
     return this.http.get(`${AppSettings
-      .itineraryApiBaseUrl}/places/search?lat=${latitude}&lng=${longitude}&radius=${radius}&rating=${rating}`)
-      .map(response => <Place[]>response.json());
+        .itineraryApiBaseUrl}/places/search?lat=${latitude}&lng=${longitude}&radius=${radius}&rating=${rating}`)
+      .map((response: Response) => <Place[]>response.json());
   }
 
   autocomplete(keyword: string): Observable<Autocomplete[]> {
     return this.http.get(`${AppSettings
-      .itineraryApiBaseUrl}/places/autocomplete?keyword=${keyword}`)
-      .map(response => <Autocomplete[]>response.json());
+        .itineraryApiBaseUrl}/places/autocomplete?keyword=${keyword}`)
+      .map((response: Response) => <Autocomplete[]>response.json());
   }
 
   details(placeId: string): Observable<PlaceDetails> {
     return this.http.get(`${AppSettings
-      .itineraryApiBaseUrl}/places/details?placeid=${placeId}`)
-      .map(response => <PlaceDetails>response.json());
+        .itineraryApiBaseUrl}/places/details?placeid=${placeId}`)
+      .map((response: Response) => <PlaceDetails>response.json());
   }
 }
