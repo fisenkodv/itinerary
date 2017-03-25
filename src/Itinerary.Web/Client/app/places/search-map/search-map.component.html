@@ -1,7 +1,9 @@
 ﻿<div class="map">
   <sebm-google-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-    <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude"></sebm-google-map-marker>
+    <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude" [label]="'H'" [title]="'My Location'"></sebm-google-map-marker>
 
-    <sebm-google-map-marker *ngFor="let place of places" [latitude]="place.location.latitude" [longitude]="place.location.longitude"></sebm-google-map-marker>
+    <sebm-google-map-marker *ngFor="let place of places" [latitude]="place.location.latitude" [longitude]="place.location.longitude" [title]="place.name" [opacity]="placeOpacity(place)"></sebm-google-map-marker>
+
+    <sebm-google-map-circle [latitude]="latitude" [longitude]="longitude" [radius]="distanceInMeters" [fillColor]="'#673ab7'" [fillOpacity]="0.2"></sebm-google-map-circle>
   </sebm-google-map>
 </div>

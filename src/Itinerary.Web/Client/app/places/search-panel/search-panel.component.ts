@@ -26,7 +26,7 @@ export class SearchPanelComponent implements OnInit {
 
   constructor(private placesService: PlacesService) {
     this.searchControl = new FormControl();
-    this.distance = 200;
+    this.distance = 100;
     this.rating = 3.0;
   }
 
