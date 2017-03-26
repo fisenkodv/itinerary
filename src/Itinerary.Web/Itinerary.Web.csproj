@@ -20,7 +20,6 @@
     <None Remove="npm-debug.log" />
     <None Remove="yarn.lock" />
     <Compile Remove="dll\**" />
-
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="Client\**" />
     <Content Remove="dll\**" />
@@ -36,7 +35,6 @@
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />
     <Exec Command="npm run build:prod" />
-
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
       <DistFiles Include="wwwroot\**;" />

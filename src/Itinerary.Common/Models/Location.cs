@@ -2,14 +2,14 @@
 {
   public class Location
   {
-    public Location( double lat, double lng )
+    public Location( double latitude, double longitude )
     {
-      Lat = lat;
-      Lng = lng;
+      Latitude = latitude;
+      Longitude = longitude;
     }
 
-    public double Lat { get; }
+    public double Latitude { get; }
 
-    public double Lng { get; }
+    public double Longitude { get; }
   }
 }

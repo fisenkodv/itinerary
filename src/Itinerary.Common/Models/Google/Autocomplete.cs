@@ -2,13 +2,13 @@
 {
   public class Autocomplete
   {
-    public Autocomplete( string id, string description )
+    public Autocomplete( string placeId, string description )
     {
-      Id = id;
+      PlaceId = placeId;
       Description = description;
     }
 
-    public string Id { get; }
+    public string PlaceId { get; }
 
     public string Description { get; }
   }

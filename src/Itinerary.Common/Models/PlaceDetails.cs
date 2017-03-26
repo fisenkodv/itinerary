@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Itinerary.Common.Models
+﻿namespace Itinerary.Common.Models
 {
   public class PlaceDetails
   {

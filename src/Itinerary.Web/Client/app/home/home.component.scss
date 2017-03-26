@@ -1,7 +1,12 @@
+@import '~@angular/material/core/style/variables';
 @import '~@angular/material/core/theming/palette';
 @import '~@angular/material/core/theming/theming';
 @import '~@angular/material/toolbar/toolbar';
 @import '../../styles/_variables';
+@import '../../styles/_breakpoints';
+
+//$mat-toolbar-height-mobile-portrait: 56px !default;
+//$mat-toolbar-height-mobile-landscape: 48px !default;
 
 .splash {
   background: url("../../assets/img/home-background.jpg") no-repeat center center fixed;
@@ -11,7 +16,7 @@
   background-size: cover;
 
   width: 100%;
-  height: calc(100vh - 64px);//TODO!
+  height: calc(100vh - #{$mat-toolbar-height-desktop});
 
   &__overlay {
     background-color: rgba(0, 0, 0, .2);
@@ -39,9 +44,6 @@
 }
 
 .details {
-  width: 960px;//TODO
-  margin: 0 auto;
-  padding-bottom: $itinerary-elements-padding * 10;
 }
 
 .divider {
@@ -84,7 +86,39 @@
   text-align: center;
 }
 
+.feature-card {
+}
+
 .features-list {
   padding: 0;
   list-style: none;
 }
+
+@include for-media-query($gt-sm) {
+  .details {
+    width: $medium-lower-bound;
+    margin: 0 auto;
+    padding-bottom: $itinerary-elements-padding * 10;
+  }
+}
+
+@include for-media-query($lt-sm) {
+  .splash {
+    height: calc(100vh - #{$mat-toolbar-height-mobile-landscape});
+  }
+  .details {
+    padding: $itinerary-elements-padding;
+  }
+
+  .divider {
+    margin-top: $itinerary-elements-padding;
+    margin-bottom: $itinerary-elements-padding;
+  }
+
+  .feature-card {
+    &:not(:last-child) {
+      margin-bottom: $itinerary-elements-padding * 2;
+    }
+  }
+}
+

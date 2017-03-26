@@ -19,7 +19,7 @@ namespace Itinerary.DataAccess.Repository.LiteDb
       get
       {
         if (_instance != null) return _instance;
-        LiteDbProvider temp = new LiteDbProvider();
+        var temp = new LiteDbProvider();
         Interlocked.CompareExchange(ref _instance, temp, null);
         return _instance;
       }

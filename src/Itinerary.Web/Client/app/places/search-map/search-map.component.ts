@@ -1,6 +1,6 @@
 ﻿import { Component, Input } from '@angular/core';
 
-import { Place, PlacesService } from '../../shared/places.service';
+import { Place, PlacesService } from '../../shared';
 import { SearchCriteria } from '../search-criteria';
 
 @Component({
@@ -18,10 +18,11 @@ export class SearchMapComponent {
   private rating: number;
   private maximumReviews: number;
 
-  @Input() set searchCriteria(value: SearchCriteria) {
+  @Input()
+  set searchCriteria(value: SearchCriteria) {
     if (value) {
-      this.latitude = value.location.lat;
-      this.longitude = value.location.lng;
+      this.latitude = value.location.latitude;
+      this.longitude = value.location.longitude;
       this.distance = value.distance;
       this.rating = value.rating;
 
