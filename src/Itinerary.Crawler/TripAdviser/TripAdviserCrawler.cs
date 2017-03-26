@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using Itinerary.Crawler.TripAdviser.Entities;
 using Itinerary.DataAccess.Domain;
 using LiteDB;
@@ -72,6 +71,18 @@ namespace Itinerary.Crawler.TripAdviser
     {
       int index = 0;
 
+      _logger.LogInformation( "Removing bad data..." );
+
+      BsonValue[] badRecords =
+        GetSegmentsCollection().FindAll()
+                               .Where(
+                                 x =>
+                                   x.Map.Attractions.Any(
+                                     a => a.Rating == 0 || a.Reviews == 0 || string.IsNullOrEmpty( a.ImgUrl ) ) )
+                               .Select( x => new BsonValue(x.Id) )
+                               .ToArray();
+      GetSegmentsCollection().Delete( Query.In( "Id", badRecords ) );
+
       _logger.LogInformation( "Reading existing data..." );
 
       Dictionary<string, Segment> segments = GetSegmentsCollection()
@@ -85,20 +96,19 @@ namespace Itinerary.Crawler.TripAdviser
       for ( double lng = startLng; lng <= endLng; lng += zoom * 10 / size )
       {
         if ( !segments.ContainsKey( GetKey( lat, lng ) ) )
-          coordinates.Add( ( lat: lat, lng: lng ) );
+          coordinates.Add( (lat: lat, lng: lng) );
       }
 
-      Parallel.ForEach(
-        coordinates, coordinate =>
-                     {
-                       double lat = coordinate.lat;
-                       double lng = coordinate.lng;
+      foreach ( (double lat, double lng) coordinate in coordinates )
+      {
+        double lat = coordinate.lat;
+        double lng = coordinate.lng;
 
-                       ReadSegment( lat, lng, zoom, size );
+        ReadSegment( lat, lng, zoom, size );
 
-                       Interlocked.Increment( ref index );
-                       _logger.LogInformation( $"{index * 100.0 / coordinates.Count} complete" );
-                     } );
+        Interlocked.Increment( ref index );
+        _logger.LogInformation( $"{index * 100.0 / coordinates.Count} complete" );
+      }
     }
 
     private static string GetKey( double lat, double lng )
@@ -111,7 +121,7 @@ namespace Itinerary.Crawler.TripAdviser
       return _liteDatabase.GetCollection<Segment>( "segments" );
     }
 
-    private async void ReadSegment( double lat, double lng, double zoom, double size )
+    private void ReadSegment( double lat, double lng, double zoom, double size )
     {
       try
       {
@@ -120,7 +130,7 @@ namespace Itinerary.Crawler.TripAdviser
           $"https://www.tripadvisor.com/GMapsLocationController?Action=update&from=Attractions&g=35805&geo=35805&mapProviderFeature=ta-maps-gmaps3&validDates=false&mc={lat},{lng}&mz={zoom}&mw={size}&mh={size}&pinSel=v2&origLocId=35805&sponsors=&finalRequest=false&includeMeta=false&trackPageView=false";
 
         Thread.Sleep( TimeSpan.FromSeconds( 0.1 ) );
-        byte[] json = await httpClient.GetByteArrayAsync( url );
+        byte[] json = httpClient.GetByteArrayAsync( url ).Result;
 
         _logger.LogDebug( $"Read segment {lat}, {lng}. {json.Length} bytes." );
 
@@ -144,7 +154,7 @@ namespace Itinerary.Crawler.TripAdviser
 
             Thread.Sleep( _delay );
 
-            string html = await httpClient.GetStringAsync( infoUrl );
+            string html = httpClient.GetStringAsync( infoUrl ).Result;
             string imgUrl = ImgRegex.Match( html ).Value;
             string reviews = ReviewsRegex.Match( html ).Groups[ groupname: "reviews" ].Value;
             string rating = RatingRegex.Match( html ).Groups[ groupname: "rating" ].Value;
