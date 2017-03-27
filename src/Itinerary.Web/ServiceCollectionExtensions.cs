@@ -24,6 +24,7 @@ namespace Itinerary.Web
       services.AddTransient( typeof( IPlacesRepository ), typeof( PlacesRepository ) );
 
       services.AddTransient<IPlacesService, PlacesService>();
+      services.AddTransient<IGooglePlacesService, GooglePlacesService>();
 
       return services;
     }

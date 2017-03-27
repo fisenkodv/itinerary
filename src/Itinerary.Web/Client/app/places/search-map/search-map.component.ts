@@ -1,6 +1,6 @@
-﻿import { Component, Input, OnInit } from '@angular/core';
+﻿import { Component, Input } from '@angular/core';
 
-import { Place, PlacesService } from '../../shared/places.service';
+import { Place, PlacesService } from '../../shared';
 import { SearchCriteria } from '../search-criteria';
 
 @Component({
@@ -8,7 +8,7 @@ import { SearchCriteria } from '../search-criteria';
   templateUrl: 'search-map.component.html',
   styleUrls: ['search-map.component.scss']
 })
-export class SearchMapComponent implements OnInit {
+export class SearchMapComponent {
   public latitude: number;
   public longitude: number;
   public zoom: number;
@@ -16,29 +16,47 @@ export class SearchMapComponent implements OnInit {
 
   private distance: number;
   private rating: number;
+  private maximumReviews: number;
 
-  @Input() set searchCriteria(value: SearchCriteria) {
+  @Input()
+  set searchCriteria(value: SearchCriteria) {
     if (value) {
-      this.latitude = value.location.lat;
-      this.longitude = value.location.lng;
+      this.latitude = value.location.latitude;
+      this.longitude = value.location.longitude;
       this.distance = value.distance;
       this.rating = value.rating;
 
       this.searchPlaces();
     }
   }
-  constructor(private placesService: PlacesService) {
-    this.zoom = 8;
+
+  public get distanceInMeters(): number {
+    return this.distance * 1609.34;
   }
 
-  ngOnInit() {
+  constructor(private placesService: PlacesService) {
+    this.latitude = 0;
+    this.longitude = 0;
+    this.zoom = 8;
+    this.places = [];
+    this.distance = 0;
+    this.rating = 0;
+    this.maximumReviews = 0;
+  }
+
+  public placeOpacity(place: Place): number {
+    return 0.5 + 0.5 * (place.reviews / this.maximumReviews);
   }
 
   private searchPlaces() {
     this.placesService.search(this.latitude, this.longitude, this.distance, this.rating)
       .subscribe((places: Place[]) => {
-        console.log(places);
         this.places = places;
+        this.maximumReviews = this.places
+          .map((place) => place.reviews)
+          .reduce((a: number, b: number) => {
+            return Math.max(a, b);
+          });
       });
   }
 }

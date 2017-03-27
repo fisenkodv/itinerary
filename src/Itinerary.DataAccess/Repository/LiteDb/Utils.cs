@@ -6,7 +6,8 @@ namespace Itinerary.DataAccess.Repository.LiteDb
 {
   internal static class Utils
   {
-    public static string GetCollectionName<TEntity>() where TEntity : EntityBase
+    public static string GetCollectionName<TEntity>()
+      where TEntity : EntityBase
     {
       string collectionName = typeof( TEntity ).GetTypeInfo().BaseType == typeof( object )
                                 ? GetCollectioNameFromInterface<TEntity>()
@@ -26,7 +27,7 @@ namespace Itinerary.DataAccess.Repository.LiteDb
     private static string GetCollectionNameFromType( Type entitytype )
     {
       if ( entitytype == null )
-        throw new ArgumentNullException( nameof( entitytype ) );
+        throw new ArgumentNullException( nameof(entitytype) );
 
       return GetBaseEntity( entitytype ).Name;
     }

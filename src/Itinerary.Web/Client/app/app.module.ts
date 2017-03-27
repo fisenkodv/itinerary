@@ -18,10 +18,11 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeModule } from './home/home.module';
 import { PlacesModule } from './places/places.module';
-import { PlacesService } from './shared/places.service';
+import { GooglePlacesService, PlacesService } from './shared';
 
 const appProviders = [
   PlacesService,
+  GooglePlacesService,
   AppState
 ];
 
@@ -60,7 +61,8 @@ type StoreType = {
 export class AppModule {
   constructor(
     public appRef: ApplicationRef,
-    public appState: AppState) { }
+    public appState: AppState) {
+  }
 
   public hmrOnInit(store: StoreType) {
     if (!store || !store.state) {

@@ -1,6 +1,5 @@
 ﻿import { Component } from '@angular/core';
 
-import { Location, Place, PlacesService } from '../shared/places.service';
 import { SearchCriteria } from './search-criteria';
 
 @Component({
@@ -11,9 +10,6 @@ import { SearchCriteria } from './search-criteria';
 
 export class PlacesComponent {
   public searchCriteria: SearchCriteria;
-
-  constructor(private placeseService: PlacesService) {
-  }
 
   public searchHandler(event: SearchCriteria) {
     this.searchCriteria = event;

@@ -1,4 +1,4 @@
-import { Location } from '../shared/places.service';
+import { Location } from '../shared/models';
 
 export class SearchCriteria {
   constructor(

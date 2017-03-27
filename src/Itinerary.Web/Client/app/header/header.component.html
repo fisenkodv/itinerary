@@ -1,20 +1,28 @@
 ﻿<div class="header">
   <md-toolbar color="primary">
     <a class="header__title" fxFlex="grow" [routerLink]="['/home']">Itinerary</a>
-    <div class="navigation-container">
+    <div class="navigation-container" fxHide.xs="true">
       <nav class="navigation">
         <a class="navigation__link" [routerLink]="['/home']" [routerLinkActive]="'navigation__link--active'">Home</a>
         <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">Places</a>
         <a class="navigation__link navigation__link--coming-soon" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">Travels</a>
       </nav>
     </div>
-    <button class="more-button" md-icon-button [md-menu-trigger-for]="menu">
+    <button class="more-button" md-icon-button [md-menu-trigger-for]="menu" fxHide.xs="true">
       <md-icon>more_vert</md-icon>
+    </button>
+    <button class="more-button" md-icon-button [md-menu-trigger-for]="navigation" fxShow.gt-xs="false">
+      <md-icon>menu</md-icon>
     </button>
   </md-toolbar>
   <md-menu x-position="before" #menu="mdMenu">
     <button md-menu-item>Settings</button>
     <button md-menu-item>Toggle Theme</button>
     <button md-menu-item>Help</button>
+  </md-menu>
+  <md-menu x-position="before" #navigation="mdMenu">
+    <button md-menu-item [routerLink]="['/home']">Home</button>
+    <button md-menu-item  [routerLink]="['/places']">Places</button>
+    <button md-menu-item  [routerLink]="['/travels']">Travels</button>
   </md-menu>
 </div>
