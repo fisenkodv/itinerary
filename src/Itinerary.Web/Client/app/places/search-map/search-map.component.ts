@@ -9,10 +9,16 @@ import { SearchCriteria } from '../search-criteria';
   styleUrls: ['search-map.component.scss']
 })
 export class SearchMapComponent {
+  // default location is 'Geographic center of the contiguous United States'
+  private defaultLatitude = 39.833333;
+  private defaultLongitude = -98.583333;
+  private defaultZoom = 5;
+
   public latitude: number;
   public longitude: number;
   public zoom: number;
   public places: Place[];
+  public isBasePointSet: boolean;
   @Output()
   public placeSelect: EventEmitter<Place> = new EventEmitter();
 
@@ -23,6 +29,7 @@ export class SearchMapComponent {
   @Input()
   set searchCriteria(value: SearchCriteria) {
     if (value) {
+      this.isBasePointSet = true;
       this.latitude = value.location.latitude;
       this.longitude = value.location.longitude;
       this.distance = value.distance;
@@ -37,9 +44,10 @@ export class SearchMapComponent {
   }
 
   constructor(private placesService: PlacesService) {
-    this.latitude = 0;
-    this.longitude = 0;
-    this.zoom = 8;
+    this.isBasePointSet = false;
+    this.latitude = this.defaultLatitude;
+    this.longitude = this.defaultLongitude;
+    this.zoom = this.defaultZoom;
     this.places = [];
     this.distance = 0;
     this.rating = 0;

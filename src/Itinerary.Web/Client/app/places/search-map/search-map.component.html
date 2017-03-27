@@ -1,6 +1,6 @@
 ﻿<div class="map">
   <sebm-google-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-    <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude" [label]="'Y'" [title]="'Current Location'"></sebm-google-map-marker>
+    <sebm-google-map-marker *ngIf="isBasePointSet" [latitude]="latitude" [longitude]="longitude" [label]="'Y'" [title]="'Current Location'"></sebm-google-map-marker>
 
     <sebm-google-map-marker *ngFor="let place of places" [latitude]="place.location.latitude" [longitude]="place.location.longitude" [title]="place.name" [opacity]="placeOpacity(place)" (markerClick)="markerClick(place)"></sebm-google-map-marker>
 
