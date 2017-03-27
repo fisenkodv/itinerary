@@ -11,6 +11,8 @@ import { PlacesRoutingModule } from './places-routing.module';
 import { PlacesComponent } from './places.component';
 import { SearchMapComponent } from './search-map/search-map.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
+import { PlaceDetailsComponent } from './place-details/place-details.component';
+import { JoinPipe } from '../shared';
 
 @NgModule({
   imports: [
@@ -27,7 +29,13 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
     })
   ],
   exports: [],
-  declarations: [PlacesComponent, SearchPanelComponent, SearchMapComponent],
+  declarations: [
+    JoinPipe,
+    PlacesComponent,
+    SearchPanelComponent,
+    SearchMapComponent,
+    PlaceDetailsComponent
+  ],
   providers: []
 })
 export class PlacesModule {

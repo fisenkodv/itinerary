@@ -50,13 +50,16 @@ namespace Itinerary.Crawler.TripAdviser
 
           IEnumerable<Place> attractionPlaces =
             from attraction in segment.Map.Attractions
-            let location = new Location() { Latitude = attraction.Lat, Longitude = attraction.Lng }
-            let place = new Place()
+            let location = new Location { Latitude = attraction.Lat, Longitude = attraction.Lng }
+            let place = new Place
                         {
                           Location = location,
                           Name = attraction.CustomHover.Title,
                           Rating = attraction.Rating,
-                          Reviews = attraction.Reviews
+                          Reviews = attraction.Reviews,
+                          Categories = attraction.Categories,
+                          ImgUrl = attraction.ImgUrl,
+                          Url = attraction.Url
                         }
             select place;
 

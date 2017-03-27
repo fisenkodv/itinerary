@@ -1,9 +1,9 @@
 ﻿<section class="places" fxLayout="row" fxLayoutAlign="stretch" fxFlex="grow">
   <div class="places__sidenav" fxFlex="noshrink">
    <search-panel (search)="searchHandler($event)"></search-panel>
+   <place-details [place]="place"></place-details>
   </div>
-
   <div class="places__map" fxFlex="grow">
-    <search-map [searchCriteria]="searchCriteria"></search-map>
+    <search-map [searchCriteria]="searchCriteria" (placeSelect)="placeSelectHandler($event)"></search-map>
   </div>
 </section>

@@ -1,4 +1,4 @@
-﻿import { Component, Input } from '@angular/core';
+﻿import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Place, PlacesService } from '../../shared';
 import { SearchCriteria } from '../search-criteria';
@@ -13,6 +13,8 @@ export class SearchMapComponent {
   public longitude: number;
   public zoom: number;
   public places: Place[];
+  @Output()
+  public placeSelect: EventEmitter<Place> = new EventEmitter();
 
   private distance: number;
   private rating: number;
@@ -46,6 +48,10 @@ export class SearchMapComponent {
 
   public placeOpacity(place: Place): number {
     return 0.5 + 0.5 * (place.reviews / this.maximumReviews);
+  }
+
+  public markerClick(place: Place) {
+    this.placeSelect.emit(place);
   }
 
   private searchPlaces() {

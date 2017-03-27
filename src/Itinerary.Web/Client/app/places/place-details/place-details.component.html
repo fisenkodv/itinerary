@@ -1,0 +1,19 @@
+<div class="place-details" *ngIf="isPlaceSelected">
+  <md-card class="card">
+    <md-card-header>
+      <md-card-title><a class="card__title" href="//tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a></md-card-title>
+      <md-card-subtitle>{{place.categories|join:", "}}</md-card-subtitle>
+    </md-card-header>
+    <img class="card__image" md-card-image src="{{place.imgUrl}}">
+    <md-card-content>
+      <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png" alt="Trip Adviser">
+      <p>
+        Ratings Powered by <i>TripAdvisor</i>
+      </p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button>LIKE</button>
+      <button md-button>SHARE</button>
+    </md-card-actions>
+  </md-card>
+</div>

@@ -13,6 +13,7 @@
   right: 0;
 
   &__sidenav {
+    overflow: scroll;
     padding: $itinerary-elements-padding * 2;
     width: $itinerary-search-sidebar-width;
   }
