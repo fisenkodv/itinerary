@@ -82,9 +82,11 @@ namespace Itinerary.Crawler.TripAdviser
                                  x =>
                                    x.Map.Attractions.Any(
                                      a => a.Rating == 0 || a.Reviews == 0 || string.IsNullOrEmpty( a.ImgUrl ) ) )
-                               .Select( x => new BsonValue(x.Id) )
+                               .Select( x => new BsonValue( x.Id ) )
                                .ToArray();
       GetSegmentsCollection().Delete( Query.In( "Id", badRecords ) );
+
+      _logger.LogInformation( $"Removed {badRecords.Length} records with not filled rating, reviews etc." );
 
       _logger.LogInformation( "Reading existing data..." );
 

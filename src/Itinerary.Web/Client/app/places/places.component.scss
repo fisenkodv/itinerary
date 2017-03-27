@@ -1,4 +1,8 @@
-﻿@import '../../styles/_variables';
+﻿@import '~@angular/material/core/theming/palette';
+@import '../../styles/_variables';
+
+$foreground: map-get($itinerary-light-theme, foreground);
+$foreground-color: mat-color($foreground, secondary-text);
 
 :host {
   flex: 1 auto;
@@ -13,9 +17,31 @@
   right: 0;
 
   &__sidenav {
-    overflow: scroll;
+    overflow: auto;
     padding: $itinerary-elements-padding * 2;
     width: $itinerary-search-sidebar-width;
+
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-border-radius: 10px;
+      background: rgba(0,0,0,0.02);
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+    }
+    &::-webkit-scrollbar-thumb:window-inactive {
+      background: rgba(0,0,0,0.01);
+    }
   }
 
   &__map {
