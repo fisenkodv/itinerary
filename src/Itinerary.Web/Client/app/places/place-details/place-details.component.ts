@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+﻿import { Component, Input, OnInit } from '@angular/core';
 
-import { Place } from '../../shared';
+import { PlaceDetails } from '../../shared';
 
 @Component({
   selector: 'place-details',
@@ -10,14 +10,14 @@ import { Place } from '../../shared';
 
 export class PlaceDetailsComponent implements OnInit {
   public isPlaceSelected: boolean;
-  private selectedPlace: Place;
+  private selectedPlace: PlaceDetails;
 
   @Input()
-  set place(value: Place) {
+  set place(value: PlaceDetails) {
     this.isPlaceSelected = value != null;
     this.selectedPlace = value;
   }
-  get place(): Place {
+  get place(): PlaceDetails {
     return this.selectedPlace;
   }
 

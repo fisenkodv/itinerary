@@ -56,7 +56,6 @@ namespace Itinerary.Web
         app.UseExceptionHandler( "/Home/Error" );
       }
 
-      app.UseResponseCompression();
       app.UseStaticFiles();
 
       app.UseMvc(

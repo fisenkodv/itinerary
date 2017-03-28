@@ -45,9 +45,6 @@ Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\It
 * Places API ```AIzaSyAHtJrpKyxsARFESBwI-a0qaWjsD5ZW-3w```
 * Google Maps JavaScript API ```AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M```
 
-## Guidelines ##
-1. [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)
-
 ## Deployment to Digital Ocean
 
 ### Create build
@@ -81,6 +78,9 @@ supervisor ```/etc/supervisor/conf.d/itinerary.conf```
 ### Certificates
 All sertificates are placed in ```/etc/letsencrypt/live/itinerary.site/```
 ```letsencrypt certonly  --webroot --webroot-path=/var/www/itinerary_cert -d itinerary.site -d www.itinerary.site -d itinerary.reise -d www.itinerary.reise```
+
+## Guidelines ##
+1. [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)
 
 ## Links
 * [Microsoft ASP.NET Core JavaScript Services](https://github.com/aspnet/JavaScriptServices)

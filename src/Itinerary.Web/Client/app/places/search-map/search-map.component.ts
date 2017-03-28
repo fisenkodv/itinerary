@@ -1,6 +1,6 @@
 ﻿import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Location, Place, PlacesService } from '../../shared';
+import { Location, PlaceDetails, PlacesService } from '../../shared';
 import { SearchCriteria } from '../search-criteria';
 
 @Component({
@@ -17,9 +17,9 @@ export class SearchMapComponent {
 
   public isBasePointSet: boolean;
   public zoom: number;
-  public places: Place[];
+  public places: PlaceDetails[];
   @Output()
-  public placeSelect: EventEmitter<Place> = new EventEmitter();
+  public placeSelect: EventEmitter<PlaceDetails> = new EventEmitter();
 
   @Input()
   set searchCriteria(value: SearchCriteria) {
@@ -52,11 +52,11 @@ export class SearchMapComponent {
     this.maximumReviews = 0;
   }
 
-  public placeOpacity(place: Place): number {
+  public placeOpacity(place: PlaceDetails): number {
     return 0.5 + 0.5 * (place.reviews / this.maximumReviews);
   }
 
-  public markerClick(place: Place) {
+  public markerClick(place: PlaceDetails) {
     this.placeSelect.emit(place);
   }
 
@@ -67,7 +67,7 @@ export class SearchMapComponent {
         this.searchCriteria.location.longitude,
         this.searchCriteria.distance,
         this.searchCriteria.rating)
-        .subscribe((places: Place[]) => {
+        .subscribe((places: PlaceDetails[]) => {
           this.places = places;
           this.maximumReviews = this.places
             .map((place) => place.reviews)
