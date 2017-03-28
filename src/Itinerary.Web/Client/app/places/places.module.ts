@@ -9,6 +9,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { AppSettings } from '../core/appSettings';
 import { JoinPipe } from '../shared';
 import { PlaceDetailsComponent } from './place-details/place-details.component';
+import { PlaceListComponent } from './place-list/place-list.component';
 import { PlaceRatingComponent } from './place-rating/place-rating.component';
 import { PlacesRoutingModule } from './places-routing.module';
 import { PlacesComponent } from './places.component';
@@ -36,6 +37,7 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
     SearchPanelComponent,
     SearchMapComponent,
     PlaceDetailsComponent,
+    PlaceListComponent,
     PlaceRatingComponent
   ],
   providers: []

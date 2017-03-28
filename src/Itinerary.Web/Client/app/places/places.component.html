@@ -1,6 +1,7 @@
 ﻿<section class="places" fxLayout="row" fxLayoutAlign="stretch" fxFlex="grow">
   <div class="places__sidenav" fxFlex="noshrink">
-   <search-panel (search)="searchHandler($event)"></search-panel>
+    <search-panel (search)="searchHandler($event)"></search-panel>
+    <place-list></place-list>
    <place-details [place]="place"></place-details>
   </div>
   <div class="places__map" fxFlex="grow">
