@@ -4,7 +4,7 @@
       <md-card-title><a class="card__title" href="//tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a></md-card-title>
       <md-card-subtitle>{{place.categories|join:", "}}</md-card-subtitle>
     </md-card-header>
-    <img class="card__image" md-card-image src="{{place.imgUrl}}">
+    <img class="card__image" *ngIf="place.imgUrl" md-card-image src="{{place.imgUrl}}">
     <md-card-content>
       <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png" alt="Trip Adviser">
       <div class="card__statistics" fxLayout="row" fxLayoutAlign="pace-between">

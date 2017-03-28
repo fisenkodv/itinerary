@@ -1,6 +1,6 @@
 ﻿import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Place, PlacesService } from '../../shared';
+import { Location, Place, PlacesService } from '../../shared';
 import { SearchCriteria } from '../search-criteria';
 
 @Component({
@@ -13,44 +13,42 @@ export class SearchMapComponent {
   private defaultLatitude = 39.833333;
   private defaultLongitude = -98.583333;
   private defaultZoom = 5;
+  private defaultZoomForSelectedPoint = 8;
 
-  public latitude: number;
-  public longitude: number;
+  public isBasePointSet: boolean;
   public zoom: number;
   public places: Place[];
-  public isBasePointSet: boolean;
   @Output()
   public placeSelect: EventEmitter<Place> = new EventEmitter();
-
-  private distance: number;
-  private rating: number;
-  private maximumReviews: number;
 
   @Input()
   set searchCriteria(value: SearchCriteria) {
     if (value) {
       this.isBasePointSet = true;
-      this.latitude = value.location.latitude;
-      this.longitude = value.location.longitude;
-      this.distance = value.distance;
-      this.rating = value.rating;
+      this.zoom = this.defaultZoomForSelectedPoint;
+      this.selectedCriteria = value;
+      this.places = [];
 
       this.searchPlaces();
     }
   }
 
+  get searchCriteria(): SearchCriteria {
+    return this.selectedCriteria;
+  }
+
+  private selectedCriteria: SearchCriteria;
+  private maximumReviews: number;
+
   public get distanceInMeters(): number {
-    return this.distance * 1609.34;
+    return this.searchCriteria.distance * 1609.34;
   }
 
   constructor(private placesService: PlacesService) {
     this.isBasePointSet = false;
-    this.latitude = this.defaultLatitude;
-    this.longitude = this.defaultLongitude;
+    this.searchCriteria = new SearchCriteria(new Location(this.defaultLatitude, this.defaultLongitude), 0, 0);
     this.zoom = this.defaultZoom;
     this.places = [];
-    this.distance = 0;
-    this.rating = 0;
     this.maximumReviews = 0;
   }
 
@@ -63,14 +61,20 @@ export class SearchMapComponent {
   }
 
   private searchPlaces() {
-    this.placesService.search(this.latitude, this.longitude, this.distance, this.rating)
-      .subscribe((places: Place[]) => {
-        this.places = places;
-        this.maximumReviews = this.places
-          .map((place) => place.reviews)
-          .reduce((a: number, b: number) => {
-            return Math.max(a, b);
-          });
-      });
+    if (this.searchCriteria.distance > 0 && this.searchCriteria.rating > 0) {
+      this.placesService.search(
+        this.searchCriteria.location.latitude,
+        this.searchCriteria.location.longitude,
+        this.searchCriteria.distance,
+        this.searchCriteria.rating)
+        .subscribe((places: Place[]) => {
+          this.places = places;
+          this.maximumReviews = this.places
+            .map((place) => place.reviews)
+            .reduce((a: number, b: number) => {
+              return Math.max(a, b);
+            });
+        });
+    }
   }
 }

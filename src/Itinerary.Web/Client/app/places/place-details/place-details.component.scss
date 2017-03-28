@@ -8,7 +8,7 @@
 .card {
   &__header {
     white-space: nowrap;
-    overflow: visible;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
 

@@ -14,8 +14,8 @@ export class PlaceDetailsComponent implements OnInit {
 
   @Input()
   set place(value: Place) {
-    this.selectedPlace = value;
     this.isPlaceSelected = value != null;
+    this.selectedPlace = value;
   }
   get place(): Place {
     return this.selectedPlace;

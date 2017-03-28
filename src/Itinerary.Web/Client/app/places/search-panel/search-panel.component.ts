@@ -27,8 +27,8 @@ export class SearchPanelComponent implements OnInit {
   constructor(
     private googlePlacesService: GooglePlacesService) {
     this.searchControl = new FormControl();
-    this.distance = 100;
-    this.rating = 3.0;
+    this.distance = 50;
+    this.rating = 4.0;
   }
 
   ngOnInit() {
