@@ -1,7 +1,7 @@
 <div class="place-details" *ngIf="isPlaceSelected">
   <md-card class="card">
     <md-card-header class="card__header">
-      <md-card-title><a class="card__title" href="//tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a></md-card-title>
+      <md-card-title><a class="card__title" href="http://tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a></md-card-title>
       <md-card-subtitle>{{place.categories|join:", "}}</md-card-subtitle>
     </md-card-header>
     <img class="card__image" *ngIf="place.imgUrl" md-card-image src="{{place.imgUrl}}">
