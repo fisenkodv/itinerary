@@ -55,6 +55,8 @@ Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\It
 
 ### Copy to Digital Ocean
 ```rsync -a release/ root@174.138.76.175:/var/www/itinerary -v```
+or
+```pscp -r -v release\ root@itinerary.site:/var/www/itinerary```
 
 ### Copy nginx config from/to configs dir
 From ```rsync -a root@174.138.76.175:/etc/nginx/nginx.conf .```

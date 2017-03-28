@@ -31,5 +31,8 @@
 @RenderBody()
 
 @RenderSection( "scripts", required: false )
+<environment names="Production">
+  @Html.Partial("_GoogleAnalytics")
+</environment>
 </body>
 </html>
