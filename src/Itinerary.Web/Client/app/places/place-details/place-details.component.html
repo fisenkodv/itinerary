@@ -1,10 +1,14 @@
 <div class="place-details">
   <div class="place-details__info">
     <a class="card__title" href="http://tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a>
+    <h2>{{place.categories|join:", "}}</h2>
   </div>
-  <div class="place-details__img">
-    <img class="card__image" *ngIf="place.imgUrl" md-card-image src="{{place.imgUrl}}">
+  <div class="place-details__parent-image">
+    <div class="place-details__image" [ngStyle]="{'background-image': 'url(' + place.imgUrl + ')'}">
+    <!--<img class="card__image" *ngIf="place.imgUrl" src="{{place.imgUrl}}">-->
   </div>
+  </div>
+
 
 
   <!--<md-card class="card">-->
