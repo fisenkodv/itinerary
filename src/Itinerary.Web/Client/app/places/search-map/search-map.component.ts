@@ -1,7 +1,6 @@
 ﻿import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Location, PlaceDetails, PlacesService } from '../../shared';
-import { SearchCriteria } from '../search-criteria';
+import { PlaceDetails } from '../../shared';
 
 @Component({
   selector: 'search-map',
@@ -9,44 +8,37 @@ import { SearchCriteria } from '../search-criteria';
   styleUrls: ['search-map.component.scss']
 })
 export class SearchMapComponent {
-  // default location is 'Geographic center of the contiguous United States'
-  private defaultLatitude = 39.833333;
-  private defaultLongitude = -98.583333;
   private defaultZoom = 5;
   private defaultZoomForSelectedPoint = 8;
-
-  public isBasePointSet: boolean;
-  public zoom: number;
-  public places: PlaceDetails[];
-  @Output()
-  public placeSelect: EventEmitter<PlaceDetails> = new EventEmitter();
-
-  @Input()
-  set searchCriteria(value: SearchCriteria) {
-    if (value) {
-      this.isBasePointSet = true;
-      this.zoom = this.defaultZoomForSelectedPoint;
-      this.selectedCriteria = value;
-      this.places = [];
-
-      this.searchPlaces();
-    }
-  }
-
-  get searchCriteria(): SearchCriteria {
-    return this.selectedCriteria;
-  }
-
-  private selectedCriteria: SearchCriteria;
+  private placesArray: PlaceDetails[];
   private maximumReviews: number;
 
-  public get distanceInMeters(): number {
-    return this.searchCriteria.distance * 1609.34;
+  public zoom: number;
+  public showBasePoint: boolean;
+  @Input()
+  public latitude: number;
+  @Input()
+  public longitude: number;
+  @Input()
+  public distance: number;
+
+  @Input()
+  public set places(value: PlaceDetails[]) {
+    this.showBasePoint = value.some(() => true);
+    this.zoom = this.showBasePoint ? this.defaultZoomForSelectedPoint : this.zoom;
+    this.maximumReviews = this.getMaximumReviews(value);
+    this.placesArray = value;
   }
 
-  constructor(private placesService: PlacesService) {
-    this.isBasePointSet = false;
-    this.searchCriteria = new SearchCriteria(new Location(this.defaultLatitude, this.defaultLongitude), 0, 0);
+  public get places(): PlaceDetails[] {
+    return this.placesArray;
+  }
+
+  @Output()
+  public select: EventEmitter<PlaceDetails> = new EventEmitter();
+
+  constructor() {
+    this.distance = 0;
     this.zoom = this.defaultZoom;
     this.places = [];
     this.maximumReviews = 0;
@@ -57,24 +49,15 @@ export class SearchMapComponent {
   }
 
   public markerClick(place: PlaceDetails) {
-    this.placeSelect.emit(place);
+    this.select.emit(place);
   }
 
-  private searchPlaces() {
-    if (this.searchCriteria.distance > 0 && this.searchCriteria.rating > 0) {
-      this.placesService.search(
-        this.searchCriteria.location.latitude,
-        this.searchCriteria.location.longitude,
-        this.searchCriteria.distance,
-        this.searchCriteria.rating)
-        .subscribe((places: PlaceDetails[]) => {
-          this.places = places;
-          this.maximumReviews = this.places
-            .map((place) => place.reviews)
-            .reduce((a: number, b: number) => {
-              return Math.max(a, b);
-            });
-        });
-    }
+  private getMaximumReviews(places: PlaceDetails[]): number {
+    return places.some(() => true)
+      ? places.map((place) => place.reviews)
+      .reduce((a: number, b: number) => {
+        return Math.max(a, b);
+      })
+      : 0;
   }
 }

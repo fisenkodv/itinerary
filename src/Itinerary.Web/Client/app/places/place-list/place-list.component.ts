@@ -7,20 +7,14 @@ import { PlaceDetails } from '../../shared';
   templateUrl: 'place-list.component.html',
   styleUrls: ['place-list.component.scss']
 })
-
 export class PlaceListComponent implements OnInit {
-  private foundPlaces: PlaceDetails[];
 
   @Input()
-  set places(value: PlaceDetails[]) {
-    this.foundPlaces = value;
-  }
-  get places(): PlaceDetails[] {
-    return this.foundPlaces;
-  }
+  public places: PlaceDetails[];
 
   constructor() {
+    this.places = [];
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

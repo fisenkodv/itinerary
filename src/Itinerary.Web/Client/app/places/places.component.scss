@@ -17,7 +17,6 @@ $foreground-color: mat-color($foreground, secondary-text);
   right: 0;
 
   &__sidenav {
-    overflow: auto;
     padding: $itinerary-elements-padding * 2;
     width: $itinerary-search-sidebar-width;
 
