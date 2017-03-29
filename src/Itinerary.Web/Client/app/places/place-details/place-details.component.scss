@@ -2,37 +2,6 @@
 @import '../../../styles/_mixins';
 
 .place-details {
-  margin-top: $itinerary-elements-padding;
+
 }
 
-.card {
-  &__header {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  &__title {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  &__image {
-    max-height: $itinerary-search-sidebar-width - $itinerary-elements-padding * 4;
-  }
-}
-
-.trip-adviser-logo {
-  width: $itinerary-search-sidebar-width / 3;
-}
-
-.reviews {
-  display: flex;
-  align-items: center;
-
-  &__label {
-    align-self: center;
-    margin-left: $itinerary-elements-padding / 2;
-    padding-top: $itinerary-elements-padding / 2;
-  }
-}
