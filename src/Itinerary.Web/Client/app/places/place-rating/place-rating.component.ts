@@ -1,10 +1,9 @@
-import { Component, ViewEncapsulation, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'place-rating',
   templateUrl: 'place-rating.component.html',
-  styleUrls: ['place-rating.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['place-rating.component.scss']
 })
 export class PlaceRatingComponent {
   private star_border = 'star_border';

@@ -1,8 +1,9 @@
 <div class="place-list-item">
   <div class="place-info">
     <div class="place-header">
-      <h1 class="place-header__title"><a class="place-header__link" href="http://tripadviser.com{{place.url}}"
-                                         target="_blank">{{place.name}}</a></h1>
+      <h3 class="place-header__title">
+        <a class="place-header__link" href="http://tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a>
+      </h3>
       <h2 class="place-header__subtitle">{{place.categories|join:", "}}</h2>
     </div>
 
@@ -16,12 +17,11 @@
           <place-rating [rating]="place.rating"></place-rating>
         </div>
       </div>
-      <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png"
-           mdTooltip="Ratings Powered by TripAdvisor"/>
+      <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png" mdTooltip="Ratings Powered by TripAdvisor" />
     </div>
 
     <!--<div class="place-actions">-->
-      <!--<button md-raised-button [disabled]="true">SAVE (COOMING SOON)</button>-->
+    <!--<button md-raised-button [disabled]="true">SAVE (COOMING SOON)</button>-->
     <!--</div>-->
 
   </div>
@@ -29,19 +29,4 @@
     <div class="place-image__background" [ngStyle]="{'background-image': 'url(' + place.imgUrl + ')'}">
     </div>
   </div>
-
-
-  <!--<md-card class="card">-->
-  <!--<md-card-header class="card__header">-->
-  <!--<md-card-title><a class="card__title" href="http://tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a></md-card-title>-->
-  <!--<md-card-subtitle>{{place.categories|join:", "}}</md-card-subtitle>-->
-  <!--</md-card-header>-->
-  <!--<img class="card__image" *ngIf="place.imgUrl" md-card-image src="{{place.imgUrl}}">-->
-  <!--<md-card-content>-->
-
-  <!--</md-card-content>-->
-  <!--<md-card-actions>-->
-  <!--<button md-raised-button [disabled]="true">SAVE (COOMING SOON)</button>-->
-  <!--</md-card-actions>-->
-  <!--</md-card>-->
 </div>
