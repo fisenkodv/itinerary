@@ -1,5 +1,12 @@
 @import '../../../styles/_mixins';
 
 .rating {
-  //
+  list-style-type: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.rating-star {
+  display: inline;
 }

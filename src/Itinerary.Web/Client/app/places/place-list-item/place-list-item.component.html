@@ -1,22 +1,23 @@
 <div class="place-list-item">
-  <div class="place-info">
+  <div class="place-text-content">
     <div class="place-header">
-      <h3 class="place-header__title">
-        <a class="place-header__link" href="http://tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a>
-      </h3>
+      <div class="place-title-container">
+        <h3 class="place-title">
+          <a class="place-title__link" href="http://tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a>
+        </h3>
+
+        <span>
+          <span class="place-rating">
+            <place-rating [rating]="place.rating"></place-rating>
+          </span>
+          <span class="place-reviews">({{place.reviews}})</span>
+        </span>
+      </div>
+
       <h2 class="place-header__subtitle">{{place.categories|join:", "}}</h2>
     </div>
 
     <div class="place-content">
-      <div class="place-statistics" fxLayout="row" fxLayoutAlign="space-between">
-        <div class="place-reviews" fxFlex>
-          <md-icon class="place-reviews__icon">people</md-icon>
-          <span class="place-reviews__label">{{place.reviews}} Reviews</span>
-        </div>
-        <div class="place-rating" fxFlexAlign="end">
-          <place-rating [rating]="place.rating"></place-rating>
-        </div>
-      </div>
       <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png" mdTooltip="Ratings Powered by TripAdvisor" />
     </div>
 

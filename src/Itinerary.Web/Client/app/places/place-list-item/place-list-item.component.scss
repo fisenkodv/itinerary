@@ -15,16 +15,14 @@ $subtitle-font-size: 10px;
   margin-bottom: $itinerary-elements-padding / 2;
 }
 
-.place-info {
+.place-text-content {
   flex: 3 0;
   padding-right: $itinerary-elements-padding / 2;
 }
 
-.place-header {
-  &__title {
-    font-size: $title-font-size;
+.place-title {
+   font-size: $title-font-size;
     margin: 0;
-  }
 
   &__subtitle {
     color: $subtitle-color;
@@ -48,8 +46,7 @@ $subtitle-font-size: 10px;
 }
 
 .place-reviews {
-  display: flex;
-  align-items: center;
+
 
   &__icon {
     width: 16px;

@@ -1,3 +1,5 @@
-<div class="rating" mdTooltip="{{rating | number:'.0-2'}} stars">
-  <md-icon class="rating__icon" *ngFor="let star of stars">{{star}}</md-icon>
-</div>
+<ol class="rating" mdTooltip="{{rating | number:'.0-2'}} stars">
+  <li class="rating-star" *ngFor="let star of stars">
+    <md-icon class="rating-star__icon">{{star}}</md-icon>
+  </li>
+</ol>
