@@ -9,6 +9,9 @@ $divider-color: mat-color($foreground, divider);
 $highlight-color: lighten(mat-color($foreground, divider), 50%);
 $title-font-size: 16px;
 $subtitle-font-size: 10px;
+$review-font-size: 12px;
+$review-line-height: 16px;
+$star-size: 16px;
 
 .place-list-item {
   display: flex;
@@ -55,16 +58,16 @@ $subtitle-font-size: 10px;
 
           .rating-star {
             &__icon {
-              width: 16px;
-              height: 16px;
-              font-size: 16px;
+              width: $star-size;
+              height: $star-size;
+              font-size: $star-size;
             }
           }
         }
 
         .place-reviews {
-          font-size: 12px;
-          line-height: 16px;
+          font-size: $review-font-size;
+          line-height: $review-line-height;
           color: $secondary-color;
         }
       }
