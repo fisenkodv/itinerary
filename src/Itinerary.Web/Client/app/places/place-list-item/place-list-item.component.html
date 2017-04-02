@@ -5,21 +5,17 @@
         <h3 class="place-title">
           <a class="place-title__link" href="http://tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a>
         </h3>
-
-        <span>
+        <h4 class="place-subtitle">{{place.categories|join:", "}}</h4>
+        <span class="place-rating-container">
           <span class="place-rating">
             <place-rating [rating]="place.rating"></place-rating>
           </span>
           <span class="place-reviews">({{place.reviews}})</span>
         </span>
       </div>
-
-      <h2 class="place-header__subtitle">{{place.categories|join:", "}}</h2>
     </div>
 
-    <div class="place-content">
-      <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png" mdTooltip="Ratings Powered by TripAdvisor" />
-    </div>
+    <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png" mdTooltip="Ratings Powered by TripAdvisor"/>
 
     <!--<div class="place-actions">-->
     <!--<button md-raised-button [disabled]="true">SAVE (COOMING SOON)</button>-->
