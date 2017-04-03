@@ -5,6 +5,7 @@
 
     <sebm-google-map-marker *ngFor="let place of places" [latitude]="place.location.latitude"
                             [longitude]="place.location.longitude" [title]="place.name" [opacity]="placeOpacity(place)"
+                            iconUrl="/assets/icon/map/generic-small.png"
                             (markerClick)="markerClick(place)"></sebm-google-map-marker>
 
     <sebm-google-map-circle *ngIf="showBasePoint" [latitude]="latitude" [longitude]="longitude" [radius]="distance"
