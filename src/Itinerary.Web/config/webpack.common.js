@@ -59,8 +59,8 @@ module.exports = function (options) {
     entry: {
 
       'polyfills': './Client/polyfills.browser.ts',
-      'main':      AOT ? './Client/main.browser.aot.ts' :
-                  './Client/main.browser.ts'
+      'main': AOT ? './Client/main.browser.aot.ts' :
+        './Client/main.browser.ts'
 
     },
 
@@ -187,6 +187,15 @@ module.exports = function (options) {
           use: 'file-loader'
         },
 
+        /*
+        /* File loader for supporting fonts, for example, in CSS files.
+        */
+        {
+          test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+          use: 'file-loader'
+        },
+
+        /*
         /* File loader for supporting fonts, for example, in CSS files.
         */
         {
