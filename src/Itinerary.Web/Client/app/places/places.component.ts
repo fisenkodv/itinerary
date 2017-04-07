@@ -1,55 +1,49 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
-import { PlaceDetails, PlacesService } from '../shared';
+import { Location, PlaceDetails, PlacesService } from '../shared';
+import { PlacesCommunicationService } from './places-communication.service';
 import { SearchCriteria } from './search-criteria';
 
 @Component({
   selector: 'places',
   templateUrl: 'places.component.html',
-  styleUrls: ['places.component.scss']
+  styleUrls: ['places.component.scss'],
+  providers: [PlacesCommunicationService]
 })
-export class PlacesComponent {
-  // default location is 'Geographic center of the contiguous United States'
-  private defaultLatitude = 39.833333;
-  private defaultLongitude = -98.583333;
+export class PlacesComponent implements OnDestroy {
+  private searchCriteriaSubscription: Subscription;
+  public searchCriteria: SearchCriteria;
 
-  public latitude: number;
-  public longitude: number;
-  public distance: number;
-  public places: PlaceDetails[];
+  constructor(
+    private placesService: PlacesService,
+    private placesCommunicationService: PlacesCommunicationService) {
+    this.searchCriteria = new SearchCriteria();
+    this.searchCriteriaSubscription = placesCommunicationService.searchCriteria
+      .subscribe((searchCriteria) => this.searchHandler(searchCriteria));
+  }
 
-  public place: PlaceDetails;
-
-  constructor(private placesService: PlacesService) {
-    this.latitude = this.defaultLatitude;
-    this.longitude = this.defaultLongitude;
-    this.distance = 0;
-    this.places = [];
+  ngOnDestroy(): void {
+    this.searchCriteriaSubscription.unsubscribe();
   }
 
   public searchHandler(event: SearchCriteria) {
     if (event) {
-      this.latitude = event.location.latitude;
-      this.longitude = event.location.longitude;
-      this.distance = event.distance * 1609.34;
-      this.searchPlaces(event);
+      this.searchCriteria = event;
+      this.searchPlaces(this.searchCriteria);
     }
-  }
-
-  public selectHandler(event: PlaceDetails) {
-    this.place = event;
   }
 
   private searchPlaces(searchCriteria: SearchCriteria) {
     if (searchCriteria.distance > 0 && searchCriteria.rating > 0) {
       this.placesService.search(
-          searchCriteria.location.latitude,
-          searchCriteria.location.longitude,
-          searchCriteria.distance,
-          searchCriteria.rating,
-          searchCriteria.reviews)
+        searchCriteria.location.latitude,
+        searchCriteria.location.longitude,
+        searchCriteria.distance,
+        searchCriteria.rating,
+        searchCriteria.reviews)
         .subscribe((places: PlaceDetails[]) => {
-          this.places = places;
+          this.placesCommunicationService.notify(places);
         });
     }
   }

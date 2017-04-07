@@ -1,14 +1,12 @@
 ﻿<div class="map">
-  <sebm-google-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-    <sebm-google-map-marker *ngIf="showBasePoint" [latitude]="latitude" [longitude]="longitude" [label]="'Y'"
-                            [title]="'Current Location'"></sebm-google-map-marker>
+  <sebm-google-map [latitude]="searchCriteria.location.latitude" [longitude]="searchCriteria.location.longitude" [zoom]="zoom">
+    <sebm-google-map-marker *ngIf="showBasePoint" [latitude]="searchCriteria.location.latitude" [longitude]="searchCriteria.location.longitude"
+      [label]="'Y'" [title]="'Current Location'"></sebm-google-map-marker>
 
-    <sebm-google-map-marker *ngFor="let place of places" [latitude]="place.location.latitude"
-                            [longitude]="place.location.longitude" [title]="place.name" [opacity]="placeOpacity(place)"
-                            iconUrl="/assets/icon/map/generic-small.png"
-                            (markerClick)="markerClick(place)"></sebm-google-map-marker>
+    <sebm-google-map-marker *ngFor="let place of places" [latitude]="place.location.latitude" [longitude]="place.location.longitude"
+      [title]="place.name" [opacity]="placeOpacity(place)" iconUrl="/assets/icon/map/generic-small.png" (markerClick)="markerClick(place)"></sebm-google-map-marker>
 
-    <sebm-google-map-circle *ngIf="showBasePoint" [latitude]="latitude" [longitude]="longitude" [radius]="distance"
-                            [fillColor]="'#673ab7'" [fillOpacity]="0.2"></sebm-google-map-circle>
+    <sebm-google-map-circle *ngIf="showBasePoint" [latitude]="searchCriteria.location.latitude" [longitude]="searchCriteria.location.longitude"
+      [radius]="radiusInMeters()" [fillColor]="'#673ab7'" [fillOpacity]="0.2"></sebm-google-map-circle>
   </sebm-google-map>
 </div>

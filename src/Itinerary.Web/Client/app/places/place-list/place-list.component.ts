@@ -1,20 +1,28 @@
-﻿import { Component, Input, OnInit } from '@angular/core';
+﻿import { Component, Input, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { PlaceDetails } from '../../shared';
+import { PlacesCommunicationService } from '../places-communication.service';
 
 @Component({
   selector: 'place-list',
   templateUrl: 'place-list.component.html',
   styleUrls: ['place-list.component.scss']
 })
-export class PlaceListComponent implements OnInit {
+export class PlaceListComponent implements OnDestroy {
+  private subscription: Subscription;
 
-  @Input()
   public places: PlaceDetails[];
 
-  constructor() {
-    this.places = [];
+  constructor(private placesCommunicationService: PlacesCommunicationService) {
+    this.subscription = placesCommunicationService
+      .places
+      .subscribe((places) => {
+        this.places = places;
+      });
   }
 
-  ngOnInit() {}
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

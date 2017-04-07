@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 import { Autocomplete, GooglePlacesService, Location } from '../../shared';
+import { PlacesCommunicationService } from '../places-communication.service';
 import { SearchCriteria } from '../search-criteria';
 
 @Component({
@@ -23,11 +24,9 @@ export class SearchPanelComponent implements OnInit {
   public rating: number;
   public reviews: number;
 
-  @Output()
-  search: EventEmitter<SearchCriteria> = new EventEmitter();
-
   constructor(
-    private googlePlacesService: GooglePlacesService) {
+    private googlePlacesService: GooglePlacesService,
+    private placesCommunicationService: PlacesCommunicationService) {
     this.searchControl = new FormControl();
     this.distance = 50;
     this.rating = 4.0;
@@ -83,6 +82,6 @@ export class SearchPanelComponent implements OnInit {
 
   private raiseSearch() {
     const searchCriteria = new SearchCriteria(this.location, this.distance, this.rating, this.reviews);
-    this.search.emit(searchCriteria);
+    this.placesCommunicationService.search(searchCriteria);
   }
 }
