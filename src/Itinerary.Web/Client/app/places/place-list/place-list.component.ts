@@ -10,19 +10,26 @@ import { PlacesCommunicationService } from '../places-communication.service';
   styleUrls: ['place-list.component.scss']
 })
 export class PlaceListComponent implements OnDestroy {
-  private subscription: Subscription;
+  private placesSubscription: Subscription;
+  private selectedPlaceSubscription: Subscription;
 
   public places: PlaceDetails[];
+  public selectedPlace: PlaceDetails;
 
   constructor(private placesCommunicationService: PlacesCommunicationService) {
-    this.subscription = placesCommunicationService
+    this.placesSubscription = placesCommunicationService
       .places
-      .subscribe((places) => {
-        this.places = places;
+      .subscribe((places) => this.places = places);
+    this.selectedPlaceSubscription = placesCommunicationService
+      .selectedPlace
+      .subscribe((place) => {
+        console.dir(place);
+
+        this.selectedPlace = place;
       });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.placesSubscription.unsubscribe();
   }
 }

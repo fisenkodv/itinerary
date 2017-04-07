@@ -45,7 +45,7 @@ export class SearchMapComponent implements OnDestroy {
   }
 
   public markerClick(place: PlaceDetails) {
-    //this.select.emit(place);
+    this.placesCommunicationService.select(place);
   }
 
   ngOnDestroy(): void {
