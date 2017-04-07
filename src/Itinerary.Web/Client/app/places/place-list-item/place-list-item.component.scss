@@ -8,7 +8,7 @@ $secondary-color: mat-color($foreground, secondary-text);
 $divider-color: mat-color($foreground, divider);
 $highlight-color: lighten(mat-color($foreground, divider), 50%);
 $title-font-size: 16px;
-$subtitle-font-size: 10px;
+$subtitle-font-size: 12px;
 $review-font-size: 12px;
 $review-line-height: 16px;
 $star-size: 16px;
@@ -44,7 +44,7 @@ $star-size: 16px;
 
       .place-subtitle {
         color: $secondary-color;
-        font-weight: lighter;
+        font-weight: normal;
         font-size: $subtitle-font-size;
         margin: $itinerary-elements-padding / 2 0;
       }
