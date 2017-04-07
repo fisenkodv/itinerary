@@ -6,6 +6,6 @@ namespace Itinerary.Business.Services.Places
 {
   public interface IPlacesService
   {
-    IEnumerable<PlaceDetails> Search( double lat, double lng, double distance, double rating );
+    IEnumerable<PlaceDetails> Search( double lat, double lng, double distance, double rating, int reviews );
   }
 }

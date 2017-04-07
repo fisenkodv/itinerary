@@ -46,7 +46,8 @@ export class PlacesComponent {
           searchCriteria.location.latitude,
           searchCriteria.location.longitude,
           searchCriteria.distance,
-          searchCriteria.rating)
+          searchCriteria.rating,
+          searchCriteria.reviews)
         .subscribe((places: PlaceDetails[]) => {
           this.places = places;
         });

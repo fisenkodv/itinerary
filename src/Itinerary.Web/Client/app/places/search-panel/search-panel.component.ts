@@ -14,21 +14,24 @@ import { SearchCriteria } from '../search-criteria';
   styleUrls: ['search-panel.component.scss']
 })
 export class SearchPanelComponent implements OnInit {
+  private location: Location;
+
   public searchControl: FormControl;
   public filteredPlaces: Autocomplete[];
 
   public distance: number;
   public rating: number;
+  public reviews: number;
+
   @Output()
   search: EventEmitter<SearchCriteria> = new EventEmitter();
-
-  private location: Location;
 
   constructor(
     private googlePlacesService: GooglePlacesService) {
     this.searchControl = new FormControl();
     this.distance = 50;
     this.rating = 4.0;
+    this.reviews = 50;
   }
 
   ngOnInit() {
@@ -64,6 +67,11 @@ export class SearchPanelComponent implements OnInit {
     this.raiseSearch();
   }
 
+  public changeReviewsHandler({ value }) {
+    this.reviews = value;
+    this.raiseSearch();
+  }
+
   private setCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -74,7 +82,7 @@ export class SearchPanelComponent implements OnInit {
   }
 
   private raiseSearch() {
-    const searchCriteria = new SearchCriteria(this.location, this.distance, this.rating);
+    const searchCriteria = new SearchCriteria(this.location, this.distance, this.rating, this.reviews);
     this.search.emit(searchCriteria);
   }
 }

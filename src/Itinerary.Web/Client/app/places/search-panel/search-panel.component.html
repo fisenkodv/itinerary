@@ -23,7 +23,15 @@
   <section fxFlex="grow">
     <div fxLayout="row">
       <label class="search-panel__label" fxFlexAlign="center" fxFlex="nogrow">Rating:</label>
-      <md-slider fxFlex="grow" [max]="5" [min]="0" [step]="0.1" [thumb-label]="true" [vertical]="false" [value]="rating" (change)="changeRatingHandler($event)">
+      <md-slider fxFlex="grow" [min]="0" [max]="5" [step]="0.1" [thumb-label]="true" [vertical]="false" [value]="rating" (change)="changeRatingHandler($event)">
+      </md-slider>
+    </div>
+  </section>
+
+  <section fxFlex="grow">
+    <div fxLayout="row">
+      <label class="search-panel__label" fxFlexAlign="center" fxFlex="nogrow">Reviews:</label>
+      <md-slider fxFlex="grow" [min]="0" [max]="500" [step]="50" [thumb-label]="true" [vertical]="false" [value]="reviews" (change)="changeReviewsHandler($event)">
       </md-slider>
     </div>
   </section>

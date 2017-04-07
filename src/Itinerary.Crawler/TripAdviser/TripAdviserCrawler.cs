@@ -68,6 +68,7 @@ namespace Itinerary.Crawler.TripAdviser
 
         db.GetCollection<Place>( "places" ).Insert( places );
         db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Rating );
+        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Reviews );
         db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Location.Latitude );
         db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Location.Longitude );
       }
