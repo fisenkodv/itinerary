@@ -1,4 +1,4 @@
-﻿@import '~@angular/material/core/theming/palette';
+﻿@import '~@angular/material/theming';
 @import '../../styles/_variables';
 
 $foreground: map-get($itinerary-light-theme, foreground);
