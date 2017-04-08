@@ -1,6 +1,8 @@
-﻿import { Component, EventEmitter, Input, Output } from '@angular/core';
+﻿import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
-import { Location, PlaceDetails, PlacesService } from '../../shared';
+import { PlaceDetails } from '../../shared';
+import { PlacesCommunicationService } from '../places-communication.service';
 import { SearchCriteria } from '../search-criteria';
 
 @Component({
@@ -8,46 +10,28 @@ import { SearchCriteria } from '../search-criteria';
   templateUrl: 'search-map.component.html',
   styleUrls: ['search-map.component.scss']
 })
-export class SearchMapComponent {
-  // default location is 'Geographic center of the contiguous United States'
-  private defaultLatitude = 39.833333;
-  private defaultLongitude = -98.583333;
+export class SearchMapComponent implements OnDestroy {
   private defaultZoom = 5;
   private defaultZoomForSelectedPoint = 8;
-
-  public isBasePointSet: boolean;
-  public zoom: number;
-  public places: PlaceDetails[];
-  @Output()
-  public placeSelect: EventEmitter<PlaceDetails> = new EventEmitter();
-
-  @Input()
-  set searchCriteria(value: SearchCriteria) {
-    if (value) {
-      this.isBasePointSet = true;
-      this.zoom = this.defaultZoomForSelectedPoint;
-      this.selectedCriteria = value;
-      this.places = [];
-
-      this.searchPlaces();
-    }
-  }
-
-  get searchCriteria(): SearchCriteria {
-    return this.selectedCriteria;
-  }
-
-  private selectedCriteria: SearchCriteria;
   private maximumReviews: number;
+  private placesSubscription: Subscription;
+  private searchCriteriaSubscription: Subscription;
 
-  public get distanceInMeters(): number {
-    return this.searchCriteria.distance * 1609.34;
-  }
+  public zoom: number;
+  public showBasePoint: boolean;
+  public searchCriteria: SearchCriteria;
+  public places: PlaceDetails[];
 
-  constructor(private placesService: PlacesService) {
-    this.isBasePointSet = false;
-    this.searchCriteria = new SearchCriteria(new Location(this.defaultLatitude, this.defaultLongitude), 0, 0);
+  constructor(private placesCommunicationService: PlacesCommunicationService) {
+    this.placesSubscription = placesCommunicationService
+      .places
+      .subscribe((places) => this.searchResultsCallBack(places));
+    this.searchCriteriaSubscription = placesCommunicationService
+      .searchCriteria
+      .subscribe((searchCriteria) => this.searchCriteria = searchCriteria);
+
     this.zoom = this.defaultZoom;
+    this.searchCriteria = new SearchCriteria();
     this.places = [];
     this.maximumReviews = 0;
   }
@@ -56,25 +40,31 @@ export class SearchMapComponent {
     return 0.5 + 0.5 * (place.reviews / this.maximumReviews);
   }
 
-  public markerClick(place: PlaceDetails) {
-    this.placeSelect.emit(place);
+  public radiusInMeters() {
+    return this.searchCriteria.distance * 1609.34;
   }
 
-  private searchPlaces() {
-    if (this.searchCriteria.distance > 0 && this.searchCriteria.rating > 0) {
-      this.placesService.search(
-        this.searchCriteria.location.latitude,
-        this.searchCriteria.location.longitude,
-        this.searchCriteria.distance,
-        this.searchCriteria.rating)
-        .subscribe((places: PlaceDetails[]) => {
-          this.places = places;
-          this.maximumReviews = this.places
-            .map((place) => place.reviews)
-            .reduce((a: number, b: number) => {
-              return Math.max(a, b);
-            });
-        });
-    }
+  public markerClick(place: PlaceDetails) {
+    this.placesCommunicationService.select(place);
+  }
+
+  ngOnDestroy(): void {
+    this.placesSubscription.unsubscribe();
+  }
+
+  private searchResultsCallBack(places: PlaceDetails[]) {
+    this.showBasePoint = places.some(() => true);
+    this.zoom = this.showBasePoint ? this.defaultZoomForSelectedPoint : this.zoom;
+    this.maximumReviews = this.getMaximumReviews(places);
+    this.places = places;
+  }
+
+  private getMaximumReviews(places: PlaceDetails[]): number {
+    return places.some(() => true)
+      ? places.map((place) => place.reviews)
+        .reduce((a: number, b: number) => {
+          return Math.max(a, b);
+        })
+      : 0;
   }
 }

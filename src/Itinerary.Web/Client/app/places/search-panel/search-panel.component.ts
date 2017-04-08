@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
 import { Autocomplete, GooglePlacesService, Location } from '../../shared';
+import { PlacesCommunicationService } from '../places-communication.service';
 import { SearchCriteria } from '../search-criteria';
 
 @Component({
@@ -14,21 +15,22 @@ import { SearchCriteria } from '../search-criteria';
   styleUrls: ['search-panel.component.scss']
 })
 export class SearchPanelComponent implements OnInit {
+  private location: Location;
+
   public searchControl: FormControl;
   public filteredPlaces: Autocomplete[];
 
   public distance: number;
   public rating: number;
-  @Output()
-  search: EventEmitter<SearchCriteria> = new EventEmitter();
-
-  private location: Location;
+  public reviews: number;
 
   constructor(
-    private googlePlacesService: GooglePlacesService) {
+    private googlePlacesService: GooglePlacesService,
+    private placesCommunicationService: PlacesCommunicationService) {
     this.searchControl = new FormControl();
     this.distance = 50;
     this.rating = 4.0;
+    this.reviews = 50;
   }
 
   ngOnInit() {
@@ -64,6 +66,11 @@ export class SearchPanelComponent implements OnInit {
     this.raiseSearch();
   }
 
+  public changeReviewsHandler({ value }) {
+    this.reviews = value;
+    this.raiseSearch();
+  }
+
   private setCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -74,7 +81,7 @@ export class SearchPanelComponent implements OnInit {
   }
 
   private raiseSearch() {
-    const searchCriteria = new SearchCriteria(this.location, this.distance, this.rating);
-    this.search.emit(searchCriteria);
+    const searchCriteria = new SearchCriteria(this.location, this.distance, this.rating, this.reviews);
+    this.placesCommunicationService.search(searchCriteria);
   }
 }

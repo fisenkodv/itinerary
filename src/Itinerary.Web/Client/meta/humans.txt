@@ -1,15 +1,9 @@
-﻿# humanstxt.org/
-# The humans responsible & technology colophon
+﻿/* TEAM */
+Author: Dmitry Fisenko
+Twitter: @fisenkodv
 
-# TEAM
-
-  <name> -- <role> -- <twitter>
-
-# THANKS
-
-  <name>
-
-# TECHNOLOGY COLOPHON
-
-  HTML5, CSS3
-  Angular 2, TypeScript, Webpack
+/* SITE */
+Last update: 04/07/2017
+Language: English
+Doctype: HTML5
+IDE: Visual Studio Code

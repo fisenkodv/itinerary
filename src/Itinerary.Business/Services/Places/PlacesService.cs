@@ -17,7 +17,7 @@ namespace Itinerary.Business.Services.Places
       _placesRepository = placesRepository;
     }
 
-    public IEnumerable<PlaceDetails> Search( double lat, double lng, double distance, double rating )
+    public IEnumerable<PlaceDetails> Search( double lat, double lng, double distance, double rating, int reviews )
     {
       GeoLocation baseLocation = GeoLocation.FromDegrees( lat, lng );
       GeoLocation[] coordinates = baseLocation.BoundingCoordinates( distance, GeoLocationMeasurement.Miles );
@@ -29,6 +29,7 @@ namespace Itinerary.Business.Services.Places
 
       return from place in _placesRepository.Get(
                place => place.Rating >= rating &&
+                        place.Reviews >= reviews &&
                         ( place.Location.Latitude <= north && place.Location.Latitude >= south ) &&
                         ( place.Location.Longitude <= east && place.Location.Longitude >= west ) )
              let distanceFromBasePoint = baseLocation.DistanceTo(

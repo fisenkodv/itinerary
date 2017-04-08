@@ -10,9 +10,13 @@ export class PlacesService {
 
   constructor(private http: Http) {}
 
-  search(latitude: number, longitude: number, distance: number, rating: number): Observable<PlaceDetails[]> {
+  search(latitude: number,
+         longitude: number,
+         distance: number,
+         rating: number,
+         reviews: number): Observable<PlaceDetails[]> {
     return this.http.get(`${AppSettings
-        .itineraryApiBaseUrl}/places/search?lat=${latitude}&lng=${longitude}&distance=${distance}&rating=${rating}`)
+        .itineraryApiBaseUrl}/places/search?lat=${latitude}&lng=${longitude}&distance=${distance}&rating=${rating}&reviews=${reviews}`)
       .map((response: Response) => <PlaceDetails[]>response.json());
   }
 }

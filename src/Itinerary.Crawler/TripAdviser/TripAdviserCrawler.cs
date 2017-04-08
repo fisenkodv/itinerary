@@ -14,6 +14,36 @@ using Newtonsoft.Json;
 
 namespace Itinerary.Crawler.TripAdviser
 {
+  internal class PlaceEqualityComparer : IEqualityComparer<Place>
+  {
+    public bool Equals( Place x, Place y )
+    {
+      if ( ReferenceEquals( x, y ) ) return true;
+      if ( ReferenceEquals( x, null ) ) return false;
+      if ( ReferenceEquals( y, null ) ) return false;
+      if ( x.GetType() != y.GetType() ) return false;
+
+      return string.Equals( x.Name, y.Name ) &&
+             x.Rating == y.Rating &&
+             x.Reviews == y.Reviews &&
+             x.Location.Latitude == y.Location.Latitude &&
+             x.Location.Longitude == y.Location.Longitude;
+    }
+
+    public int GetHashCode( Place obj )
+    {
+      unchecked
+      {
+        int result = obj.Name.GetHashCode();
+        result = ( result * 397 ) ^ obj.Rating.GetHashCode();
+        result = ( result * 397 ) ^ obj.Reviews.GetHashCode();
+        result = ( result * 397 ) ^ obj.Location.Latitude.GetHashCode();
+        result = ( result * 397 ) ^ obj.Location.Longitude.GetHashCode();
+        return result;
+      }
+    }
+  }
+
   internal class TripAdviserCrawler : IDisposable
   {
     private readonly TimeSpan _delay;
@@ -66,8 +96,15 @@ namespace Itinerary.Crawler.TripAdviser
           places.AddRange( attractionPlaces );
         }
 
+        _logger.LogInformation( $"Total {places.Count} places found." );
+
+        places = places.Distinct( new PlaceEqualityComparer() ).ToList();
+
+        _logger.LogInformation( $"Total {places.Count} places after cleanup." );
+
         db.GetCollection<Place>( "places" ).Insert( places );
         db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Rating );
+        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Reviews );
         db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Location.Latitude );
         db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Location.Longitude );
       }
@@ -80,13 +117,14 @@ namespace Itinerary.Crawler.TripAdviser
       _logger.LogInformation( "Removing bad data..." );
 
       BsonValue[] badRecords =
-        GetSegmentsCollection().FindAll()
-                               .Where(
-                                 x =>
-                                   x.Map.Attractions.Any(
-                                     a => a.Rating == 0 || a.Reviews == 0 || string.IsNullOrEmpty( a.ImgUrl ) ) )
-                               .Select( x => new BsonValue( x.Id ) )
-                               .ToArray();
+        GetSegmentsCollection()
+          .FindAll()
+          .Where(
+            x =>
+              x.Map.Attractions.Any(
+                a => a.Rating == 0 || a.Reviews == 0 || string.IsNullOrEmpty( a.ImgUrl ) ) )
+          .Select( x => new BsonValue( x.Id ) )
+          .ToArray();
       GetSegmentsCollection().Delete( Query.In( "Id", badRecords ) );
 
       _logger.LogInformation( $"Removed {badRecords.Length} records with not filled rating, reviews etc." );
