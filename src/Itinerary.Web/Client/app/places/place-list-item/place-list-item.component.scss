@@ -7,11 +7,21 @@ $foreground: map-get($itinerary-light-theme, foreground);
 $secondary-color: mat-color($foreground, secondary-text);
 $divider-color: mat-color($foreground, divider);
 $highlight-color: lighten(mat-color($foreground, divider), 50%);
+$highlight-animation-color: darken(mat-color($foreground, divider), 100%);
 $title-font-size: 16px;
 $subtitle-font-size: 12px;
 $review-font-size: 12px;
 $review-line-height: 16px;
 $star-size: 16px;
+
+@keyframes highlight {
+  0% {
+    background: $highlight-animation-color;
+  }
+  100% {
+    background: none;
+  }
+}
 
 .place-list-item {
   display: flex;
@@ -22,6 +32,10 @@ $star-size: 16px;
 
   &:hover {
     background-color: $highlight-color;
+  }
+
+  &--highlight {
+    animation: highlight 2s;
   }
 }
 

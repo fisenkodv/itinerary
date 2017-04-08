@@ -11,4 +11,6 @@ import { PlaceDetails } from '../../shared';
 export class PlaceListItemComponent {
   @Input()
   public place: PlaceDetails;
+  @Input()
+  public isPlaceSelected: boolean;
 }

@@ -1,4 +1,4 @@
-<div class="place-list-item">
+<div class="place-list-item" [class.place-list-item--highlight]="isPlaceSelected">
   <div class="place-text-content">
     <div class="place-header">
       <div class="place-title-container">
@@ -16,11 +16,9 @@
     </div>
 
     <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png" mdTooltip="Ratings Powered by TripAdvisor"/>
-
     <!--<div class="place-actions">-->
     <!--<button md-raised-button [disabled]="true">SAVE (COOMING SOON)</button>-->
     <!--</div>-->
-
   </div>
   <div class="place-image">
     <div class="place-image__background" [style.background-image]="'url(' + (place.imgUrl||'/assets/img/empty_state.png') + ')'">
