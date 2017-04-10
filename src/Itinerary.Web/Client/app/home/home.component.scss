@@ -10,7 +10,7 @@
   background-size: cover;
 
   width: 100%;
-  height: calc(100vh - #{$mat-toolbar-height-desktop});
+  height: calc(100vh - #{$toolbar-height-desktop});
 
   &__overlay {
     background-color: rgba(0, 0, 0, .2);
@@ -107,7 +107,7 @@
 
 @include for-media-query($lt-sm) {
   .splash {
-    height: calc(100vh - #{$mat-toolbar-height-mobile-landscape});
+    height: calc(100vh - #{$toolbar-height-mobile-landscape});
   }
   .details {
     padding: $itinerary-elements-padding;

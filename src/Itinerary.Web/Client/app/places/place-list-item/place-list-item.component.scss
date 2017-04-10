@@ -96,8 +96,10 @@ $star-size: 16px;
 .place-image {
   flex: 1 1;
   overflow: hidden;
+  position: relative;
 
   &__background {
+    position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;

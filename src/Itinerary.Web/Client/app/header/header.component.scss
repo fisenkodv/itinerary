@@ -2,8 +2,7 @@
 @import '../../styles/_variables';
 
 $title-font-size: 50px;
-$title-font-size-mobile-landscape: 36px;
-$title-font-size-mobile-portrait: 42px;
+$title-font-size-mobile: 42px;
 
 $navigation-link-font-size: 16px !default;
 $navigation-link-coming-soon-font-size: 8px !default;
@@ -30,7 +29,7 @@ $navigation-link-border-size: 4px !default;
 
   &__link {
     display: inline-block;
-    padding: 0 $mat-toolbar-padding;
+    padding: 0 $toolbar-padding;
     font-size: $navigation-link-font-size;
     text-decoration: none;
     text-transform: uppercase;
@@ -49,7 +48,7 @@ $navigation-link-border-size: 4px !default;
         content: "soon";
         font-size: $navigation-link-coming-soon-font-size;
         position: absolute;
-        right: $mat-toolbar-padding;
+        right: $toolbar-padding;
         top: $navigation-link-font-size - $navigation-link-border-size;
       }
     }
@@ -74,16 +73,8 @@ $navigation-link-border-size: 4px !default;
 }
 
 @include header($title-font-size);
-@include navigation-height($mat-toolbar-height-desktop);
+@include navigation-height($toolbar-height-desktop);
 
-// Specific height for mobile devices in portrait mode.
-@media ($mat-xsmall) and (orientation: portrait) {
-  @include navigation-height($mat-toolbar-height-mobile-portrait);
-  @include header($title-font-size-mobile-portrait);
-}
-
-// Specific height for mobile devices in landscape mode.
-@media ($mat-small) and (orientation: landscape) {
-  @include navigation-height($mat-toolbar-height-mobile-landscape);
-  @include header($title-font-size-mobile-landscape);
+@media ($mat-xsmall) {
+  @include header($title-font-size-mobile);
 }
