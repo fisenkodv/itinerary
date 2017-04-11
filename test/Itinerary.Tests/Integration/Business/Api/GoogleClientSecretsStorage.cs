@@ -1,7 +1,7 @@
 ﻿using Itinerary.Business.Api.Google;
 using Itinerary.Business.Api.Google.Places;
 
-namespace Itinerary.Tests
+namespace Itinerary.Tests.Business.Api
 {
   internal class GoogleClientSecretsStorage
   {

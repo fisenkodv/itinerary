@@ -9,14 +9,15 @@ using Itinerary.Business.Api.Google.Places.Search.Entities.Nearby;
 using Itinerary.Business.Api.Google.Places.Search.Entities.Radar;
 using Itinerary.Business.Api.Google.Places.Search.Entities.Text;
 using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.Interfaces;
+using Itinerary.Tests.Business.Api;
 using Xunit;
 
-namespace Itinerary.Tests
+namespace Itinerary.Tests.Integration.Business.Api
 {
   public class PlacesApiTests
   {
     [Fact]
-    public async void NearbySearch()
+    public async void It_should_return_nearby_search_results()
     {
       INearbyHttpQueryBuilder searchQueryBuilder =
         PlacesBuilder.Create( GoogleClientSecretsStorage.Instance.ClientSecrets )
@@ -33,7 +34,7 @@ namespace Itinerary.Tests
     }
 
     [Fact]
-    public async void TextSearch()
+    public async void It_should_return_text_search_results()
     {
       ITextHttpQueryBuilder textQueryBuilder =
         PlacesBuilder.Create( GoogleClientSecretsStorage.Instance.ClientSecrets )
@@ -49,7 +50,7 @@ namespace Itinerary.Tests
     }
 
     [Fact]
-    public async void RadarSearch()
+    public async void It_should_return_radius_search_results()
     {
       IRadarHttpQueryBuilder radarQueryBuilder =
         PlacesBuilder.Create( GoogleClientSecretsStorage.Instance.ClientSecrets )
@@ -65,7 +66,7 @@ namespace Itinerary.Tests
     }
 
     [Fact]
-    public async void Autocomplete()
+    public async void It_should_return_autocomlete_results()
     {
       IAutocompleteHttpQueryBuilder autocompleteQueryBuilder =
         PlacesBuilder.Create( GoogleClientSecretsStorage.Instance.ClientSecrets )
@@ -82,7 +83,7 @@ namespace Itinerary.Tests
     }
 
     [Fact]
-    public async void Details()
+    public async void It_should_return_details_result()
     {
       IDetailsHttpQueryBuilder detailsHttpQueryBuilder =
         PlacesBuilder.Create( GoogleClientSecretsStorage.Instance.ClientSecrets )
