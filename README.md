@@ -51,7 +51,7 @@ Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\It
 ```dotnet publish src/Itinerary.Web/Itinerary.Web.csproj -o ../../release/```
 
 ### Copy to Digital Ocean
-```rsync -a release/ root@174.138.76.175:/var/www/itinerary -v```
+```rsync -a release/ root@itinerary.site:/var/www/itinerary -v```
 or
 ```pscp -r -v release\ root@itinerary.site:/var/www/itinerary```
 

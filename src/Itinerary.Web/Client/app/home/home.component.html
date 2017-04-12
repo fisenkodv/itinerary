@@ -14,12 +14,12 @@
   </div>
 </div>
 
-<div class="details">
+<div class="details" fxLayout="column">
   <div class="divider" fxFlex >
     <h2 class="divider__title">About "Itinerary"</h2>
   </div>
   <section class="text-center" fxFlex fxFlexAlign="center">
-    <p>Do you want to spend less time planning your trip without missing anything? Then this site is for you! You will easily
+    <p class="details__paragraph">Do you want to spend less time planning your trip without missing anything? Then this site is for you! You will easily
       find all the most interesting and popular places, but also you will quickly build and maintain the best route here.
     </p>
   </section>
@@ -29,7 +29,7 @@
   </div>
   <section fxFlex>
     <div fxLayout='column' fxLayoutAlign="center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-around start">
-      <md-card class="feature-card" fxFlex.gt-sm="45">
+      <md-card class="feature-card" fxFlex="noshrink" fxFlex.gt-sm="45">
         <md-card-header>
           <md-card-title>Places</md-card-title>
           <md-card-subtitle>Search interesting places</md-card-subtitle>
@@ -46,7 +46,7 @@
           <a md-button [routerLink]="['/places']">START USING IT</a>
         </md-card-actions>
       </md-card>
-      <md-card class="feature-card" fxFlex.gt-sm="45">
+      <md-card class="feature-card" fxFlex="noshrink" fxFlex.gt-sm="45">
         <md-card-header>
           <md-card-title>Route</md-card-title>
           <md-card-subtitle>Build and maintain the best route</md-card-subtitle>

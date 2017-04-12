@@ -1,5 +1,4 @@
-@import '~@angular/material/core/theming/palette';
-@import '~@angular/material/core/theming/theming';
+@import '~@angular/material/theming';
 @import '../../../styles/_variables';
 @import '../../../styles/_mixins';
 
@@ -7,11 +6,21 @@ $foreground: map-get($itinerary-light-theme, foreground);
 $secondary-color: mat-color($foreground, secondary-text);
 $divider-color: mat-color($foreground, divider);
 $highlight-color: lighten(mat-color($foreground, divider), 50%);
+$highlight-animation-color: darken(mat-color($foreground, divider), 100%);
 $title-font-size: 16px;
 $subtitle-font-size: 12px;
 $review-font-size: 12px;
 $review-line-height: 16px;
 $star-size: 16px;
+
+@keyframes highlight {
+  0% {
+    background: $highlight-animation-color;
+  }
+  100% {
+    background: none;
+  }
+}
 
 .place-list-item {
   display: flex;
@@ -22,6 +31,10 @@ $star-size: 16px;
 
   &:hover {
     background-color: $highlight-color;
+  }
+
+  &--highlight {
+    animation: highlight 2s;
   }
 }
 
@@ -83,8 +96,10 @@ $star-size: 16px;
 .place-image {
   flex: 1 1;
   overflow: hidden;
+  position: relative;
 
   &__background {
+    position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;

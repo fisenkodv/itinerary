@@ -287,13 +287,13 @@ module.exports = function (options) {
        *
        * See: https://github.com/ampedandwired/html-webpack-plugin
        */
-      new HtmlWebpackPlugin({
-        template: 'Client/index.html',
-        title: METADATA.title,
-        chunksSortMode: 'dependency',
-        metadata: METADATA,
-        inject: 'head'
-      }),
+      // new HtmlWebpackPlugin({
+      //   template: 'Client/index.html',
+      //   title: METADATA.title,
+      //   chunksSortMode: 'dependency',
+      //   metadata: METADATA,
+      //   inject: 'head'
+      // }),
 
       /*
        * Plugin: ScriptExtHtmlWebpackPlugin
@@ -302,9 +302,9 @@ module.exports = function (options) {
        *
        * See: https://github.com/numical/script-ext-html-webpack-plugin
        */
-      new ScriptExtHtmlWebpackPlugin({
-        defaultAttribute: 'defer'
-      }),
+      // new ScriptExtHtmlWebpackPlugin({
+      //   defaultAttribute: 'defer'
+      // }),
 
       /*
        * Plugin: HtmlElementsPlugin
@@ -328,9 +328,9 @@ module.exports = function (options) {
        *
        * Dependencies: HtmlWebpackPlugin
        */
-      new HtmlElementsPlugin({
-        headTags: require('./head-config.common')
-      }),
+      // new HtmlElementsPlugin({
+      //   headTags: require('./head-config.common')
+      // }),
 
       /**
        * Plugin LoaderOptionsPlugin (experimental)
