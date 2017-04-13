@@ -4,24 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { PlaceDetails } from '../../shared';
 import { PlacesCommunicationService } from '../places-communication.service';
 import { SearchCriteria } from '../search-criteria';
-
-export class MapPlaceDetail extends PlaceDetails {
-  constructor(
-    public isSelected: boolean,
-    public wasSelected: boolean,
-    place: PlaceDetails) {
-    super(place.name, place.rating, place.reviews, place.categories, place.url, place.imgUrl, place.location);
-  }
-
-  public get iconUrl(): string {
-    let color = this.wasSelected || this.isSelected ? 'blue' : 'red';
-    return `/assets/icon/map/generic-${color}-small.png`;
-  }
-
-  public get opacity(): number {
-    return this.isSelected ? 1.0 : this.wasSelected ? 0.7 : 0.5;
-  }
-}
+import { MapPlaceDetails } from '.map-place-details';
 
 @Component({
   selector: 'search-map',
@@ -38,7 +21,7 @@ export class SearchMapComponent implements OnDestroy {
   public zoom: number;
   public showBasePoint: boolean;
   public searchCriteria: SearchCriteria;
-  public places: MapPlaceDetail[];
+  public places: MapPlaceDetails[];
 
   constructor(private placesCommunicationService: PlacesCommunicationService) {
     this.placesSubscription = placesCommunicationService
@@ -58,11 +41,11 @@ export class SearchMapComponent implements OnDestroy {
     return this.searchCriteria.distance * 1609.34;
   }
 
-  public markerClick(place: MapPlaceDetail) {
+  public markerClick(place: MapPlaceDetails) {
     this.placesCommunicationService.select(place);
-    this.places.forEach((place) => {
-      place.wasSelected = place.wasSelected || place.isSelected;
-      place.isSelected = false;
+    this.places.forEach((x) => {
+      x.wasSelected = x.wasSelected || x.isSelected;
+      x.isSelected = false;
     });
     place.isSelected = true;
   }
@@ -76,13 +59,13 @@ export class SearchMapComponent implements OnDestroy {
     this.zoom = this.showBasePoint ? this.defaultZoomForSelectedPoint : this.zoom;
 
     this.setPreviousSelectedPlaces(places);
-    this.places = places.map(place => new MapPlaceDetail(false, this.wasSelected(place), place));
+    this.places = places.map((place) => new MapPlaceDetails(false, this.wasSelected(place), place));
   }
 
   private setPreviousSelectedPlaces(places: PlaceDetails[]) {
-    let selected = this.places
-      .filter(place => place.wasSelected || place.isSelected)
-      .map(place => place.name);
+    const selected = this.places
+      .filter((place) => place.wasSelected || place.isSelected)
+      .map((place) => place.name);
     this.selectedPlaces = [...selected, ...this.selectedPlaces];
   }
 
