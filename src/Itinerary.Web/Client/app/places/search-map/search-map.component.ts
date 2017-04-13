@@ -5,6 +5,24 @@ import { PlaceDetails } from '../../shared';
 import { PlacesCommunicationService } from '../places-communication.service';
 import { SearchCriteria } from '../search-criteria';
 
+export class MapPlaceDetail extends PlaceDetails {
+  constructor(
+    public isSelected: boolean,
+    public wasSelected: boolean,
+    place: PlaceDetails) {
+    super(place.name, place.rating, place.reviews, place.categories, place.url, place.imgUrl, place.location);
+  }
+
+  public get iconUrl(): string {
+    let color = this.wasSelected || this.isSelected ? 'blue' : 'red';
+    return `/assets/icon/map/generic-${color}-small.png`;
+  }
+
+  public get opacity(): number {
+    return this.isSelected ? 1.0 : this.wasSelected ? 0.7 : 0.5;
+  }
+}
+
 @Component({
   selector: 'search-map',
   templateUrl: 'search-map.component.html',
@@ -13,14 +31,14 @@ import { SearchCriteria } from '../search-criteria';
 export class SearchMapComponent implements OnDestroy {
   private defaultZoom = 5;
   private defaultZoomForSelectedPoint = 8;
-  private maximumReviews: number;
   private placesSubscription: Subscription;
   private searchCriteriaSubscription: Subscription;
+  private selectedPlaces: string[];
 
   public zoom: number;
   public showBasePoint: boolean;
   public searchCriteria: SearchCriteria;
-  public places: PlaceDetails[];
+  public places: MapPlaceDetail[];
 
   constructor(private placesCommunicationService: PlacesCommunicationService) {
     this.placesSubscription = placesCommunicationService
@@ -33,19 +51,20 @@ export class SearchMapComponent implements OnDestroy {
     this.zoom = this.defaultZoom;
     this.searchCriteria = new SearchCriteria();
     this.places = [];
-    this.maximumReviews = 0;
-  }
-
-  public placeOpacity(place: PlaceDetails): number {
-    return 0.5 + 0.5 * (place.reviews / this.maximumReviews);
+    this.selectedPlaces = [];
   }
 
   public radiusInMeters() {
     return this.searchCriteria.distance * 1609.34;
   }
 
-  public markerClick(place: PlaceDetails) {
+  public markerClick(place: MapPlaceDetail) {
     this.placesCommunicationService.select(place);
+    this.places.forEach((place) => {
+      place.wasSelected = place.wasSelected || place.isSelected;
+      place.isSelected = false;
+    });
+    place.isSelected = true;
   }
 
   ngOnDestroy(): void {
@@ -55,16 +74,19 @@ export class SearchMapComponent implements OnDestroy {
   private searchResultsCallBack(places: PlaceDetails[]) {
     this.showBasePoint = places.some(() => true);
     this.zoom = this.showBasePoint ? this.defaultZoomForSelectedPoint : this.zoom;
-    this.maximumReviews = this.getMaximumReviews(places);
-    this.places = places;
+
+    this.setPreviousSelectedPlaces(places);
+    this.places = places.map(place => new MapPlaceDetail(false, this.wasSelected(place), place));
   }
 
-  private getMaximumReviews(places: PlaceDetails[]): number {
-    return places.some(() => true)
-      ? places.map((place) => place.reviews)
-        .reduce((a: number, b: number) => {
-          return Math.max(a, b);
-        })
-      : 0;
+  private setPreviousSelectedPlaces(places: PlaceDetails[]) {
+    let selected = this.places
+      .filter(place => place.wasSelected || place.isSelected)
+      .map(place => place.name);
+    this.selectedPlaces = [...selected, ...this.selectedPlaces];
+  }
+
+  private wasSelected(place: PlaceDetails): boolean {
+    return this.selectedPlaces.some((x) => x === place.name);
   }
 }
