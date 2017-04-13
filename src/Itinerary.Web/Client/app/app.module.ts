@@ -1,11 +1,13 @@
 ﻿import { ApplicationRef, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { createInputTransfer, createNewHosts, removeNgStyles } from '@angularclass/hmr';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import 'hammerjs';
 
@@ -33,6 +35,10 @@ type StoreType = {
   disposeOldHosts: () => void
 };
 
+export function createTranslateLoader(http: Http) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +51,13 @@ type StoreType = {
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+      }
+    }),
     MaterialModule.forRoot(),
     FlexLayoutModule,
     FormsModule,
