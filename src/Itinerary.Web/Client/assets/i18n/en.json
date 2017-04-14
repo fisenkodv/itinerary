@@ -29,6 +29,28 @@
       }
     }
   },
+  "places": {
+    "search": {
+      "title":"Search Places",
+      "location": {
+        "placeholder": "Select location"
+      },
+      "distance": {
+        "label":"Distance:"
+      },
+      "rating": {
+        "label": "Rating:"
+      },
+      "review": {
+        "label": "Reviews:"
+      }
+    },
+    "results": {
+      "tripadvisor": {
+        "tooltip": "Ratings Powered by TripAdvisor"
+      }
+    }
+  },
   "header": {
     "title": "Itinerary",
     "navigation": {

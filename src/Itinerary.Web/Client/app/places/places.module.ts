@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AppSettings } from '../core/appSettings';
 import { JoinPipe } from '../shared';
@@ -20,6 +21,7 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
   imports: [
     CommonModule,
     PlacesRoutingModule,
+    TranslateModule.forChild(),
     MaterialModule.forRoot(),
     FlexLayoutModule,
     FormsModule,
