@@ -1,11 +1,11 @@
 ﻿<div class="header">
   <md-toolbar color="primary">
-    <a class="header__title" fxFlex="grow" [routerLink]="['/home']">Itinerary</a>
+    <a class="header__title" fxFlex="grow" [routerLink]="['/home']">{{'header.title' | translate }}</a>
     <div class="navigation-container" fxHide.xs="true">
       <nav class="navigation">
-        <a class="navigation__link" [routerLink]="['/home']" [routerLinkActive]="'navigation__link--active'">Home</a>
-        <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">Places</a>
-        <a class="navigation__link navigation__link--coming-soon" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">Travels</a>
+        <a class="navigation__link" [routerLink]="['/home']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.home' | translate }}</a>
+        <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.places' | translate }}</a>
+        <a class="navigation__link navigation__link--coming-soon" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.travels' | translate }}</a>
       </nav>
     </div>
     <button class="more-button" md-icon-button [md-menu-trigger-for]="menu" fxHide.xs="true">
@@ -16,13 +16,13 @@
     </button>
   </md-toolbar>
   <md-menu x-position="before" #menu="mdMenu">
-    <button md-menu-item>Settings</button>
-    <button md-menu-item>Toggle Theme</button>
-    <button md-menu-item>Help</button>
+    <button md-menu-item>{{'header.menu.settings' | translate }}</button>
+    <button md-menu-item>{{'header.menu.theme' | translate }}</button>
+    <button md-menu-item>{{'header.menu.help' | translate }}</button>
   </md-menu>
   <md-menu x-position="before" #navigation="mdMenu">
-    <button md-menu-item [routerLink]="['/home']">Home</button>
-    <button md-menu-item  [routerLink]="['/places']">Places</button>
-    <button md-menu-item  [routerLink]="['/travels']">Travels</button>
+    <button md-menu-item [routerLink]="['/home']">{{'header.navigation.home' | translate }}</button>
+    <button md-menu-item  [routerLink]="['/places']">{{'header.navigation.places' | translate }}</button>
+    <button md-menu-item  [routerLink]="['/travels']">{{'header.navigation.travels' | translate }}</button>
   </md-menu>
 </div>

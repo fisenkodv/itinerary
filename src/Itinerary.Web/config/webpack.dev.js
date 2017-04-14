@@ -24,8 +24,6 @@ const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = webpackMerge(commonConfig({ env: ENV }).metadata, {
-  host: HOST,
-  port: PORT,
   ENV: ENV,
   HMR: HMR
 });
@@ -234,24 +232,6 @@ module.exports = function (options) {
       })
 
     ],
-
-    /**
-     * Webpack Development Server configuration
-     * Description: The webpack-dev-server is a little node.js Express server.
-     * The server emits information about the compilation state to the client,
-     * which reacts to those events.
-     *
-     * See: https://webpack.github.io/docs/webpack-dev-server.html
-     */
-    devServer: {
-      port: METADATA.port,
-      host: METADATA.host,
-      historyApiFallback: true,
-      watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000
-      }
-    },
 
     /*
      * Include polyfills or mocks for various node stuff

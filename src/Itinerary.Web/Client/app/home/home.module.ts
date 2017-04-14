@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -13,6 +14,7 @@ import { HomeComponent } from './home.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
+    TranslateModule.forChild(),
     MaterialModule.forRoot(),
     FlexLayoutModule,
     FormsModule,

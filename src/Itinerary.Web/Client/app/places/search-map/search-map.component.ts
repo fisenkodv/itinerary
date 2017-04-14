@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { PlaceDetails } from '../../shared';
 import { PlacesCommunicationService } from '../places-communication.service';
 import { SearchCriteria } from '../search-criteria';
+import { MapPlaceDetails } from './map-place-details';
 
 @Component({
   selector: 'search-map',
@@ -13,14 +14,14 @@ import { SearchCriteria } from '../search-criteria';
 export class SearchMapComponent implements OnDestroy {
   private defaultZoom = 5;
   private defaultZoomForSelectedPoint = 8;
-  private maximumReviews: number;
   private placesSubscription: Subscription;
   private searchCriteriaSubscription: Subscription;
+  private selectedPlaces: string[];
 
   public zoom: number;
   public showBasePoint: boolean;
   public searchCriteria: SearchCriteria;
-  public places: PlaceDetails[];
+  public places: MapPlaceDetails[];
 
   constructor(private placesCommunicationService: PlacesCommunicationService) {
     this.placesSubscription = placesCommunicationService
@@ -33,19 +34,20 @@ export class SearchMapComponent implements OnDestroy {
     this.zoom = this.defaultZoom;
     this.searchCriteria = new SearchCriteria();
     this.places = [];
-    this.maximumReviews = 0;
-  }
-
-  public placeOpacity(place: PlaceDetails): number {
-    return 0.5 + 0.5 * (place.reviews / this.maximumReviews);
+    this.selectedPlaces = [];
   }
 
   public radiusInMeters() {
     return this.searchCriteria.distance * 1609.34;
   }
 
-  public markerClick(place: PlaceDetails) {
+  public markerClick(place: MapPlaceDetails) {
     this.placesCommunicationService.select(place);
+    this.places.forEach((x) => {
+      x.wasSelected = x.wasSelected || x.isSelected;
+      x.isSelected = false;
+    });
+    place.isSelected = true;
   }
 
   ngOnDestroy(): void {
@@ -55,16 +57,19 @@ export class SearchMapComponent implements OnDestroy {
   private searchResultsCallBack(places: PlaceDetails[]) {
     this.showBasePoint = places.some(() => true);
     this.zoom = this.showBasePoint ? this.defaultZoomForSelectedPoint : this.zoom;
-    this.maximumReviews = this.getMaximumReviews(places);
-    this.places = places;
+
+    this.setPreviousSelectedPlaces(places);
+    this.places = places.map((place) => new MapPlaceDetails(false, this.wasSelected(place), place));
   }
 
-  private getMaximumReviews(places: PlaceDetails[]): number {
-    return places.some(() => true)
-      ? places.map((place) => place.reviews)
-        .reduce((a: number, b: number) => {
-          return Math.max(a, b);
-        })
-      : 0;
+  private setPreviousSelectedPlaces(places: PlaceDetails[]) {
+    const selected = this.places
+      .filter((place) => place.wasSelected || place.isSelected)
+      .map((place) => place.name);
+    this.selectedPlaces = [...selected, ...this.selectedPlaces];
+  }
+
+  private wasSelected(place: PlaceDetails): boolean {
+    return this.selectedPlaces.some((x) => x === place.name);
   }
 }

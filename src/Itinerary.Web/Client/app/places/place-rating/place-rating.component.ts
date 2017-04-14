@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class PlaceRatingComponent {
   private star_border = 'star_border';
   private star_half = 'star_half';
-  private star = 'star';
+  private star_fill = 'star';
 
   private ratingValue: number;
   public stars: string[];
@@ -23,7 +23,7 @@ export class PlaceRatingComponent {
     this.stars = [];
     for (let index = 1; index <= 5; index++) {
       if (this.ratingValue >= index) {
-        this.stars.push(this.star);
+        this.stars.push(this.star_fill);
       } else {
         const diff = Math.abs(this.ratingValue - index);
         this.stars.push(diff >= 0.5 && diff < 1 ? this.star_half : this.star_border);

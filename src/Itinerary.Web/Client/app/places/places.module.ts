@@ -1,10 +1,11 @@
-﻿import { CommonModule } from '@angular/common';
+﻿import { AgmCoreModule } from '@agm/core';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { AgmCoreModule } from '@agm/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AppSettings } from '../core/appSettings';
 import { JoinPipe } from '../shared';
@@ -20,6 +21,7 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
   imports: [
     CommonModule,
     PlacesRoutingModule,
+    TranslateModule.forChild(),
     MaterialModule.forRoot(),
     FlexLayoutModule,
     FormsModule,
