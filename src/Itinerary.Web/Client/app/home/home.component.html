@@ -8,59 +8,57 @@
         <p class="">{{'home.hero.motto' | translate }}</p>
       </li>
       <li>
-        <a md-raised-button color="accent" [routerLink]="['/places']">{{'home.hero.label' | translate }}</a>
+        <a md-raised-button color="accent" [routerLink]="['/places']">{{'home.hero.button-label' | translate }}</a>
       </li>
     </ul>
   </div>
 </div>
 
 <div class="details" fxLayout="column">
-  <div class="divider" fxFlex >
-    <h2 class="divider__title">About "Itinerary"</h2>
+  <div class="divider" fxFlex>
+    <h2 class="divider__title">{{'home.about.title' | translate }}</h2>
   </div>
   <section class="text-center" fxFlex fxFlexAlign="center">
-    <p class="details__paragraph">Do you want to spend less time planning your trip without missing anything? Then this site is for you! You will easily
-      find all the most interesting and popular places, but also you will quickly build and maintain the best route here.
-    </p>
+    <p class="details__paragraph">{{'home.about.description' | translate }}</p>
   </section>
 
   <div class="divider" fxFlex>
-    <h2 class="divider__title">Our Features</h2>
+    <h2 class="divider__title">{{'home.features.title' | translate }}</h2>
   </div>
   <section fxFlex>
     <div fxLayout='column' fxLayoutAlign="center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-around start">
       <md-card class="feature-card" fxFlex="noshrink" fxFlex.gt-sm="45">
         <md-card-header>
-          <md-card-title>Places</md-card-title>
-          <md-card-subtitle>Search interesting places</md-card-subtitle>
+          <md-card-title>{{'home.features.places.title' | translate }}</md-card-title>
+          <md-card-subtitle>{{'home.features.places.description' | translate }}</md-card-subtitle>
         </md-card-header>
         <img md-card-image src="assets/img/travel-plans.jpg">
         <md-card-content>
           <ul class="features-list">
-            <li>Specify the search area</li>
-            <li>Set the place ranking</li>
-            <li>Choose and keep your liked points</li>
+            <li>{{'home.features.places.feature_1' | translate }}</li>
+            <li>{{'home.features.places.feature_2' | translate }}</li>
+            <li>{{'home.features.places.feature_3' | translate }}</li>
           </ul>
         </md-card-content>
         <md-card-actions>
-          <a md-button [routerLink]="['/places']">START USING IT</a>
+          <a md-button [routerLink]="['/places']">{{'home.features.places.button-label' | translate }}</a>
         </md-card-actions>
       </md-card>
       <md-card class="feature-card" fxFlex="noshrink" fxFlex.gt-sm="45">
         <md-card-header>
-          <md-card-title>Route</md-card-title>
-          <md-card-subtitle>Build and maintain the best route</md-card-subtitle>
+          <md-card-title>{{'home.features.route.title' | translate }}</md-card-title>
+          <md-card-subtitle>{{'home.features.route.description' | translate }}</md-card-subtitle>
         </md-card-header>
         <img md-card-image src="assets/img/travel-notes.jpg">
         <md-card-content>
           <ul class="features-list">
-            <li>Create a new map or use the points you saved earlier.</li>
-            <li>Set the start and end point of the journey-the route is ready.</li>
-            <li>Embark on a journey!</li>
+            <li>{{'home.features.route.feature_1' | translate }}</li>
+            <li>{{'home.features.route.feature_2' | translate }}</li>
+            <li>{{'home.features.route.feature_3' | translate }}</li>
           </ul>
         </md-card-content>
         <md-card-actions>
-          <a md-button [disabled]="true" [routerLink]="['/home']">COMING SOON</a>
+          <a md-button [disabled]="true" [routerLink]="['/home']">{{'home.features.route.button-label' | translate }}</a>
         </md-card-actions>
       </md-card>
     </div>
