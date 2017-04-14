@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnDestroy, ElementRef } from '@angular/core';
+﻿import { Component, ElementRef, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { PlaceDetails } from '../../shared';
@@ -37,7 +37,7 @@ export class PlaceListComponent implements OnDestroy {
   }
 
   public isPlaceListItemSelected(place: PlaceDetails): boolean {
-    return this.selectedPlace != null ? place.name == this.selectedPlace.name : false;
+    return this.selectedPlace != null ? place.name === this.selectedPlace.name : false;
   }
 
   private selectPlaceListItem(place: PlaceDetails) {

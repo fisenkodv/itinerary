@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { PlaceDetails } from '../../shared';
 import { PlacesCommunicationService } from '../places-communication.service';
 import { SearchCriteria } from '../search-criteria';
-import { MapPlaceDetails } from '.map-place-details';
+import { MapPlaceDetails } from './map-place-details';
 
 @Component({
   selector: 'search-map',
