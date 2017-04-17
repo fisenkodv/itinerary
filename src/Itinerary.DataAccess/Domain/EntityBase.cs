@@ -2,13 +2,8 @@
 
 namespace Itinerary.DataAccess.Domain
 {
-  public interface IEntityBase<TKey>
+  public class EntityBase
   {
-    TKey Id { get; set; }
-  }
-
-  public abstract class EntityBase : IEntityBase<Guid>
-  {
-    public Guid Id { get; set; }
+    public long Id { get; set; }
   }
 }
