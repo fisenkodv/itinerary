@@ -7,15 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Itinerary.DataAccess.Repository
 {
-  public abstract class RepositoryBase<TContext, TEntity> : IRepository<TEntity>
-    where TContext : DbContext
+  public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
     where TEntity : EntityBase
   {
-    private readonly TContext _context;
+    protected readonly DbContext DbContext;
 
-    public RepositoryBase( TContext context )
+    protected RepositoryBase( DbContext dbContext )
     {
-      _context = context;
+      DbContext = dbContext;
     }
 
     public IEnumerable<TEntity> Get( Expression<Func<TEntity, bool>> predicate )

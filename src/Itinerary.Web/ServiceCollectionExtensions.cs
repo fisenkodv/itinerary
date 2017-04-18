@@ -1,11 +1,11 @@
 ﻿using Itinerary.Business.Api.Google;
 using Itinerary.Business.Services.Places;
-using Itinerary.DataAccess.Repository;
+using Itinerary.DataAccess;
 using Itinerary.DataAccess.Repository.Interfaces;
-using Itinerary.DataAccess.Repository.Interfaces.Generic;
-using Itinerary.DataAccess.Repository.LiteDb;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Itinerary.Web
 {
@@ -17,10 +17,11 @@ namespace Itinerary.Web
     {
       services.AddSingleton( configuration.GetGoogleClientSecrets() );
 
-      services.AddSingleton<IRepositoryConfiguration>(
-        new RepositoryConfiguration( configuration.GetConnectionString( "DefaultConnection" ) ) );
+//      services.AddSingleton<IRepositoryConfiguration>(
+//        new RepositoryConfiguration( configuration.GetConnectionString( "DefaultConnection" ) ) );
 
-      services.AddTransient( typeof( IGuidKeyRepository<> ), typeof( LiteDbRepository<> ) );
+      services.AddDbContext<ItineraryDbContext>(options => options.UseSqlite( configuration.GetConnectionString( "DefaultConnection" ) ));
+      //services.AddTransient( typeof( DbContext ), typeof( ItineraryDbContext ) );
       services.AddTransient( typeof( IPlacesRepository ), typeof( PlacesRepository ) );
 
       services.AddTransient<IPlacesService, PlacesService>();

@@ -1,29 +1,25 @@
 ﻿using System;
-using Itinerary.DataAccess.Exceptions;
 using Itinerary.DataAccess.Repository.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Itinerary.DataAccess.UnitOfWork
 {
-  public class UnitOfWork<TContext> : IUnitOfWork
-    where TContext : DbContext
+  public class UnitOfWork : IUnitOfWork
   {
-    private TContext _context;
-    private readonly IServiceProvider _serviceProvider;
+    private ItineraryDbContext _dbContext;
     protected bool _isDisposed;
 
-    public UnitOfWork( TContext context, IServiceProvider serviceProvider )
+    public UnitOfWork( ItineraryDbContext dbContext )
     {
-      _context = context;
-      _serviceProvider = serviceProvider;
+      _dbContext = dbContext;
+      PlacesRepository = new PlacesRepository( dbContext );
     }
 
-    public IPlacesRepository PlacesRepository => GetRepository<IPlacesRepository>();
+    public IPlacesRepository PlacesRepository { get; }
 
     public int SaveChanges()
     {
       CheckDisposed();
-      return _context.SaveChanges();
+      return _dbContext.SaveChanges();
     }
 
     public void Dispose()
@@ -38,32 +34,16 @@ namespace Itinerary.DataAccess.UnitOfWork
         throw new ObjectDisposedException( "The UnitOfWork is already disposed and cannot be used anymore." );
     }
 
-    private TRepository GetRepository<TRepository>()
-    {
-      CheckDisposed();
-      Type repositoryType = typeof( TRepository );
-      var repository = ( TRepository ) _serviceProvider.GetService( repositoryType );
-      if ( repository == null )
-      {
-        throw new RepositoryNotFoundException(
-          repositoryType.Name,
-          $"Repository {repositoryType.Name} not found in the IOC container. Check if it is registered during startup." );
-      }
-
-      //((IRepositoryInjection)repository).SetContext(_context);
-      return repository;
-    }
-
     private void Dispose( bool disposing )
     {
       if ( !_isDisposed )
       {
         if ( disposing )
         {
-          if ( _context != null )
+          if ( _dbContext != null )
           {
-            _context.Dispose();
-            _context = null;
+            _dbContext.Dispose();
+            _dbContext = null;
           }
         }
       }
