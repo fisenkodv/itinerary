@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Itinerary.Crawler.TripAdviser.Entities;
 using Itinerary.DataAccess.Domain;
+using Itinerary.DataAccess.Entities;
 using LiteDB;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

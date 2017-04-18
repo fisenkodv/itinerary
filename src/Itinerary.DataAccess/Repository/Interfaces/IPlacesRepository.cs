@@ -1,5 +1,5 @@
 ﻿using Itinerary.DataAccess.Domain;
-using Itinerary.DataAccess.Repository.Interfaces.Generic;
+using Itinerary.DataAccess.Entities;
 
 namespace Itinerary.DataAccess.Repository.Interfaces
 {

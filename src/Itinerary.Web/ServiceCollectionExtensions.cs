@@ -17,10 +17,11 @@ namespace Itinerary.Web
     {
       services.AddSingleton( configuration.GetGoogleClientSecrets() );
 
-//      services.AddSingleton<IRepositoryConfiguration>(
-//        new RepositoryConfiguration( configuration.GetConnectionString( "DefaultConnection" ) ) );
+      //      services.AddSingleton<IRepositoryConfiguration>(
+      //        new RepositoryConfiguration( configuration.GetConnectionString( "DefaultConnection" ) ) );
 
-      services.AddDbContext<ItineraryDbContext>(options => options.UseSqlite( configuration.GetConnectionString( "DefaultConnection" ) ));
+      services.AddDbContext<ItineraryDbContext>(
+        options => options.UseSqlite( configuration.GetConnectionString( "DefaultConnection" ) ) );
       //services.AddTransient( typeof( DbContext ), typeof( ItineraryDbContext ) );
       services.AddTransient( typeof( IPlacesRepository ), typeof( PlacesRepository ) );
 

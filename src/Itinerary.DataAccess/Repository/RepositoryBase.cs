@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Itinerary.DataAccess.Domain;
-using Itinerary.DataAccess.Repository.Interfaces.Generic;
+using Itinerary.DataAccess.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Itinerary.DataAccess.Repository

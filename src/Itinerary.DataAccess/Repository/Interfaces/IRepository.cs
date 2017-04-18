@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Itinerary.DataAccess.Domain;
 
-namespace Itinerary.DataAccess.Repository.Interfaces.Generic
+namespace Itinerary.DataAccess.Repository.Interfaces
 {
   public interface IRepository<TEntity>
   {
