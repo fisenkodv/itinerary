@@ -17,9 +17,12 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
       _entities = new Dictionary<long, TEntity>();
     }
 
-    public IEnumerable<TEntity> Get( Expression<Func<TEntity, bool>> predicate )
+    public IEnumerable<TEntity> Get(
+      Expression<Func<TEntity, bool>> filter,
+      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null )
     {
-      Func<TEntity, bool> func = predicate.Compile();
+      Func<TEntity, bool> func = filter.Compile();
       return _entities.Values.Where( func );
     }
 

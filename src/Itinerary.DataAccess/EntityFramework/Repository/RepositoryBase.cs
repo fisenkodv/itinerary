@@ -18,14 +18,14 @@ namespace Itinerary.DataAccess.EntityFramework.Repository
       DbContext = dbContext;
     }
 
-    public IEnumerable<TEntity> Get( Expression<Func<TEntity, bool>> predicate )
+    public IEnumerable<TEntity> Get(
+      Expression<Func<TEntity, bool>> filter,
+      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null )
+
     {
-      IQueryable<TEntity> query = DbContext.Set<TEntity>();
-
-      if ( predicate != null )
-        query = query.Where( predicate );
-
-      return query.ToList();
+      IQueryable<TEntity> result = QueryDb(filter, orderBy, includes);
+      return result.ToList();
     }
 
     public TEntity Get( long id )
@@ -76,19 +76,13 @@ namespace Itinerary.DataAccess.EntityFramework.Repository
       IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
       if ( filter != null )
-      {
         query = query.Where( filter );
-      }
 
       if ( includes != null )
-      {
         query = includes( query );
-      }
 
       if ( orderBy != null )
-      {
         query = orderBy( query );
-      }
 
       return query;
     }
