@@ -1,3 +1,0 @@
-[submodule "src/GoogleApi"]
-	path = src/GoogleApi
-	url = https://github.com/fisenkodv/google-api.git
