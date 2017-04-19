@@ -23,7 +23,6 @@
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstract\Repository" />
     <Folder Include="Abstract\UnitOfWork" />
     <Folder Include="Entities" />
     <Folder Include="EntityFramework\Configurations" />

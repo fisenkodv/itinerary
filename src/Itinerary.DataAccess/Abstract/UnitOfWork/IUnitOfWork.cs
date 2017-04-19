@@ -7,6 +7,8 @@ namespace Itinerary.DataAccess.Abstract.UnitOfWork
   {
     IPlacesRepository PlacesRepository { get; }
 
+    IPlaceCategoriesRepository PlaceCategoriesRepository { get; }
+
     int SaveChanges();
   }
 }

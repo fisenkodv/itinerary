@@ -15,7 +15,7 @@ namespace Itinerary.Crawler
 
       var crawler = new TripAdviserCrawler( "map.db", TimeSpan.FromSeconds( 1 ), logger );
       //crawler.Run( 51.34433866, -169.01367187, 23.72501174, -57.83203125, 13, 1000 );
-      crawler.ConvertToWebDb( "litedb.db" );
+      crawler.ConvertToWebDb( "itinerary.db" );
     }
   }
 }

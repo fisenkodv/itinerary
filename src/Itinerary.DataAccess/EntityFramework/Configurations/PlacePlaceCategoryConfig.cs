@@ -9,13 +9,13 @@ namespace Itinerary.DataAccess.EntityFramework.Configurations
     {
       entity.HasKey( p => p.Id );
 
-      entity.HasOne( pt => pt.Place )
-            .WithMany( p => p.Categories )
-            .HasForeignKey( pt => pt.PlaceId );
+      entity.HasOne(pt => pt.Place)
+            .WithMany(p => p.Categories)
+            .HasForeignKey(pt => pt.PlaceId);
 
-      entity.HasOne( pt => pt.Category )
-            .WithMany( t => t.Places )
-            .HasForeignKey( pt => pt.CategoryId );
+      entity.HasOne(pt => pt.Category)
+            .WithMany(t => t.Places)
+            .HasForeignKey(pt => pt.CategoryId);
     }
   }
 }

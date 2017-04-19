@@ -14,9 +14,12 @@ namespace Itinerary.DataAccess.EntityFramework
     {
       _dbContext = dbContext;
       PlacesRepository = new PlacesRepository( dbContext );
+      PlaceCategoriesRepository = new PlaceCategoriesRepository( dbContext );
     }
 
     public IPlacesRepository PlacesRepository { get; }
+
+    public IPlaceCategoriesRepository PlaceCategoriesRepository { get; }
 
     public int SaveChanges()
     {
