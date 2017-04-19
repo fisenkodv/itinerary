@@ -1,5 +1,8 @@
 ﻿using System;
-using Itinerary.DataAccess.Repository.Interfaces;
+using Itinerary.DataAccess.Abstract.Repository;
+using Itinerary.DataAccess.Abstract.UnitOfWork;
+using Itinerary.DataAccess.EntityFramework;
+using Itinerary.DataAccess.EntityFramework.Repository;
 
 namespace Itinerary.DataAccess.UnitOfWork
 {

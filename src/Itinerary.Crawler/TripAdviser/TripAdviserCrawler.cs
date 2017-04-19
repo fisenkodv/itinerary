@@ -14,36 +14,36 @@ using Newtonsoft.Json;
 
 namespace Itinerary.Crawler.TripAdviser
 {
-  internal class PlaceEqualityComparer : IEqualityComparer<Place>
-  {
-    public bool Equals( Place x, Place y )
-    {
-      if ( ReferenceEquals( x, y ) ) return true;
-      if ( ReferenceEquals( x, null ) ) return false;
-      if ( ReferenceEquals( y, null ) ) return false;
-      if ( x.GetType() != y.GetType() ) return false;
-
-      return string.Equals( x.Name, y.Name ) &&
-             x.Rating == y.Rating &&
-             x.Reviews == y.Reviews &&
-             x.Location.Latitude == y.Location.Latitude &&
-             x.Location.Longitude == y.Location.Longitude;
-    }
-
-    public int GetHashCode( Place obj )
-    {
-      unchecked
-      {
-        int result = obj.Name.GetHashCode();
-        result = ( result * 397 ) ^ obj.Rating.GetHashCode();
-        result = ( result * 397 ) ^ obj.Reviews.GetHashCode();
-        result = ( result * 397 ) ^ obj.Location.Latitude.GetHashCode();
-        result = ( result * 397 ) ^ obj.Location.Longitude.GetHashCode();
-        return result;
-      }
-    }
-  }
-
+  //  internal class PlaceEqualityComparer : IEqualityComparer<Place>
+  //  {
+  //    public bool Equals( Place x, Place y )
+  //    {
+  //      if ( ReferenceEquals( x, y ) ) return true;
+  //      if ( ReferenceEquals( x, null ) ) return false;
+  //      if ( ReferenceEquals( y, null ) ) return false;
+  //      if ( x.GetType() != y.GetType() ) return false;
+  //
+  //      return string.Equals( x.Name, y.Name ) &&
+  //             x.Rating == y.Rating &&
+  //             x.Reviews == y.Reviews &&
+  //             x.Location.Latitude == y.Location.Latitude &&
+  //             x.Location.Longitude == y.Location.Longitude;
+  //    }
+  //
+  //    public int GetHashCode( Place obj )
+  //    {
+  //      unchecked
+  //      {
+  //        int result = obj.Name.GetHashCode();
+  //        result = ( result * 397 ) ^ obj.Rating.GetHashCode();
+  //        result = ( result * 397 ) ^ obj.Reviews.GetHashCode();
+  //        result = ( result * 397 ) ^ obj.Location.Latitude.GetHashCode();
+  //        result = ( result * 397 ) ^ obj.Location.Longitude.GetHashCode();
+  //        return result;
+  //      }
+  //    }
+  //  }
+  //
   internal class TripAdviserCrawler : IDisposable
   {
     private readonly TimeSpan _delay;
@@ -71,43 +71,43 @@ namespace Itinerary.Crawler.TripAdviser
 
     public void ConvertToWebDb( string outputFile )
     {
-      using ( var db = new LiteDatabase( outputFile ) )
-      {
-        var places = new List<Place>();
-        foreach ( Segment segment in GetSegmentsCollection().FindAll() )
-        {
-          if ( !segment.Map.Attractions.Any() ) continue;
-
-          IEnumerable<Place> attractionPlaces =
-            from attraction in segment.Map.Attractions
-            let location = new Location { Latitude = attraction.Lat, Longitude = attraction.Lng }
-            let place = new Place
-                        {
-                          Location = location,
-                          Name = attraction.CustomHover.Title,
-                          Rating = attraction.Rating,
-                          Reviews = attraction.Reviews,
-                          Categories = attraction.Categories,
-                          ImgUrl = attraction.ImgUrl,
-                          Url = attraction.Url
-                        }
-            select place;
-
-          places.AddRange( attractionPlaces );
-        }
-
-        _logger.LogInformation( $"Total {places.Count} places found." );
-
-        places = places.Distinct( new PlaceEqualityComparer() ).ToList();
-
-        _logger.LogInformation( $"Total {places.Count} places after cleanup." );
-
-        db.GetCollection<Place>( "places" ).Insert( places );
-        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Rating );
-        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Reviews );
-        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Location.Latitude );
-        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Location.Longitude );
-      }
+      //      using ( var db = new LiteDatabase( outputFile ) )
+      //      {
+      //        var places = new List<Place>();
+      //        foreach ( Segment segment in GetSegmentsCollection().FindAll() )
+      //        {
+      //          if ( !segment.Map.Attractions.Any() ) continue;
+      //
+      //          IEnumerable<Place> attractionPlaces =
+      //            from attraction in segment.Map.Attractions
+      //            let location = new Location { Latitude = attraction.Lat, Longitude = attraction.Lng }
+      //            let place = new Place
+      //                        {
+      //                          Location = location,
+      //                          Name = attraction.CustomHover.Title,
+      //                          Rating = attraction.Rating,
+      //                          Reviews = attraction.Reviews,
+      //                          Categories = attraction.Categories,
+      //                          ImgUrl = attraction.ImgUrl,
+      //                          Url = attraction.Url
+      //                        }
+      //            select place;
+      //
+      //          places.AddRange( attractionPlaces );
+      //        }
+      //
+      //        _logger.LogInformation( $"Total {places.Count} places found." );
+      //
+      //        places = places.Distinct( new PlaceEqualityComparer() ).ToList();
+      //
+      //        _logger.LogInformation( $"Total {places.Count} places after cleanup." );
+      //
+      //        db.GetCollection<Place>( "places" ).Insert( places );
+      //        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Rating );
+      //        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Reviews );
+      //        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Location.Latitude );
+      //        db.GetCollection<Place>( "places" ).EnsureIndex( x => x.Location.Longitude );
+      //      }
     }
 
     public void Run( double startLat, double startLng, double endLat, double endLng, double zoom, double size )

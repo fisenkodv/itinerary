@@ -281,3 +281,4 @@ src/Itinerary.Web/wwwroot/*
 src/Itinerary.Web/dll/
 src/Itinerary.Web/Client/dist/
 src/Itinerary.Crawler/download/
+.DS_Store

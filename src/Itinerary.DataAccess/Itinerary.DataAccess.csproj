@@ -16,13 +16,19 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
-<PropertyGroup>
-  <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-</PropertyGroup>
+  <PropertyGroup>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Abstract\Repository" />
+    <Folder Include="Abstract\UnitOfWork" />
+    <Folder Include="Entities" />
+    <Folder Include="EntityFramework\Configurations" />
+    <Folder Include="EntityFramework\Repository" />
+    <Folder Include="Migrations" />
     <Folder Include="Migrations\" />
     <Folder Include="Migrations\" />
   </ItemGroup>

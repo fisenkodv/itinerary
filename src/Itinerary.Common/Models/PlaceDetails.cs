@@ -1,4 +1,6 @@
-﻿namespace Itinerary.Common.Models
+﻿using System.Collections.Generic;
+
+namespace Itinerary.Common.Models
 {
   public class PlaceDetails
   {
@@ -6,7 +8,7 @@
       string name,
       float rating,
       int reviews,
-      string[] categories,
+      IEnumerable<string> categories,
       string url,
       string imgUrl,
       Location location )
@@ -26,7 +28,7 @@
 
     public int Reviews { get; }
 
-    public string[] Categories { get; }
+    public IEnumerable<string> Categories { get; }
 
     public string Url { get; set; }
 

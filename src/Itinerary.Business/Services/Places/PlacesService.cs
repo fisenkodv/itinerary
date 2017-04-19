@@ -30,16 +30,18 @@ namespace Itinerary.Business.Services.Places
       return from place in _placesRepository.Get(
                place => place.Rating >= rating &&
                         place.Reviews >= reviews &&
-                        ( place.Location.Latitude <= north && place.Location.Latitude >= south ) &&
-                        ( place.Location.Longitude <= east && place.Location.Longitude >= west ) )
+                        place.Latitude <= north && place.Latitude >= south &&
+                        place.Longitude <= east && place.Longitude >= west )
              let distanceFromBasePoint = baseLocation.DistanceTo(
-               GeoLocation.FromDegrees( place.Location.Latitude, place.Location.Longitude ),
+               GeoLocation.FromDegrees( place.Latitude, place.Longitude ),
                GeoLocationMeasurement.Miles )
              where distanceFromBasePoint <= distance
+             let categories = from category in place.CategoriesLink
+                              select category.Category.Name
              select
              new PlaceDetails(
-               place.Name, place.Rating, place.Reviews, place.Categories, place.Url, place.ImgUrl,
-               new Common.Models.Location( place.Location.Latitude, place.Location.Longitude ) );
+               place.Name, place.Rating, place.Reviews, categories, place.Url, place.ImgUrl,
+               new Location( place.Latitude, place.Longitude ) );
     }
   }
 }

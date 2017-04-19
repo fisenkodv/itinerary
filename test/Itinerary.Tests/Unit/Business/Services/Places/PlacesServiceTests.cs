@@ -4,7 +4,6 @@ using Itinerary.Business.Services.Places;
 using Itinerary.Common.Models;
 using Itinerary.DataAccess.Entities;
 using Xunit;
-using Location = Itinerary.DataAccess.Domain.Location;
 
 namespace Itinerary.Tests.Unit.Business.Services.Places
 {
@@ -16,12 +15,12 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
       var placesRepository = new PlacesRepositoryFake();
       var placesService = new PlacesService( placesRepository );
 
-      placesRepository.Insert( new Place { Location = new Location { Latitude = 42.29722, Longitude = -85.07451 } } );
-      placesRepository.Insert( new Place { Location = new Location { Latitude = 42.81097, Longitude = -86.08699 } } );
-      placesRepository.Insert( new Place { Location = new Location { Latitude = 42.79807, Longitude = -86.09348 } } );
-      placesRepository.Insert( new Place { Location = new Location { Latitude = 42.77731, Longitude = -86.20029 } } );
-      placesRepository.Insert( new Place { Location = new Location { Latitude = 42.66265, Longitude = -86.21619 } } );
-      placesRepository.Insert( new Place { Location = new Location { Latitude = -42.66265, Longitude = 86.21619 } } );
+      placesRepository.Insert( new Place { Latitude = 42.29722, Longitude = -85.07451 } );
+      placesRepository.Insert( new Place { Latitude = 42.81097, Longitude = -86.08699 } );
+      placesRepository.Insert( new Place { Latitude = 42.79807, Longitude = -86.09348 } );
+      placesRepository.Insert( new Place { Latitude = 42.77731, Longitude = -86.20029 } );
+      placesRepository.Insert( new Place { Latitude = 42.66265, Longitude = -86.21619 } );
+      placesRepository.Insert( new Place { Latitude = -42.66265, Longitude = 86.21619 } );
 
       IEnumerable<PlaceDetails> places =
         placesService.Search(
@@ -40,17 +39,17 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
       var placesService = new PlacesService( placesRepository );
 
       placesRepository.Insert(
-        new Place { Rating = 1, Location = new Location { Latitude = 42.29722, Longitude = -85.07451 } } );
+        new Place { Rating = 1, Latitude = 42.29722, Longitude = -85.07451 } );
       placesRepository.Insert(
-        new Place { Rating = 2, Location = new Location { Latitude = 42.81097, Longitude = -86.08699 } } );
+        new Place { Rating = 2, Latitude = 42.81097, Longitude = -86.08699 } );
       placesRepository.Insert(
-        new Place { Rating = 3, Location = new Location { Latitude = 42.79807, Longitude = -86.09348 } } );
+        new Place { Rating = 3, Latitude = 42.79807, Longitude = -86.09348 } );
       placesRepository.Insert(
-        new Place { Rating = 4, Location = new Location { Latitude = 42.77731, Longitude = -86.20029 } } );
+        new Place { Rating = 4, Latitude = 42.77731, Longitude = -86.20029 } );
       placesRepository.Insert(
-        new Place { Rating = 5, Location = new Location { Latitude = 42.66265, Longitude = -86.21619 } } );
+        new Place { Rating = 5, Latitude = 42.66265, Longitude = -86.21619 } );
       placesRepository.Insert(
-        new Place { Rating = 5, Location = new Location { Latitude = -42.66265, Longitude = 86.21619 } } );
+        new Place { Rating = 5, Latitude = -42.66265, Longitude = 86.21619 } );
 
       IEnumerable<PlaceDetails> places =
         placesService.Search(
@@ -69,17 +68,17 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
       var placesService = new PlacesService( placesRepository );
 
       placesRepository.Insert(
-        new Place { Reviews = 10, Location = new Location { Latitude = 42.29722, Longitude = -85.07451 } } );
+        new Place { Reviews = 10, Latitude = 42.29722, Longitude = -85.07451 } );
       placesRepository.Insert(
-        new Place { Reviews = 20, Location = new Location { Latitude = 42.81097, Longitude = -86.08699 } } );
+        new Place { Reviews = 20, Latitude = 42.81097, Longitude = -86.08699 } );
       placesRepository.Insert(
-        new Place { Reviews = 30, Location = new Location { Latitude = 42.79807, Longitude = -86.09348 } } );
+        new Place { Reviews = 30, Latitude = 42.79807, Longitude = -86.09348 } );
       placesRepository.Insert(
-        new Place { Reviews = 40, Location = new Location { Latitude = 42.77731, Longitude = -86.20029 } } );
+        new Place { Reviews = 40, Latitude = 42.77731, Longitude = -86.20029 } );
       placesRepository.Insert(
-        new Place { Reviews = 50, Location = new Location { Latitude = 42.66265, Longitude = -86.21619 } } );
+        new Place { Reviews = 50, Latitude = 42.66265, Longitude = -86.21619 } );
       placesRepository.Insert(
-        new Place { Reviews = 50, Location = new Location { Latitude = -42.66265, Longitude = 86.21619 } } );
+        new Place { Reviews = 50, Latitude = -42.66265, Longitude = 86.21619 } );
 
       IEnumerable<PlaceDetails> places =
         placesService.Search(

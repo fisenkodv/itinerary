@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Itinerary.DataAccess.Abstract.Repository;
 using Itinerary.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
