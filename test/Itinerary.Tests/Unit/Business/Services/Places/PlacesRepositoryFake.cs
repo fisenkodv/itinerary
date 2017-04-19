@@ -1,5 +1,4 @@
-﻿using Itinerary.DataAccess.Domain;
-using Itinerary.DataAccess.Repository.Interfaces;
+﻿using Itinerary.DataAccess.Abstract.Repository;
 
 namespace Itinerary.Tests.Unit.Business.Services.Places
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Itinerary.DataAccess.Repository.Interfaces
+namespace Itinerary.DataAccess.Abstract.Repository
 {
   public interface IRepository<TEntity>
   {

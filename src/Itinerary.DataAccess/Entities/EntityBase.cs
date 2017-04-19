@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Itinerary.DataAccess.Domain
+﻿namespace Itinerary.DataAccess.Entities
 {
   public class EntityBase
   {

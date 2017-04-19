@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Itinerary.DataAccess.Domain;
 
 namespace Itinerary.DataAccess.Entities
 {

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Itinerary.Common.Models;
-using Itinerary.DataAccess.Domain;
 
 namespace Itinerary.Business.Services.Places
 {

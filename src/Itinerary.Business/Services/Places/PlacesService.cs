@@ -2,7 +2,7 @@
 using System.Linq;
 using Itinerary.Common;
 using Itinerary.Common.Models;
-using Itinerary.DataAccess.Repository.Interfaces;
+using Itinerary.DataAccess.Abstract.Repository;
 using JetBrains.Annotations;
 
 namespace Itinerary.Business.Services.Places

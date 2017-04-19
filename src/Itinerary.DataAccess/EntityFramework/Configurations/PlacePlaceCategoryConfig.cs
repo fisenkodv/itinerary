@@ -1,7 +1,7 @@
-﻿using Itinerary.DataAccess.Domain;
+﻿using Itinerary.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Itinerary.DataAccess.Entities.Configurations
+namespace Itinerary.DataAccess.EntityFramework.Configurations
 {
   internal static class PlacePlaceCategoryConfig
   {

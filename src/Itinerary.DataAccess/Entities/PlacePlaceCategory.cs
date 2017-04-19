@@ -1,6 +1,4 @@
-﻿using Itinerary.DataAccess.Domain;
-
-namespace Itinerary.DataAccess.Entities
+﻿namespace Itinerary.DataAccess.Entities
 {
   public class PlacePlaceCategory : EntityBase
   {

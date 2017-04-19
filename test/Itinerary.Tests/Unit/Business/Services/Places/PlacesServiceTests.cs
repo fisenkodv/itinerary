@@ -2,7 +2,6 @@
 using System.Linq;
 using Itinerary.Business.Services.Places;
 using Itinerary.Common.Models;
-using Itinerary.DataAccess.Domain;
 using Itinerary.DataAccess.Entities;
 using Xunit;
 using Location = Itinerary.DataAccess.Domain.Location;

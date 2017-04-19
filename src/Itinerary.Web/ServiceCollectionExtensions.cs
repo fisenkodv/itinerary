@@ -1,7 +1,9 @@
 ﻿using Itinerary.Business.Api.Google;
 using Itinerary.Business.Services.Places;
 using Itinerary.DataAccess;
-using Itinerary.DataAccess.Repository.Interfaces;
+using Itinerary.DataAccess.Abstract.Repository;
+using Itinerary.DataAccess.EntityFramework;
+using Itinerary.DataAccess.EntityFramework.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

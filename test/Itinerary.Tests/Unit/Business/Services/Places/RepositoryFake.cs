@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Itinerary.DataAccess.Domain;
-using Itinerary.DataAccess.Repository.Interfaces;
+using Itinerary.DataAccess.Entities;
 
 namespace Itinerary.Tests.Unit.Business.Services.Places
 {
