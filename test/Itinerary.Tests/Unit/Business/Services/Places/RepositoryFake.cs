@@ -30,7 +30,7 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
 
     public TEntity Insert( TEntity entity )
     {
-      long id = _entities.Keys.Max()+1;
+      long id = GetNextId();
       entity.Id = id;
       _entities[ id ] = entity;
       return entity;
@@ -56,6 +56,15 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
     {
       Func<TEntity, bool> func = predicate.Compile();
       return _entities.Values.Count( func );
+    }
+
+    private long GetNextId()
+    {
+      long id = 1;
+      if ( _entities.Any() )
+        id = _entities.Keys.Max() + 1;
+
+      return id;
     }
   }
 }

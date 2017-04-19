@@ -29,7 +29,5 @@
     <Folder Include="EntityFramework\Configurations" />
     <Folder Include="EntityFramework\Repository" />
     <Folder Include="Migrations" />
-    <Folder Include="Migrations\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

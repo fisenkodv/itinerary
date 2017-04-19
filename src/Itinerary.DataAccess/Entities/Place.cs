@@ -4,6 +4,11 @@ namespace Itinerary.DataAccess.Entities
 {
   public class Place : EntityBase
   {
+    public Place()
+    {
+      Categories = new List<PlacePlaceCategory>();
+    }
+
     public string Name { get; set; }
 
     public float Rating { get; set; }
@@ -18,6 +23,6 @@ namespace Itinerary.DataAccess.Entities
 
     public double Longitude { get; set; }
 
-    public ICollection<PlacePlaceCategory> CategoriesLink { get; set; }
+    public ICollection<PlacePlaceCategory> Categories { get; set; }
   }
 }

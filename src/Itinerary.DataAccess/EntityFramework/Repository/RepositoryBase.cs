@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Itinerary.DataAccess.Abstract.Repository;
 using Itinerary.DataAccess.Entities;
@@ -8,48 +9,88 @@ using Microsoft.EntityFrameworkCore;
 namespace Itinerary.DataAccess.EntityFramework.Repository
 {
   public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
-    where TEntity : EntityBase
+    where TEntity : EntityBase, new()
   {
-    protected readonly DbContext DbContext;
+    protected readonly ItineraryDbContext DbContext;
 
-    protected RepositoryBase( DbContext dbContext )
+    protected RepositoryBase( ItineraryDbContext dbContext )
     {
       DbContext = dbContext;
     }
 
     public IEnumerable<TEntity> Get( Expression<Func<TEntity, bool>> predicate )
     {
-      throw new NotImplementedException();
+      IQueryable<TEntity> query = DbContext.Set<TEntity>();
+
+      if ( predicate != null )
+        query = query.Where( predicate );
+
+      return query.ToList();
     }
 
     public TEntity Get( long id )
     {
-      throw new NotImplementedException();
+      IQueryable<TEntity> query = DbContext.Set<TEntity>();
+      return query.SingleOrDefault( x => x.Id == id );
     }
 
     public TEntity Insert( TEntity entity )
     {
-      throw new NotImplementedException();
+      if ( entity == null ) throw new InvalidOperationException( "Unable to add a null entity to the repository." );
+      return DbContext.Set<TEntity>().Add( entity ).Entity;
     }
 
     public TEntity Update( TEntity entity )
     {
-      throw new NotImplementedException();
+      return DbContext.Set<TEntity>().Update( entity ).Entity;
     }
 
     public void Delete( long id )
     {
-      throw new NotImplementedException();
+      var entity = new TEntity { Id = id };
+      Delete( entity );
     }
 
     public void Delete( TEntity entity )
     {
-      throw new NotImplementedException();
+      DbContext.Set<TEntity>().Attach( entity );
+      DbContext.Entry( entity ).State = EntityState.Deleted;
+      DbContext.Set<TEntity>().Remove( entity );
     }
 
     public long Count( Expression<Func<TEntity, bool>> predicate )
     {
-      throw new NotImplementedException();
+      IQueryable<TEntity> query = DbContext.Set<TEntity>();
+
+      if ( predicate != null )
+        query = query.Where( predicate );
+
+      return query.Count();
+    }
+
+    protected IQueryable<TEntity> QueryDb(
+      Expression<Func<TEntity, bool>> filter,
+      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes )
+    {
+      IQueryable<TEntity> query = DbContext.Set<TEntity>();
+
+      if ( filter != null )
+      {
+        query = query.Where( filter );
+      }
+
+      if ( includes != null )
+      {
+        query = includes( query );
+      }
+
+      if ( orderBy != null )
+      {
+        query = orderBy( query );
+      }
+
+      return query;
     }
   }
 }

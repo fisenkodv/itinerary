@@ -40,7 +40,7 @@ namespace Itinerary.DataAccess.EntityFramework
     {
       var optionsBuilder = new DbContextOptionsBuilder<ItineraryDbContext>();
       optionsBuilder.UseSqlite( ConnectionString, b => b.MigrationsAssembly( "Itinerary.DataAccess" ) );
-      optionsBuilder.UseSqlServer( ConnectionString, b => b.MigrationsAssembly( "Itinerary.DataAccess" ) );
+      //optionsBuilder.UseSqlServer( ConnectionString, b => b.MigrationsAssembly( "Itinerary.DataAccess" ) );
 
       return new ItineraryDbContext( optionsBuilder.Options );
     }

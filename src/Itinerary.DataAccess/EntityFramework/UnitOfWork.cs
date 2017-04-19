@@ -1,15 +1,14 @@
 ﻿using System;
 using Itinerary.DataAccess.Abstract.Repository;
 using Itinerary.DataAccess.Abstract.UnitOfWork;
-using Itinerary.DataAccess.EntityFramework;
 using Itinerary.DataAccess.EntityFramework.Repository;
 
-namespace Itinerary.DataAccess.UnitOfWork
+namespace Itinerary.DataAccess.EntityFramework
 {
   public class UnitOfWork : IUnitOfWork
   {
     private ItineraryDbContext _dbContext;
-    protected bool _isDisposed;
+    private bool _isDisposed;
 
     public UnitOfWork( ItineraryDbContext dbContext )
     {

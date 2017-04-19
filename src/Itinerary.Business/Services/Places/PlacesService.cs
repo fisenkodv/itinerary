@@ -36,7 +36,7 @@ namespace Itinerary.Business.Services.Places
                GeoLocation.FromDegrees( place.Latitude, place.Longitude ),
                GeoLocationMeasurement.Miles )
              where distanceFromBasePoint <= distance
-             let categories = from category in place.CategoriesLink
+             let categories = from category in place.Categories
                               select category.Category.Name
              select
              new PlaceDetails(

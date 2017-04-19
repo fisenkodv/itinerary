@@ -6,7 +6,7 @@ namespace Itinerary.DataAccess.EntityFramework.Repository
 {
   public class PlacesRepository : RepositoryBase<Place>, IPlacesRepository
   {
-    public PlacesRepository( ItineraryDbContext dbContext ) : base( ( DbContext ) dbContext )
+    public PlacesRepository( ItineraryDbContext dbContext ) : base( dbContext )
     {
     }
   }
