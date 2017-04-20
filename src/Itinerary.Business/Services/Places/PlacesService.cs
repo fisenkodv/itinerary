@@ -3,6 +3,7 @@ using System.Linq;
 using Itinerary.Common;
 using Itinerary.Common.Models;
 using Itinerary.DataAccess.Abstract.Repository;
+using Itinerary.DataAccess.Abstract.UnitOfWork;
 using Itinerary.DataAccess.Entities;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,11 @@ namespace Itinerary.Business.Services.Places
   [UsedImplicitly]
   public class PlacesService : IPlacesService
   {
-    private readonly IPlacesRepository _placesRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public PlacesService( IPlacesRepository placesRepository )
+    public PlacesService( IUnitOfWork unitOfWork )
     {
-      _placesRepository = placesRepository;
+      _unitOfWork = unitOfWork;
     }
 
     public IEnumerable<PlaceDetails> Search( double lat, double lng, double distance, double rating, int reviews )
@@ -29,14 +30,15 @@ namespace Itinerary.Business.Services.Places
       double east = coordinates[ 1 ].GetLongitudeInDegrees();
       double west = coordinates[ 0 ].GetLongitudeInDegrees();
 
-      return from place in _placesRepository.Get(
+      return from place in _unitOfWork.PlacesRepository.Get(
                place => place.Rating >= rating &&
                         place.Reviews >= reviews &&
                         place.Latitude <= north && place.Latitude >= south &&
                         place.Longitude <= east && place.Longitude >= west,
                null,
                query => query.Include( place => place.Categories )
-                             .ThenInclude( placePlaceCategory => placePlaceCategory.Category ) )
+                             .ThenInclude(
+                               placePlaceCategory => placePlaceCategory.Category ) )
              let distanceFromBasePoint = baseLocation.DistanceTo(
                GeoLocation.FromDegrees( place.Latitude, place.Longitude ),
                GeoLocationMeasurement.Miles )
