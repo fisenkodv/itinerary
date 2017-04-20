@@ -20,8 +20,8 @@ namespace Itinerary.DataAccess.EntityFramework.Repository
 
     public IEnumerable<TEntity> Get(
       Expression<Func<TEntity, bool>> filter,
-      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null )
+      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes )
 
     {
       IQueryable<TEntity> result = QueryDb(filter, orderBy, includes);
@@ -58,12 +58,12 @@ namespace Itinerary.DataAccess.EntityFramework.Repository
       DbContext.Set<TEntity>().Remove( entity );
     }
 
-    public long Count( Expression<Func<TEntity, bool>> predicate )
+    public long Count( Expression<Func<TEntity, bool>> filter )
     {
       IQueryable<TEntity> query = DbContext.Set<TEntity>();
 
-      if ( predicate != null )
-        query = query.Where( predicate );
+      if ( filter != null )
+        query = query.Where( filter );
 
       return query.Count();
     }

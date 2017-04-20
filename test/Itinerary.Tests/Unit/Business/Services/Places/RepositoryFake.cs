@@ -19,8 +19,8 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
 
     public IEnumerable<TEntity> Get(
       Expression<Func<TEntity, bool>> filter,
-      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null )
+      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes )
     {
       Func<TEntity, bool> func = filter.Compile();
       return _entities.Values.Where( func );
@@ -55,9 +55,9 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
       _entities.Remove( entity.Id );
     }
 
-    public long Count( Expression<Func<TEntity, bool>> predicate )
+    public long Count( Expression<Func<TEntity, bool>> filter )
     {
-      Func<TEntity, bool> func = predicate.Compile();
+      Func<TEntity, bool> func = filter.Compile();
       return _entities.Values.Count( func );
     }
 

@@ -241,7 +241,7 @@ namespace Itinerary.Crawler.TripAdviser
       }
 
       unitOfWork.SaveChanges();
-      return unitOfWork.PlaceCategoriesRepository.Get( _ => true ).ToDictionary( x => x.Name, x => x );
+      return unitOfWork.PlaceCategoriesRepository.Get( _ => true, null, null ).ToDictionary( x => x.Name, x => x );
     }
 
     private static ICollection<PlacePlaceCategory> GetPlaceCategories(

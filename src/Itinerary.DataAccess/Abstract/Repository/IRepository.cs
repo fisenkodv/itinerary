@@ -9,8 +9,8 @@ namespace Itinerary.DataAccess.Abstract.Repository
   {
     IEnumerable<TEntity> Get(
       Expression<Func<TEntity, bool>> filter,
-      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes = null );
+      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy,
+      Func<IQueryable<TEntity>, IQueryable<TEntity>> includes );
 
     TEntity Get( long id );
 
@@ -22,6 +22,6 @@ namespace Itinerary.DataAccess.Abstract.Repository
 
     void Delete( TEntity entity );
 
-    long Count( Expression<Func<TEntity, bool>> predicate );
+    long Count( Expression<Func<TEntity, bool>> filter );
   }
 }
