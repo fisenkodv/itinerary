@@ -2,18 +2,20 @@
 using System.Linq;
 using Itinerary.Business.Services.Places;
 using Itinerary.Common.Models;
+using Itinerary.DataAccess.Abstract.Repository;
 using Itinerary.DataAccess.Entities;
+using Itinerary.Tests.Unit.DataAccess.Fakes;
 using Xunit;
 
-namespace Itinerary.Tests.Unit.Business.Services.Places
+namespace Itinerary.Tests.Unit.Services.Places
 {
   public class PlacesServiceTests
   {
     [Fact]
     public void It_should_return_results_in_area()
     {
-      var placesRepository = new PlacesRepositoryFake();
-      var placesService = new PlacesService( placesRepository );
+      var unitOfWork = new UnitOfWorkFake();
+      IPlacesRepository placesRepository = unitOfWork.PlacesRepository;
 
       placesRepository.Insert( new Place { Latitude = 42.29722, Longitude = -85.07451 } );
       placesRepository.Insert( new Place { Latitude = 42.81097, Longitude = -86.08699 } );
@@ -21,6 +23,8 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
       placesRepository.Insert( new Place { Latitude = 42.77731, Longitude = -86.20029 } );
       placesRepository.Insert( new Place { Latitude = 42.66265, Longitude = -86.21619 } );
       placesRepository.Insert( new Place { Latitude = -42.66265, Longitude = 86.21619 } );
+
+      var placesService = new PlacesService( unitOfWork );
 
       IEnumerable<PlaceDetails> places =
         placesService.Search(
@@ -35,8 +39,8 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
     [Fact]
     public void It_should_return_results_with_appropriate_rating()
     {
-      var placesRepository = new PlacesRepositoryFake();
-      var placesService = new PlacesService( placesRepository );
+      var unitOfWork = new UnitOfWorkFake();
+      IPlacesRepository placesRepository = unitOfWork.PlacesRepository;
 
       placesRepository.Insert(
         new Place { Rating = 1, Latitude = 42.29722, Longitude = -85.07451 } );
@@ -51,6 +55,7 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
       placesRepository.Insert(
         new Place { Rating = 5, Latitude = -42.66265, Longitude = 86.21619 } );
 
+      var placesService = new PlacesService( unitOfWork );
       IEnumerable<PlaceDetails> places =
         placesService.Search(
                        lat: 42.2290029, lng: -85.58352060000001, distance: 50,
@@ -64,8 +69,8 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
     [Fact]
     public void It_should_return_results_with_appropriate_reviews()
     {
-      var placesRepository = new PlacesRepositoryFake();
-      var placesService = new PlacesService( placesRepository );
+      var unitOfWork = new UnitOfWorkFake();
+      IPlacesRepository placesRepository = unitOfWork.PlacesRepository;
 
       placesRepository.Insert(
         new Place { Reviews = 10, Latitude = 42.29722, Longitude = -85.07451 } );
@@ -80,6 +85,7 @@ namespace Itinerary.Tests.Unit.Business.Services.Places
       placesRepository.Insert(
         new Place { Reviews = 50, Latitude = -42.66265, Longitude = 86.21619 } );
 
+      var placesService = new PlacesService( unitOfWork );
       IEnumerable<PlaceDetails> places =
         placesService.Search(
                        lat: 42.2290029, lng: -85.58352060000001, distance: 50,

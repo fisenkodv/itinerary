@@ -10,18 +10,14 @@ const commonConfig = require('./webpack.common.js'); // the settings that are co
 /**
  * Webpack Plugins
  */
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 /**
  * Webpack Constants
  */
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
-const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 3000;
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = webpackMerge(commonConfig({ env: ENV }).metadata, {
   ENV: ENV,

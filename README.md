@@ -48,27 +48,59 @@ Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\It
 ## Deployment to Digital Ocean
 
 ### Create build
-```dotnet publish src/Itinerary.Web/Itinerary.Web.csproj -o ../../release/```
-
-### Copy to Digital Ocean
-```rsync -a release/ root@itinerary.site:/var/www/itinerary -v```
-or
-```pscp -r -v release\ root@itinerary.site:/var/www/itinerary```
-
-### Copy nginx config from/to configs dir
-From ```rsync -a root@174.138.76.175:/etc/nginx/nginx.conf .```
-or ```pscp root@itinerary.site:/etc/nginx/nginx.conf .```
-
-To ```rsync -a nginx.conf root@174.138.76.175:/etc/nginx/nginx.conf```
-
-### Copy supervisor config from/to configs dir
-From ```rsync -a root@174.138.76.175:/etc/supervisor/conf.d/itinerary.conf .```
-or ```pscp root@itinerary.site:/etc/supervisor/conf.d/itinerary.conf .```
-
-To ```rsync -a itinerary.conf root@174.138.76.175:/etc/supervisor/conf.d/itinerary.conf```
+```
+dotnet publish src/Itinerary.Web/Itinerary.Web.csproj -o ../../release/
+```
 
 ### Connect to Digital Ocean
-```ssh root@174.138.76.175```
+```
+ssh root@itinerary.site
+```
+
+### Copy release to Digital Ocean
+macOS, Linux: 
+```
+rsync -a release/ root@itinerary.site:/var/www/itinerary -v
+```
+Windows: 
+```
+pscp -r -v release\ root@itinerary.site:/var/www/itinerary
+```
+
+### Copy nginx config from/to configs dir
+__From Digital Ocean to dev environment__:
+
+macOS, Linux: 
+```
+rsync -a root@1itinerary.site:/etc/nginx/nginx.conf .
+```
+Windows:
+```
+pscp root@itinerary.site:/etc/nginx/nginx.conf .
+```
+
+__To Digital Ocean from dev environment__:
+macOS, Linux:
+```
+rsync -a nginx.conf root@itinerary.site:/etc/nginx/nginx.conf
+```
+
+### Copy supervisor config from/to configs dir
+__From Digital Ocean to dev environment__:
+macOS, Linux:
+```
+rsync -a root@itinerary.site:/etc/supervisor/conf.d/itinerary.conf .
+```
+Windows:
+```
+pscp root@itinerary.site:/etc/supervisor/conf.d/itinerary.conf .
+```
+
+__To Digital Ocean from dev environment__:
+macOS, Linux:
+```
+rsync -a itinerary.conf root@174.138.76.175:/etc/supervisor/conf.d/itinerary.conf
+```
 
 ### Pathes
 nginx ```/etc/nginx/nginx.conf```
@@ -76,8 +108,12 @@ nginx ```/etc/nginx/nginx.conf```
 supervisor ```/etc/supervisor/conf.d/itinerary.conf```
 
 ### Certificates
-All sertificates are placed in ```/etc/letsencrypt/live/itinerary.site/```
-```letsencrypt certonly  --webroot --webroot-path=/var/www/itinerary_cert -d itinerary.site -d www.itinerary.site -d itinerary.reise -d www.itinerary.reise```
+All certificates are placed: ```/etc/letsencrypt/live/itinerary.site/```
+
+To generate certificates: 
+```
+letsencrypt certonly  --webroot --webroot-path=/var/www/itinerary_cert -d itinerary.site -d www.itinerary.site -d itinerary.reise -d www.itinerary.reise
+```
 
 ## Guidelines ##
 1. [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)

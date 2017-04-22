@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using Itinerary.DataAccess.Abstract.Repository;
 using Itinerary.DataAccess.Entities;
 
-namespace Itinerary.Tests.Unit.Business.Services.Places
+namespace Itinerary.Tests.Unit.DataAccess.Fakes
 {
   internal class RepositoryFake<TEntity> : IRepository<TEntity>
     where TEntity : EntityBase

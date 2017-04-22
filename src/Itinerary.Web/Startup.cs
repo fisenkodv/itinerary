@@ -1,8 +1,11 @@
 ﻿using System.IO.Compression;
+using Itinerary.DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -36,6 +39,7 @@ namespace Itinerary.Web
       services.AddMemoryCache();
       services.AddMvc();
 
+      services.AddDatabaseServices( Configuration );
       services.AddCustomServices( Configuration );
     }
 
@@ -50,6 +54,16 @@ namespace Itinerary.Web
           {
             HotModuleReplacement = true
           } );
+
+        using ( IServiceScope serviceScope = app
+          .ApplicationServices
+          .GetRequiredService<IServiceScopeFactory>()
+          .CreateScope() )
+        {
+          var context = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
+          context.Database.EnsureCreated();
+          context.Database.Migrate();
+        }
       }
       else
       {

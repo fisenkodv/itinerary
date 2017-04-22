@@ -11,10 +11,8 @@ const commonConfig = require('./webpack.common.js'); // the settings that are co
  */
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const OptimizeJsPlugin = require('optimize-js-plugin');
 
@@ -22,8 +20,6 @@ const OptimizeJsPlugin = require('optimize-js-plugin');
  * Webpack Constants
  */
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
-const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 8080;
 const METADATA = webpackMerge(commonConfig({
   env: ENV
 }).metadata, {

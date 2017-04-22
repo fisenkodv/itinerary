@@ -178,7 +178,12 @@ module.exports = function (options) {
          */
         {
           test: /\.(jpg|png|gif)$/,
-          use: 'file-loader'
+          loader: 'file-loader',
+          query: {
+            useRelativePath: false,
+            publicPath: 'assets/img/',
+            name: '[name].[ext]?[hash]'
+          }
         },
 
         /*
@@ -188,14 +193,6 @@ module.exports = function (options) {
           test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
           use: 'file-loader'
         },
-
-        /*
-        /* File loader for supporting fonts, for example, in CSS files.
-        */
-        {
-          test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
-          use: 'file-loader'
-        }
 
       ]
 
