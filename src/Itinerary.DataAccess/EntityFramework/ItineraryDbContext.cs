@@ -1,11 +1,12 @@
 ﻿using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Itinerary.DataAccess.EntityFramework
 {
-  public class ItineraryDbContext : DbContext
+  public class ItineraryDbContext : IdentityDbContext<IdentityUser>
   {
     private readonly DbContextOptions<ItineraryDbContext> _dbContextOptions;
 
@@ -21,6 +22,7 @@ namespace Itinerary.DataAccess.EntityFramework
 
     protected override void OnModelCreating( ModelBuilder modelBuilder )
     {
+      base.OnModelCreating( modelBuilder );
       modelBuilder.Entity<PlacePlaceCategory>().Configure();
     }
   }

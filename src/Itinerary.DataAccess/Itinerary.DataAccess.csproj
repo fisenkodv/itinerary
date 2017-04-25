@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore">
       <Version>1.1.1</Version>
     </PackageReference>
@@ -24,7 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\UnitOfWork" />
-    <Folder Include="Entities" />
     <Folder Include="EntityFramework\Configurations" />
     <Folder Include="EntityFramework\Repository" />
     <Folder Include="Migrations" />
