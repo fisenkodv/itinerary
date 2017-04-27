@@ -8,7 +8,7 @@ using Itinerary.DataAccess.EntityFramework;
 namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 {
     [DbContext(typeof(ItineraryDbContext))]
-    [Migration("20170427011200_InitialItineraryDbMigration")]
+    [Migration("20170427203941_InitialItineraryDbMigration")]
     partial class InitialItineraryDbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

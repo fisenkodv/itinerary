@@ -1,11 +1,11 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO.Compression;
 using IdentityServer4.EntityFramework.DbContexts;
-using IdentityServer4.EntityFramework.Mappers;
-using IdentityServer4.Models;
 using Itinerary.DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,9 +34,15 @@ namespace Itinerary.Web
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices( IServiceCollection services )
     {
-      //services.Configure<GzipCompressionProviderOptions>(
-      //  options => options.Level = CompressionLevel.Optimal );
-      //services.AddResponseCompression( options => { options.Providers.Add<GzipCompressionProvider>(); } );
+      if ( string.Equals(
+        Configuration[ "EnableCompression" ],
+        bool.TrueString,
+        StringComparison.CurrentCultureIgnoreCase ) )
+      {
+        services.Configure<GzipCompressionProviderOptions>(
+          options => options.Level = CompressionLevel.Optimal );
+        services.AddResponseCompression( options => { options.Providers.Add<GzipCompressionProvider>(); } );
+      }
 
       services.AddMemoryCache();
       services.AddMvc();
@@ -89,37 +95,10 @@ namespace Itinerary.Web
     {
       using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
       {
-        var itineraryDbContext = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
-        itineraryDbContext.Database.EnsureCreated();
-        itineraryDbContext.Database.Migrate();
-
+        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
         serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-
-        var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-        context.Database.Migrate();
-        if ( !context.Clients.Any() )
-        {
-          foreach ( Client client in Clients.Get() )
-            context.Clients.Add( client.ToEntity() );
-
-          context.SaveChanges();
-        }
-
-        if ( !context.IdentityResources.Any() )
-        {
-          foreach ( IdentityResource resource in Resources.GetIdentityResources() )
-            context.IdentityResources.Add( resource.ToEntity() );
-
-          context.SaveChanges();
-        }
-
-        if ( !context.ApiResources.Any() )
-        {
-          foreach ( ApiResource resource in Resources.GetApiResources() )
-            context.ApiResources.Add( resource.ToEntity() );
-
-          context.SaveChanges();
-        }
+        serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().Database.Migrate();
+        serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().EnsureSeedData();
       }
     }
   }
