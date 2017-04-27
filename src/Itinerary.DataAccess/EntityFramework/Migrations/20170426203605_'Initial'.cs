@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Itinerary.DataAccess.Migrations
+namespace Itinerary.DataAccess.EntityFramework.Migrations
 {
     public partial class Initial : Migration
     {

@@ -1,9 +1,9 @@
-﻿using AspNet.Security.OpenIdConnect.Primitives;
+﻿using System.Reflection;
+using IdentityServer4.EntityFramework.DbContexts;
 using Itinerary.Business.Api.Google;
 using Itinerary.Business.Services.Places;
 using Itinerary.DataAccess.Abstract.UnitOfWork;
 using Itinerary.DataAccess.EntityFramework;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -20,14 +20,13 @@ namespace Itinerary.Web
     {
       services.AddEntityFramework();
       services.AddDbContext<ItineraryDbContext>(
-        options =>
-        {
-          options.UseSqlite( configuration.GetConnectionString( "SqliteConnection" ) );
-          // Register the entity sets needed by OpenIddict.
-          // Note: use the generic overload if you need
-          // to replace the default OpenIddict entities.
-          options.UseOpenIddict();
-        } );
+        options => { options.UseSqlite( configuration.GetConnectionString( "SqliteConnection" ) ); } );
+
+      //services.AddDbContext<PersistedGrantDbContext>(
+      //  options => { options.UseSqlite(configuration.GetConnectionString("SqliteConnection")); });
+
+      //services.AddDbContext<ConfigurationDbContext>(
+      //  options => { options.UseSqlite(configuration.GetConnectionString("SqliteConnection")); });
 
       return services;
     }
@@ -38,36 +37,38 @@ namespace Itinerary.Web
               .AddEntityFrameworkStores<ItineraryDbContext>()
               .AddDefaultTokenProviders();
 
-      // Configure Identity to use the same JWT claims as OpenIddict instead
-      // of the legacy WS-Federation claims it uses by default (ClaimTypes),
-      // which saves you from doing the mapping in your authorization controller.
-      services.Configure<IdentityOptions>(
-        options =>
-        {
-          options.ClaimsIdentity.UserNameClaimType = OpenIdConnectConstants.Claims.Name;
-          options.ClaimsIdentity.UserIdClaimType = OpenIdConnectConstants.Claims.Subject;
-          //options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
-        } );
-
       return services;
     }
 
-    public static IServiceCollection AddOpenIddictService( this IServiceCollection services )
+    public static IServiceCollection AddIdentityServerService(
+      this IServiceCollection services,
+      IConfiguration configuration )
     {
-      // Register the OpenIddict services.
-      services.AddOpenIddict()
-              // Register the Entity Framework stores.
-              .AddEntityFrameworkCoreStores<ItineraryDbContext>()
-              // Register the ASP.NET Core MVC binder used by OpenIddict.
-              // Note: if you don't call this method, you won't be able to
-              // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
-              .AddMvcBinders()
-              // Enable the token endpoint.
-              .EnableTokenEndpoint( "/connect/token" )
-              // Enable the password flow.
-              .AllowPasswordFlow()
-              // During development, you can disable the HTTPS requirement.
-              .DisableHttpsRequirement();
+      //var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "damienbodserver.pfx"), "");
+
+      //services.AddIdentityServer()
+      //        //.AddSigningCredential(cert)
+      //        .AddTemporarySigningCredential()
+      //        .AddInMemoryIdentityResources(Resources.GetIdentityResources())
+      //        .AddInMemoryApiResources(Resources.GetApiResources())
+      //        .AddInMemoryClients(Clients.Get())
+      //        .AddTestUsers(Users.Get());
+
+      var migrationsAssembly = typeof( ItineraryDbContext ).GetTypeInfo().Assembly.GetName().Name;
+      services.AddIdentityServer()
+              //.AddSigningCredential(cert)
+              .AddTemporarySigningCredential()
+              .AddAspNetIdentity<IdentityUser>()
+              .AddOperationalStore(
+                builder => builder.UseSqlite(
+                  configuration.GetConnectionString( "SqliteConnection" ),
+                  options => options.MigrationsAssembly( migrationsAssembly ) ) )
+              .AddConfigurationStore(
+                builder => builder.UseSqlite(
+                  configuration.GetConnectionString( "SqliteConnection" ),
+                  options => options.MigrationsAssembly( migrationsAssembly ) ) );
+      //.AddAspNetIdentity<IdentityUser>();
+      //.AddProfileService<IdentityWithAdditionalClaimsProfileService>();
 
       return services;
     }

@@ -22,6 +22,7 @@ namespace Itinerary.Web.Controllers.Api
     public string Password { get; set; }
   }
 
+  [Route( "api/[controller]" )]
   [Authorize]
   public class AccountController : Controller
   {
@@ -39,7 +40,7 @@ namespace Itinerary.Web.Controllers.Api
 
     //
     // POST: /Account/Register
-    [HttpPost]
+    [HttpPost( "[action]" )]
     [AllowAnonymous]
     public async Task<IActionResult> Register( [FromBody] RegisterViewModel model )
     {

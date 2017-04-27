@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Itinerary.DataAccess.EntityFramework;
 
-namespace Itinerary.DataAccess.Migrations
+namespace Itinerary.DataAccess.EntityFramework.Migrations
 {
     [DbContext(typeof(ItineraryDbContext))]
     partial class ItineraryDbContextModelSnapshot : ModelSnapshot

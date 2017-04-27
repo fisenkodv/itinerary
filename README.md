@@ -38,6 +38,16 @@ dotnet publish -c Release
 
 This will produce a ready-to-deploy production build of your application. It includes .NET code compiled in Release mode, and invokes Webpack with the ```--env.prod``` flag to produce a production build of front-end assets. Equivalently, you can use the Publish option from Visual Studio’s Build menu.
 
+#### Database Migrations ####
+Create IdentityServer Configuration migration
+```
+dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o EntityFramework/Migrations/IdentityServer/ConfigurationDb
+```
+Create IdentityServer PersistedGrant migration
+```
+dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o EntityFramework/Migrations/IdentityServer/PersistedGrantDb
+```
+
 #### Itinerary API ####
 Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\Itinerary.postman_collection.json```
 

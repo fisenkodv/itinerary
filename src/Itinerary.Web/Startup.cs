@@ -1,9 +1,10 @@
-﻿using System.IO.Compression;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
 using Itinerary.DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +42,7 @@ namespace Itinerary.Web
 
       services.AddDatabaseServices( Configuration );
       services.AddIdentityService();
-      services.AddOpenIddictService();
+      services.AddIdentityServerService( Configuration );
       services.AddCustomServices( Configuration );
     }
 
@@ -57,14 +58,16 @@ namespace Itinerary.Web
             HotModuleReplacement = true
           } );
 
-        using ( IServiceScope serviceScope = app
+        InitializeDatabase( app );
+
+        using (IServiceScope serviceScope = app
           .ApplicationServices
           .GetRequiredService<IServiceScopeFactory>()
-          .CreateScope() )
+          .CreateScope())
         {
           var context = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
           context.Database.EnsureCreated();
-          //context.Database.Migrate();
+          context.Database.Migrate();
         }
       }
       else
@@ -72,11 +75,13 @@ namespace Itinerary.Web
         app.UseExceptionHandler( "/Home/Error" );
       }
 
-      // Add a middleware used to validate access
-      // tokens and protect the API endpoints.
-      app.UseOAuthValidation();
-      app.UseOpenIddict();
       app.UseStaticFiles();
+
+      app.UseIdentity();
+
+      JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+      app.UseIdentityServer();
 
       app.UseMvc(
         routes =>
@@ -89,6 +94,43 @@ namespace Itinerary.Web
             name: "spa-fallback",
             defaults: new { controller = "Home", action = "Index" } );
         } );
+    }
+
+    private void InitializeDatabase( IApplicationBuilder app )
+    {
+      using ( var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
+      {
+        serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+        var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+        context.Database.Migrate();
+        if ( !context.Clients.Any() )
+        {
+          foreach ( var client in Clients.Get() )
+          {
+            context.Clients.Add( client.ToEntity() );
+          }
+          context.SaveChanges();
+        }
+
+        if ( !context.IdentityResources.Any() )
+        {
+          foreach ( var resource in Resources.GetIdentityResources() )
+          {
+            context.IdentityResources.Add( resource.ToEntity() );
+          }
+          context.SaveChanges();
+        }
+
+        if ( !context.ApiResources.Any() )
+        {
+          foreach ( var resource in Resources.GetApiResources() )
+          {
+            context.ApiResources.Add( resource.ToEntity() );
+          }
+          context.SaveChanges();
+        }
+      }
     }
   }
 }
