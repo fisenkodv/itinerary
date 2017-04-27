@@ -14,19 +14,28 @@ namespace Itinerary.Web
 {
   public static class ServiceCollectionExtensions
   {
+    private static readonly string MigrationAssemblyName = typeof( ItineraryDbContext )
+      .GetTypeInfo()
+      .Assembly.GetName()
+      .Name;
+
+    public static string GetConnectionString( this IConfiguration configuration )
+    {
+      return configuration.GetConnectionString( "SqliteConnection" );
+    }
+
     public static IServiceCollection AddDatabaseServices(
       this IServiceCollection services,
       IConfiguration configuration )
     {
       services.AddEntityFramework();
       services.AddDbContext<ItineraryDbContext>(
-        options => { options.UseSqlite( configuration.GetConnectionString( "SqliteConnection" ) ); } );
-
-      //services.AddDbContext<PersistedGrantDbContext>(
-      //  options => { options.UseSqlite(configuration.GetConnectionString("SqliteConnection")); });
-
-      //services.AddDbContext<ConfigurationDbContext>(
-      //  options => { options.UseSqlite(configuration.GetConnectionString("SqliteConnection")); });
+        builder =>
+        {
+          builder.UseSqlite(
+            configuration.GetConnectionString(),
+            options => options.MigrationsAssembly( MigrationAssemblyName ) );
+        } );
 
       return services;
     }
@@ -46,29 +55,18 @@ namespace Itinerary.Web
     {
       //var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "damienbodserver.pfx"), "");
 
-      //services.AddIdentityServer()
-      //        //.AddSigningCredential(cert)
-      //        .AddTemporarySigningCredential()
-      //        .AddInMemoryIdentityResources(Resources.GetIdentityResources())
-      //        .AddInMemoryApiResources(Resources.GetApiResources())
-      //        .AddInMemoryClients(Clients.Get())
-      //        .AddTestUsers(Users.Get());
-
-      var migrationsAssembly = typeof( ItineraryDbContext ).GetTypeInfo().Assembly.GetName().Name;
       services.AddIdentityServer()
               //.AddSigningCredential(cert)
               .AddTemporarySigningCredential()
               .AddAspNetIdentity<IdentityUser>()
               .AddOperationalStore(
                 builder => builder.UseSqlite(
-                  configuration.GetConnectionString( "SqliteConnection" ),
-                  options => options.MigrationsAssembly( migrationsAssembly ) ) )
+                  configuration.GetConnectionString(),
+                  options => options.MigrationsAssembly( MigrationAssemblyName ) ) )
               .AddConfigurationStore(
                 builder => builder.UseSqlite(
-                  configuration.GetConnectionString( "SqliteConnection" ),
-                  options => options.MigrationsAssembly( migrationsAssembly ) ) );
-      //.AddAspNetIdentity<IdentityUser>();
-      //.AddProfileService<IdentityWithAdditionalClaimsProfileService>();
+                  configuration.GetConnectionString(),
+                  options => options.MigrationsAssembly( MigrationAssemblyName ) ) );
 
       return services;
     }

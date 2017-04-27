@@ -2,6 +2,7 @@
 using System.Linq;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
+using IdentityServer4.Models;
 using Itinerary.DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -59,16 +60,6 @@ namespace Itinerary.Web
           } );
 
         InitializeDatabase( app );
-
-        using (IServiceScope serviceScope = app
-          .ApplicationServices
-          .GetRequiredService<IServiceScopeFactory>()
-          .CreateScope())
-        {
-          var context = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
-          context.Database.EnsureCreated();
-          context.Database.Migrate();
-        }
       }
       else
       {
@@ -76,11 +67,9 @@ namespace Itinerary.Web
       }
 
       app.UseStaticFiles();
-
       app.UseIdentity();
 
       JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-
       app.UseIdentityServer();
 
       app.UseMvc(
@@ -96,38 +85,39 @@ namespace Itinerary.Web
         } );
     }
 
-    private void InitializeDatabase( IApplicationBuilder app )
+    private static void InitializeDatabase( IApplicationBuilder app )
     {
-      using ( var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
+      using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
       {
+        var itineraryDbContext = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
+        itineraryDbContext.Database.EnsureCreated();
+        itineraryDbContext.Database.Migrate();
+
         serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
 
         var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
         context.Database.Migrate();
         if ( !context.Clients.Any() )
         {
-          foreach ( var client in Clients.Get() )
-          {
+          foreach ( Client client in Clients.Get() )
             context.Clients.Add( client.ToEntity() );
-          }
+
           context.SaveChanges();
         }
 
         if ( !context.IdentityResources.Any() )
         {
-          foreach ( var resource in Resources.GetIdentityResources() )
-          {
+          foreach ( IdentityResource resource in Resources.GetIdentityResources() )
             context.IdentityResources.Add( resource.ToEntity() );
-          }
+
           context.SaveChanges();
         }
 
         if ( !context.ApiResources.Any() )
         {
-          foreach ( var resource in Resources.GetApiResources() )
-          {
+          foreach ( ApiResource resource in Resources.GetApiResources() )
             context.ApiResources.Add( resource.ToEntity() );
-          }
+
           context.SaveChanges();
         }
       }

@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Itinerary.DataAccess.EntityFramework;
 
-namespace Itinerary.DataAccess.EntityFramework.Migrations
+namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 {
     [DbContext(typeof(ItineraryDbContext))]
-    [Migration("20170426203605_'Initial'")]
-    partial class Initial
+    [Migration("20170427011200_InitialItineraryDbMigration")]
+    partial class InitialItineraryDbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
