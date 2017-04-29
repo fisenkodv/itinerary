@@ -11,9 +11,7 @@
     <PackageReference Include="IdentityServer4.EntityFramework" Version="1.0.1" />
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore">
-      <Version>1.1.1</Version>
-    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.1" />
@@ -33,10 +31,5 @@
     <Folder Include="Abstract\UnitOfWork" />
     <Folder Include="EntityFramework\Configurations" />
     <Folder Include="EntityFramework\Repository" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="IdentityServer4.EntityFramework">
-      <HintPath>C:\Users\Dmitry_Fisenko.PRINCETON\.nuget\packages\identityserver4.entityframework\1.0.1\lib\netstandard1.4\IdentityServer4.EntityFramework.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
