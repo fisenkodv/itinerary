@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using Itinerary.Business.Services.Places;
 using Itinerary.Common.Models;
+using Itinerary.Common.Models.Google;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Web.Controllers.Api
 {
-  [Route( "api/google/places" )]
+  [ApiVersion("1.0")]
+  [Route( "api/v{version:apiVersion}/google/places" )]
   public class GooglePlacesController : Controller
   {
     private readonly IGooglePlacesService _googlePlacesService;

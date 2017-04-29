@@ -6,12 +6,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Itinerary.Common.Models;
+using Itinerary.Common.Utilities;
 using Itinerary.Crawler.TripAdviser.Entities;
 using Itinerary.DataAccess.Abstract.UnitOfWork;
 using Itinerary.DataAccess.Entities;
-using Itinerary.DataAccess.EntityFramework;
 using LiteDB;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -42,63 +42,13 @@ namespace Itinerary.Crawler.TripAdviser
       _liteDatabase = new LiteDatabase( outputFile );
     }
 
-    public void ConvertToWebDb( string outputFile )
+    public void ConvertToCSharpSnapshot( string outputFile )
     {
-      DbContextOptions<ItineraryDbContext> options = new DbContextOptionsBuilder<ItineraryDbContext>()
-        .UseSqlite( $"Data Source={outputFile}" )
-        .Options;
+      IEnumerable<Segment> segments = GetSegmentsCollection().FindAll();
+      string generatedClass = PlacesSnapshotClassGenerator
+        .GenerateClass( ConvertToPlaceDetails( segments ) );
 
-      using ( var unitOfWork = new UnitOfWork( new ItineraryDbContext( options ) ) )
-      {
-        var places = new List<Place>();
-        List<Segment> segments = GetSegmentsCollection().FindAll().ToList();
-        var categories = new List<string>();
-
-        foreach ( Segment segment in segments )
-        {
-          IList<Attraction> attractions = segment.Map.Attractions;
-          foreach ( Attraction attraction in attractions )
-          {
-            categories.AddRange( attraction.Categories ?? Enumerable.Empty<string>() );
-          }
-        }
-        Dictionary<string, PlaceCategory> createdCategories = CreateCategories( unitOfWork, categories.Distinct() );
-
-        foreach ( Segment segment in segments )
-        {
-          if ( !segment.Map.Attractions.Any() ) continue;
-
-          IEnumerable<Place> attractionPlaces =
-            from attraction in segment.Map.Attractions
-            let place = new Place
-                        {
-                          Name = attraction.CustomHover.Title,
-                          Rating = attraction.Rating,
-                          Reviews = attraction.Reviews,
-                          Categories = GetPlaceCategories( createdCategories, attraction.Categories ),
-                          ImgUrl = attraction.ImgUrl,
-                          Url = attraction.Url,
-                          Latitude = attraction.Lat,
-                          Longitude = attraction.Lng
-                        }
-            select place;
-
-          places.AddRange( attractionPlaces );
-        }
-
-        _logger.LogInformation( $"Total {places.Count} places found." );
-
-        places = places.Distinct( new PlaceEqualityComparer() ).ToList();
-
-        _logger.LogInformation( $"Total {places.Count} places after cleanup." );
-
-        foreach ( Place place in places )
-        {
-          unitOfWork.PlacesRepository.Insert( place );
-        }
-
-        unitOfWork.SaveChanges();
-      }
+      File.WriteAllText( outputFile, generatedClass );
     }
 
     public void Run( double startLat, double startLng, double endLat, double endLng, double zoom, double size )
@@ -256,39 +206,25 @@ namespace Itinerary.Crawler.TripAdviser
                : new List<PlacePlaceCategory>();
     }
 
+    private IEnumerable<PlaceDetails> ConvertToPlaceDetails( IEnumerable<Segment> segments )
+    {
+      return
+        from segment in segments
+        where segment.Map.Attractions.Any()
+        from attraction in segment.Map.Attractions
+        select new PlaceDetails(
+          attraction.CustomHover.Title ?? string.Empty,
+          attraction.Rating,
+          attraction.Reviews,
+          attraction.Categories ?? Enumerable.Empty<string>(),
+          attraction.Url ?? string.Empty,
+          attraction.ImgUrl ?? string.Empty,
+          new Location( attraction.Lat, attraction.Lng ) );
+    }
+
     public void Dispose()
     {
       _liteDatabase.Dispose();
-    }
-  }
-
-  internal class PlaceEqualityComparer : IEqualityComparer<Place>
-  {
-    public bool Equals( Place x, Place y )
-    {
-      if ( ReferenceEquals( x, y ) ) return true;
-      if ( ReferenceEquals( x, null ) ) return false;
-      if ( ReferenceEquals( y, null ) ) return false;
-      if ( x.GetType() != y.GetType() ) return false;
-
-      return string.Equals( x.Name, y.Name ) &&
-             x.Rating == y.Rating &&
-             x.Reviews == y.Reviews &&
-             x.Latitude == y.Latitude &&
-             x.Longitude == y.Longitude;
-    }
-
-    public int GetHashCode( Place obj )
-    {
-      unchecked
-      {
-        int result = obj.Name.GetHashCode();
-        result = ( result * 397 ) ^ obj.Rating.GetHashCode();
-        result = ( result * 397 ) ^ obj.Reviews.GetHashCode();
-        result = ( result * 397 ) ^ obj.Latitude.GetHashCode();
-        result = ( result * 397 ) ^ obj.Longitude.GetHashCode();
-        return result;
-      }
     }
   }
 }

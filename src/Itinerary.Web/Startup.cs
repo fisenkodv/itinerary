@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO.Compression;
 using IdentityServer4.EntityFramework.DbContexts;
 using Itinerary.DataAccess.EntityFramework;
+using Itinerary.DataAccess.EntityFramework.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -46,6 +47,12 @@ namespace Itinerary.Web
 
       services.AddMemoryCache();
       services.AddMvc();
+      services.AddApiVersioning(
+        options =>
+        {
+          options.ReportApiVersions = true;
+          options.AssumeDefaultVersionWhenUnspecified = true;
+        });
 
       services.AddDatabaseServices( Configuration );
       services.AddIdentityService();

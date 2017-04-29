@@ -2,7 +2,6 @@
 using System.Linq;
 using Itinerary.Common;
 using Itinerary.Common.Models;
-using Itinerary.DataAccess.Abstract.Repository;
 using Itinerary.DataAccess.Abstract.UnitOfWork;
 using Itinerary.DataAccess.Entities;
 using JetBrains.Annotations;
