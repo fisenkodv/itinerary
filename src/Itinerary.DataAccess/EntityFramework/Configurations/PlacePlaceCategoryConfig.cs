@@ -1,4 +1,5 @@
 ﻿using Itinerary.DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Itinerary.DataAccess.EntityFramework.Configurations
@@ -16,6 +17,8 @@ namespace Itinerary.DataAccess.EntityFramework.Configurations
       entity.HasOne(pt => pt.Category)
             .WithMany(t => t.Places)
             .HasForeignKey(pt => pt.CategoryId);
+
+      entity.ToTable( "PlacePlaceCategories" );
     }
   }
 }

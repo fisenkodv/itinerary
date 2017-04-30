@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Web.Controllers.Api
 {
-  [Route( "api/[controller]" )]
+  [ApiVersion("1.0")]
+  [Route( "api/v{version:apiVersion}/[controller]" )]
   public class PlacesController : Controller
   {
     private readonly IPlacesService _placesService;

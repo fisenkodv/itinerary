@@ -1,4 +1,4 @@
-﻿namespace Itinerary.Common.Models
+﻿namespace Itinerary.Common.Models.Google
 {
   public class Autocomplete
   {

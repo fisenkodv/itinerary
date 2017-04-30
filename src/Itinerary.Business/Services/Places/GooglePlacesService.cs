@@ -8,6 +8,7 @@ using Itinerary.Business.Api.Google.Places.Autocomplete.Types;
 using Itinerary.Business.Api.Google.Places.Details.Entities;
 using Itinerary.Business.Api.Google.Places.Details.ParameterBuilder;
 using Itinerary.Common.Models;
+using Itinerary.Common.Models.Google;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Itinerary.Business.Services.Places

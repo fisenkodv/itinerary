@@ -16,9 +16,4 @@
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
     <ProjectReference Include="..\Itinerary.DataAccess\Itinerary.DataAccess.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Update="itinerary.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

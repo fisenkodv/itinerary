@@ -1,11 +1,14 @@
-﻿using System.IO.Compression;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO.Compression;
+using IdentityServer4.EntityFramework.DbContexts;
 using Itinerary.DataAccess.EntityFramework;
+using Itinerary.DataAccess.EntityFramework.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,14 +35,28 @@ namespace Itinerary.Web
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices( IServiceCollection services )
     {
-      services.Configure<GzipCompressionProviderOptions>(
-        options => options.Level = CompressionLevel.Optimal );
-      services.AddResponseCompression( options => { options.Providers.Add<GzipCompressionProvider>(); } );
+      if ( string.Equals(
+        Configuration[ "EnableCompression" ],
+        bool.TrueString,
+        StringComparison.CurrentCultureIgnoreCase ) )
+      {
+        services.Configure<GzipCompressionProviderOptions>(
+          options => options.Level = CompressionLevel.Optimal );
+        services.AddResponseCompression( options => { options.Providers.Add<GzipCompressionProvider>(); } );
+      }
 
       services.AddMemoryCache();
       services.AddMvc();
+      services.AddApiVersioning(
+        options =>
+        {
+          options.ReportApiVersions = true;
+          options.AssumeDefaultVersionWhenUnspecified = true;
+        } );
 
       services.AddDatabaseServices( Configuration );
+      services.AddIdentityService();
+      services.AddIdentityServerService( Configuration );
       services.AddCustomServices( Configuration );
     }
 
@@ -55,15 +72,7 @@ namespace Itinerary.Web
             HotModuleReplacement = true
           } );
 
-        using ( IServiceScope serviceScope = app
-          .ApplicationServices
-          .GetRequiredService<IServiceScopeFactory>()
-          .CreateScope() )
-        {
-          var context = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
-          context.Database.EnsureCreated();
-          context.Database.Migrate();
-        }
+        InitializeDatabase( app );
       }
       else
       {
@@ -71,6 +80,10 @@ namespace Itinerary.Web
       }
 
       app.UseStaticFiles();
+      app.UseIdentity();
+
+      JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+      app.UseIdentityServer();
 
       app.UseMvc(
         routes =>
@@ -83,6 +96,18 @@ namespace Itinerary.Web
             name: "spa-fallback",
             defaults: new { controller = "Home", action = "Index" } );
         } );
+    }
+
+    private static void InitializeDatabase( IApplicationBuilder app )
+    {
+      using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
+      {
+        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
+        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData();
+        serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+        serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().Database.Migrate();
+        serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().EnsureSeedData();
+      }
     }
   }
 }
