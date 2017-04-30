@@ -44,9 +44,10 @@ namespace Itinerary.Crawler.TripAdviser
 
     public void ConvertToCSharpSnapshot( string outputFile )
     {
-      IEnumerable<Segment> segments = GetSegmentsCollection().FindAll();
-      string generatedClass = PlacesSnapshotClassGenerator
-        .GenerateClass( ConvertToPlaceDetails( segments ) );
+      IEnumerable<PlaceDetails> places =
+        //new[] { new PlaceDetails( "a", 1, 10, Enumerable.Empty<string>(), string.Empty, string.Empty, new Location( 10, 10 ) ) };
+      ConvertToPlaceDetails( GetSegmentsCollection().FindAll() );
+      string generatedClass = PlacesSnapshotClassGenerator.GenerateClass( places );
 
       File.WriteAllText( outputFile, generatedClass );
     }

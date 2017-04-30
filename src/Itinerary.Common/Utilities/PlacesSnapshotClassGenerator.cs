@@ -127,8 +127,9 @@ namespace Itinerary.Common.Utilities
           SyntaxFactory.LiteralExpression(
             SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal( category ) ) ) );
 
-      ImplicitArrayCreationExpressionSyntax arrayCreation =
-        SyntaxFactory.ImplicitArrayCreationExpression( arrayInitializer );
+      ArrayCreationExpressionSyntax arrayCreation =
+        SyntaxFactory.ArrayCreationExpression(
+          SyntaxFactory.ArrayType( SyntaxFactory.ParseTypeName( "string[]" ) ), arrayInitializer );
 
       return SyntaxFactory.Argument( arrayCreation );
     }
