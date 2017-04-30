@@ -7,10 +7,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Itinerary.Common.Models;
-using Itinerary.Common.Utilities;
 using Itinerary.Crawler.TripAdviser.Entities;
-using Itinerary.DataAccess.Abstract.UnitOfWork;
-using Itinerary.DataAccess.Entities;
 using LiteDB;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -44,12 +41,8 @@ namespace Itinerary.Crawler.TripAdviser
 
     public void ConvertToCSharpSnapshot( string outputFile )
     {
-      IEnumerable<PlaceDetails> places =
-        //new[] { new PlaceDetails( "a", 1, 10, Enumerable.Empty<string>(), string.Empty, string.Empty, new Location( 10, 10 ) ) };
-      ConvertToPlaceDetails( GetSegmentsCollection().FindAll() );
-      string generatedClass = PlacesSnapshotClassGenerator.GenerateClass( places );
-
-      File.WriteAllText( outputFile, generatedClass );
+      IEnumerable<PlaceDetails> places = ConvertToPlaceDetails( GetSegmentsCollection().FindAll() );
+      File.WriteAllText( outputFile, JsonConvert.SerializeObject( places ) );
     }
 
     public void Run( double startLat, double startLng, double endLat, double endLng, double zoom, double size )
@@ -128,7 +121,7 @@ namespace Itinerary.Crawler.TripAdviser
           var serializer = new Newtonsoft.Json.JsonSerializer();
           var map = serializer.Deserialize<Map>( jsonTextReader );
 
-          var segment = new Segment() { Latitude = lat, Longitude = lng, Zoom = zoom, Size = size, Map = map };
+          var segment = new Segment { Latitude = lat, Longitude = lng, Zoom = zoom, Size = size, Map = map };
           _logger.LogInformation( $"Found {map.Attractions.Count} attractions" );
 
           GetSegmentsCollection().Insert( segment );
@@ -182,32 +175,7 @@ namespace Itinerary.Crawler.TripAdviser
       }
     }
 
-    private static Dictionary<string, PlaceCategory> CreateCategories(
-      IUnitOfWork unitOfWork,
-      IEnumerable<string> categories )
-    {
-      foreach ( string category in categories )
-      {
-        unitOfWork.PlaceCategoriesRepository.Insert( new PlaceCategory { Name = category } );
-      }
-
-      unitOfWork.SaveChanges();
-      return unitOfWork.PlaceCategoriesRepository.Get( _ => true, null, null ).ToDictionary( x => x.Name, x => x );
-    }
-
-    private static ICollection<PlacePlaceCategory> GetPlaceCategories(
-      IReadOnlyDictionary<string, PlaceCategory> existingCategories,
-      IEnumerable<string> categories )
-    {
-      return categories != null
-               ? categories
-                 .Select( category => existingCategories[ category ] )
-                 .Select( placeCategory => new PlacePlaceCategory { Category = placeCategory } )
-                 .ToList()
-               : new List<PlacePlaceCategory>();
-    }
-
-    private IEnumerable<PlaceDetails> ConvertToPlaceDetails( IEnumerable<Segment> segments )
+    private static IEnumerable<PlaceDetails> ConvertToPlaceDetails( IEnumerable<Segment> segments )
     {
       return
         from segment in segments

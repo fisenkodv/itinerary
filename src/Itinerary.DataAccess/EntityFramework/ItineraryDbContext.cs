@@ -9,9 +9,9 @@ namespace Itinerary.DataAccess.EntityFramework
   {
     private readonly DbContextOptions<ItineraryDbContext> _dbContextOptions;
 
-    public DbSet<Place> Place { get; set; }
+    public DbSet<Place> Places { get; set; }
 
-    public DbSet<PlaceCategory> PlaceCategory { get; set; }
+    public DbSet<PlaceCategory> PlaceCategories { get; set; }
 
     public ItineraryDbContext( DbContextOptions<ItineraryDbContext> dbContextOptions )
       : base( dbContextOptions )

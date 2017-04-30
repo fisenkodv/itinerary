@@ -39,6 +39,10 @@ dotnet publish -c Release
 This will produce a ready-to-deploy production build of your application. It includes .NET code compiled in Release mode, and invokes Webpack with the ```--env.prod``` flag to produce a production build of front-end assets. Equivalently, you can use the Publish option from Visual Studio’s Build menu.
 
 #### Database Migrations ####
+Create Itinerary initial migration
+```
+dotnet ef migrations add InitialItineraryDbMigration -c ItineraryDbContext -o EntityFramework/Migrations/Itinerary
+```
 Create IdentityServer Configuration migration
 ```
 dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o EntityFramework/Migrations/IdentityServer/ConfigurationDb

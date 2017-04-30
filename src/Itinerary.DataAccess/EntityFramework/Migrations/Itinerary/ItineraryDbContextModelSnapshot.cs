@@ -36,7 +36,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 
                     b.HasKey("Id");
 
-                    b.ToTable("Place");
+                    b.ToTable("Places");
                 });
 
             modelBuilder.Entity("Itinerary.DataAccess.Entities.PlaceCategory", b =>
@@ -48,7 +48,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlaceCategory");
+                    b.ToTable("PlaceCategories");
                 });
 
             modelBuilder.Entity("Itinerary.DataAccess.Entities.PlacePlaceCategory", b =>
@@ -66,7 +66,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 
                     b.HasIndex("PlaceId");
 
-                    b.ToTable("PlacePlaceCategory");
+                    b.ToTable("PlacePlaceCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>

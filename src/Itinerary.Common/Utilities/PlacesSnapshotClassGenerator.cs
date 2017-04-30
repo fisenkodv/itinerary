@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Itinerary.Common.Models;
+using Itinerary.Common.Models.Comparers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -153,36 +154,6 @@ namespace Itinerary.Common.Utilities
       ArgumentSyntax locationArgument = SyntaxFactory.Argument( objectCreation );
 
       return locationArgument;
-    }
-  }
-
-  internal class PlaceEqualityComparer : IEqualityComparer<PlaceDetails>
-  {
-    public bool Equals( PlaceDetails x, PlaceDetails y )
-    {
-      if ( ReferenceEquals( x, y ) ) return true;
-      if ( ReferenceEquals( x, null ) ) return false;
-      if ( ReferenceEquals( y, null ) ) return false;
-      if ( x.GetType() != y.GetType() ) return false;
-
-      return string.Equals( x.Name, y.Name ) &&
-             x.Rating == y.Rating &&
-             x.Reviews == y.Reviews &&
-             x.Location.Latitude == y.Location.Latitude &&
-             x.Location.Longitude == y.Location.Longitude;
-    }
-
-    public int GetHashCode( PlaceDetails obj )
-    {
-      unchecked
-      {
-        int result = obj.Name.GetHashCode();
-        result = ( result * 397 ) ^ obj.Rating.GetHashCode();
-        result = ( result * 397 ) ^ obj.Reviews.GetHashCode();
-        result = ( result * 397 ) ^ obj.Location.Latitude.GetHashCode();
-        result = ( result * 397 ) ^ obj.Location.Longitude.GetHashCode();
-        return result;
-      }
     }
   }
 }
