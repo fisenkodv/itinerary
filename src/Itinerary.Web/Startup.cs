@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO.Compression;
+using System.Security.Cryptography.X509Certificates;
 using IdentityServer4.EntityFramework.DbContexts;
 using Itinerary.DataAccess.EntityFramework;
 using Itinerary.DataAccess.EntityFramework.Extensions;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Itinerary.Web
 {
@@ -84,6 +86,21 @@ namespace Itinerary.Web
 
       JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
       app.UseIdentityServer();
+
+      var tokenValidationParameters = new TokenValidationParameters
+                                      {
+                                        ValidateIssuerSigningKey = false,
+                                        ValidateIssuer = true,
+                                        ValidIssuer = "http://localhost:5000/",
+                                        //IssuerSigningKey = new X509SecurityKey(new X509Certificate2(certLocation)),
+                                      };
+
+      app.UseJwtBearerAuthentication(new JwtBearerOptions()
+                                     {
+                                       Audience = "http://localhost:5001/",
+                                       AutomaticAuthenticate = true,
+                                       TokenValidationParameters = tokenValidationParameters
+                                     });
 
       app.UseMvc(
         routes =>
