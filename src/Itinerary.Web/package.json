@@ -1,6 +1,11 @@
 {
   "name": "itinerary-web",
+  "description": "Itinerary Web Spa Application",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://fisenkodv@bitbucket.org/fisenkodv/itinerary.git"
+  },
   "scripts": {
     "build:dev": "npm run clean:dist && npm run clean:assets && webpack --config config/webpack.dev.js --progress --profile --hot",
     "build:prod": "npm run clean:dist && npm run clean:assets && webpack --config config/webpack.prod.js  --progress --profile --bail",
@@ -32,6 +37,7 @@
     "@agm/core": "1.0.0-beta.0",
     "@ngx-translate/core": "6.0.1",
     "@ngx-translate/http-loader": "0.0.3",
+    "angular2-jwt": "0.2.3",
     "angular2-platform-node": "2.1.0-rc.1",
     "angular2-template-loader": "0.6.2",
     "aspnet-prerendering": "2.0.3",

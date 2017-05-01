@@ -17,6 +17,6 @@ export class PlacesService {
          reviews: number): Observable<PlaceDetails[]> {
     return this.http.get(`${AppSettings
         .itineraryApiBaseUrl}/places/search?lat=${latitude}&lng=${longitude}&distance=${distance}&rating=${rating}&reviews=${reviews}`)
-      .map((response: Response) => <PlaceDetails[]>response.json());
+      .map((response: Response) => response.json() as PlaceDetails[]);
   }
 }

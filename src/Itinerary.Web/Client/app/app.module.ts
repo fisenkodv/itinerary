@@ -21,6 +21,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeModule } from './home/home.module';
 import { PlacesModule } from './places/places.module';
+import { AuthModule } from './security';
 import { GooglePlacesService, PlacesService } from './shared';
 
 const appProviders = [
@@ -65,7 +66,8 @@ export function createTranslateLoader(http: Http) {
     HttpModule,
     AppRoutingModule,
     HomeModule,
-    PlacesModule
+    PlacesModule,
+    AuthModule
   ],
   providers: [
     envProviders,

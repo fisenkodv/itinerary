@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Itinerary.Business.Services.Places;
 using Itinerary.Common.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Web.Controllers.Api
@@ -20,6 +22,12 @@ namespace Itinerary.Web.Controllers.Api
     public IEnumerable<PlaceDetails> Search( double lat, double lng, double distance, double rating, int reviews )
     {
       return _placesService.Search( lat, lng, distance, rating, reviews );
+    }
+
+    [Authorize]
+    [HttpGet("[action]")]
+    public DateTime GetTime(){
+      return DateTime.Now;
     }
   }
 }

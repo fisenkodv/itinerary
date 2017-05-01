@@ -13,12 +13,12 @@ export class GooglePlacesService {
   autocomplete(keyword: string): Observable<Autocomplete[]> {
     return this.http.get(`${AppSettings
         .itineraryApiBaseUrl}/google/places/autocomplete?keyword=${keyword}`)
-      .map((response: Response) => <Autocomplete[]>response.json());
+      .map((response: Response) => response.json() as Autocomplete[]);
   }
 
   location(placeId: string): Observable<Location> {
     return this.http.get(`${AppSettings
         .itineraryApiBaseUrl}/google/places/location?placeid=${placeId}`)
-      .map((response: Response) => <Location>response.json());
+      .map((response: Response) => response.json() as Location);
   }
 }
