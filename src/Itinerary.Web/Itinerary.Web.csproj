@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="IdentityServer4" Version="1.5.0" />
@@ -19,7 +18,7 @@
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.1.0-preview4-final" />
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
