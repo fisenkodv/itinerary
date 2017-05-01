@@ -16,19 +16,19 @@ namespace Itinerary.Web
 {
   public static class ServiceCollectionExtensions
   {
-    private static readonly string MigrationAssemblyName = typeof(ItineraryDbContext)
+    private static readonly string MigrationAssemblyName = typeof( ItineraryDbContext )
       .GetTypeInfo()
       .Assembly.GetName()
       .Name;
 
-    public static string GetConnectionString(this IConfiguration configuration)
+    public static string GetConnectionString( this IConfiguration configuration )
     {
-      return configuration.GetConnectionString("SqliteConnection");
+      return configuration.GetConnectionString( "SqliteConnection" );
     }
 
     public static IServiceCollection AddDatabaseServices(
       this IServiceCollection services,
-      IConfiguration configuration)
+      IConfiguration configuration )
     {
       services.AddEntityFramework();
       services.AddDbContext<ItineraryDbContext>(
@@ -36,33 +36,34 @@ namespace Itinerary.Web
         {
           builder.UseSqlite(
             configuration.GetConnectionString(),
-            options => options.MigrationsAssembly(MigrationAssemblyName));
-        });
+            options => options.MigrationsAssembly( MigrationAssemblyName ) );
+        } );
 
       return services;
     }
 
-    public static IServiceCollection AddIdentityService(this IServiceCollection services)
+    public static IServiceCollection AddIdentityService( this IServiceCollection services )
     {
       services.AddIdentity<IdentityUser, IdentityRole>(
-        identityOptions =>
-    {
-      identityOptions.Cookies.ApplicationCookie.Events =
-          new CookieAuthenticationEvents
-          {
-            OnRedirectToLogin = context =>
-                                  {
-                                    if (context.Request.Path.StartsWithSegments("/api") &&
-                                          context.Response.StatusCode == (int)HttpStatusCode.OK)
-                                      context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                                    else
-                                      context.Response.Redirect(context.RedirectUri);
+                identityOptions =>
+                {
+                  identityOptions.Cookies.ApplicationCookie.Events =
+                    new CookieAuthenticationEvents
+                    {
+                      OnRedirectToLogin =
+                        context =>
+                        {
+                          if ( context.Request.Path.StartsWithSegments( "/api" ) &&
+                               context.Response.StatusCode == ( int ) HttpStatusCode.OK )
+                            context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
+                          else
+                            context.Response.Redirect( context.RedirectUri );
 
-                                    return Task.CompletedTask;
-                                  }
-          };
-    }
-      )
+                          return Task.CompletedTask;
+                        }
+                    };
+                }
+              )
               .AddEntityFrameworkStores<ItineraryDbContext>()
               .AddDefaultTokenProviders();
 
@@ -71,10 +72,9 @@ namespace Itinerary.Web
 
     public static IServiceCollection AddIdentityServerService(
       this IServiceCollection services,
-      IConfiguration configuration)
+      IConfiguration configuration )
     {
       //var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "damienbodserver.pfx"), "");
-
       services.AddIdentityServer()
               //.AddSigningCredential(cert)
               .AddTemporarySigningCredential()
@@ -82,22 +82,22 @@ namespace Itinerary.Web
               .AddOperationalStore(
                 builder => builder.UseSqlite(
                   configuration.GetConnectionString(),
-                  options => options.MigrationsAssembly(MigrationAssemblyName)))
+                  options => options.MigrationsAssembly( MigrationAssemblyName ) ) )
               .AddConfigurationStore(
                 builder => builder.UseSqlite(
                   configuration.GetConnectionString(),
-                  options => options.MigrationsAssembly(MigrationAssemblyName)));
+                  options => options.MigrationsAssembly( MigrationAssemblyName ) ) );
 
       return services;
     }
 
     public static IServiceCollection AddCustomServices(
       this IServiceCollection services,
-      IConfiguration configuration)
+      IConfiguration configuration )
     {
-      services.AddSingleton(configuration.GetGoogleClientSecrets());
+      services.AddSingleton( configuration.GetGoogleClientSecrets() );
 
-      services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
+      services.AddTransient( typeof( IUnitOfWork ), typeof( UnitOfWork ) );
       services.AddTransient<IPlacesService, PlacesService>();
       services.AddTransient<IGooglePlacesService, GooglePlacesService>();
 

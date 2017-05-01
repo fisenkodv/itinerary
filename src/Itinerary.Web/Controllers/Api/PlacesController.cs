@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Web.Controllers.Api
 {
-  [ApiVersion("1.0")]
+  [ApiVersion( "1.0" )]
   [Route( "api/v{version:apiVersion}/[controller]" )]
   public class PlacesController : Controller
   {
@@ -25,8 +25,9 @@ namespace Itinerary.Web.Controllers.Api
     }
 
     [Authorize]
-    [HttpGet("[action]")]
-    public DateTime GetTime(){
+    [HttpGet( "[action]" )]
+    public DateTime GetTime()
+    {
       return DateTime.Now;
     }
   }
