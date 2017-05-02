@@ -4,6 +4,7 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using Itinerary.Business.Api.Google;
+using Itinerary.Business.Services.Account;
 using Itinerary.Business.Services.Places;
 using Itinerary.DataAccess.Abstract.UnitOfWork;
 using Itinerary.DataAccess.EntityFramework;
@@ -118,6 +119,7 @@ namespace Itinerary.Web.Extensions
       services.AddTransient( typeof( IUnitOfWork ), typeof( UnitOfWork ) );
       services.AddTransient<IPlacesService, PlacesService>();
       services.AddTransient<IGooglePlacesService, GooglePlacesService>();
+      services.AddTransient<IAccountService, AccountService>();
 
       return services;
     }

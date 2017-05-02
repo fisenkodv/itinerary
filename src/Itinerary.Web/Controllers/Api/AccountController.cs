@@ -1,74 +1,39 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Itinerary.DataAccess.EntityFramework;
+using Itinerary.Business.Services.Account;
+using Itinerary.Common.Models;
+using Itinerary.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Web.Controllers.Api
 {
-  public class RegisterViewModel
-  {
-    [Required]
-    [EmailAddress]
-    [Display( Name = "Email" )]
-    public string Email { get; set; }
-
-    [Required]
-    [StringLength( 100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6 )]
-    [DataType( DataType.Password )]
-    [Display( Name = "Password" )]
-    public string Password { get; set; }
-  }
-
-  [ApiVersion("1.0")]
-  [Route( "api/v{version:apiVersion}/[controller]" )]
   [Authorize]
+  [ApiVersion( "1.0" )]
+  [Route( "api/v{version:apiVersion}/[controller]" )]
   public class AccountController : Controller
   {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly ItineraryDbContext _itineraryDbContext;
+    private readonly IAccountService _accountService;
 
-    public AccountController(
-      UserManager<IdentityUser> userManager,
-      ItineraryDbContext itineraryDbContext )
+    public AccountController( IAccountService accountService )
     {
-      _userManager = userManager;
-      _itineraryDbContext = itineraryDbContext;
+      _accountService = accountService;
     }
 
-    //
-    // POST: /Account/Register
-    [HttpPost( "[action]" )]
     [AllowAnonymous]
+    [HttpPost( "[action]" )]
     public async Task<IActionResult> Register( [FromBody] RegisterViewModel model )
     {
+      ApiCallStatus result;
       if ( ModelState.IsValid )
-      {
-        var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-        var result = await _userManager.CreateAsync( user, model.Password );
-        if ( result.Succeeded )
-        {
-          return Ok();
-        }
-        AddErrors( result );
-      }
+        result = await _accountService.Register( model.Email, model.Password );
+      else
+        result = new ApiCallStatus(
+          false, ModelState.Values.SelectMany( x => x.Errors ).Select( x => x.ErrorMessage ) );
 
-      // If we got this far, something failed.
-      return BadRequest( ModelState );
+      return result.Succeeded
+               ? ( IActionResult ) Ok( result )
+               : BadRequest( result );
     }
-
-    #region Helpers
-
-    private void AddErrors( IdentityResult result )
-    {
-      foreach ( var error in result.Errors )
-      {
-        ModelState.AddModelError( string.Empty, error.Description );
-      }
-    }
-
-    #endregion
   }
 }
