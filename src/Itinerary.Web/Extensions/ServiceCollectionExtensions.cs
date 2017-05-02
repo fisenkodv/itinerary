@@ -1,20 +1,22 @@
-﻿using System.IO;
+﻿using System;
+using System.IO.Compression;
 using System.Net;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Itinerary.Business.Api.Google;
 using Itinerary.Business.Services.Places;
 using Itinerary.DataAccess.Abstract.UnitOfWork;
 using Itinerary.DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Itinerary.Web
+namespace Itinerary.Web.Extensions
 {
   public static class ServiceCollectionExtensions
   {
@@ -26,6 +28,22 @@ namespace Itinerary.Web
     public static string GetConnectionString( this IConfiguration configuration )
     {
       return configuration.GetConnectionString( "SqliteConnection" );
+    }
+
+    public static IServiceCollection AddCompression(
+      this IServiceCollection services,
+      IConfiguration configuration )
+    {
+      if ( !string.Equals(
+             configuration[ "EnableCompression" ],
+             bool.TrueString,
+             StringComparison.CurrentCultureIgnoreCase ) ) return services;
+
+      services.Configure<GzipCompressionProviderOptions>(
+        options => options.Level = CompressionLevel.Optimal );
+      services.AddResponseCompression( options => { options.Providers.Add<GzipCompressionProvider>(); } );
+
+      return services;
     }
 
     public static IServiceCollection AddDatabaseServices(
@@ -76,10 +94,8 @@ namespace Itinerary.Web
       this IServiceCollection services,
       IConfiguration configuration )
     {
-      var certificate = new X509Certificate2( Path.Combine( "certs", "ItineraryRoot.pfx" ) );
       services.AddIdentityServer()
-              .AddSigningCredential( certificate )
-              //.AddTemporarySigningCredential()
+              .AddSigningCredential( CertificatesExtensions.RootCertificate )
               .AddAspNetIdentity<IdentityUser>()
               .AddOperationalStore(
                 builder => builder.UseSqlite(

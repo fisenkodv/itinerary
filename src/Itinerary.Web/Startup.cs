@@ -1,14 +1,10 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
-using System.IO.Compression;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.IdentityModel.Tokens.Jwt;
 using IdentityServer4.EntityFramework.DbContexts;
 using Itinerary.DataAccess.EntityFramework;
 using Itinerary.DataAccess.EntityFramework.Extensions;
+using Itinerary.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,16 +34,7 @@ namespace Itinerary.Web
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices( IServiceCollection services )
     {
-      if ( string.Equals(
-        Configuration[ "EnableCompression" ],
-        bool.TrueString,
-        StringComparison.CurrentCultureIgnoreCase ) )
-      {
-        services.Configure<GzipCompressionProviderOptions>(
-          options => options.Level = CompressionLevel.Optimal );
-        services.AddResponseCompression( options => { options.Providers.Add<GzipCompressionProvider>(); } );
-      }
-
+      services.AddCompression( Configuration );
       services.AddMemoryCache();
       services.AddMvc();
       services.AddApiVersioning(
@@ -87,20 +74,18 @@ namespace Itinerary.Web
 
       JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
       app.UseIdentityServer();
-      var certificate = new X509Certificate2( Path.Combine( "certs", "ItineraryRoot.pfx" ) );
-      var tokenValidationParameters = new TokenValidationParameters
-                                      {
-                                        ValidateIssuerSigningKey = false,
-                                        ValidateIssuer = false,
-                                       // ValidIssuer = "http://localhost:5000/",
-                                        ValidateAudience = false,
-                                        IssuerSigningKey = new X509SecurityKey( certificate ),
-                                      };
+      var tokenValidationParameters =
+        new TokenValidationParameters
+        {
+          ValidateIssuerSigningKey = true,
+          ValidateIssuer = false,
+          ValidateAudience = false,
+          IssuerSigningKey = CertificatesExtensions.SigningKey
+        };
 
       app.UseJwtBearerAuthentication(
-        new JwtBearerOptions()
+        new JwtBearerOptions
         {
-          //Audience = "http://localhost:5001/",
           AutomaticAuthenticate = true,
           TokenValidationParameters = tokenValidationParameters
         } );
