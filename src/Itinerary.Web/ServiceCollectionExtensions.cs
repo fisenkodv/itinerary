@@ -1,5 +1,7 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Itinerary.Business.Api.Google;
 using Itinerary.Business.Services.Places;
@@ -74,10 +76,10 @@ namespace Itinerary.Web
       this IServiceCollection services,
       IConfiguration configuration )
     {
-      //var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "damienbodserver.pfx"), "");
+      var certificate = new X509Certificate2( Path.Combine( "certs", "ItineraryRoot.pfx" ) );
       services.AddIdentityServer()
-              //.AddSigningCredential(cert)
-              .AddTemporarySigningCredential()
+              .AddSigningCredential( certificate )
+              //.AddTemporarySigningCredential()
               .AddAspNetIdentity<IdentityUser>()
               .AddOperationalStore(
                 builder => builder.UseSqlite(

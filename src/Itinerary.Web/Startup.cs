@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography.X509Certificates;
 using IdentityServer4.EntityFramework.DbContexts;
@@ -86,21 +87,23 @@ namespace Itinerary.Web
 
       JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
       app.UseIdentityServer();
-
+      var certificate = new X509Certificate2( Path.Combine( "certs", "ItineraryRoot.pfx" ) );
       var tokenValidationParameters = new TokenValidationParameters
                                       {
                                         ValidateIssuerSigningKey = false,
-                                        ValidateIssuer = true,
-                                        ValidIssuer = "http://localhost:5000/",
-                                        //IssuerSigningKey = new X509SecurityKey(new X509Certificate2(certLocation)),
+                                        ValidateIssuer = false,
+                                       // ValidIssuer = "http://localhost:5000/",
+                                        ValidateAudience = false,
+                                        IssuerSigningKey = new X509SecurityKey( certificate ),
                                       };
 
-      app.UseJwtBearerAuthentication(new JwtBearerOptions()
-                                     {
-                                       Audience = "http://localhost:5001/",
-                                       AutomaticAuthenticate = true,
-                                       TokenValidationParameters = tokenValidationParameters
-                                     });
+      app.UseJwtBearerAuthentication(
+        new JwtBearerOptions()
+        {
+          //Audience = "http://localhost:5001/",
+          AutomaticAuthenticate = true,
+          TokenValidationParameters = tokenValidationParameters
+        } );
 
       app.UseMvc(
         routes =>
@@ -116,7 +119,7 @@ namespace Itinerary.Web
       using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
       {
         serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
-        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData();
+        //serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData();
         serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
         serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().Database.Migrate();
         serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().EnsureSeedData();
