@@ -4,8 +4,12 @@
     <div class="navigation-container" fxHide.xs="true">
       <nav class="navigation">
         <a class="navigation__link" [routerLink]="['/home']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.home' | translate }}</a>
-        <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.places' | translate }}</a>
-        <a class="navigation__link navigation__link--coming-soon" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.travels' | translate }}</a>
+        <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.places' | translate }}
+          <sub class="navigation__link-sub-title">{{'header.navigation.us-only' | translate }}</sub>
+        </a>
+        <a class="navigation__link" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.travels' | translate }}
+          <sub class="navigation__link-sub-title">{{'header.navigation.soon' | translate }}</sub>
+        </a>
       </nav>
     </div>
     <button class="more-button" md-icon-button [md-menu-trigger-for]="menu" fxHide.xs="true">

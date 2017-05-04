@@ -74,8 +74,7 @@ namespace Itinerary.Web.Extensions
                       OnRedirectToLogin =
                         context =>
                         {
-                          if ( context.Request.Path.StartsWithSegments( "/api" ) &&
-                               context.Response.StatusCode == ( int ) HttpStatusCode.OK )
+                          if ( context.Request.Path.StartsWithSegments( "/api" ) )
                             context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
                           else
                             context.Response.Redirect( context.RedirectUri );

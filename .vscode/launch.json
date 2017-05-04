@@ -6,9 +6,9 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceRoot}/Itinerary.Web/bin/Debug/netcoreapp1.1/Itinerary.Web.dll",
+      "program": "${workspaceRoot}/src/Itinerary.Web/bin/Debug/netcoreapp1.1/Itinerary.Web.dll",
       "args": [],
-      "cwd": "${workspaceRoot}",
+      "cwd": "${workspaceRoot}/src/Itinerary.Web",
       "stopAtEntry": false,
       "internalConsoleOptions": "openOnSessionStart",
       "launchBrowser": {

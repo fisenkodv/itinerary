@@ -43,14 +43,11 @@ $navigation-link-border-size: 4px !default;
       transition: border-color 0.4s ease-in-out;
     }
 
-    &--coming-soon {
-      &:after {
-        content: "soon";
-        font-size: $navigation-link-coming-soon-font-size;
-        position: absolute;
-        right: $toolbar-padding;
-        top: $navigation-link-font-size - $navigation-link-border-size;
-      }
+    &-sub-title {
+      font-size: $navigation-link-coming-soon-font-size;
+      position: absolute;
+      right: $toolbar-padding;
+      top: $navigation-link-font-size - $navigation-link-border-size;
     }
   }
 }

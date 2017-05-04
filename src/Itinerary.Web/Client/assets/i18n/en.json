@@ -14,29 +14,29 @@
       "places": {
         "title": "Places",
         "description": "Search interesting places",
-        "feature_1": "Specify the search area.",
-        "feature_2": "Set the place ranking.",
-        "feature_3": "Choose and keep your liked points.",
+        "feature-1": "Specify the search area.",
+        "feature-2": "Set the place ranking.",
+        "feature-3": "Choose and keep your liked points.",
         "button-label": "START USING IT"
       },
       "route": {
         "title": "Route",
         "description": "Build and maintain the best route",
-        "feature_1": "Create a new map or use the points you saved earlier.",
-        "feature_2": "Set the start and end point of the journey-the route is ready.",
-        "feature_3": "Embark on a journey!",
+        "feature-1": "Create a new map or use the points you saved earlier.",
+        "feature-2": "Set the start and end point of the journey-the route is ready.",
+        "feature-3": "Embark on a journey!",
         "button-label": "COMING SOON"
       }
     }
   },
   "places": {
     "search": {
-      "title":"Search Places",
+      "title": "Search Places",
       "location": {
         "placeholder": "Select location"
       },
       "distance": {
-        "label":"Distance:"
+        "label": "Distance:"
       },
       "rating": {
         "label": "Rating:"
@@ -56,10 +56,12 @@
     "navigation": {
       "home": "Home",
       "places": "Places",
-      "travels": "Travels"
+      "travels": "Travels",
+      "soon": "Soon",
+      "us-only": "US Only"
     },
     "menu": {
-      "settings":"Settings",
+      "settings": "Settings",
       "theme": "Toggle Theme",
       "help": "Help"
     }
