@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { AppSettings } from '../core/appSettings';
+import { AppConfig } from '../core/app-config';
 import { JoinPipe } from '../shared';
 import { PlaceListItemComponent } from './place-list-item/place-list-item.component';
 import { PlaceListComponent } from './place-list/place-list.component';
@@ -28,7 +28,7 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
     ReactiveFormsModule,
     HttpModule,
     AgmCoreModule.forRoot({
-      apiKey: AppSettings.googlePlacesApiKey,
+      apiKey: AppConfig.googlePlacesApiKey,
       libraries: ['places']
     })
   ],
