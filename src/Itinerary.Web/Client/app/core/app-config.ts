@@ -3,7 +3,7 @@
   public static itineraryApiBaseUrl = '/api/v1';
 
   public static identityInfo = {
-    clientId: "itineraryWebClient",
-    grantType: "password"
+    clientId: 'itineraryWebClient',
+    grantType: 'password'
   }
 }

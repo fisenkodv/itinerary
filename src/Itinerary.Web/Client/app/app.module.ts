@@ -30,11 +30,11 @@ const appProviders = [
   AppState
 ];
 
-type StoreType = {
+interface StoreType {
   state: InternalStateType,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
-};
+}
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

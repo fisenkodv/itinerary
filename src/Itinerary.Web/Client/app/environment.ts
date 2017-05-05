@@ -8,7 +8,7 @@ let providers: any[] = [
 
 // Angular debug tools in the dev console
 // https://github.com/angular/angular/blob/86405345b781a9dc2438c0fbe3e9409245647019/TOOLS_JS.md
-let decorateModuleRefInternal = <T>(value: T): T => { return value; };
+let decorateModuleRefInternal = <T>(value: T): T => value;
 
 if ('production' === ENV) {
   enableProdMode();
@@ -31,10 +31,10 @@ if ('production' === ENV) {
     const appRef = modRef.injector.get(ApplicationRef);
     const cmpRef = appRef.components[0];
 
-    const ng = (<any> window).ng;
+    const ng = (window as any).ng;
     enableDebugTools(cmpRef);
-    (<any> window).ng.probe = ng.probe;
-    (<any> window).ng.coreTokens = ng.coreTokens;
+    (window as any).ng.probe = ng.probe;
+    (window as any).ng.coreTokens = ng.coreTokens;
     return modRef;
   };
 
