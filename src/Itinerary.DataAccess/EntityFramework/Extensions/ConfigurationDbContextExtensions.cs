@@ -27,8 +27,12 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
               RequireClientSecret = false,
               AllowedScopes =
               {
-                "openid"
-              }
+                IdentityServerConstants.StandardScopes.OpenId, // For UserInfo endpoint.
+                IdentityServerConstants.StandardScopes.Profile,
+                "WebAPI",
+                "roles"
+              },
+
             }.ToEntity()
           );
 

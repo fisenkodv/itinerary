@@ -1,38 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/interval';
-import 'rxjs/add/observable/timer';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
-import { AuthHttp } from 'angular2-jwt';
+import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/timer';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from '../core/app-config';
 
 @Injectable()
 export class AuthenticationService {
 
-  /**
-   * Stores the URL so we can redirect after signing in.
-   */
-  public redirectUrl: string;
-
-  /**
-   * Behavior subjects of the user's status, data & roles.
-   * https://netbasal.com/angular-2-persist-your-login-status-with-behaviorsubject-45da9ec43243#.14rltx9dh
-   */
   public signinSubject = new BehaviorSubject<boolean>(this.tokenNotExpired());
 
   public userSubject = new BehaviorSubject<any>({});
 
   public rolesSubject = new BehaviorSubject<string[]>([]);
 
-  /**
-   * Token info.
-   */
   private expiresIn: number;
   private authTime: number;
 
@@ -54,6 +42,10 @@ export class AuthenticationService {
     // Creates header for post requests.
     this.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     this.options = new RequestOptions({ headers: this.headers });
+  }
+
+  public loggedIn(): boolean {
+    return tokenNotExpired();
   }
 
   public signin(username: string, password: string): Observable<any> {
@@ -297,35 +289,4 @@ export class AuthenticationService {
     Helpers.setExp(this.authTime + this.expiresIn);
   }
 
-}
-
-// Set Helpers to use the same storage in AppModule.
-class Helpers {
-
-  public static getToken(name: string): string {
-    return localStorage.getItem(name);
-  }
-
-  public static setToken(name: string, value: string) {
-    localStorage.setItem(name, value);
-  }
-
-  public static removeToken(name: string): void {
-    localStorage.removeItem(name);
-  }
-
-  public static setExp(exp: number) {
-    localStorage.setItem("exp", exp.toString());
-  }
-
-  /**
-   * Returns token expiration in milliseconds.
-   */
-  public static getExp(): number {
-    return parseInt(localStorage.getItem("exp"));
-  }
-
-  public static removeExp(): void {
-    localStorage.removeItem("exp");
-  }
 }
