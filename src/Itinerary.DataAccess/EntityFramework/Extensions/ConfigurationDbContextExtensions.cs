@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.Models;
@@ -27,12 +28,12 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
               RequireClientSecret = false,
               AllowedScopes =
               {
-                IdentityServerConstants.StandardScopes.OpenId, // For UserInfo endpoint.
+                IdentityServerConstants.StandardScopes.OpenId,
                 IdentityServerConstants.StandardScopes.Profile,
-                "WebAPI",
-                "roles"
+                IdentityServerConstants.StandardScopes.Email,
+                "WebAPI"
               },
-
+              AllowOfflineAccess = true
             }.ToEntity()
           );
 
