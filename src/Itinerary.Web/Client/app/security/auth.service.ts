@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
@@ -11,37 +11,20 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from '../core/app-config';
+import { AuthTokenStorageService } from './auth-token-storage.service';
 
 @Injectable()
 export class AuthenticationService {
 
-  public signinSubject = new BehaviorSubject<boolean>(this.tokenNotExpired());
+  constructor(
+    private http: Http,
+    private authHttp: AuthHttp,
+    private storageService: AuthTokenStorageService) {
+  }
 
-  public userSubject = new BehaviorSubject<any>({});
-
-  public rolesSubject = new BehaviorSubject<string[]>([]);
-
-  private expiresIn: number;
-  private authTime: number;
-
-  /**
-   * Scheduling of the refresh token.
-   */
-  private refreshSubscription: any;
-  /**
-   * Offset for the scheduling to avoid the inconsistency of data on the client.
-   */
-  private offsetSeconds: number = 30;
-
-  private headers: Headers;
-  private options: RequestOptions;
-
-  constructor(private http: Http, private authHttp: AuthHttp) {
-    // On bootstrap or refresh, tries to get users'data.
-    this.getUserInfo();
-    // Creates header for post requests.
-    this.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    this.options = new RequestOptions({ headers: this.headers });
+  private getRequestOptions(): RequestOptions {
+    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return new RequestOptions({ headers: headers });
   }
 
   public loggedIn(): boolean {
@@ -49,123 +32,18 @@ export class AuthenticationService {
   }
 
   public signin(username: string, password: string): Observable<any> {
-    const tokenEndpoint: string = Config.TOKEN_ENDPOINT;
-
-    const params: any = {
+    const request: any = {
       client_id: AppConfig.identityInfo.clientId,
       grant_type: AppConfig.identityInfo.grantType,
+      scope: AppConfig.identityInfo.scope,
       username: username,
       password: password
     };
 
-    const body: string = this.encodeParams(params);
-
-    this.authTime = new Date().valueOf();
-
-    return this.http.post(tokenEndpoint, body, this.options)
+    return this.http.post(AppConfig.authTokenEndpoint, request, this.getRequestOptions())
       .map((res: Response) => {
         const body: any = res.json();
         if (typeof body.access_token !== 'undefined') {
-          // Stores access token & refresh token.
-          this.store(body);
-          this.getUserInfo();
-
-          // Tells all the subscribers about the new status.
-          this.signinSubject.next(true);
-        }
-      }).catch((error: any) => {
-        return Observable.throw(error);
-      });
-  }
-
-  /**
-   * Optional strategy for refresh token through a scheduler.
-   * Will schedule a refresh at the appropriate time.
-   */
-  public scheduleRefresh(): void {
-    const source = this.authHttp.tokenStream.flatMap(
-      (token: string) => {
-        const delay: number = this.expiresIn - this.offsetSeconds * 1000;
-        return Observable.interval(delay);
-      });
-
-    this.refreshSubscription = source.subscribe(() => {
-      this.getNewToken().subscribe(
-        () => {
-          // Scheduler works.
-        },
-        (error: any) => {
-          // Need to handle this error.
-          console.log(error);
-        }
-      );
-    });
-  }
-
-  /**
-   * Case when the user comes back to the app after closing it.
-   */
-  public startupTokenRefresh(): void {
-    // If the user is authenticated, uses the token stream
-    // provided by angular2-jwt and flatMap the token.
-    if (this.signinSubject.getValue()) {
-      const source = this.authHttp.tokenStream.flatMap(
-        (token: string) => {
-          const now: number = new Date().valueOf();
-          const exp: number = Helpers.getExp();
-          const delay: number = exp - now - this.offsetSeconds * 1000;
-
-          // Uses the delay in a timer to run the refresh at the proper time.
-          return Observable.timer(delay);
-        });
-
-      // Once the delay time from above is reached, gets a new JWT and schedules additional refreshes.
-      source.subscribe(() => {
-        this.getNewToken().subscribe(
-          () => {
-            this.scheduleRefresh();
-          },
-          (error: any) => {
-            // Need to handle this error.
-            console.log(error);
-          }
-        );
-      });
-    }
-  }
-
-  /**
-   * Unsubscribes from the scheduling of the refresh token.
-   */
-  public unscheduleRefresh(): void {
-    if (this.refreshSubscription) {
-      this.refreshSubscription.unsubscribe();
-    }
-  }
-
-  /**
-   * Tries to get a new token using refresh token.
-   */
-  public getNewToken(): Observable<any> {
-    const refreshToken: string = Helpers.getToken('refresh_token');
-
-    const tokenEndpoint: string = Config.TOKEN_ENDPOINT;
-
-    const params: any = {
-      client_id: Config.CLIENT_ID,
-      grant_type: "refresh_token",
-      refresh_token: refreshToken
-    };
-
-    const body: string = this.encodeParams(params);
-
-    this.authTime = new Date().valueOf();
-
-    return this.http.post(tokenEndpoint, body, this.options)
-      .map((res: Response) => {
-        const body: any = res.json();
-        if (typeof body.access_token !== 'undefined') {
-          // Stores access token & refresh token.
           this.store(body);
         }
       }).catch((error: any) => {
@@ -173,120 +51,8 @@ export class AuthenticationService {
       });
   }
 
-  /**
-   * Revokes token.
-   */
-  public revokeToken(): void {
-    Helpers.removeToken('id_token');
-    Helpers.removeExp();
-  }
-
-  public revokeRefreshToken(): void {
-    const refreshToken: string = Helpers.getToken('refresh_token');
-
-    if (refreshToken != null) {
-      const revocationEndpoint: string = Config.REVOCATION_ENDPOINT;
-
-      const params: any = {
-        client_id: Config.CLIENT_ID,
-        token_type_hint: "refresh_token",
-        token: refreshToken
-      };
-
-      const body: string = this.encodeParams(params);
-
-      this.http.post(revocationEndpoint, body, this.options)
-        .subscribe(
-        () => {
-          Helpers.removeToken('refresh_token');
-        });
-    }
-  }
-
-  /**
-   * Removes user and revokes tokens.
-   */
-  public signout(): void {
-    this.redirectUrl = null;
-
-    // Tells all the subscribers about the new status, data & roles.
-    this.signinSubject.next(false);
-    this.userSubject.next({});
-    this.rolesSubject.next([]);
-
-    // Unschedules the refresh token.
-    this.unscheduleRefresh();
-
-    // Revokes tokens.
-    this.revokeToken();
-    this.revokeRefreshToken();
-  }
-
-  /**
-   * Checks if user is signed in.
-   */
-  public isSignedIn(): Observable<boolean> {
-    return this.signinSubject.asObservable();
-  }
-
-  public getUser(): Observable<any> {
-    return this.userSubject.asObservable();
-  }
-
-  public getRoles(): Observable<any> {
-    return this.rolesSubject.asObservable();
-  }
-
-  /**
-   * Checks for presence of token and that token hasn't expired.
-   */
-  private tokenNotExpired(): boolean {
-    const token: string = Helpers.getToken('id_token');
-    return token != null && (Helpers.getExp() > new Date().valueOf());
-  }
-
-  /**
-   * Calls UserInfo endpoint to retrieve user's data.
-   */
-  private getUserInfo(): void {
-    if (this.tokenNotExpired()) {
-      this.authHttp.get(Config.USERINFO_ENDPOINT)
-        .subscribe(
-        (res: any) => {
-          const user: any = res.json();
-          const roles: string[] = user.role;
-          // Tells all the subscribers about the new data & roles.
-          this.userSubject.next(user);
-          this.rolesSubject.next(user.role);
-        },
-        (error: any) => {
-          console.log(error);
-        });
-    }
-  }
-
-  private encodeParams(params: any): string {
-    let body: string = "";
-    for (const key in params) {
-      if (body.length) {
-        body += "&";
-      }
-      body += key + "=";
-      body += encodeURIComponent(params[key]);
-    }
-    return body;
-  }
-
-  /**
-   * Stores access token & refresh token.
-   */
   private store(body: any): void {
-    Helpers.setToken('id_token', body.access_token);
-    Helpers.setToken('refresh_token', body.refresh_token);
-
-    // Calculates token expiration.
-    this.expiresIn = body.expires_in as number * 1000; // To milliseconds.
-    Helpers.setExp(this.authTime + this.expiresIn);
+    this.storageService.setToken('id_token', body.access_token);
+    this.storageService.setToken('refresh_token', body.refresh_token);
   }
-
 }

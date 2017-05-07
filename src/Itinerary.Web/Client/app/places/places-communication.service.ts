@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { PlaceDetails, PlacesService } from '../shared';
+import { PlaceDetails } from '../shared';
 import { SearchCriteria } from './search-criteria';
 
 @Injectable()

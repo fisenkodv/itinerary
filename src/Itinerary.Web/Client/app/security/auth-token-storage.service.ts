@@ -1,4 +1,10 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
+
+export enum TokenType {
+  AccesToken,
+  RefreshToken
+}
+
 
 @Injectable()
 export class AuthTokenStorageService {
@@ -27,5 +33,11 @@ export class AuthTokenStorageService {
 
   public removeExp(): void {
     localStorage.removeItem('exp');
+  }
+
+  private getTokenName(tokenType: TokenType): string {
+    return tokenType === TokenType.AccesToken
+      ? 'id_token'
+      : 'refresh_token';
   }
 }
