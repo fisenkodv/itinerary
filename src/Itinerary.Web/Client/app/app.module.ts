@@ -16,13 +16,14 @@ import '../styles/styles.scss';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppState, InternalStateType } from './app.service';
+import { AuthModule } from './auth';
 import { envProviders } from './environment';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeModule } from './home/home.module';
 import { PlacesModule } from './places/places.module';
-import { AuthModule } from './security';
 import { GooglePlacesService, PlacesService } from './shared';
+import { SigninDialogComponent } from './signin/signin-dialog.component';
 
 const appProviders = [
   PlacesService,
@@ -44,10 +45,12 @@ export function createTranslateLoader(http: Http) {
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SigninDialogComponent
   ],
   entryComponents: [
-    AppComponent
+    AppComponent,
+    SigninDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -58,12 +58,25 @@
       "places": "Places",
       "travels": "Travels",
       "soon": "Soon",
-      "us-only": "US Only"
+      "us-only": "US Only",
+      "signin": "Sign in"
     },
     "menu": {
       "settings": "Settings",
       "theme": "Toggle Theme",
       "help": "Help"
+    }
+  },
+  "signin": {
+    "title": "Sign in",
+    "username": {
+      "placeholder": "Enter Your Email"
+    },
+    "password": {
+      "placeholder": "Enter Your Password"
+    },
+    "signin-button": {
+      "label": "Sign in"
     }
   },
   "footer": {

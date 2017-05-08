@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from '../core/app-config';
-import { AuthTokenStorageService } from './auth-token-storage.service';
+import { AuthTokenStorageService, TokenType } from './auth-token-storage.service';
 
 @Injectable()
 export class AuthenticationService {
@@ -24,7 +24,7 @@ export class AuthenticationService {
 
   private getRequestOptions(): RequestOptions {
     const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return new RequestOptions({ headers: headers });
+    return new RequestOptions({ headers });
   }
 
   public loggedIn(): boolean {
@@ -36,8 +36,8 @@ export class AuthenticationService {
       client_id: AppConfig.identityInfo.clientId,
       grant_type: AppConfig.identityInfo.grantType,
       scope: AppConfig.identityInfo.scope,
-      username: username,
-      password: password
+      username,
+      password
     };
 
     return this.http.post(AppConfig.authTokenEndpoint, request, this.getRequestOptions())
@@ -52,7 +52,7 @@ export class AuthenticationService {
   }
 
   private store(body: any): void {
-    this.storageService.setToken('id_token', body.access_token);
-    this.storageService.setToken('refresh_token', body.refresh_token);
+    this.storageService.setToken(TokenType.AccessToken, body.access_token);
+    this.storageService.setToken(TokenType.RefreshToken, body.refresh_token);
   }
 }

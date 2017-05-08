@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 
 export enum TokenType {
-  AccesToken,
+  AccessToken,
   RefreshToken
 }
 
@@ -11,16 +11,16 @@ export class AuthTokenStorageService {
 
   constructor() { }
 
-  public getToken(name: string): string {
-    return localStorage.getItem(name);
+  public getToken(tokenType: TokenType): string {
+    return localStorage.getItem(this.getTokenName(tokenType));
   }
 
-  public setToken(name: string, value: string) {
-    localStorage.setItem(name, value);
+  public setToken(tokenType: TokenType, value: string) {
+    localStorage.setItem(this.getTokenName(tokenType), value);
   }
 
-  public removeToken(name: string): void {
-    localStorage.removeItem(name);
+  public removeToken(tokenType: TokenType): void {
+    localStorage.removeItem(this.getTokenName(tokenType));
   }
 
   public setExp(exp: number) {
@@ -36,7 +36,7 @@ export class AuthTokenStorageService {
   }
 
   private getTokenName(tokenType: TokenType): string {
-    return tokenType === TokenType.AccesToken
+    return tokenType === TokenType.AccessToken
       ? 'id_token'
       : 'refresh_token';
   }

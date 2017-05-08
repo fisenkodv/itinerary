@@ -36,6 +36,7 @@ $navigation-link-border-size: 4px !default;
     color: mat-color(map-get($itinerary-light-theme, primary), default-contrast);
     border-bottom: $navigation-link-border-size solid transparent;
     position: relative;
+    cursor: pointer;
 
     &--active,
     &:hover {

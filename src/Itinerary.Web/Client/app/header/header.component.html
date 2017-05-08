@@ -10,6 +10,7 @@
         <a class="navigation__link" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">{{'header.navigation.travels' | translate }}
           <sub class="navigation__link-sub-title">{{'header.navigation.soon' | translate }}</sub>
         </a>
+        <a class="navigation__link" (click)="openSigninDialog()">{{'header.navigation.signin' | translate }}</a>
       </nav>
     </div>
     <button class="more-button" md-icon-button [md-menu-trigger-for]="menu" fxHide.xs="true">

@@ -1,0 +1,14 @@
+<h1 md-dialog-title>{{'signin.title' | translate }}</h1>
+<div md-dialog-content>
+  <md-input-container>
+    <input type="email" mdInput>
+    <md-placeholder>{{'signin.username.placeholder' | translate }}</md-placeholder>
+  </md-input-container>
+  <md-input-container>
+    <input type="password" mdInput>
+    <md-placeholder>{{'signin.password.placeholder' | translate }}</md-placeholder>
+  </md-input-container>
+</div>
+<div md-dialog-actions>
+  <button md-raised-button color="primary" (click)="signin()">{{'signin.signin-button.label' | translate }}</button>
+</div>
