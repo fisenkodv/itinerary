@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
-import { AuthenticationService } from '../auth';
+import { AuthResult, AuthService } from '../auth';
 
 @Component({
   selector: 'signin-dialog',
@@ -12,13 +13,24 @@ import { AuthenticationService } from '../auth';
 export class SigninDialogComponent {
   public username: string;
   public password: string;
+  public error: string;
 
   constructor(
+    private translateService: TranslateService,
     private dialogRef: MdDialogRef<SigninDialogComponent>,
-    private authService: AuthenticationService) { }
+    private authService: AuthService) {
+  }
 
   public signin() {
-    this.authService.signin(this.username, this.username);
-    return this.dialogRef.close('ok');
+    this.authService.signin(this.username, this.password)
+      .subscribe((result: AuthResult) => {
+        this.dialogRef.close();
+      }, (result: AuthResult) => {
+        this.error = this.getTranslatedMessage(result.errorDescription);
+      });
+  }
+
+  private getTranslatedMessage(messageToTranslate: string) {
+    return this.translateService.instant(`signin.errors.${messageToTranslate}`);
   }
 }

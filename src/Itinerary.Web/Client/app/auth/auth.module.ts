@@ -3,7 +3,7 @@ import { Http, RequestOptions } from '@angular/http';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 
 import { AuthTokenStorageService } from './auth-token-storage.service';
-import { AuthenticationService } from './auth.service';
+import { AuthService } from './auth.service';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -20,7 +20,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
     },
-    AuthenticationService,
+    AuthService,
     AuthTokenStorageService
   ]
 })

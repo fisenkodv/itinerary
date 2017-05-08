@@ -5,7 +5,6 @@ export enum TokenType {
   RefreshToken
 }
 
-
 @Injectable()
 export class AuthTokenStorageService {
 

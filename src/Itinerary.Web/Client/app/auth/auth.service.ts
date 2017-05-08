@@ -12,9 +12,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from '../core/app-config';
 import { AuthTokenStorageService, TokenType } from './auth-token-storage.service';
+import { AuthResult } from './models';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthService {
 
   constructor(
     private http: Http,
@@ -31,7 +32,7 @@ export class AuthenticationService {
     return tokenNotExpired();
   }
 
-  public signin(username: string, password: string): Observable<any> {
+  public signin(username: string, password: string): Observable<AuthResult> {
     const request: any = {
       client_id: AppConfig.identityInfo.clientId,
       grant_type: AppConfig.identityInfo.grantType,
@@ -40,15 +41,25 @@ export class AuthenticationService {
       password
     };
 
-    return this.http.post(AppConfig.authTokenEndpoint, request, this.getRequestOptions())
-      .map((res: Response) => {
-        const body: any = res.json();
-        if (typeof body.access_token !== 'undefined') {
-          this.store(body);
-        }
+    return this.http.post(
+      AppConfig.authTokenEndpoint,
+      this.urlEncode(request),
+      this.getRequestOptions())
+      .map((response: Response) => {
+        this.store(response.json());
+        return new AuthResult(true, null);
       }).catch((error: any) => {
-        return Observable.throw(error);
+        const body: any = error.json();
+        return Observable.throw(new AuthResult(false, body.error_description));
       });
+  }
+
+  private urlEncode(obj: object): string {
+    const urlSearchParams = new URLSearchParams();
+    for (const key of Object.keys(obj)) {
+      urlSearchParams.append(key, obj[key]);
+    }
+    return urlSearchParams.toString();
   }
 
   private store(body: any): void {

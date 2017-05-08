@@ -4,7 +4,7 @@
 
   public static authTokenEndpoint = '/connect/token';
   public static authUserInfoEndpoint = '/connect/userinfo';
- 
+
   public static identityInfo = {
     clientId: 'itineraryWebClient',
     grantType: 'password',
