@@ -1,10 +1,11 @@
-﻿import { NgModule } from '@angular/core';
+﻿import { ApplicationRef, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { createInputTransfer, createNewHosts, removeNgStyles } from '@angularclass/hmr';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -27,6 +28,11 @@ const appProviders = [
   PlacesService,
   GooglePlacesService
 ];
+
+interface StoreType {
+  restoreInputValues: () => void,
+  disposeOldHosts: () => void
+}
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -70,6 +76,22 @@ export function createTranslateLoader(http: Http) {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
+  constructor(public appRef: ApplicationRef) {
+  }
+
+  public hmrOnInit(store: StoreType) {
+    this.appRef.tick();
+  }
+
+  public hmrOnDestroy(store: StoreType) {
+    const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
+    store.disposeOldHosts = createNewHosts(cmpLocation);
+    store.restoreInputValues = createInputTransfer();
+    removeNgStyles();
+  }
+
+  public hmrAfterDestroy(store: StoreType) {
+    store.disposeOldHosts();
+    delete store.disposeOldHosts;
   }
 }
