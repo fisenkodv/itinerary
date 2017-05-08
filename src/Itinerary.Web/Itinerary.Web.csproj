@@ -36,6 +36,9 @@
     <Content Remove="Data\PlacesSnapshot.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\assets\i18n\en.json" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Itinerary.Business\Itinerary.Business.csproj" />
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
     <ProjectReference Include="..\Itinerary.DataAccess\Itinerary.DataAccess.csproj" />

@@ -36,7 +36,7 @@ export class AuthTokenStorageService {
 
   private getTokenName(tokenType: TokenType): string {
     return tokenType === TokenType.AccessToken
-      ? 'id_token'
+      ? 'token'
       : 'refresh_token';
   }
 }

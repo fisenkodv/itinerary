@@ -30,8 +30,8 @@ const appProviders = [
 ];
 
 interface StoreType {
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
+  restoreInputValues: () => void;
+  disposeOldHosts: () => void;
 }
 
 export function createTranslateLoader(http: Http) {

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { SigninDialogComponent } from '../signin/signin-dialog.component';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'header',
@@ -9,11 +10,22 @@ import { SigninDialogComponent } from '../signin/signin-dialog.component';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(public dialog: MdDialog) { }
+  constructor(
+    private dialog: MdDialog,
+    private authService: AuthService) {
+  }
 
-  public openSigninDialog() {
+  public signin() {
     const dialogRef = this.dialog.open(SigninDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
     });
+  }
+
+  public signout() {
+    return;
+  }
+
+  public get signedin(): boolean {
+    return this.authService.loggedIn();
   }
 }

@@ -29,7 +29,9 @@ export class AuthService {
   }
 
   public loggedIn(): boolean {
-    return tokenNotExpired();
+    let token = this.storageService.getToken(TokenType.AccessToken);
+    let expired = tokenNotExpired('token', token);
+    return expired;
   }
 
   public signin(username: string, password: string): Observable<AuthResult> {
