@@ -14,8 +14,6 @@ export class HeaderComponent {
   public openSigninDialog() {
     const dialogRef = this.dialog.open(SigninDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-      //this.selectedOption = result;
     });
   }
 }
