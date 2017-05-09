@@ -42,6 +42,8 @@ export class ProjectConfig extends SeedConfig {
       //{'node_modules/immutable/dist/immutable.js': [ 'Map' ]},
     ];
 
+    this.ENABLE_SCSS = true;
+
     // Add packages (e.g. ng2-translate)
     // let additionalPackages: ExtendPackages[] = [{
     //   name: 'ng2-translate',
@@ -62,7 +64,7 @@ export class ProjectConfig extends SeedConfig {
 
    this.addPackageBundles({
      name:'@angular/flex-layout',
-     path:'node_modules/@angular/flex-layout/index.js',
+     path:'node_modules/@angular/flex-layout/bundles/flex-layout.umd.js',
      packageMeta:{
        main: 'index.js',
        defaultExtension: 'js'
@@ -71,7 +73,7 @@ export class ProjectConfig extends SeedConfig {
 
       this.addPackageBundles({
      name:'@ngx-translate/core',
-     path:'node_modules/@ngx-translate/core/index.js',
+     path:'node_modules/@ngx-translate/core/bundles/core.umd.js',
      packageMeta:{
        main: 'index.js',
        defaultExtension: 'js'
@@ -80,7 +82,7 @@ export class ProjectConfig extends SeedConfig {
 
    this.addPackageBundles({
      name:'@ngx-translate/http-loader',
-     path:'node_modules/@ngx-translate/http-loader/index.js',
+     path:'node_modules/@ngx-translate/http-loader/bundles/http-loader.umd.js',
      packageMeta:{
        main: 'index.js',
        defaultExtension: 'js'

@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 @mixin itinerary-loader-theme($theme) {
   $primary: map-get($theme, primary);

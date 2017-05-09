@@ -14,8 +14,8 @@ import { HomeComponent } from './home.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    TranslateModule.forChild(),
     MaterialModule.forRoot(),
+    TranslateModule.forChild(),
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,

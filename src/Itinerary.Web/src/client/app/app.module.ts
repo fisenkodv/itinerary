@@ -15,22 +15,23 @@ import 'hammerjs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 // import { AuthModule } from './auth';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
+// import { FooterComponent } from './footer/footer.component';
+// import { HeaderComponent } from './header/header.component';
 import { HomeModule } from './home/home.module';
-import { PlacesModule } from './places/places.module';
-import { GooglePlacesService, PlacesService } from './shared';
-import { SigninDialogComponent } from './signin/signin-dialog.component';
+// import { PlacesModule } from './places/places.module';
+// import { GooglePlacesService, PlacesService } from './shared';
+// import { SigninDialogComponent } from './signin/signin-dialog.component';
 
-const appProviders = [
-  PlacesService,
-  GooglePlacesService,
-  {
-    provide: APP_BASE_HREF,
-    useValue: '<%= APP_BASE %>'
-  }
-];
+// const appProviders = [
+//   PlacesService,
+//   GooglePlacesService,
+//   {
+//     provide: APP_BASE_HREF,
+//     useValue: '<%= APP_BASE %>'
+//   }
+// ];
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,13 +40,13 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    SigninDialogComponent
+    // HeaderComponent,
+    // FooterComponent,
+    // SigninDialogComponent
   ],
   entryComponents: [
     AppComponent,
-    SigninDialogComponent
+    // SigninDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -57,19 +58,21 @@ export function createTranslateLoader(http: Http) {
         deps: [Http]
       }
     }),
-    MaterialModule,
+   // MaterialModule.forRoot(),
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
+    SharedModule.forRoot(),
     HomeModule,
-    PlacesModule,
+    // PlacesModule,
     // AuthModule
   ],
-  providers: [
-    appProviders
-  ],
+  providers: [{
+    provide: APP_BASE_HREF,
+    useValue: '<%= APP_BASE %>'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
