@@ -109,7 +109,7 @@ export class ProjectConfig extends SeedConfig {
 
     this.addPackageBundles({
      name:'@agm/core',
-     path:'node_modules/@agm/core/index.js',
+     path:'node_modules/@agm/core/core.umd.js',
      packageMeta:{
        main: 'index.js',
        defaultExtension: 'js'

@@ -20,7 +20,7 @@ import { SharedModule } from './shared/shared.module';
 // import { FooterComponent } from './footer/footer.component';
 // import { HeaderComponent } from './header/header.component';
 import { HomeModule } from './home/home.module';
-// import { PlacesModule } from './places/places.module';
+import { PlacesModule } from './places/places.module';
 // import { GooglePlacesService, PlacesService } from './shared';
 // import { SigninDialogComponent } from './signin/signin-dialog.component';
 
@@ -66,7 +66,7 @@ export function createTranslateLoader(http: Http) {
     AppRoutingModule,
     SharedModule.forRoot(),
     HomeModule,
-    // PlacesModule,
+    PlacesModule,
     // AuthModule
   ],
   providers: [{
