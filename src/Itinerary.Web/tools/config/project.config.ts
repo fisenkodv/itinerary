@@ -51,6 +51,69 @@ export class ProjectConfig extends SeedConfig {
     //
     // this.addPackagesBundles(additionalPackages);
 
+    this.addPackageBundles({
+     name:'@angular/material',
+     path:'node_modules/@angular/material/bundles/material.umd.js',
+     packageMeta:{
+       main: 'index.js',
+       defaultExtension: 'js'
+     }
+   });
+
+   this.addPackageBundles({
+     name:'@angular/flex-layout',
+     path:'node_modules/@angular/flex-layout/index.js',
+     packageMeta:{
+       main: 'index.js',
+       defaultExtension: 'js'
+     }
+   });
+
+      this.addPackageBundles({
+     name:'@ngx-translate/core',
+     path:'node_modules/@ngx-translate/core/index.js',
+     packageMeta:{
+       main: 'index.js',
+       defaultExtension: 'js'
+     }
+   });
+
+   this.addPackageBundles({
+     name:'@ngx-translate/http-loader',
+     path:'node_modules/@ngx-translate/http-loader/index.js',
+     packageMeta:{
+       main: 'index.js',
+       defaultExtension: 'js'
+     }
+   });
+
+   this.addPackageBundles({
+     name:'hammerjs',
+     path:'node_modules/hammerjs/hammer.js',
+     packageMeta:{
+       main: 'index.js',
+       defaultExtension: 'js'
+     }
+   });
+
+   this.addPackageBundles({
+     name:'angular2-jwt',
+     path:'node_modules/angular2-jwt/angular2-jwt.js',
+     packageMeta:{
+       main: 'index.js',
+       defaultExtension: 'js'
+     }
+   });
+
+    this.addPackageBundles({
+     name:'@agm/core',
+     path:'node_modules/@agm/core/index.js',
+     packageMeta:{
+       main: 'index.js',
+       defaultExtension: 'js'
+     }
+   });
+
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [
     //   require('http-proxy-middleware')('/api', { ws: false, target: 'http://localhost:3003' })

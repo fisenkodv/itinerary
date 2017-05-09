@@ -15,14 +15,14 @@ import { SearchCriteria } from '../search-criteria';
   styleUrls: ['search-panel.component.scss']
 })
 export class SearchPanelComponent implements OnInit {
-  private location: Location;
-
   public searchControl: FormControl;
   public filteredPlaces: Autocomplete[];
 
   public distance: number;
   public rating: number;
   public reviews: number;
+
+  private location: Location;
 
   constructor(
     private googlePlacesService: GooglePlacesService,
@@ -45,7 +45,7 @@ export class SearchPanelComponent implements OnInit {
   }
 
   public displayPlace(autocomplete: Autocomplete): string {
-    if (autocomplete != null && autocomplete.placeId) {
+    if (autocomplete !== null && autocomplete.placeId) {
       this.googlePlacesService
         .location(autocomplete.placeId)
         .subscribe((location: Location) => {
@@ -56,17 +56,17 @@ export class SearchPanelComponent implements OnInit {
     return autocomplete ? autocomplete.description : '';
   }
 
-  public changeDistanceHandler({ value }) {
+  public changeDistanceHandler({ value }: any) {
     this.distance = value;
     this.raiseSearch();
   }
 
-  public changeRatingHandler({ value }) {
+  public changeRatingHandler({ value }: any) {
     this.rating = value;
     this.raiseSearch();
   }
 
-  public changeReviewsHandler({ value }) {
+  public changeReviewsHandler({ value }: any) {
     this.reviews = value;
     this.raiseSearch();
   }

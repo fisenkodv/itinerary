@@ -23,11 +23,6 @@ export class AuthService {
     private storageService: AuthTokenStorageService) {
   }
 
-  private getRequestOptions(): RequestOptions {
-    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return new RequestOptions({ headers });
-  }
-
   public loggedIn(): boolean {
     let token = this.storageService.getToken(TokenType.AccessToken);
     let expired = tokenNotExpired('token', token);
@@ -56,11 +51,18 @@ export class AuthService {
       });
   }
 
+  private getRequestOptions(): RequestOptions {
+    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return new RequestOptions({ headers });
+  }
+
   private urlEncode(obj: object): string {
     const urlSearchParams = new URLSearchParams();
-    for (const key of Object.keys(obj)) {
-      urlSearchParams.append(key, obj[key]);
-    }
+    Object.keys(obj).forEach(key => {
+      let value = (<any>obj)[key];
+      urlSearchParams.append(key, value);
+    });
+
     return urlSearchParams.toString();
   }
 
