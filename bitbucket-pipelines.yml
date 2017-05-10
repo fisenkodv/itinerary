@@ -13,5 +13,5 @@ pipelines:
           - BUILD_NUMBER=`git log --oneline | wc -l`
           - echo "Build number':' ${BUILD_NUMBER}"
           - dotnet restore
-          - dotnet build src/Itinerary.Web
+          - dotnet build src/Itinerary.Api
           - dotnet test test/Itinerary.Tests/Itinerary.Tests.csproj
