@@ -6,16 +6,16 @@ namespace Itinerary.Api
 {
   public class Program
   {
-    public static void Main(string[] args)
+    public static void Main( string[] args )
     {
-      var configuration = new ConfigurationBuilder()
-                  .AddCommandLine(args)
-                  .Build();
+      IConfigurationRoot configuration = new ConfigurationBuilder()
+        .AddCommandLine( args )
+        .Build();
 
       IWebHost host = new WebHostBuilder()
         .UseKestrel()
-        .UseContentRoot(Directory.GetCurrentDirectory())
-        .UseConfiguration(configuration)
+        .UseContentRoot( Directory.GetCurrentDirectory() )
+        .UseConfiguration( configuration )
         .UseIISIntegration()
         .UseStartup<Startup>()
         .UseApplicationInsights()
