@@ -1,6 +1,6 @@
 ﻿import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -16,10 +16,10 @@ import { AppConfig } from '../shared/config/app.config';
 import { PlacesRoutingModule } from './places-routing.module';
 import { PlacesComponent } from './places.component';
 // import { SearchMapComponent } from './search-map/search-map.component';
-// import { SearchPanelComponent } from './search-panel/search-panel.component';
+import { SearchPanelComponent } from './search-panel/search-panel.component';
 
-// import { PlacesService } from './places';
-// import { GooglePlacesService } from './google-places';
+//import { PlacesService } from './places';
+import { GooglePlacesService } from './places/google-places.service';
 // import { PlacesCommunicationService } from './places-communication';
 
 /**
@@ -42,20 +42,30 @@ import { PlacesComponent } from './places.component';
     PlacesRoutingModule
   ],
   exports: [
-    PlacesComponent
+      PlacesComponent,
+    SearchPanelComponent,
+    //PlacesComponent,
+    //PlacesService
   ],
   declarations: [
     // JoinPipe,
     PlacesComponent,
-    // SearchPanelComponent,
+    SearchPanelComponent,
     // SearchMapComponent,
     // PlaceListItemComponent,
     // PlaceListComponent,
     // PlaceRatingComponent
   ],
   providers: [
-    // PlacesService
+    //PlacesService,
+    GooglePlacesService
   ]
 })
 export class PlacesModule {
+  // static forRoot(): ModuleWithProviders {
+  //   return {
+  //     ngModule: PlacesModule,
+  //     providers: [PlacesService]
+  //   };
+  // }
 }

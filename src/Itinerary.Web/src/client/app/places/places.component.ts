@@ -1,7 +1,7 @@
 ﻿import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-// import { Location, PlaceDetails, PlacesService } from './places';
+import { Location, PlaceDetails, PlacesService } from './places';
 // import { PlacesCommunicationService,SearchCriteria } from './places-communication';
 
 @Component({
