@@ -20,6 +20,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="1.1.0-beta2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Itinerary.Business\Itinerary.Business.csproj" />

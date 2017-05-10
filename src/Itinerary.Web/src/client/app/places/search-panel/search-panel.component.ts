@@ -5,10 +5,11 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
-import {  GooglePlacesService } from '../places/google-places.service';
+import { GooglePlacesService } from '../places/google-places.service';
 import { Autocomplete, } from '../places/autocompete';
 import { Location } from '../places/location';
-// import { PlacesCommunicationService,SearchCriteria } from '../places-communication';
+import { PlacesCommunicationService } from '../places-communication/places-communication.service';
+import { SearchCriteria } from '../places-communication/search-criteria';
 
 @Component({
   moduleId: module.id,
@@ -29,7 +30,7 @@ export class SearchPanelComponent implements OnInit {
 
   constructor(
     private googlePlacesService: GooglePlacesService,
-    // private placesCommunicationService: PlacesCommunicationService
+    private placesCommunicationService: PlacesCommunicationService
   ) {
     this.searchControl = new FormControl();
     this.distance = 50;
@@ -85,7 +86,7 @@ export class SearchPanelComponent implements OnInit {
   }
 
   private raiseSearch() {
-    // const searchCriteria = new SearchCriteria(this.location, this.distance, this.rating, this.reviews);
-    // this.placesCommunicationService.search(searchCriteria);
+    const searchCriteria = new SearchCriteria(this.location, this.distance, this.rating, this.reviews);
+    this.placesCommunicationService.search(searchCriteria);
   }
 }

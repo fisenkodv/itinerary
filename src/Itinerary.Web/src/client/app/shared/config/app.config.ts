@@ -1,6 +1,6 @@
 ﻿export class AppConfig {
   public static googlePlacesApiKey = 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M';
-  public static itineraryApiBaseUrl = '/api/v1';
+  public static itineraryApiBaseUrl = 'http://localhost:5000/api/v1';
 
   public static authTokenEndpoint = '/connect/token';
   public static authUserInfoEndpoint = '/connect/userinfo';

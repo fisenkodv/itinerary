@@ -20,7 +20,7 @@ import { SearchPanelComponent } from './search-panel/search-panel.component';
 
 import { PlacesService } from './places/places.service';
 import { GooglePlacesService } from './places/google-places.service';
-// import { PlacesCommunicationService } from './places-communication';
+import { PlacesCommunicationService } from './places-communication/places-communication.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -57,7 +57,8 @@ import { GooglePlacesService } from './places/google-places.service';
   ],
   providers: [
     PlacesService,
-    GooglePlacesService
+    GooglePlacesService,
+    PlacesCommunicationService
   ]
 })
 export class PlacesModule {

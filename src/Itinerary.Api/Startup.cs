@@ -17,23 +17,23 @@ namespace Itinerary.Api
   {
     public IConfigurationRoot Configuration { get; }
 
-    public Startup( IHostingEnvironment env, ILoggerFactory loggerFactory )
+    public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
       Configuration = new ConfigurationBuilder()
-        .SetBasePath( env.ContentRootPath )
-        .AddJsonFile( "appsettings.json", optional: true, reloadOnChange: true )
-        .AddJsonFile( $"appsettings.{env.EnvironmentName}.json", optional: true )
+        .SetBasePath(env.ContentRootPath)
+        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
         .AddEnvironmentVariables()
         .Build();
 
-      loggerFactory.AddConsole( Configuration.GetSection( "Logging" ) );
+      loggerFactory.AddConsole(Configuration.GetSection("Logging"));
       loggerFactory.AddDebug();
     }
 
     // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices( IServiceCollection services )
+    public void ConfigureServices(IServiceCollection services)
     {
-      services.AddCompression( Configuration );
+      services.AddCompression(Configuration);
       services.AddMemoryCache();
       services.AddMvc();
       services.AddApiVersioning(
@@ -41,22 +41,28 @@ namespace Itinerary.Api
         {
           options.ReportApiVersions = true;
           options.AssumeDefaultVersionWhenUnspecified = true;
-        } );
+        });
+      services.AddCors(
+        options => options.AddPolicy("AllowAllOrigins",
+    builder =>
+    {
+      builder.AllowAnyOrigin();
+    }));
 
-      services.AddDatabaseServices( Configuration );
+      services.AddDatabaseServices(Configuration);
       services.AddIdentityService();
-      services.AddIdentityServerService( Configuration );
-      services.AddCustomServices( Configuration );
+      services.AddIdentityServerService(Configuration);
+      services.AddCustomServices(Configuration);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure( IApplicationBuilder app, IHostingEnvironment env )
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
-      if ( env.IsDevelopment() )
+      if (env.IsDevelopment())
       {
-        InitializeDatabase( app );
+        InitializeDatabase(app);
       }
-
+       app.UseCors("AllowAllOrigins");
       app.UseIdentity();
 
       JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -75,14 +81,14 @@ namespace Itinerary.Api
         {
           AutomaticAuthenticate = true,
           TokenValidationParameters = tokenValidationParameters
-        } );
+        });
 
       app.UseMvc();
     }
 
-    private static void InitializeDatabase( IApplicationBuilder app )
+    private static void InitializeDatabase(IApplicationBuilder app)
     {
-      using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
+      using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
       {
         serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
         //serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData();
