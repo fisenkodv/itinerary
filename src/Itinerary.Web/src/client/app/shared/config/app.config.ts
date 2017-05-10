@@ -9,5 +9,5 @@
     clientId: 'itineraryWebClient',
     grantType: 'password',
     scope: 'offline_access openid'
-  }
+  };
 }
