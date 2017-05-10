@@ -25,7 +25,7 @@ export class PlacesComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.searchCriteriaSubscription.unsubscribe();
+    //this.searchCriteriaSubscription.unsubscribe();
   }
 
   // public searchHandler(event: SearchCriteria) {

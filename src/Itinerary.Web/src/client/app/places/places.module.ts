@@ -18,7 +18,7 @@ import { PlacesComponent } from './places.component';
 // import { SearchMapComponent } from './search-map/search-map.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 
-//import { PlacesService } from './places';
+import { PlacesService } from './places/places.service';
 import { GooglePlacesService } from './places/google-places.service';
 // import { PlacesCommunicationService } from './places-communication';
 
@@ -42,10 +42,9 @@ import { GooglePlacesService } from './places/google-places.service';
     PlacesRoutingModule
   ],
   exports: [
-      PlacesComponent,
+    PlacesComponent,
     SearchPanelComponent,
     //PlacesComponent,
-    //PlacesService
   ],
   declarations: [
     // JoinPipe,
@@ -57,7 +56,7 @@ import { GooglePlacesService } from './places/google-places.service';
     // PlaceRatingComponent
   ],
   providers: [
-    //PlacesService,
+    PlacesService,
     GooglePlacesService
   ]
 })
