@@ -7,15 +7,12 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 
-// import { AppConfig } from '../core/app-config';
 import { AppConfig } from '../shared/config/app.config';
-// import { JoinPipe } from '../shared';
-
-
 
 import { PlacesRoutingModule } from './places-routing.module';
-import { PlacesComponent } from './places.component';
+import { SharedModule } from '../shared/shared.module';
 
+import { PlacesComponent } from './places.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 import { PlaceListComponent } from './place-list/place-list.component';
 import { PlaceListItemComponent } from './place-list-item/place-list-item.component';
@@ -43,7 +40,8 @@ import { PlacesCommunicationService } from './places-communication/places-commun
       apiKey: AppConfig.googlePlacesApiKey,
       libraries: ['places']
     }),
-    PlacesRoutingModule
+    PlacesRoutingModule,
+    SharedModule
   ],
   exports: [
     PlacesComponent,
@@ -53,7 +51,6 @@ import { PlacesCommunicationService } from './places-communication/places-commun
     SearchMapComponent
   ],
   declarations: [
-    // JoinPipe,
     PlacesComponent,
     SearchPanelComponent,
     PlaceListComponent,
@@ -68,10 +65,4 @@ import { PlacesCommunicationService } from './places-communication/places-commun
   ]
 })
 export class PlacesModule {
-  // static forRoot(): ModuleWithProviders {
-  //   return {
-  //     ngModule: PlacesModule,
-  //     providers: [PlacesService]
-  //   };
-  // }
 }

@@ -9,6 +9,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
+import { JoinPipe } from './join/join.pipe';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -20,10 +22,11 @@ import { FooterComponent } from './footer/footer.component';
     MaterialModule.forRoot(),
     TranslateModule.forChild(),
     FlexLayoutModule],
-  declarations: [HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, JoinPipe],
   exports: [
     HeaderComponent,
     FooterComponent,
+    JoinPipe,
     CommonModule,
     FormsModule,
     RouterModule]
