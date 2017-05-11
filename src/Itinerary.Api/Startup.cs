@@ -89,7 +89,7 @@ namespace Itinerary.Api
       using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
       {
         serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
-        //serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData();
+        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData();
         serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
         serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().Database.Migrate();
         serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().EnsureSeedData();
