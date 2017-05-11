@@ -42,6 +42,10 @@ export class PlaceListComponent implements OnDestroy {
     return this.selectedPlace !== null ? place.name === this.selectedPlace.name : false;
   }
 
+  public trackPlace(index: number, place: PlaceDetails): string {
+    return place ? place.name : undefined;
+  }
+
   private selectPlaceListItem(place: PlaceDetails) {
     this.selectedPlace = place;
     this.hostElement.nativeElement.scrollTop = document.getElementById(this.getPlaceListItemId(place)).offsetTop - 1;
