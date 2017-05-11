@@ -13,8 +13,8 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-    // this.APP_TITLE = 'Put name of your app here';
-    // this.GOOGLE_ANALYTICS_ID = 'Your site's ID';
+    this.APP_TITLE = 'Put name of your app here';
+    this.GOOGLE_ANALYTICS_ID = 'UA-96353507-1';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
@@ -53,68 +53,66 @@ export class ProjectConfig extends SeedConfig {
     //
     // this.addPackagesBundles(additionalPackages);
 
-    this.addPackageBundles({
-     name:'@angular/material',
-     path:'node_modules/@angular/material/bundles/material.umd.js',
-     packageMeta:{
-       main: 'index.js',
-       defaultExtension: 'js'
-     }
-   });
+    let bundles = [
+      {
+        name: '@angular/material',
+        path: 'node_modules/@angular/material/bundles/material.umd.js',
+        packageMeta: {
+          main: 'index.js',
+          defaultExtension: 'js'
+        }
+      },
+      {
+        name: '@angular/flex-layout',
+        path: 'node_modules/@angular/flex-layout/bundles/flex-layout.umd.js',
+        packageMeta: {
+          main: 'index.js',
+          defaultExtension: 'js'
+        }
+      },
+      {
+        name: '@ngx-translate/core',
+        path: 'node_modules/@ngx-translate/core/bundles/core.umd.js',
+        packageMeta: {
+          main: 'index.js',
+          defaultExtension: 'js'
+        }
+      },
+      {
+        name: '@ngx-translate/http-loader',
+        path: 'node_modules/@ngx-translate/http-loader/bundles/http-loader.umd.js',
+        packageMeta: {
+          main: 'index.js',
+          defaultExtension: 'js'
+        }
+      },
+      {
+        name: 'hammerjs',
+        path: 'node_modules/hammerjs/hammer.js',
+        packageMeta: {
+          main: 'index.js',
+          defaultExtension: 'js'
+        }
+      },
+      {
+        name: 'angular2-jwt',
+        path: 'node_modules/angular2-jwt/angular2-jwt.js',
+        packageMeta: {
+          main: 'index.js',
+          defaultExtension: 'js'
+        }
+      },
+      {
+        name: '@agm/core',
+        path: 'node_modules/@agm/core/core.umd.js',
+        packageMeta: {
+          main: 'index.js',
+          defaultExtension: 'js'
+        }
+      }
+    ];
 
-   this.addPackageBundles({
-     name:'@angular/flex-layout',
-     path:'node_modules/@angular/flex-layout/bundles/flex-layout.umd.js',
-     packageMeta:{
-       main: 'index.js',
-       defaultExtension: 'js'
-     }
-   });
-
-      this.addPackageBundles({
-     name:'@ngx-translate/core',
-     path:'node_modules/@ngx-translate/core/bundles/core.umd.js',
-     packageMeta:{
-       main: 'index.js',
-       defaultExtension: 'js'
-     }
-   });
-
-   this.addPackageBundles({
-     name:'@ngx-translate/http-loader',
-     path:'node_modules/@ngx-translate/http-loader/bundles/http-loader.umd.js',
-     packageMeta:{
-       main: 'index.js',
-       defaultExtension: 'js'
-     }
-   });
-
-   this.addPackageBundles({
-     name:'hammerjs',
-     path:'node_modules/hammerjs/hammer.js',
-     packageMeta:{
-       main: 'index.js',
-       defaultExtension: 'js'
-     }
-   });
-
-   this.addPackageBundles({
-     name:'angular2-jwt',
-     path:'node_modules/angular2-jwt/angular2-jwt.js',
-     packageMeta:{
-       main: 'index.js',
-       defaultExtension: 'js'
-     }
-   });
-
-    this.addPackageBundles({
-     name:'@agm/core',
-     path:'node_modules/@agm/core/core.umd.js',
-     packageMeta:{
-       main: 'index.js',
-       defaultExtension: 'js'
-     }
-   });
+    this.addPackagesBundles(bundles);
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [
