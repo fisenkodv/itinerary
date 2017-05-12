@@ -5,26 +5,5 @@
     "**/coverage_js": true,
     "**/coverage": true,
     "**/dist": true
-  },
-  "TodoParser": {
-    "exclude": [
-      "cpp",
-      "c"
-    ],
-    "include": [
-      "ts",
-      "scss"
-    ],
-    "folderExclude": [
-      "node_modules",
-      ".vscode"
-    ],
-    "only": [],
-    "markers": [
-      "TODO:",
-      "NOTE:",
-      "REMINDER:"
-    ],
-    "autoDefaultMarkers": true
   }
 }

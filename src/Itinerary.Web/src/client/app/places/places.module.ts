@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { AppConfig } from '../shared/config/app.config';
+import { Config } from '../shared/config/env.config';
 
 import { SharedModule } from '../shared/shared.module';
 import { PlacesRoutingModule } from './places-routing.module';
@@ -23,10 +23,6 @@ import { PlacesCommunicationService } from './places-communication/places-commun
 import { GooglePlacesService } from './places/google-places.service';
 import { PlacesService } from './places/places.service';
 
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
-
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +33,7 @@ import { PlacesService } from './places/places.service';
     ReactiveFormsModule,
     HttpModule,
     AgmCoreModule.forRoot({
-      apiKey: AppConfig.googlePlacesApiKey,
+      apiKey: Config.APIKeys.Google.Places,
       libraries: ['places']
     }),
     PlacesRoutingModule,

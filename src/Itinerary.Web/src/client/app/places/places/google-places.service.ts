@@ -2,23 +2,32 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { AppConfig } from '../../shared/config/app.config';
+import { Config } from '../../shared/config/env.config';
+import { BaseService } from './base.service';
 import { Autocomplete, Location } from './models';
 
 @Injectable()
-export class GooglePlacesService {
+export class GooglePlacesService extends BaseService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    super();
+  }
 
   public autocomplete(keyword: string): Observable<Autocomplete[]> {
-    return this.http.get(`${AppConfig
-      .itineraryApiBaseUrl}/google/places/autocomplete?keyword=${keyword}`)
+    const baseUrl = `${super.getBaseServiceUrl()}/google/places/autocomplete`;
+    const parameters = {
+      keyword
+    };
+    return this.http.get(`${baseUrl}?${super.urlEncode(parameters)}`)
       .map((response: Response) => response.json() as Autocomplete[]);
   }
 
   public location(placeId: string): Observable<Location> {
-    return this.http.get(`${AppConfig
-      .itineraryApiBaseUrl}/google/places/location?placeid=${placeId}`)
+    const baseUrl = `${super.getBaseServiceUrl()}/google/places/location`;
+    const parameters = {
+      placeid: placeId
+    };
+    return this.http.get(`${baseUrl}?${super.urlEncode(parameters)}`)
       .map((response: Response) => response.json() as Location);
   }
 }

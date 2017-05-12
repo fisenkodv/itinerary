@@ -1,18 +1,18 @@
-import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
-import { Http, RequestOptions } from '@angular/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { MaterialModule } from '@angular/material';
-import { TranslateModule } from '@ngx-translate/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Http, RequestOptions } from '@angular/http';
+import { MaterialModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { AuthHttp } from 'angular2-jwt';
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { SigninDialogComponent } from './signin/signin-dialog.component';
-import { AuthService, AuthHttpServiceFactory } from './auth/auth.service';
+import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
 import { TokenStorageService } from './auth/token-storage.service';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { SigninDialogComponent } from './signin/signin-dialog.component';
 
 @NgModule({
   imports: [
@@ -33,7 +33,7 @@ import { TokenStorageService } from './auth/token-storage.service';
   ]
 })
 export class CoreModule {
-  static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
       providers: [

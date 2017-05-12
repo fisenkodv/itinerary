@@ -3,5 +3,7 @@
     "tslint:recommended",
     "./tools/config/seed.tslint.json"
   ],
-  "rules": {}
+  "rules": {
+    "object-literal-sort-keys": false
+  }
 }

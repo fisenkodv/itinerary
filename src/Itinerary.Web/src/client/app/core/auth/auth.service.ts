@@ -10,9 +10,10 @@ import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
-import { AppConfig } from '../../shared/config/app.config';
-import { TokenStorageService, TokenType } from './token-storage.service';
+import { Config } from '../../shared/config/env.config';
+
 import { AuthResult } from './models/auth-result.model';
+import { TokenStorageService, TokenType } from './token-storage.service';
 
 export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -24,6 +25,9 @@ export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
 
 @Injectable()
 export class AuthService {
+  private clientId: string = 'itineraryWebClient';
+  private grantType: string = 'password';
+  private scope: string = 'offline_access openid';
 
   constructor(
     private http: Http,
@@ -31,28 +35,23 @@ export class AuthService {
     private storageService: TokenStorageService) {
   }
 
-  private getRequestOptions(): RequestOptions {
-    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return new RequestOptions({ headers });
-  }
-
   public loggedIn(): boolean {
-    let token = this.storageService.getToken(TokenType.AccessToken);
-    let expired = tokenNotExpired('token', token);
+    const token = this.storageService.getToken(TokenType.AccessToken);
+    const expired = tokenNotExpired('token', token);
     return expired;
   }
 
   public signin(username: string, password: string): Observable<AuthResult> {
     const request: any = {
-      client_id: AppConfig.identityInfo.clientId,
-      grant_type: AppConfig.identityInfo.grantType,
-      scope: AppConfig.identityInfo.scope,
+      client_id: this.clientId,
+      grant_type: this.grantType,
+      scope: this.scope,
       username,
       password
     };
 
     return this.http.post(
-      AppConfig.authTokenEndpoint,
+      `${Config.API}/connect/token`,
       this.urlEncode(request),
       this.getRequestOptions())
       .map((response: Response) => {
@@ -62,6 +61,11 @@ export class AuthService {
         const body: any = error.json();
         return Observable.throw(new AuthResult(false, body.error_description));
       });
+  }
+
+  private getRequestOptions(): RequestOptions {
+    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return new RequestOptions({ headers });
   }
 
   private urlEncode(obj: any): string {

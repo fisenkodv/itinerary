@@ -1,6 +1,5 @@
-﻿import { Config } from './shared/config/env.config';
-import './operators';
-
+﻿import './operators';
+import { Config } from './shared/config/env.config';
 
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
