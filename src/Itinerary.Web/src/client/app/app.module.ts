@@ -1,4 +1,4 @@
-﻿import { ApplicationRef, NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,27 +11,12 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import 'hammerjs';
 
-// import '../styles/styles.scss';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-// import { AuthModule } from './auth';
-// import { FooterComponent } from './footer/footer.component';
-// import { HeaderComponent } from './header/header.component';
+
+import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { PlacesModule } from './places/places.module';
-// import { GooglePlacesService, PlacesService } from './shared';
-// import { SigninDialogComponent } from './signin/signin-dialog.component';
-
-// const appProviders = [
-//   PlacesService,
-//   GooglePlacesService,
-//   {
-//     provide: APP_BASE_HREF,
-//     useValue: '<%= APP_BASE %>'
-//   }
-// ];
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -39,14 +24,10 @@ export function createTranslateLoader(http: Http) {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    // HeaderComponent,
-    // FooterComponent,
-    // SigninDialogComponent
+    AppComponent
   ],
   entryComponents: [
-    AppComponent,
-    // SigninDialogComponent
+    AppComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -58,16 +39,14 @@ export function createTranslateLoader(http: Http) {
         deps: [Http]
       }
     }),
-   // MaterialModule.forRoot(),
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    SharedModule.forRoot(),
+    CoreModule.forRoot(),
     HomeModule,
-    PlacesModule,
-    // AuthModule
+    PlacesModule
   ],
   providers: [{
     provide: APP_BASE_HREF,
@@ -76,6 +55,4 @@ export function createTranslateLoader(http: Http) {
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef) {
-  }
 }

@@ -6,14 +6,7 @@ import { MaterialModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-
 import { JoinPipe } from './join/join.pipe';
-
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
 
 @NgModule({
   imports: [
@@ -22,14 +15,9 @@ import { JoinPipe } from './join/join.pipe';
     MaterialModule.forRoot(),
     TranslateModule.forChild(),
     FlexLayoutModule],
-  declarations: [HeaderComponent, FooterComponent, JoinPipe],
+  declarations: [JoinPipe],
   exports: [
-    HeaderComponent,
-    FooterComponent,
-    JoinPipe,
-    CommonModule,
-    FormsModule,
-    RouterModule]
+    JoinPipe]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

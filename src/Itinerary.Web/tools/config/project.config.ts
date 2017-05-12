@@ -13,7 +13,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
-    this.APP_TITLE = 'Put name of your app here';
+    this.APP_TITLE = 'Itinerary';
     this.GOOGLE_ANALYTICS_ID = 'UA-96353507-1';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
