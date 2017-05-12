@@ -1,5 +1,7 @@
 {
-  "extends": "./tools/config/seed.tslint.json",
-  "rules": {
-  }
+  "extends": [
+    "tslint:recommended",
+    "./tools/config/seed.tslint.json"
+  ],
+  "rules": {}
 }

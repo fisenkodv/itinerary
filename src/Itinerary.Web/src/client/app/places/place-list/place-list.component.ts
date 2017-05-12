@@ -1,8 +1,8 @@
 ﻿import { Component, ElementRef, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { PlaceDetails } from '../places/placedetails';
 import { PlacesCommunicationService } from '../places-communication/places-communication.service';
+import { PlaceDetails } from '../places/models';
 
 @Component({
   moduleId: module.id,

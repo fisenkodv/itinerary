@@ -64,7 +64,7 @@ export class AuthService {
       });
   }
 
-  private urlEncode(obj: object): string {
+  private urlEncode(obj: any): string {
     const urlSearchParams = new URLSearchParams();
     for (const key of Object.keys(obj)) {
       urlSearchParams.append(key, obj[key]);

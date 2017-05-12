@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { PlaceDetails } from '../places/placedetails';
+import { PlaceDetails } from '../places/models';
 import { SearchCriteria } from './search-criteria';
 
 @Injectable()

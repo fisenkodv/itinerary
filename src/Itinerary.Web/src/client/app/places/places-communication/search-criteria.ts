@@ -1,4 +1,4 @@
-import { Location } from '../places/location';
+import { Location } from '../places/models';
 
 export class SearchCriteria {
   // default location is 'Geographic center of the contiguous United States'

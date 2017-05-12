@@ -5,11 +5,10 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 
-import { GooglePlacesService } from '../places/google-places.service';
-import { Autocomplete, } from '../places/autocompete';
-import { Location } from '../places/location';
 import { PlacesCommunicationService } from '../places-communication/places-communication.service';
 import { SearchCriteria } from '../places-communication/search-criteria';
+import { GooglePlacesService } from '../places/google-places.service';
+import { Autocomplete, Location } from '../places/models';
 
 @Component({
   moduleId: module.id,

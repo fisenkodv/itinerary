@@ -1,9 +1,8 @@
 ﻿import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
+import { Location, PlaceDetails } from './places/models';
 import { PlacesService } from './places/places.service';
-import { Location } from './places/location';
-import { PlaceDetails } from './places/placedetails';
 
 import { PlacesCommunicationService } from './places-communication/places-communication.service';
 import { SearchCriteria } from './places-communication/search-criteria';
@@ -12,8 +11,7 @@ import { SearchCriteria } from './places-communication/search-criteria';
   moduleId: module.id,
   selector: 'places',
   templateUrl: 'places.component.html',
-  styleUrls: ['places.component.css'],
-  //providers: [PlacesCommunicationService]
+  styleUrls: ['places.component.css']
 })
 export class PlacesComponent implements OnDestroy {
   public searchCriteria: SearchCriteria;
