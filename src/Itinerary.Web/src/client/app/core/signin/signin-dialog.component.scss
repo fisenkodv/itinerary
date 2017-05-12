@@ -1,0 +1,14 @@
+@import '@angular/material/theming';
+@import '../../../../scss/variables';
+
+.input {
+  &--fullwidth{
+    width: 100%;
+  }
+}
+
+.error-message {
+  $warn: map-get($itinerary-light-theme, warn);
+  color: mat-color($warn);
+  margin: auto;
+}

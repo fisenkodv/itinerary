@@ -1,4 +1,5 @@
-﻿export class AppConfig {
+﻿//TODO: move to env.config.ts
+export class AppConfig {
   public static googlePlacesApiKey = 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M';
   public static itineraryApiBaseUrl = 'http://localhost:5000/api/v1';
 

@@ -1,0 +1,15 @@
+<h1 md-dialog-title>{{'signin.title' | translate }}</h1>
+<div md-dialog-content>
+  <md-input-container class="input--fullwidth">
+    <input type="email" mdInput [(ngModel)]="username">
+    <md-placeholder>{{'signin.username.placeholder' | translate }}</md-placeholder>
+  </md-input-container>
+  <md-input-container class="input--fullwidth">
+    <input type="password" mdInput [(ngModel)]="password">
+    <md-placeholder>{{'signin.password.placeholder' | translate }}</md-placeholder>
+  </md-input-container>
+</div>
+<div md-dialog-actions>
+  <button md-raised-button color="primary" (click)="signin()">{{'signin.signin-button.label' | translate }}</button>
+  <span class="error-message">{{error}}</span>
+</div>
