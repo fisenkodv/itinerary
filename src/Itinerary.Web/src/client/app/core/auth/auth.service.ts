@@ -1,6 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-
 import { AuthConfig, AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/throw';
@@ -10,8 +9,7 @@ import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
-import { Config } from '../../shared/config/env.config';
-
+import { BaseService } from '../base.service';
 import { AuthResult } from './models/auth-result.model';
 import { TokenStorageService, TokenType } from './token-storage.service';
 
@@ -24,7 +22,7 @@ export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
 }
 
 @Injectable()
-export class AuthService {
+export class AuthService extends BaseService {
   private clientId: string = 'itineraryWebClient';
   private grantType: string = 'password';
   private scope: string = 'offline_access openid';
@@ -33,6 +31,7 @@ export class AuthService {
     private http: Http,
     private authHttp: AuthHttp,
     private storageService: TokenStorageService) {
+    super();
   }
 
   public loggedIn(): boolean {
@@ -42,6 +41,7 @@ export class AuthService {
   }
 
   public signin(username: string, password: string): Observable<AuthResult> {
+    const baseUrl = `${super.getBaseServiceUrl(false)}/connect/token`;
     const request: any = {
       client_id: this.clientId,
       grant_type: this.grantType,
@@ -51,8 +51,8 @@ export class AuthService {
     };
 
     return this.http.post(
-      `${Config.API}/connect/token`,
-      this.urlEncode(request),
+      baseUrl,
+      super.urlEncode(request),
       this.getRequestOptions())
       .map((response: Response) => {
         this.store(response.json());
@@ -66,14 +66,6 @@ export class AuthService {
   private getRequestOptions(): RequestOptions {
     const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     return new RequestOptions({ headers });
-  }
-
-  private urlEncode(obj: any): string {
-    const urlSearchParams = new URLSearchParams();
-    for (const key of Object.keys(obj)) {
-      urlSearchParams.append(key, obj[key]);
-    }
-    return urlSearchParams.toString();
   }
 
   private store(body: any): void {

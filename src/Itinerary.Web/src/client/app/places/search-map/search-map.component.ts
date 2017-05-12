@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { PlacesCommunicationService } from '../places-communication/places-communication.service';
 import { SearchCriteria } from '../places-communication/search-criteria';
-import { PlaceDetails } from '../places/models';
+import { PlaceDetails } from '../places/models/index';
 import { MapPlaceDetails } from './map-place-details';
 
 @Component({

@@ -2,9 +2,9 @@
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
+import { BaseService } from '../../core/base.service';
 import { Config } from '../../shared/config/env.config';
-import { BaseService } from './base.service';
-import { PlaceDetails } from './models';
+import { PlaceDetails } from './models/index';
 
 @Injectable()
 export class PlacesService extends BaseService {
@@ -19,14 +19,14 @@ export class PlacesService extends BaseService {
     rating: number,
     reviews: number): Observable<PlaceDetails[]> {
     const baseUrl = `${super.getBaseServiceUrl()}/places/search`;
-    const parameters = {
+    const request = {
       lat: latitude,
       lng: longitude,
       distance,
       rating,
       reviews
     };
-    return this.http.get(`${baseUrl}?${super.urlEncode(parameters)}`)
+    return this.http.get(`${baseUrl}?${super.urlEncode(request)}`)
       .map((response: Response) => response.json() as PlaceDetails[]);
   }
 }

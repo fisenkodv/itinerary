@@ -1,6 +1,6 @@
 ﻿import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { PlaceDetails } from '../places/models';
+import { PlaceDetails } from '../places/models/index';
 
 @Component({
   moduleId: module.id,

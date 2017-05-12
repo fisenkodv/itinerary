@@ -1,8 +1,9 @@
-import { Config } from '../../shared/config/env.config';
+import { Config } from '../shared/config/env.config';
 
 export abstract class BaseService {
-  protected getBaseServiceUrl(): string {
-    return `${Config.API}api/${Config.APIVersion}/`;
+  protected getBaseServiceUrl(appendVersion: boolean = true): string {
+    const version = appendVersion ? `api/${Config.APIVersion}` : '';
+    return `${Config.API}${version}/`;
   }
 
   protected urlEncode(obj: any): string {

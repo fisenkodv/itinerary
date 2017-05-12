@@ -2,7 +2,7 @@
 import { Subscription } from 'rxjs/Subscription';
 
 import { PlacesCommunicationService } from '../places-communication/places-communication.service';
-import { PlaceDetails } from '../places/models';
+import { PlaceDetails } from '../places/models/index';
 
 @Component({
   moduleId: module.id,
