@@ -33,7 +33,7 @@ import { PlacesService } from './places/places.service';
     ReactiveFormsModule,
     HttpModule,
     AgmCoreModule.forRoot({
-      apiKey: Config.APIKeys.Google.Places,
+      apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M',
       libraries: ['places']
     }),
     PlacesRoutingModule,
