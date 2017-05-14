@@ -2,7 +2,7 @@ import { Config } from '../shared/config/env.config';
 
 export abstract class BaseService {
   protected getBaseServiceUrl(appendVersion: boolean = true): string {
-    const version = appendVersion ? `api/${Config.APIVersion}` : '';
+    const version = appendVersion ? `api/${Config.APIVersion}/` : '';
     return `${Config.API}${version}`;
   }
 

@@ -18,7 +18,7 @@ export class PlacesService extends BaseService {
     distance: number,
     rating: number,
     reviews: number): Observable<PlaceDetails[]> {
-    const baseUrl = `${super.getBaseServiceUrl()}/places/search`;
+    const baseUrl = `${super.getBaseServiceUrl()}places/search`;
     const request = {
       lat: latitude,
       lng: longitude,

@@ -14,7 +14,7 @@ export class GooglePlacesService extends BaseService {
   }
 
   public autocomplete(keyword: string): Observable<Autocomplete[]> {
-    const baseUrl = `${super.getBaseServiceUrl()}/google/places/autocomplete`;
+    const baseUrl = `${super.getBaseServiceUrl()}google/places/autocomplete`;
     const request = {
       keyword
     };
@@ -23,7 +23,7 @@ export class GooglePlacesService extends BaseService {
   }
 
   public location(placeId: string): Observable<Location> {
-    const baseUrl = `${super.getBaseServiceUrl()}/google/places/location`;
+    const baseUrl = `${super.getBaseServiceUrl()}google/places/location`;
     const request = {
       placeid: placeId
     };

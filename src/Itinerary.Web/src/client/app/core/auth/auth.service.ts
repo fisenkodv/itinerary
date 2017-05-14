@@ -41,7 +41,7 @@ export class AuthService extends BaseService {
   }
 
   public signin(username: string, password: string): Observable<AuthResult> {
-    const baseUrl = `${super.getBaseServiceUrl(false)}/connect/token`;
+    const baseUrl = `${super.getBaseServiceUrl(false)}connect/token`;
     const request: any = {
       client_id: this.clientId,
       grant_type: this.grantType,
