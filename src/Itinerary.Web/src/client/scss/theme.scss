@@ -1,0 +1,11 @@
+﻿@import '@angular/material/theming';
+@import 'variables';
+@import 'loader';
+
+@mixin itinerary-material-theme($theme) {
+  @include angular-material-theme($theme);
+  @include itinerary-loader-theme($theme);
+}
+
+@include mat-core();
+@include itinerary-material-theme($itinerary-light-theme);

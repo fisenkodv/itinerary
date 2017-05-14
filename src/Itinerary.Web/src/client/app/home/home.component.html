@@ -1,0 +1,67 @@
+<div class="splash">
+  <div class="splash__overlay splash__overlay--center">
+    <ul class="intro">
+      <li>
+        <h1 class="">{{'home.hero.title' | translate }}</h1>
+      </li>
+      <li>
+        <p class="">{{'home.hero.motto' | translate }}</p>
+      </li>
+      <li>
+        <a md-raised-button color="accent" [routerLink]="['/places']">{{'home.hero.button-label' | translate }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="details" fxLayout="column">
+  <div class="divider" fxFlex>
+    <h2 class="divider__title">{{'home.about.title' | translate }}</h2>
+  </div>
+  <section class="text-center" fxFlex fxFlexAlign="center">
+    <p class="details__paragraph">{{'home.about.description' | translate }}</p>
+  </section>
+
+  <div class="divider" fxFlex>
+    <h2 class="divider__title">{{'home.features.title' | translate }}</h2>
+  </div>
+  <section fxFlex>
+    <div fxLayout='column' fxLayoutAlign="center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-around start">
+      <md-card class="feature-card" fxFlex="noshrink" fxFlex.gt-sm="45">
+        <md-card-header>
+          <md-card-title>{{'home.features.places.title' | translate }}</md-card-title>
+          <md-card-subtitle>{{'home.features.places.description' | translate }}</md-card-subtitle>
+        </md-card-header>
+        <img md-card-image src="assets/img/travel-plans.jpg">
+        <md-card-content>
+          <ul class="features-list">
+            <li>{{'home.features.places.feature-1' | translate }}</li>
+            <li>{{'home.features.places.feature-2' | translate }}</li>
+            <li>{{'home.features.places.feature-3' | translate }}</li>
+          </ul>
+        </md-card-content>
+        <md-card-actions>
+          <a md-button [routerLink]="['/places']">{{'home.features.places.button-label' | translate }}</a>
+        </md-card-actions>
+      </md-card>
+      <md-card class="feature-card" fxFlex="noshrink" fxFlex.gt-sm="45">
+        <md-card-header>
+          <md-card-title>{{'home.features.route.title' | translate }}</md-card-title>
+          <md-card-subtitle>{{'home.features.route.description' | translate }}</md-card-subtitle>
+        </md-card-header>
+        <img md-card-image src="assets/img/travel-notes.jpg">
+        <md-card-content>
+          <ul class="features-list">
+            <li>{{'home.features.route.feature-1' | translate }}</li>
+            <li>{{'home.features.route.feature-2' | translate }}</li>
+            <li>{{'home.features.route.feature-3' | translate }}</li>
+          </ul>
+        </md-card-content>
+        <md-card-actions>
+          <a md-button [disabled]="true" [routerLink]="['/home']">{{'home.features.route.button-label' | translate }}</a>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </section>
+</div>
+

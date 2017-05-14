@@ -113,7 +113,7 @@ pscp root@itinerary.site:/etc/supervisor/conf.d/itinerary.conf .
 __To Digital Ocean from dev environment__:
 macOS, Linux:
 ```
-rsync -a itinerary.conf root@174.138.76.175:/etc/supervisor/conf.d/itinerary.conf
+rsync -a itinerary.conf root@itinerary.site:/etc/supervisor/conf.d/itinerary.conf
 ```
 
 ### Pathes
