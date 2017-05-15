@@ -146,7 +146,7 @@
     "@angular/router": "^4.1.0",
     "@angular/service-worker": "^1.0.0-beta.13",
     "@angular/flex-layout": "2.0.0-beta.8",
-    "@angular/material": "2.0.0-beta.3",
+    "@angular/material": "2.0.0-beta.5",
     "@agm/core": "1.0.0-beta.0",
     "@ngx-translate/core": "6.0.1",
     "@ngx-translate/http-loader": "0.0.3",

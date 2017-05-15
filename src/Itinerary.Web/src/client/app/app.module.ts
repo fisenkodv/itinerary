@@ -28,6 +28,10 @@ export function CreateTranslateLoader(http: Http) {
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    FlexLayoutModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -35,10 +39,6 @@ export function CreateTranslateLoader(http: Http) {
         deps: [Http]
       }
     }),
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
     AppRoutingModule,
     CoreModule.forRoot(),
     HomeModule,

@@ -1,7 +1,6 @@
 ﻿import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
@@ -26,18 +25,16 @@ import { PlacesService } from './places/places.service';
 @NgModule({
   imports: [
     CommonModule,
-    TranslateModule.forChild(),
-    MaterialModule.forRoot(),
-    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    TranslateModule.forChild(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M',
       libraries: ['places']
     }),
-    PlacesRoutingModule,
-    SharedModule
+    SharedModule,
+    PlacesRoutingModule
   ],
   exports: [
     PlacesComponent,

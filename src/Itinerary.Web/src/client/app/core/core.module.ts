@@ -3,11 +3,11 @@ import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, RequestOptions } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthHttp } from 'angular2-jwt';
 
+import { ItineraryMaterialModule } from '../shared/material.module';
 import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
 import { TokenStorageService } from './auth/token-storage.service';
 import { FooterComponent } from './footer/footer.component';
@@ -20,9 +20,10 @@ import { SigninDialogComponent } from './signin/signin-dialog.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule.forRoot(),
     TranslateModule.forChild(),
-    FlexLayoutModule],
+    FlexLayoutModule,
+    ItineraryMaterialModule,
+  ],
   entryComponents: [
     SigninDialogComponent
   ],

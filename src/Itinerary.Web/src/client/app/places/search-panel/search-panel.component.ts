@@ -37,7 +37,7 @@ export class SearchPanelComponent implements OnInit {
     this.reviews = 50;
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.searchControl.valueChanges
       .debounceTime(200)
       .switchMap((keyword) => this.googlePlacesService.autocomplete(keyword as string))

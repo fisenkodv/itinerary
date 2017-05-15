@@ -53,7 +53,7 @@ export class ProjectConfig extends SeedConfig {
     //
     // this.addPackagesBundles(additionalPackages);
 
-    let bundles = [
+    const bundles = [
       {
         name: '@angular/material',
         path: 'node_modules/@angular/material/bundles/material.umd.js',
