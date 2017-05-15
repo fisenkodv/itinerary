@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthHttp } from 'angular2-jwt';
 
-import { ItineraryMaterialModule } from '../shared/material.module';
+import { MaterialModule } from '../shared/material.module';
 import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
 import { TokenStorageService } from './auth/token-storage.service';
 import { FooterComponent } from './footer/footer.component';
@@ -22,7 +22,7 @@ import { SigninDialogComponent } from './signin/signin-dialog.component';
     ReactiveFormsModule,
     TranslateModule.forChild(),
     FlexLayoutModule,
-    ItineraryMaterialModule,
+    MaterialModule,
   ],
   entryComponents: [
     SigninDialogComponent

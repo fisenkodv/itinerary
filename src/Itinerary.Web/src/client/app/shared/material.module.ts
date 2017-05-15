@@ -37,5 +37,5 @@ import {
     MdToolbarModule,
     MdTooltipModule]
 })
-export class ItineraryMaterialModule {
+export class MaterialModule {
 }

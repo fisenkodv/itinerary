@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ItineraryMaterialModule } from '../shared/material.module';
+import { MaterialModule } from '../shared/material.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
@@ -19,7 +19,7 @@ import { HomeComponent } from './home.component';
     FlexLayoutModule,
     TranslateModule.forChild(),
     HomeRoutingModule,
-    ItineraryMaterialModule
+    MaterialModule
   ],
   exports: [],
   declarations: [HomeComponent],

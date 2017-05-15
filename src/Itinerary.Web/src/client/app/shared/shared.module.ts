@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { JoinPipe } from './join/join.pipe';
-import { ItineraryMaterialModule } from './material.module';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   imports: [
@@ -14,12 +14,12 @@ import { ItineraryMaterialModule } from './material.module';
     RouterModule,
     TranslateModule.forChild(),
     FlexLayoutModule,
-    ItineraryMaterialModule
+    MaterialModule
   ],
   declarations: [JoinPipe],
   exports: [
     FlexLayoutModule,
-    ItineraryMaterialModule,
+    MaterialModule,
     JoinPipe
   ]
 })
