@@ -12,14 +12,14 @@ import { AuthResult } from '../auth/models/auth-result.model';
   styleUrls: ['signin-dialog.component.css']
 })
 
-export class SigninDialogComponent {
+export class SignInDialogComponent {
   public username: string;
   public password: string;
   public error: string;
 
   constructor(
     private translateService: TranslateService,
-    private dialogRef: MdDialogRef<SigninDialogComponent>,
+    private dialogRef: MdDialogRef<SignInDialogComponent>,
     private authService: AuthService) {
   }
 

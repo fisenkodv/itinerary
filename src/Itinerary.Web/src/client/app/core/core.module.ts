@@ -12,7 +12,7 @@ import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
 import { TokenStorageService } from './auth/token-storage.service';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { SigninDialogComponent } from './signin/signin-dialog.component';
+import { SignInDialogComponent } from './signin/signin-dialog.component';
 
 @NgModule({
   imports: [
@@ -25,9 +25,9 @@ import { SigninDialogComponent } from './signin/signin-dialog.component';
     MaterialModule,
   ],
   entryComponents: [
-    SigninDialogComponent
+    SignInDialogComponent
   ],
-  declarations: [HeaderComponent, FooterComponent, SigninDialogComponent],
+  declarations: [HeaderComponent, FooterComponent, SignInDialogComponent],
   exports: [
     HeaderComponent,
     FooterComponent

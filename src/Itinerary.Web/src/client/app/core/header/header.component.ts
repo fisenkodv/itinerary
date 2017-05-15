@@ -2,7 +2,7 @@
 import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { AuthService } from '../auth/auth.service';
-import { SigninDialogComponent } from '../signin/signin-dialog.component';
+import { SignInDialogComponent } from '../signin/signin-dialog.component';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +17,7 @@ export class HeaderComponent {
   }
 
   public signin() {
-    const dialogRef = this.dialog.open(SigninDialogComponent);
+    const dialogRef = this.dialog.open(SignInDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       // TODO: Add implementation
     });
@@ -27,7 +27,7 @@ export class HeaderComponent {
     return;
   }
 
-  public get signedin(): boolean {
+  public get signedIn(): boolean {
     return this.authService.loggedIn();
   }
 }
