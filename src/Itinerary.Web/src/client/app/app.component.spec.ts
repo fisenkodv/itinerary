@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { TestBed } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
+import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 import {
   async
@@ -14,24 +14,27 @@ import {
 } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ToolbarComponent } from './shared/toolbar/toolbar.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+// import { NavbarComponent } from './shared/navbar/navbar.component';
+// import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
 export function main() {
 
   describe('App component', () => {
 
     let config: Route[] = [
-      { path: '', component: HomeComponent },
-      { path: 'about', component: AboutComponent }
+      { path: '', component: HomeComponent }
     ];
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [FormsModule, RouterTestingModule.withRoutes(config)],
-        declarations: [TestComponent, ToolbarComponent,
-          NavbarComponent, AppComponent,
-          HomeComponent, AboutComponent],
+        declarations: [
+          TestComponent,
+          // ToolbarComponent,
+          // NavbarComponent,
+          AppComponent,
+          HomeComponent,
+          // AboutComponent
+        ],
         providers: [
           { provide: APP_BASE_HREF, useValue: '/' }
         ]
