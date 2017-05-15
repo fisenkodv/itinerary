@@ -26,7 +26,11 @@ $star-size: 16px;
   display: flex;
   flex-direction: row;
   align-content: stretch;
-  padding: $itinerary-elements-padding / 2 $itinerary-elements-padding * 2;
+  padding:
+    $itinerary-elements-padding / 2
+    $itinerary-elements-padding
+    $itinerary-elements-padding / 2
+    $itinerary-elements-padding * 2;
   border-bottom: 1px solid $divider-color;
 
   &:hover {
