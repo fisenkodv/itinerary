@@ -1,8 +1,7 @@
 ﻿import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { PlacesCommunicationService } from '../places-communication/places-communication.service';
-import { SearchCriteria } from '../places-communication/search-criteria';
+import { PlacesCommunicationService, SearchCriteria } from '../places-communication/index';
 import { PlaceDetails } from '../places/models/index';
 import { MapPlaceDetails } from './map-place-details';
 

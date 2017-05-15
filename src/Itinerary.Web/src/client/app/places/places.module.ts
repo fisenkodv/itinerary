@@ -19,8 +19,7 @@ import { SearchMapComponent } from './search-map/search-map.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 
 import { PlacesCommunicationService } from './places-communication/places-communication.service';
-import { GooglePlacesService } from './places/google-places.service';
-import { PlacesService } from './places/places.service';
+import { GooglePlacesService, PlacesService } from './places/index';
 
 @NgModule({
   imports: [

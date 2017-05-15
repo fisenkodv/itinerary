@@ -1,11 +1,8 @@
 ﻿import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Location, PlaceDetails } from './places/models/index';
-import { PlacesService } from './places/places.service';
-
-import { PlacesCommunicationService } from './places-communication/places-communication.service';
-import { SearchCriteria } from './places-communication/search-criteria';
+import { PlacesCommunicationService, SearchCriteria } from './places-communication/index';
+import { Location, PlaceDetails, PlacesService } from './places/index';
 
 @Component({
   moduleId: module.id,
