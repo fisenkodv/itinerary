@@ -1,8 +1,7 @@
-﻿import './operators';
-import { Config } from './shared/config/env.config';
-
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import './operators';
+import { Config } from './shared/config/env.config';
 
 @Component({
   moduleId: module.id,
