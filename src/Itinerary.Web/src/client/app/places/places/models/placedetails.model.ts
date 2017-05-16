@@ -1,4 +1,6 @@
-﻿export class PlaceDetails {
+﻿import { Location } from './location.model';
+
+export class PlaceDetails {
   constructor(
     public name: string,
     public rating: number,

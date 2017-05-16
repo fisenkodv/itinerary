@@ -1,4 +1,5 @@
-﻿import { Component, ElementRef, Input, OnDestroy } from '@angular/core';
+﻿import { Component, ElementRef, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 import { PlacesCommunicationService } from '../places-communication/places-communication.service';
@@ -10,10 +11,9 @@ import { PlaceDetails } from '../places/models/index';
   templateUrl: 'place-list.component.html',
   styleUrls: ['place-list.component.css']
 })
-export class PlaceListComponent implements OnDestroy {
-  public places: PlaceDetails[];
+export class PlaceListComponent {
+  public places: Observable<PlaceDetails[]>;
 
-  private placesSubscription: Subscription;
   private selectedPlaceSubscription: Subscription;
   private selectedPlace: PlaceDetails;
 
@@ -21,25 +21,21 @@ export class PlaceListComponent implements OnDestroy {
     private hostElement: ElementRef,
     private placesCommunicationService: PlacesCommunicationService) {
     this.selectedPlace = null;
-    this.placesSubscription = placesCommunicationService
-      .places
-      .subscribe((places) => this.places = places);
+
+    this.places = placesCommunicationService.places;
+
     this.selectedPlaceSubscription = placesCommunicationService
       .selectedPlace
       .subscribe((place) => this.selectPlaceListItem(place));
   }
 
-  ngOnDestroy(): void {
-    this.placesSubscription.unsubscribe();
+  public isPlaceListItemSelected(place: PlaceDetails): boolean {
+    return this.selectedPlace !== null ? place.name === this.selectedPlace.name : false;
   }
 
   public getPlaceListItemId(place: PlaceDetails): string {
-    const index = this.places.findIndex((p) => p.name === place.name);
-    return `place-${index}`;
-  }
-
-  public isPlaceListItemSelected(place: PlaceDetails): boolean {
-    return this.selectedPlace !== null ? place.name === this.selectedPlace.name : false;
+    return `${place.rating}${place.reviews}${place.location.latitude}${place.location.longitude}`
+      .replace(/\D/g, '');
   }
 
   public trackPlace(index: number, place: PlaceDetails): string {
