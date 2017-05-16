@@ -5,10 +5,6 @@ import {
   transition,
   trigger
 } from '@angular/animations';
-import {
-  Component,
-  Input
-} from '@angular/core';
 
 export const fadeInOut = trigger('fadeInOut', [
   transition(':enter', [
