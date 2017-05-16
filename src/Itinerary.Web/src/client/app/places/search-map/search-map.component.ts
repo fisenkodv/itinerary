@@ -50,8 +50,9 @@ export class SearchMapComponent implements OnDestroy {
     place.isSelected = true;
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.placesSubscription.unsubscribe();
+    this.searchCriteriaSubscription.unsubscribe();
   }
 
   private searchResultsCallBack(places: PlaceDetails[]) {
