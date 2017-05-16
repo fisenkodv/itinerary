@@ -5,8 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { JoinPipe } from './join/join.pipe';
 import { MaterialModule } from './material.module';
+
+import { OnEnterPressDirective } from './directives/index';
+import { JoinPipe } from './pipes/index';
 
 @NgModule({
   imports: [
@@ -16,11 +18,12 @@ import { MaterialModule } from './material.module';
     FlexLayoutModule,
     MaterialModule
   ],
-  declarations: [JoinPipe],
+  declarations: [JoinPipe, OnEnterPressDirective],
   exports: [
     FlexLayoutModule,
     MaterialModule,
-    JoinPipe
+    JoinPipe,
+    OnEnterPressDirective
   ]
 })
 export class SharedModule {

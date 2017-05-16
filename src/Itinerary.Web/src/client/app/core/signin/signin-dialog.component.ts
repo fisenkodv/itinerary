@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -23,13 +24,15 @@ export class SignInDialogComponent {
     private authService: AuthService) {
   }
 
-  public signin() {
-    this.authService.signin(this.username, this.password)
-      .subscribe((result: AuthResult) => {
-        this.dialogRef.close();
-      }, (result: AuthResult) => {
-        this.error = this.getTranslatedMessage(result.errorDescription);
-      });
+  public signIn(form: FormGroup) {
+    if (form.valid) {
+      this.authService.signin(this.username, this.password)
+        .subscribe((result: AuthResult) => {
+          this.dialogRef.close();
+        }, (result: AuthResult) => {
+          this.error = this.getTranslatedMessage(result.errorDescription);
+        });
+    }
   }
 
   private getTranslatedMessage(messageToTranslate: string) {

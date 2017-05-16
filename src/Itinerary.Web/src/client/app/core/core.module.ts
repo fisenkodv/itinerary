@@ -8,6 +8,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AuthHttp } from 'angular2-jwt';
 
 import { MaterialModule } from '../shared/material.module';
+import { SharedModule } from '../shared/shared.module';
+
 import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
 import { TokenStorageService } from './auth/token-storage.service';
 import { FooterComponent } from './footer/footer.component';
@@ -23,6 +25,7 @@ import { SignInDialogComponent } from './signin/signin-dialog.component';
     TranslateModule.forChild(),
     FlexLayoutModule,
     MaterialModule,
+    SharedModule
   ],
   entryComponents: [
     SignInDialogComponent

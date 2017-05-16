@@ -6,7 +6,7 @@
     <md-placeholder>{{'places.search.location.placeholder' | translate }}</md-placeholder>
   </md-input-container>
 
-  <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayPlace.bind(this)">
+  <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayPlace">
     <md-option *ngFor="let place of filteredPlaces" [value]="place">
       {{ place.description }}
     </md-option>
@@ -35,5 +35,4 @@
       </md-slider>
     </div>
   </section>
-
 </section>
