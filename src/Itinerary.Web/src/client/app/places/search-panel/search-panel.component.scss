@@ -2,7 +2,7 @@
 @import '../../../scss/mixins';
 
 :host {
-  padding: $itinerary-elements-padding * 2;
+  padding: $elements-padding * 2;
 }
 
 .search-panel {
@@ -11,6 +11,6 @@
   }
 
   &__label {
-    padding-right: $itinerary-elements-padding;
+    padding-right: $elements-padding;
   }
 }

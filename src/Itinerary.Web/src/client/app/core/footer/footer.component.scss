@@ -1,4 +1,5 @@
 ﻿@import '@angular/material/theming';
+@import '../../../scss/theme';
 @import '../../../scss/variables';
 
 @mixin _mat-footer-color($palette) {
@@ -7,17 +8,17 @@
 }
 
 .footer {
-  $primary: map-get($itinerary-light-theme, primary);
-  $accent: map-get($itinerary-light-theme, accent);
-  $warn: map-get($itinerary-light-theme, warn);
-  $background: map-get($itinerary-light-theme, background);
-  $foreground: map-get($itinerary-light-theme, foreground);
+  $primary: map-get($light-theme, primary);
+  $accent: map-get($light-theme, accent);
+  $warn: map-get($light-theme, warn);
+  $background: map-get($light-theme, background);
+  $foreground: map-get($light-theme, foreground);
 
   background: mat-color($background, app-bar);
   color: mat-color($foreground, text);
 
   &__title {
-    padding: $itinerary-elements-padding;
+    padding: $elements-padding;
     text-align: center;
   }
 

@@ -1,4 +1,5 @@
 ﻿@import '@angular/material/theming';
+@import '../../../scss/theme';
 @import '../../../scss/variables';
 
 $title-font-size: 50px;
@@ -12,7 +13,7 @@ $navigation-link-border-size: 4px !default;
   &__title {
     font-family: 'Clicker Script';
     text-decoration: none;
-    color: mat-color(map-get($itinerary-light-theme, primary), default-contrast);
+    color: mat-color(map-get($light-theme, primary), default-contrast);
   }
 }
 
@@ -33,14 +34,14 @@ $navigation-link-border-size: 4px !default;
     font-size: $navigation-link-font-size;
     text-decoration: none;
     text-transform: uppercase;
-    color: mat-color(map-get($itinerary-light-theme, primary), default-contrast);
+    color: mat-color(map-get($light-theme, primary), default-contrast);
     border-bottom: $navigation-link-border-size solid transparent;
     position: relative;
     cursor: pointer;
 
     &--active,
     &:hover {
-      border-bottom: $navigation-link-border-size solid mat-color(map-get($itinerary-light-theme, accent));
+      border-bottom: $navigation-link-border-size solid mat-color(map-get($light-theme, accent));
       transition: border-color 0.4s ease-in-out;
     }
 

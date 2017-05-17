@@ -1,8 +1,9 @@
 @import '@angular/material/theming';
+@import '../../../scss/theme';
 @import '../../../scss/variables';
 @import '../../../scss/mixins';
 
-$foreground: map-get($itinerary-light-theme, foreground);
+$foreground: map-get($light-theme, foreground);
 $secondary-color: mat-color($foreground, secondary-text);
 $divider-color: mat-color($foreground, divider);
 $highlight-color: lighten(mat-color($foreground, divider), 50%);
@@ -27,10 +28,10 @@ $star-size: 16px;
   flex-direction: row;
   align-content: stretch;
   padding:
-    $itinerary-elements-padding / 2
-    $itinerary-elements-padding
-    $itinerary-elements-padding / 2
-    $itinerary-elements-padding * 2;
+    $elements-padding / 2
+    $elements-padding
+    $elements-padding / 2
+    $elements-padding * 2;
   border-bottom: 1px solid $divider-color;
 
   &:hover {
@@ -44,7 +45,7 @@ $star-size: 16px;
 
 .place-text-content {
   flex: 3 0;
-  padding-right: $itinerary-elements-padding / 2;
+  padding-right: $elements-padding / 2;
 
   .place-header {
     .place-title-container {
@@ -63,7 +64,7 @@ $star-size: 16px;
         color: $secondary-color;
         font-weight: normal;
         font-size: $subtitle-font-size;
-        margin: $itinerary-elements-padding / 2 0;
+        margin: $elements-padding / 2 0;
       }
 
       .place-rating-container {
@@ -93,8 +94,8 @@ $star-size: 16px;
 }
 
 .trip-adviser-logo {
-  width: $itinerary-elements-padding * 10;
-  margin-top: $itinerary-elements-padding;
+  width: $elements-padding * 10;
+  margin-top: $elements-padding;
 }
 
 .place-image {

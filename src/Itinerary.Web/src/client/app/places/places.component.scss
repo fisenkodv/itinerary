@@ -1,7 +1,8 @@
 ﻿@import '@angular/material/theming';
+@import '../../scss/theme';
 @import '../../scss/variables';
 
-$foreground: map-get($itinerary-light-theme, foreground);
+$foreground: map-get($light-theme, foreground);
 $foreground-color: mat-color($foreground, secondary-text);
 
 :host {
@@ -17,7 +18,7 @@ $foreground-color: mat-color($foreground, secondary-text);
   right: 0;
 
   &__sidenav {
-    width: $itinerary-search-sidebar-width;
+    width: $search-sidebar-width;
   }
 
   &__map {

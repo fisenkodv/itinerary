@@ -8,3 +8,9 @@
     clear: both;
   }
 }
+
+@mixin for-media-query($media-query) {
+  @media #{$media-query} {
+    @content;
+  }
+}

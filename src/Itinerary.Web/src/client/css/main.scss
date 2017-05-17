@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Clicker+Script|Material+Icons');
-@import '../scss/theme';
+@import '../scss/main';
 
 html, body, div {
   border: 0;
@@ -21,3 +21,7 @@ body {
   -webkit-webkit-font-smoothing: antialised;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@include mat-core();
+@include angular-material-theme($light-theme);
+@include loader-theme($light-theme);

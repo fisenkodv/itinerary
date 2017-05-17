@@ -1,6 +1,5 @@
 @import '@angular/material/theming';
-@import '../../scss/variables';
-@import '../../scss/breakpoints';
+@import '../../scss/main';
 
 .splash {
   background: url("../../assets/img/home-background.jpg") no-repeat center center fixed;
@@ -26,7 +25,7 @@
       -ms-flex-align: center;
       align-items: center;
       height: 100%;
-      color: mat-color(map-get($itinerary-light-theme, primary), default-contrast);
+      color: mat-color(map-get($light-theme, primary), default-contrast);
     }
   }
 }
@@ -40,7 +39,7 @@
 .details {
   &__paragraph {
     margin: 0;
-    margin-bottom: $itinerary-elements-padding;
+    margin-bottom: $elements-padding;
   }
 }
 
@@ -57,8 +56,8 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-top: $itinerary-elements-padding * 3;
-  margin-bottom: $itinerary-elements-padding * 3;
+  margin-top: $elements-padding * 3;
+  margin-bottom: $elements-padding * 3;
 
   &__title {
     margin: 0;
@@ -76,11 +75,11 @@
   }
 
   &:before {
-    margin: 0 $itinerary-elements-padding 0 0;
+    margin: 0 $elements-padding 0 0;
   }
 
   &:after {
-    margin: 0 0 0 $itinerary-elements-padding;
+    margin: 0 0 0 $elements-padding;
   }
 }
 
@@ -100,8 +99,8 @@
   .details {
     width: $medium-lower-bound;
     margin: 0 auto;
-    padding-top: $itinerary-elements-padding * 3;
-    padding-bottom: $itinerary-elements-padding * 3;
+    padding-top: $elements-padding * 3;
+    padding-bottom: $elements-padding * 3;
   }
 }
 
@@ -110,7 +109,7 @@
     height: calc(100vh - #{$toolbar-height-mobile-landscape});
   }
   .details {
-    padding: $itinerary-elements-padding;
+    padding: $elements-padding;
 
     &__paragraph {
       margin: 0;
@@ -118,13 +117,13 @@
   }
 
   .divider {
-    padding-top: $itinerary-elements-padding;
-    padding-bottom: $itinerary-elements-padding;
+    padding-top: $elements-padding;
+    padding-bottom: $elements-padding;
   }
 
   .feature-card {
     &:not(:last-child) {
-      margin-bottom: $itinerary-elements-padding * 2;
+      margin-bottom: $elements-padding * 2;
     }
   }
 }

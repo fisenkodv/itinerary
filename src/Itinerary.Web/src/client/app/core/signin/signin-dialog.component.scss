@@ -1,5 +1,5 @@
 @import '@angular/material/theming';
-@import '../../../scss/variables';
+@import '../../../scss/theme';
 
 .input {
   &--fullwidth{
@@ -8,7 +8,7 @@
 }
 
 .error-message {
-  $warn: map-get($itinerary-light-theme, warn);
+  $warn: map-get($light-theme, warn);
   color: mat-color($warn);
   margin: auto;
 }

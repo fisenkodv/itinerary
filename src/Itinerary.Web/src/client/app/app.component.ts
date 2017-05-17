@@ -5,7 +5,7 @@ import { Config } from './shared/config/env.config';
 
 @Component({
   moduleId: module.id,
-  selector: 'itinerary-root',
+  selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css']
 })
