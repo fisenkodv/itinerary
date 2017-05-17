@@ -8,15 +8,15 @@ namespace Itinerary.DataAccess.EntityFramework.Configurations
   {
     public static void Configure( this EntityTypeBuilder<PlacePlaceCategory> entity )
     {
-      entity.HasKey( p => p.Id );
+      entity.HasKey( x => x.Id );
 
-      entity.HasOne(pt => pt.Place)
-            .WithMany(p => p.Categories)
-            .HasForeignKey(pt => pt.PlaceId);
+      entity.HasOne( x => x.Place )
+            .WithMany( x => x.Categories )
+            .HasForeignKey( x => x.PlaceId );
 
-      entity.HasOne(pt => pt.Category)
-            .WithMany(t => t.Places)
-            .HasForeignKey(pt => pt.CategoryId);
+      entity.HasOne( pt => pt.Category )
+            .WithMany( x => x.Places )
+            .HasForeignKey( x => x.CategoryId );
 
       entity.ToTable( "PlacePlaceCategories" );
     }

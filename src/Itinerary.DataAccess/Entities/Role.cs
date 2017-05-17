@@ -2,13 +2,13 @@
 
 namespace Itinerary.DataAccess.Entities
 {
-  public sealed class ApplicationRole : IdentityRole<int>
+  public sealed class Role : IdentityRole<long>
   {
-    public ApplicationRole()
+    public Role()
     {
     }
 
-    public ApplicationRole( string name )
+    public Role( string name )
       : this()
     {
       Name = name;

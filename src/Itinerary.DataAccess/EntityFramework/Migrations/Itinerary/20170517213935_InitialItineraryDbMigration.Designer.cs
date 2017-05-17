@@ -8,7 +8,7 @@ using Itinerary.DataAccess.EntityFramework;
 namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 {
     [DbContext(typeof(ItineraryDbContext))]
-    [Migration("20170517194357_InitialItineraryDbMigration")]
+    [Migration("20170517213935_InitialItineraryDbMigration")]
     partial class InitialItineraryDbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -16,9 +16,81 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2");
 
-            modelBuilder.Entity("Itinerary.DataAccess.Entities.ApplicationRole", b =>
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.Itinerary", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<long?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Itineraries");
+                });
+
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.Place", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ImgUrl");
+
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitude");
+
+                    b.Property<string>("Name");
+
+                    b.Property<float>("Rating");
+
+                    b.Property<int>("Reviews");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Places");
+                });
+
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.PlaceCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PlaceCategories");
+                });
+
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.PlacePlaceCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("CategoryId");
+
+                    b.Property<long>("PlaceId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PlaceId");
+
+                    b.ToTable("PlacePlaceCategories");
+                });
+
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.Role", b =>
+                {
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
@@ -39,9 +111,9 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Itinerary.DataAccess.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
@@ -89,61 +161,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Itinerary.DataAccess.Entities.Place", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ImgUrl");
-
-                    b.Property<double>("Latitude");
-
-                    b.Property<double>("Longitude");
-
-                    b.Property<string>("Name");
-
-                    b.Property<float>("Rating");
-
-                    b.Property<int>("Reviews");
-
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Places");
-                });
-
-            modelBuilder.Entity("Itinerary.DataAccess.Entities.PlaceCategory", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PlaceCategories");
-                });
-
-            modelBuilder.Entity("Itinerary.DataAccess.Entities.PlacePlaceCategory", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long>("CategoryId");
-
-                    b.Property<long>("PlaceId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("PlaceId");
-
-                    b.ToTable("PlacePlaceCategories");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<long>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -152,7 +170,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("RoleId");
+                    b.Property<long>("RoleId");
 
                     b.HasKey("Id");
 
@@ -161,7 +179,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<long>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -170,7 +188,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<int>("UserId");
+                    b.Property<long>("UserId");
 
                     b.HasKey("Id");
 
@@ -179,7 +197,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<long>", b =>
                 {
                     b.Property<string>("LoginProvider");
 
@@ -187,7 +205,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<int>("UserId");
+                    b.Property<long>("UserId");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -196,11 +214,11 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<long>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<long>("UserId");
 
-                    b.Property<int>("RoleId");
+                    b.Property<long>("RoleId");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -209,9 +227,9 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<long>", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<long>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -222,6 +240,13 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.Itinerary", b =>
+                {
+                    b.HasOne("Itinerary.DataAccess.Entities.User", "User")
+                        .WithMany("Itineraries")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Itinerary.DataAccess.Entities.PlacePlaceCategory", b =>
@@ -237,38 +262,38 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<long>", b =>
                 {
-                    b.HasOne("Itinerary.DataAccess.Entities.ApplicationRole")
+                    b.HasOne("Itinerary.DataAccess.Entities.Role")
                         .WithMany("Claims")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<long>", b =>
                 {
-                    b.HasOne("Itinerary.DataAccess.Entities.ApplicationUser")
+                    b.HasOne("Itinerary.DataAccess.Entities.User")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<long>", b =>
                 {
-                    b.HasOne("Itinerary.DataAccess.Entities.ApplicationUser")
+                    b.HasOne("Itinerary.DataAccess.Entities.User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<long>", b =>
                 {
-                    b.HasOne("Itinerary.DataAccess.Entities.ApplicationRole")
+                    b.HasOne("Itinerary.DataAccess.Entities.Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Itinerary.DataAccess.Entities.ApplicationUser")
+                    b.HasOne("Itinerary.DataAccess.Entities.User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

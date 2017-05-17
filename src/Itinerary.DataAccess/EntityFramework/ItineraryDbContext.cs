@@ -1,17 +1,18 @@
 ﻿using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework.Configurations;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Itinerary.DataAccess.EntityFramework
 {
-  public class ItineraryDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
+  public class ItineraryDbContext : CustomIdentityDbContext
   {
     private readonly DbContextOptions<ItineraryDbContext> _dbContextOptions;
 
     public DbSet<Place> Places { get; set; }
 
     public DbSet<PlaceCategory> PlaceCategories { get; set; }
+
+    public DbSet<Entities.Itinerary> Itineraries { get; set; }
 
     public ItineraryDbContext( DbContextOptions<ItineraryDbContext> dbContextOptions )
       : base( dbContextOptions )
@@ -22,7 +23,10 @@ namespace Itinerary.DataAccess.EntityFramework
     protected override void OnModelCreating( ModelBuilder modelBuilder )
     {
       base.OnModelCreating( modelBuilder );
+
+      modelBuilder.Entity<PlaceCategory>().Configure();
       modelBuilder.Entity<PlacePlaceCategory>().Configure();
+      modelBuilder.Entity<Entities.Itinerary>().Configure();
     }
   }
 }
