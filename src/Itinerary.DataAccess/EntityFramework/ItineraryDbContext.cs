@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Itinerary.DataAccess.EntityFramework
 {
-  public class ItineraryDbContext : IdentityDbContext<IdentityUser>
+  public class ItineraryDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
   {
     private readonly DbContextOptions<ItineraryDbContext> _dbContextOptions;
 

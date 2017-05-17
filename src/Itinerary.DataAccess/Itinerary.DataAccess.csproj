@@ -30,6 +30,7 @@
   <ItemGroup>
     <Folder Include="Abstract\UnitOfWork" />
     <Folder Include="EntityFramework\Configurations" />
+    <Folder Include="EntityFramework\Migrations\Itinerary\" />
     <Folder Include="EntityFramework\Repository" />
   </ItemGroup>
 </Project>
