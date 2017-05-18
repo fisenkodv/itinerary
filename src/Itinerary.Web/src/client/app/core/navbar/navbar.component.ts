@@ -6,11 +6,11 @@ import { SignInDialogComponent } from '../signin/signin-dialog.component';
 
 @Component({
   moduleId: module.id,
-  selector: 'header',
-  templateUrl: 'header.component.html',
-  styleUrls: ['header.component.css']
+  selector: 'navbar',
+  templateUrl: 'navbar.component.html',
+  styleUrls: ['navbar.component.css']
 })
-export class HeaderComponent {
+export class NavbarComponent {
   constructor(
     private dialog: MdDialog,
     private authService: AuthService) {

@@ -9,12 +9,15 @@ $navigation-link-font-size: 16px !default;
 $navigation-link-coming-soon-font-size: 8px !default;
 $navigation-link-border-size: 4px !default;
 
-.header {
-  &__title {
-    font-family: 'Clicker Script';
-    text-decoration: none;
-    color: mat-color(map-get($light-theme, primary), default-contrast);
-  }
+:host {
+  @include mat-elevation(1);
+  z-index: 1;
+}
+
+.title {
+  font-family: 'Clicker Script';
+  text-decoration: none;
+  color: mat-color(map-get($light-theme, primary), default-contrast);
 }
 
 .more-button {
@@ -54,11 +57,9 @@ $navigation-link-border-size: 4px !default;
   }
 }
 
-@mixin header ($font-size){
-  .header {
-    &__title {
-      font-size: $font-size;
-    }
+@mixin havbar ($font-size){
+  .title {
+    font-size: $font-size;
   }
 }
 
@@ -71,9 +72,9 @@ $navigation-link-border-size: 4px !default;
   }
 }
 
-@include header($title-font-size);
+@include havbar($title-font-size);
 @include navigation-height($toolbar-height-desktop);
 
 @media ($mat-xsmall) {
-  @include header($title-font-size-mobile);
+  @include havbar($title-font-size-mobile);
 }

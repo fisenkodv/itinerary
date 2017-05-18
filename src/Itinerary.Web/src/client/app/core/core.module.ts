@@ -13,7 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
 import { TokenStorageService } from './auth/token-storage.service';
 import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { SignInDialogComponent } from './signin/signin-dialog.component';
 
 @NgModule({
@@ -30,9 +30,9 @@ import { SignInDialogComponent } from './signin/signin-dialog.component';
   entryComponents: [
     SignInDialogComponent
   ],
-  declarations: [HeaderComponent, FooterComponent, SignInDialogComponent],
+  declarations: [NavbarComponent, FooterComponent, SignInDialogComponent],
   exports: [
-    HeaderComponent,
+    NavbarComponent,
     FooterComponent
   ]
 })

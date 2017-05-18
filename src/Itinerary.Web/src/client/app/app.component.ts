@@ -10,7 +10,6 @@ import { Config } from './shared/config/env.config';
   styleUrls: ['app.component.css']
 })
 export class AppComponent {
-
   constructor(translate: TranslateService) {
     translate.setDefaultLang('en');
   }
