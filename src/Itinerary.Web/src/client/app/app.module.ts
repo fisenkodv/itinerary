@@ -9,6 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { EffectsModule } from '@ngrx/effects';
+import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { AppReducer, InitialState } from './redux/reducers/index';
+
 import 'hammerjs';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,7 +49,9 @@ export function CreateTranslateLoader(http: Http) {
     AppRoutingModule,
     CoreModule.forRoot(),
     HomeModule,
-    PlacesModule
+    PlacesModule,
+    StoreModule.provideStore(AppReducer, InitialState),
+    RouterStoreModule.connectRouter(),
   ],
   providers: [{
     provide: APP_BASE_HREF,
