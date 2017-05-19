@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { BaseService } from '../../core/base.service';
 import { Config } from '../../shared/config/env.config';
-import { PlaceDetails } from './models/index';
+import { PlaceDetails } from '../models/index';
 
 @Injectable()
 export class PlacesService extends BaseService {
