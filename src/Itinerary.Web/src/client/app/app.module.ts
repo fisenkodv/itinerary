@@ -14,6 +14,7 @@ import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { Effects } from './redux/effects';
 import { AppReducer, InitialState } from './redux/reducers/index';
 
 import 'hammerjs';
@@ -46,13 +47,14 @@ export function CreateTranslateLoader(http: Http) {
         deps: [Http]
       }
     }),
+    Effects,
+    StoreModule.provideStore(AppReducer, InitialState),
+    RouterStoreModule.connectRouter(),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     AppRoutingModule,
     CoreModule.forRoot(),
     HomeModule,
-    PlacesModule,
-    StoreModule.provideStore(AppReducer, InitialState),
-    RouterStoreModule.connectRouter(),
-    StoreDevtoolsModule.instrumentOnlyWithExtension()
+    PlacesModule
   ],
   providers: [{
     provide: APP_BASE_HREF,
