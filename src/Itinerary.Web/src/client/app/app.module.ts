@@ -52,6 +52,7 @@ export function CreateTranslateLoader(http: Http) {
     PlacesModule,
     StoreModule.provideStore(AppReducer, InitialState),
     RouterStoreModule.connectRouter(),
+    StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   providers: [{
     provide: APP_BASE_HREF,

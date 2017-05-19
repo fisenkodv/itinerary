@@ -1,5 +1,7 @@
 ﻿import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
@@ -7,6 +9,10 @@ import 'rxjs/add/operator/switchMap';
 
 import { PlacesCommunicationService, SearchCriteria } from '../places-communication/index';
 import { Autocomplete, GooglePlacesService, Location } from '../places/index';
+
+import { IAppState } from '../../redux/reducers/index';
+import * as FromRoot from '../../redux/reducers/index';
+import * as Filter from '../redux/actions/filter';
 
 @Component({
   moduleId: module.id,
@@ -19,29 +25,35 @@ export class SearchPanelComponent implements OnInit {
   public searchControl: FormControl;
   public filteredPlaces: Autocomplete[];
 
-  public distance: number;
-  public rating: number;
-  public reviews: number;
+  public distance: Observable<number>;
+  public rating: Observable<number>;
+  public reviews: Observable<number>;
 
-  private location: Location;
+  private location: Observable<Location>;
 
   constructor(
     private googlePlacesService: GooglePlacesService,
-    private placesCommunicationService: PlacesCommunicationService
+    private store: Store<IAppState>
   ) {
     this.searchControl = new FormControl();
-    this.distance = 50;
-    this.rating = 4.0;
-    this.reviews = 50;
   }
 
   public ngOnInit() {
     this.searchControl.valueChanges
       .debounceTime(200)
-      .switchMap((keyword) => this.googlePlacesService.autocomplete(keyword as string))
-      .subscribe((value: Autocomplete[]) => {
-        this.filteredPlaces = value;
-      });
+      .switchMap((keyword) => this.googlePlacesService.autocomplete(keyword as string));
+
+    this.location = this.store.select(FromRoot.getCurrentLocation);
+    this.distance = this.store.select(FromRoot.getCurrentDistance);
+    this.rating = this.store.select(FromRoot.getCurrentRating);
+    this.reviews = this.store.select(FromRoot.getCurrentReviews);
+
+    Observable.combineLatest(this.location, this.distance, this.rating, this.reviews).subscribe(
+      (res) => {
+        console.log(typeof res);
+        console.log(res);
+      }
+    );
 
     this.setCurrentPosition();
   }
@@ -51,39 +63,30 @@ export class SearchPanelComponent implements OnInit {
       this.googlePlacesService
         .location(autocomplete.placeId)
         .subscribe((location: Location) => {
-          this.location = location;
-          this.raiseSearch();
+          this.store.dispatch(new Filter.SetLocationAction(location));
         });
     }
     return autocomplete ? autocomplete.description : '';
   }
 
   public changeDistanceHandler({ value }: any) {
-    this.distance = value;
-    this.raiseSearch();
+    this.store.dispatch(new Filter.SetDistanceAction(value));
   }
 
   public changeRatingHandler({ value }: any) {
-    this.rating = value;
-    this.raiseSearch();
+    this.store.dispatch(new Filter.SetRatingAction(value));
   }
 
   public changeReviewsHandler({ value }: any) {
-    this.reviews = value;
-    this.raiseSearch();
+    this.store.dispatch(new Filter.SetReviewsAction(value));
   }
 
   private setCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.location = new Location(position.coords.latitude, position.coords.longitude);
-        this.raiseSearch();
+        const location = new Location(position.coords.latitude, position.coords.longitude);
+        this.store.dispatch(new Filter.SetLocationAction(location));
       });
     }
-  }
-
-  private raiseSearch() {
-    const searchCriteria = new SearchCriteria(this.location, this.distance, this.rating, this.reviews);
-    this.placesCommunicationService.search(searchCriteria);
   }
 }

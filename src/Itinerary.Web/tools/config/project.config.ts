@@ -157,6 +157,10 @@ export class ProjectConfig extends SeedConfig {
       {
         name: 'deep-freeze-strict',
         path: 'node_modules/deep-freeze-strict/index.js'
+      },
+      {
+        name: 'reselect',
+        path: 'node_modules/reselect/dist/reselect.js'
       }
     ];
 
