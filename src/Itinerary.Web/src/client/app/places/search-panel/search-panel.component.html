@@ -7,7 +7,7 @@
   </md-input-container>
 
   <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayPlace.bind(this)">
-    <md-option *ngFor="let place of filteredPlaces" [value]="place">
+    <md-option *ngFor="let place of filteredPlaces | async" [value]="place">
       {{ place.description }}
     </md-option>
   </md-autocomplete>

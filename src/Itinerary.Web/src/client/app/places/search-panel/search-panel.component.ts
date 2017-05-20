@@ -24,7 +24,7 @@ import { GooglePlacesService } from '../places/index';
 })
 export class SearchPanelComponent implements OnDestroy, OnInit {
   public searchControl: FormControl;
-  public filteredPlaces: Autocomplete[];
+  public filteredPlaces: Observable<Autocomplete[]>;
 
   public distance: Observable<number>;
   public rating: Observable<number>;
@@ -39,13 +39,9 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit() {
-    this.searchControl.valueChanges
+    this.filteredPlaces =  this.searchControl.valueChanges
       .debounceTime(200)
-      .switchMap((keyword) => this.googlePlacesService.autocomplete(keyword as string))
-      .takeWhile(() => this.alive)
-      .subscribe((value: Autocomplete[]) => {
-        this.filteredPlaces = value;
-      });
+      .switchMap((keyword) => this.googlePlacesService.autocomplete(keyword as string));
 
     this.distance = this.store.select(FromRoot.getFilterDistance);
     this.rating = this.store.select(FromRoot.getFilterRating);
@@ -68,8 +64,8 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
         .location(autocomplete.placeId)
         .subscribe((location: Location) => {
           this.store.dispatch(new Filter.SetLocationAction(location));
-        })
-        .unsubscribe();
+        });
+        //.unsubscribe();
     }
     return autocomplete ? autocomplete.description : '';
   }
