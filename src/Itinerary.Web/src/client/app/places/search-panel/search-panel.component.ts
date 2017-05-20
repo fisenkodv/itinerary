@@ -65,6 +65,7 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
         .subscribe((location: Location) => {
           this.store.dispatch(new Filter.SetLocationAction(location));
         });
+        //TODO: unsubscribe
         //.unsubscribe();
     }
     return autocomplete ? autocomplete.description : '';
