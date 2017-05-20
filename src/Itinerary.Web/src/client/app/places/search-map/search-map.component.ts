@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/takeWhile';
 
 import { IAppState } from '../../redux/reducers/index';
-import * as FromRoot from '../../redux/reducers/index';
+import * as FromRoot from '../redux/index';
 
 import { Filter, PlaceDetails } from '../models/index';
 import { MapPlaceDetails } from './map-place-details';

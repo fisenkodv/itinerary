@@ -28,6 +28,7 @@ export function reducer(state: IState = initialState, action: filter.Actions): I
     case filter.SET_RATING:
       return Object.assign({}, state, { rating: action.payload });
     case filter.SET_REVIEWS:
+      console.log(state);
       return Object.assign({}, state, { reviews: action.payload });
     default:
       return state;

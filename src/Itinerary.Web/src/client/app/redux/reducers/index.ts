@@ -4,26 +4,26 @@ import { Action, ActionReducer, combineReducers } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { createSelector } from 'reselect';
 
-import * as Filter from '../../places/redux/reducers/filter';
-import * as Places from '../../places/redux/reducers/places';
-import * as Search from '../../places/redux/reducers/search';
+import * as filter from '../../places/redux/reducers/filter';
+import * as places from '../../places/redux/reducers/places';
+import * as search from '../../places/redux/reducers/search';
+
+import * as Places from '../../places/redux/index';
 
 export interface IAppState {
-  filter: Filter.IState;
-  places: Places.IState;
-  search: Search.IState;
+  places: Places.IPlacesState;
 }
 
 export const InitialState: IAppState = {
-  filter: Filter.initialState,
-  places: Places.initialState,
-  search: Search.initialState
+  places: Places.InitialState
 };
 
 export const reducers = {
-  filter: Filter.reducer,
-  places: Places.reducer,
-  search: Search.reducer
+  places: combineReducers({
+    filter: filter.reducer,
+    places: places.reducer,
+    search: search.reducer
+  })
 };
 
 const developmentReducer: ActionReducer<IAppState> = compose(storeFreeze, combineReducers)(reducers);
@@ -37,16 +37,16 @@ export function AppReducer(state: any, action: any) {
   }
 }
 
-export const getFilterState = (state: IAppState) => state.filter;
-export const getFilterLocation = createSelector(getFilterState, Filter.getLocation);
-export const getFilterDistance = createSelector(getFilterState, Filter.getDistance);
-export const getFilterRating = createSelector(getFilterState, Filter.getRating);
-export const getFilterReviews = createSelector(getFilterState, Filter.getReviews);
-export const getFilterFilter = createSelector(getFilterState, Filter.getFilter);
+// export const getFilterState = (state: IAppState) => state.places.filter;
+// export const getFilterLocation = createSelector(getFilterState, filter.getLocation);
+// export const getFilterDistance = createSelector(getFilterState, filter.getDistance);
+// export const getFilterRating = createSelector(getFilterState, filter.getRating);
+// export const getFilterReviews = createSelector(getFilterState, filter.getReviews);
+// export const getFilterFilter = createSelector(getFilterState, filter.getFilter);
 
-export const getPlacesState = (state: IAppState) => state.places;
-export const getPlaceEntities = createSelector(getPlacesState, Places.getEntities);
+// export const getPlacesState = (state: IAppState) => state.places.places;
+// export const getPlaceEntities = createSelector(getPlacesState, places.getEntities);
 
-export const getSearchState = (state: IAppState) => state.search;
-export const getSearchLoading = createSelector(getSearchState, Search.getLoading);
-export const getSearchFilter = createSelector(getSearchState, Search.getFilter);
+// export const getSearchState = (state: IAppState) => state.places.search;
+// export const getSearchLoading = createSelector(getSearchState, search.getLoading);
+// export const getSearchFilter = createSelector(getSearchState, search.getFilter);

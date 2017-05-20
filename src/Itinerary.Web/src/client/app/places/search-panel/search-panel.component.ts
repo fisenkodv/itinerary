@@ -9,9 +9,11 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/takeWhile';
 
 import { IAppState } from '../../redux/reducers/index';
-import * as FromRoot from '../../redux/reducers/index';
+import * as FromRoot from '../redux/index';
 import * as Filter from '../redux/actions/filter';
 import * as Places from '../redux/actions/places';
+
+import * as From from '../redux/index';
 
 import { Autocomplete, Location } from '../models/index';
 import { GooglePlacesService } from '../places/index';
