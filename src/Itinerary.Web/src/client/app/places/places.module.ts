@@ -18,7 +18,6 @@ import { PlacesComponent } from './places.component';
 import { SearchMapComponent } from './search-map/search-map.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 
-import { PlacesCommunicationService } from './places-communication/places-communication.service';
 import { GooglePlacesService, PlacesService } from './places/index';
 
 @NgModule({
@@ -52,8 +51,7 @@ import { GooglePlacesService, PlacesService } from './places/index';
   ],
   providers: [
     PlacesService,
-    GooglePlacesService,
-    PlacesCommunicationService
+    GooglePlacesService
   ]
 })
 export class PlacesModule {

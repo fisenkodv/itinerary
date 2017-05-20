@@ -6,15 +6,15 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import "rxjs/add/operator/takeWhile";
-
-import { PlacesCommunicationService, SearchCriteria } from '../places-communication/index';
-import { Autocomplete, GooglePlacesService, Location } from '../places/index';
+import 'rxjs/add/operator/takeWhile';
 
 import { IAppState } from '../../redux/reducers/index';
 import * as FromRoot from '../../redux/reducers/index';
 import * as Filter from '../redux/actions/filter';
 import * as Places from '../redux/actions/places';
+
+import { Autocomplete, Location } from '../models/index';
+import { GooglePlacesService } from '../places/index';
 
 @Component({
   moduleId: module.id,

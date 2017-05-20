@@ -1,9 +1,11 @@
 ﻿import { Component, ElementRef, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 
-import { PlacesCommunicationService } from '../places-communication/places-communication.service';
-import { PlaceDetails } from '../places/models/index';
+import { IAppState } from '../../redux/reducers/index';
+import * as FromRoot from '../../redux/reducers/index';
+
+import { PlaceDetails } from '../models/index';
 
 @Component({
   moduleId: module.id,
@@ -14,19 +16,14 @@ import { PlaceDetails } from '../places/models/index';
 export class PlaceListComponent {
   public places: Observable<PlaceDetails[]>;
 
-  private selectedPlaceSubscription: Subscription;
   private selectedPlace: PlaceDetails;
 
   constructor(
-    private hostElement: ElementRef,
-    private placesCommunicationService: PlacesCommunicationService) {
+    private store: Store<IAppState>,
+    private hostElement: ElementRef) {
     this.selectedPlace = null;
 
-    this.places = placesCommunicationService.places;
-
-    this.selectedPlaceSubscription = placesCommunicationService
-      .selectedPlace
-      .subscribe((place) => this.selectPlaceListItem(place));
+    this.places = this.store.select(FromRoot.getPlaceEntities);
   }
 
   public isPlaceListItemSelected(place: PlaceDetails): boolean {

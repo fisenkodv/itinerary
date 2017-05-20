@@ -15,7 +15,7 @@ export const initialState: IState = {
 export function reducer(state: IState = initialState, action: Places.Actions): IState {
   switch (action.type) {
     case Places.SEARCH_COMPLETE:
-      return Object.assign({}, state, { places: action.payload });
+      return Object.assign({}, state, { entities: action.payload });
     default:
       return state;
   }

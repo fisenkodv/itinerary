@@ -1,8 +1,13 @@
-﻿import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+﻿import { Component, Input, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
-import { PlacesCommunicationService, SearchCriteria } from '../places-communication/index';
-import { PlaceDetails } from '../places/models/index';
+import 'rxjs/add/operator/takeWhile';
+
+import { IAppState } from '../../redux/reducers/index';
+import * as FromRoot from '../../redux/reducers/index';
+
+import { Filter, PlaceDetails } from '../models/index';
 import { MapPlaceDetails } from './map-place-details';
 
 @Component({
@@ -14,60 +19,57 @@ import { MapPlaceDetails } from './map-place-details';
 export class SearchMapComponent implements OnDestroy {
   public zoom: number;
   public showBasePoint: boolean;
-  public searchCriteria: SearchCriteria;
-  public places: MapPlaceDetails[];
+  public places: Observable<MapPlaceDetails[]>;
+  public filter: Filter;
 
   private defaultZoom = 5;
   private defaultZoomForSelectedPoint = 8;
-  private placesSubscription: Subscription;
-  private searchCriteriaSubscription: Subscription;
   private selectedPlaces: string[];
+  private alive: boolean = true;
 
-  constructor(private placesCommunicationService: PlacesCommunicationService) {
-    this.placesSubscription = placesCommunicationService
-      .places
-      .subscribe((places) => this.searchResultsCallBack(places));
-    this.searchCriteriaSubscription = placesCommunicationService
-      .searchCriteria
-      .subscribe((searchCriteria) => this.searchCriteria = searchCriteria);
+  constructor(private store: Store<IAppState>) {
+    this.places = this.store.select(FromRoot.getPlaceEntities).map(this.searchResultsCallBack);
+    this.store.select(FromRoot.getFilterFilter)
+      .takeWhile(() => this.alive)
+      .subscribe((filter) => this.filter = filter);
 
+    this.showBasePoint = true;
     this.zoom = this.defaultZoom;
-    this.searchCriteria = new SearchCriteria();
-    this.places = [];
     this.selectedPlaces = [];
   }
 
   public radiusInMeters() {
-    return this.searchCriteria.distance * 1609.34;
+    return this.filter.distance * 1609.34;
   }
 
   public markerClick(place: MapPlaceDetails) {
-    this.placesCommunicationService.select(place);
-    this.places.forEach((x) => {
-      x.wasSelected = x.wasSelected || x.isSelected;
-      x.isSelected = false;
-    });
-    place.isSelected = true;
+    // this.placesCommunicationService.select(place);
+    // this.places.forEach((x) => {
+    //   x.wasSelected = x.wasSelected || x.isSelected;
+    //   x.isSelected = false;
+    // });
+    // place.isSelected = true;
   }
 
   public ngOnDestroy(): void {
-    this.placesSubscription.unsubscribe();
-    this.searchCriteriaSubscription.unsubscribe();
+    this.alive = false;
+    // this.placesSubscription.unsubscribe();
+    // this.searchCriteriaSubscription.unsubscribe();
   }
 
-  private searchResultsCallBack(places: PlaceDetails[]) {
+  private searchResultsCallBack(places: PlaceDetails[]): MapPlaceDetails[] {
     this.showBasePoint = places.some(() => true);
     this.zoom = this.showBasePoint ? this.defaultZoomForSelectedPoint : this.zoom;
 
-    this.setPreviousSelectedPlaces(places);
-    this.places = places.map((place) => new MapPlaceDetails(false, this.wasSelected(place), place));
+    // this.setPreviousSelectedPlaces(places);
+    return places.map((place) => new MapPlaceDetails(false, false, place));
   }
 
   private setPreviousSelectedPlaces(places: PlaceDetails[]) {
-    const selected = this.places
-      .filter((place) => place.wasSelected || place.isSelected)
-      .map((place) => place.name);
-    this.selectedPlaces = [...selected, ...this.selectedPlaces];
+    // const selected = this.places
+    //   .filter((place) => place.wasSelected || place.isSelected)
+    //   .map((place) => place.name);
+    // this.selectedPlaces = [...selected, ...this.selectedPlaces];
   }
 
   private wasSelected(place: PlaceDetails): boolean {

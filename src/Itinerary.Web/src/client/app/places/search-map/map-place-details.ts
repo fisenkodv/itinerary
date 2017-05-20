@@ -1,4 +1,4 @@
-import { PlaceDetails } from '../places/models/index';
+import { PlaceDetails } from '../models/index';
 
 export class MapPlaceDetails extends PlaceDetails {
   constructor(
