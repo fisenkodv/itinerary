@@ -16,5 +16,6 @@ export class SearchCompleteAction implements Action {
   constructor(public payload: PlaceDetails[]) { }
 }
 
-export type Actions = SearchAction
-  | SearchCompleteAction;
+export type Actions =
+  SearchAction |
+  SearchCompleteAction;
