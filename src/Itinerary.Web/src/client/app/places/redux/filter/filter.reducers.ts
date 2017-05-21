@@ -16,7 +16,7 @@ export const initialState: IState = {
   location: new Location(39.833333, -98.583333),
   distance: 50,
   rating: 4.0,
-  reviews: 50,
+  reviews: 250,
 };
 
 export function reducer(state: IState = initialState, action: filterActions.Actions): IState {
