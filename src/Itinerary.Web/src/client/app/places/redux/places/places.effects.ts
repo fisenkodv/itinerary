@@ -14,13 +14,13 @@ import { Action } from '@ngrx/store';
 
 import { Filter } from '../../models/index';
 import { PlacesService } from '../../places/index';
-import * as Places from '../actions/places';
+import * as placesActions from './places.actions';
 
 @Injectable()
 export class FilterEffects {
   @Effect()
   public search$: Observable<Action> = this.actions$
-    .ofType(Places.SEARCH)
+    .ofType(placesActions.SEARCH)
     .debounceTime(300)
     .map(toPayload)
     .switchMap((filter: Filter) => {
@@ -28,12 +28,12 @@ export class FilterEffects {
         return empty();
       }
 
-      const nextSearch$ = this.actions$.ofType(Places.SEARCH).skip(1);
+      const nextSearch$ = this.actions$.ofType(placesActions.SEARCH).skip(1);
 
       return this.placesService.search(filter)
         .takeUntil(nextSearch$)
-        .map((places) => new Places.SearchCompleteAction(places))
-        .catch(() => of(new Places.SearchCompleteAction([])));
+        .map((places) => new placesActions.SearchCompleteAction(places))
+        .catch(() => of(new placesActions.SearchCompleteAction([])));
     });
 
   constructor(private actions$: Actions, private placesService: PlacesService) { }

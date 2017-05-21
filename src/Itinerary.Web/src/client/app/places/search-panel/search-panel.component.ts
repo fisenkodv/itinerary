@@ -8,10 +8,10 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/takeWhile';
 
-import { IAppState } from '../../redux/reducers/index';
-import * as FromRoot from '../redux/index';
-import * as Filter from '../redux/actions/filter';
-import * as Places from '../redux/actions/places';
+import { IAppState } from '../../redux/app.state';
+import * as fromModule from '../redux/index';
+import * as filterActions from '../redux/filter/filter.actions';
+import * as placesActions from '../redux/places/places.actions';
 
 import * as From from '../redux/index';
 
@@ -45,13 +45,13 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
       .debounceTime(200)
       .switchMap((keyword) => this.googlePlacesService.autocomplete(keyword as string));
 
-    this.distance = this.store.select(FromRoot.getFilterDistance);
-    this.rating = this.store.select(FromRoot.getFilterRating);
-    this.reviews = this.store.select(FromRoot.getFilterReviews);
-    this.store.select(FromRoot.getFilterFilter)
+    this.distance = this.store.select(fromModule.getFilterDistance);
+    this.rating = this.store.select(fromModule.getFilterRating);
+    this.reviews = this.store.select(fromModule.getFilterReviews);
+    this.store.select(fromModule.getFilterFilter)
       .takeWhile(() => this.alive)
       .subscribe((filter) =>
-        this.store.dispatch(new Places.SearchAction(filter)));
+        this.store.dispatch(new placesActions.SearchAction(filter)));
 
     this.setCurrentPosition();
   }
@@ -65,7 +65,7 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
       this.googlePlacesService
         .location(autocomplete.placeId)
         .subscribe((location: Location) => {
-          this.store.dispatch(new Filter.SetLocationAction(location));
+          this.store.dispatch(new filterActions.SetLocationAction(location));
         });
         //TODO: unsubscribe
         //.unsubscribe();
@@ -74,22 +74,22 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
   }
 
   public changeDistanceHandler({ value }: any) {
-    this.store.dispatch(new Filter.SetDistanceAction(value));
+    this.store.dispatch(new filterActions.SetDistanceAction(value));
   }
 
   public changeRatingHandler({ value }: any) {
-    this.store.dispatch(new Filter.SetRatingAction(value));
+    this.store.dispatch(new filterActions.SetRatingAction(value));
   }
 
   public changeReviewsHandler({ value }: any) {
-    this.store.dispatch(new Filter.SetReviewsAction(value));
+    this.store.dispatch(new filterActions.SetReviewsAction(value));
   }
 
   private setCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const location = new Location(position.coords.latitude, position.coords.longitude);
-        this.store.dispatch(new Filter.SetLocationAction(location));
+        this.store.dispatch(new filterActions.SetLocationAction(location));
       });
     }
   }

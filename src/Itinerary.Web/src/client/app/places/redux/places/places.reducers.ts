@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
 import { PlaceDetails } from '../../models/index';
-import * as Places from '../actions/places';
+import * as placesActions from './places.actions';
 
 export interface IState {
   entities: PlaceDetails[];
@@ -12,9 +12,9 @@ export const initialState: IState = {
   entities: []
 };
 
-export function reducer(state: IState = initialState, action: Places.Actions): IState {
+export function reducer(state: IState = initialState, action: placesActions.Actions): IState {
   switch (action.type) {
-    case Places.SEARCH_COMPLETE:
+    case placesActions.SEARCH_COMPLETE:
       return Object.assign({}, state, { entities: action.payload });
     default:
       return state;

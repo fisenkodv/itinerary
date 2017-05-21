@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
 import { Filter, Location } from '../../models/index';
-import * as filter from '../actions/filter';
+import * as filterActions from './filter.actions';
 
 export interface IState {
   location: Location;
@@ -19,15 +19,15 @@ export const initialState: IState = {
   reviews: 50,
 };
 
-export function reducer(state: IState = initialState, action: filter.Actions): IState {
+export function reducer(state: IState = initialState, action: filterActions.Actions): IState {
   switch (action.type) {
-    case filter.SET_LOCATION:
+    case filterActions.SET_LOCATION:
       return Object.assign({}, state, { location: action.payload });
-    case filter.SET_DISTANCE:
+    case filterActions.SET_DISTANCE:
       return Object.assign({}, state, { distance: action.payload });
-    case filter.SET_RATING:
+    case filterActions.SET_RATING:
       return Object.assign({}, state, { rating: action.payload });
-    case filter.SET_REVIEWS:
+    case filterActions.SET_REVIEWS:
       console.log(state);
       return Object.assign({}, state, { reviews: action.payload });
     default:

@@ -14,8 +14,9 @@ import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { Effects } from './redux/effects';
-import { AppReducer, InitialState } from './redux/reducers/index';
+import { Effects } from './redux/app.effects';
+import { AppReducer } from './redux/app.reducers';
+import { InitialState } from './redux/app.state';
 
 import 'hammerjs';
 
