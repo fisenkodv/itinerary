@@ -241,6 +241,12 @@ export class SeedConfig {
   E2E_DEST = `${this.DIST_DIR}/e2e`;
 
   /**
+   * The folder for the built files of the e2e-specs.
+   * @type {string}
+   */
+  LOCALE_DEST = `${this.DIST_DIR}/locale`;
+
+  /**
    * The folder for temporary files.
    * @type {string}
    */
@@ -424,11 +430,10 @@ export class SeedConfig {
     base: this.PROJECT_ROOT,
     packageConfigPaths: [
       join('node_modules', '*', 'package.json'),
-      join('node_modules', '@angular', '*', 'package.json'),
+      join('node_modules', '@angular', '*', 'package.json')
       // for other modules like @ngx-translate the package.json path needs to updated here
       // otherwise npm run build.prod would fail
-      join('node_modules', '@ngx-translate', '*', 'package.json'),
-      join('node_modules', '@agm', '*', 'package.json')
+      // join('node_modules', '@ngx-translate', '*', 'package.json')
     ],
     paths: {
       // Note that for multiple apps this configuration need to be updated
