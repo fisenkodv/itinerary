@@ -15,7 +15,7 @@ export function reducer(state: IState = initialState, action: placesActions.Acti
   switch (action.type) {
     case placesActions.SEARCH:
       const loading = action.payload !== null;
-      return Object.assign({}, state, { loading });
+      return Object.assign({}, state, { loading: true });
     case placesActions.SEARCH_COMPLETE:
       return Object.assign({}, state, { loading: false });
     default:

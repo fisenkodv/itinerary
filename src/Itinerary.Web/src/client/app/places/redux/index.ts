@@ -6,20 +6,20 @@ import { createSelector } from 'reselect';
 
 import * as filterReducers from './filter/filter.reducers';
 import * as placesReducers from './places/places.reducers';
-//import * as Search from './search/search.reducers';
+import * as searchReducers from './search/search.reducers';
 
 import { IAppState } from '../../redux/app.state';
 
 export interface IPlacesState {
   filter: filterReducers.IState;
   places: placesReducers.IState;
-  //search: Search.IState;
+  search: searchReducers.IState;
 }
 
 export const InitialState: IPlacesState = {
   filter: filterReducers.initialState,
   places: placesReducers.initialState,
-  //search: Search.initialState
+  search: searchReducers.initialState
 };
 
 export const getFilterState = (state: IAppState) => state.places.filter;
@@ -32,6 +32,5 @@ export const getFilterFilter = createSelector(getFilterState, filterReducers.get
 export const getPlacesState = (state: IAppState) => state.places.places;
 export const getPlaceEntities = createSelector(getPlacesState, placesReducers.getEntities);
 
-// export const getSearchState = (state: IAppState) => state.places.search;
-// export const getSearchLoading = createSelector(getSearchState, Search.getLoading);
-// export const getSearchFilter = createSelector(getSearchState, Search.getFilter);
+export const getSearchState = (state: IAppState) => state.places.search;
+export const getSearchLoading = createSelector(getSearchState, searchReducers.getLoading);
