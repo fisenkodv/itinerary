@@ -18,8 +18,8 @@ import { MapPlaceDetails } from './map-place-details';
 })
 export class MapComponent implements OnDestroy {
   public zoom: number;
-  public showBasePoint: boolean;
   public places: Observable<MapPlaceDetails[]>;
+  public searchLoading: Observable<boolean>;
   public filter: Filter;
 
   private defaultZoom = 5;
@@ -28,12 +28,13 @@ export class MapComponent implements OnDestroy {
   private alive: boolean = true;
 
   constructor(private store: Store<IAppState>) {
-    this.places = this.store.select(FromRoot.getPlaceEntities).map(this.searchResultsCallBack);
+    this.places = this.store.select(FromRoot.getPlaceEntities).map(this.toMapPlaceDetails);
+    this.searchLoading = this.store.select(FromRoot.getSearchLoading);
+
     this.store.select(FromRoot.getFilterFilter)
       .takeWhile(() => this.alive)
       .subscribe((filter) => this.filter = filter);
 
-    this.showBasePoint = true;
     this.zoom = this.defaultZoom;
     this.selectedPlaces = [];
   }
@@ -57,11 +58,7 @@ export class MapComponent implements OnDestroy {
     // this.searchCriteriaSubscription.unsubscribe();
   }
 
-  private searchResultsCallBack(places: PlaceDetails[]): MapPlaceDetails[] {
-    this.showBasePoint = places.some(() => true);
-    this.zoom = this.showBasePoint ? this.defaultZoomForSelectedPoint : this.zoom;
-
-    // this.setPreviousSelectedPlaces(places);
+  private toMapPlaceDetails(places: PlaceDetails[]): MapPlaceDetails[] {
     return places.map((place) => new MapPlaceDetails(false, false, place));
   }
 

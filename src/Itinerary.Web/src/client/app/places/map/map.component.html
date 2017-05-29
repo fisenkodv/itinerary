@@ -1,12 +1,12 @@
 ﻿<div class="map">
   <agm-map [latitude]="filter.location.latitude" [longitude]="filter.location.longitude" [zoom]="zoom">
-    <agm-marker *ngIf="showBasePoint" [latitude]="filter.location.latitude" [longitude]="filter.location.longitude"
+    <agm-marker *ngIf="!searchLoading | async" [latitude]="filter.location.latitude" [longitude]="filter.location.longitude"
       [title]="'Selected Location'"></agm-marker>
 
     <agm-marker *ngFor="let place of places | async" [latitude]="place.location.latitude" [longitude]="place.location.longitude"
       [title]="place.name" [opacity]="place.opacity" [iconUrl]="place.iconUrl" (markerClick)="markerClick(place)"></agm-marker>
 
-    <agm-circle *ngIf="showBasePoint" [latitude]="filter.location.latitude" [longitude]="filter.location.longitude"
+    <agm-circle *ngIf="!searchLoading | async" [latitude]="filter.location.latitude" [longitude]="filter.location.longitude"
       [radius]="radiusInMeters()" [fillColor]="'#673ab7'" [fillOpacity]="0.2"></agm-circle>
   </agm-map>
 </div>
