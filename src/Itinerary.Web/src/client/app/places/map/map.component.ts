@@ -12,11 +12,11 @@ import { MapPlaceDetails } from './map-place-details';
 
 @Component({
   moduleId: module.id,
-  selector: 'search-map',
-  templateUrl: 'search-map.component.html',
-  styleUrls: ['search-map.component.css']
+  selector: 'map',
+  templateUrl: 'map.component.html',
+  styleUrls: ['map.component.css']
 })
-export class SearchMapComponent implements OnDestroy {
+export class MapComponent implements OnDestroy {
   public zoom: number;
   public showBasePoint: boolean;
   public places: Observable<MapPlaceDetails[]>;

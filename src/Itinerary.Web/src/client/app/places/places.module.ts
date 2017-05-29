@@ -11,11 +11,11 @@ import { Config } from '../shared/config/env.config';
 import { SharedModule } from '../shared/shared.module';
 import { PlacesRoutingModule } from './places-routing.module';
 
+import { MapComponent } from './map/map.component';
 import { PlaceListItemComponent } from './place-list-item/place-list-item.component';
 import { PlaceListComponent } from './place-list/place-list.component';
 import { PlaceRatingComponent } from './place-rating/place-rating.component';
 import { PlacesComponent } from './places.component';
-import { SearchMapComponent } from './search-map/search-map.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
 
 import { GooglePlacesService, PlacesService } from './places/index';
@@ -39,7 +39,7 @@ import { GooglePlacesService, PlacesService } from './places/index';
     SearchPanelComponent,
     PlaceListComponent,
     PlaceListItemComponent,
-    SearchMapComponent
+    MapComponent
   ],
   declarations: [
     PlacesComponent,
@@ -47,7 +47,7 @@ import { GooglePlacesService, PlacesService } from './places/index';
     PlaceListComponent,
     PlaceListItemComponent,
     PlaceRatingComponent,
-    SearchMapComponent
+    MapComponent
   ],
   providers: [
     PlacesService,
