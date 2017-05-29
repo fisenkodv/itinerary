@@ -1,7 +1,3 @@
-import { compose } from '@ngrx/core';
-import { routerReducer, RouterState, RouterStoreModule } from '@ngrx/router-store';
-import { Action, ActionReducer, combineReducers } from '@ngrx/store';
-import { storeFreeze } from 'ngrx-store-freeze';
 import { createSelector } from 'reselect';
 
 import * as filterReducers from './filter/filter.reducers';
@@ -23,7 +19,6 @@ export const InitialState: IPlacesState = {
 };
 
 export const getFilterState = (state: IAppState) => state.places.filter;
-export const getFilterLocation = createSelector(getFilterState, filterReducers.getLocation);
 export const getFilterDistance = createSelector(getFilterState, filterReducers.getDistance);
 export const getFilterRating = createSelector(getFilterState, filterReducers.getRating);
 export const getFilterReviews = createSelector(getFilterState, filterReducers.getReviews);

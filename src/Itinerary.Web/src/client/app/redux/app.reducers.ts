@@ -1,8 +1,6 @@
 import { compose } from '@ngrx/core';
-import { routerReducer, RouterState, RouterStoreModule } from '@ngrx/router-store';
-import { Action, ActionReducer, combineReducers } from '@ngrx/store';
+import { ActionReducer, combineReducers } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { createSelector } from 'reselect';
 
 import * as filterReducers from '../places/redux/filter/filter.reducers';
 import * as placesReducers from '../places/redux/places/places.reducers';

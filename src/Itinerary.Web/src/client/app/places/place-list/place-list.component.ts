@@ -22,7 +22,6 @@ export class PlaceListComponent {
     private store: Store<IAppState>,
     private hostElement: ElementRef) {
     this.selectedPlace = null;
-
     this.places = this.store.select(FromRoot.getPlaceEntities);
   }
 

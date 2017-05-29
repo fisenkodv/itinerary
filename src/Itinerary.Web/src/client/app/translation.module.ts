@@ -1,5 +1,5 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { Http, HttpModule } from '@angular/http';
+import { ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
+import { Http } from '@angular/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 

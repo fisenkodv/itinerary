@@ -1,4 +1,4 @@
-﻿import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+﻿import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -9,11 +9,9 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/takeWhile';
 
 import { IAppState } from '../../redux/app.state';
-import * as fromModule from '../redux/index';
 import * as filterActions from '../redux/filter/filter.actions';
+import * as fromModule from '../redux/index';
 import * as placesActions from '../redux/places/places.actions';
-
-import * as From from '../redux/index';
 
 import { Autocomplete, Location } from '../models/index';
 import { GooglePlacesService } from '../places/index';
@@ -67,8 +65,8 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
         .subscribe((location: Location) => {
           this.store.dispatch(new filterActions.SetLocationAction(location));
         });
-        //TODO: unsubscribe
-        //.unsubscribe();
+        // TODO: unsubscribe
+        // .unsubscribe();
     }
     return autocomplete ? autocomplete.description : '';
   }

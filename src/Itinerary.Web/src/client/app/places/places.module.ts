@@ -1,12 +1,9 @@
 ﻿import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
-
-import { Config } from '../shared/config/env.config';
 
 import { SharedModule } from '../shared/shared.module';
 import { PlacesRoutingModule } from './places-routing.module';

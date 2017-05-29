@@ -1,6 +1,3 @@
-import { Action } from '@ngrx/store';
-import { createSelector } from 'reselect';
-
 import { PlaceDetails } from '../../models/index';
 import * as placesActions from './places.actions';
 
