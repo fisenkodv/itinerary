@@ -21,6 +21,7 @@ import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { PlacesModule } from './places/places.module';
 import { TranslationModule } from './translation.module';
+import { TravelsModule } from './travels/travels.module';
 
 import { AppComponent } from './app.component';
 
@@ -42,7 +43,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     CoreModule.forRoot(),
     HomeModule,
-    PlacesModule
+    PlacesModule,
+    TravelsModule
   ],
   providers: [{
     provide: APP_BASE_HREF,
