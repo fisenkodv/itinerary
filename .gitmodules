@@ -1,0 +1,3 @@
+[submodule "src/Itinerary.Web"]
+	path = src/Itinerary.Web
+	url = https://github.com/mgechev/angular-seed
