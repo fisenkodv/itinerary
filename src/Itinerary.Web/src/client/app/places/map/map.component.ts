@@ -30,6 +30,7 @@ export class MapComponent implements OnDestroy {
   constructor(private store: Store<IAppState>) {
     this.places = this.store.select(FromRoot.getPlaceEntities).map(this.toMapPlaceDetails);
     this.searchLoading = this.store.select(FromRoot.getSearchLoading);
+    //this.filter = this.store.select(FromRoot.getFilterFilter)
 
     this.store.select(FromRoot.getFilterFilter)
       .takeWhile(() => this.alive)
