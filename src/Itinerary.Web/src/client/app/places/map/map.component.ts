@@ -20,7 +20,7 @@ export class MapComponent implements OnDestroy {
   public zoom: number;
   public places: Observable<MapPlaceDetails[]>;
   public searchLoading: Observable<boolean>;
-  public filter: Filter;
+  public filter: Observable<Filter>;
 
   private defaultZoom = 5;
   private defaultZoomForSelectedPoint = 8;
@@ -30,11 +30,11 @@ export class MapComponent implements OnDestroy {
   constructor(private store: Store<IAppState>) {
     this.places = this.store.select(FromRoot.getPlaceEntities).map(this.toMapPlaceDetails);
     this.searchLoading = this.store.select(FromRoot.getSearchLoading);
-    //this.filter = this.store.select(FromRoot.getFilterFilter)
+    this.filter = this.store.select(FromRoot.getFilterFilter);
 
-    this.store.select(FromRoot.getFilterFilter)
-      .takeWhile(() => this.alive)
-      .subscribe((filter) => this.filter = filter);
+    // this.store.select(FromRoot.getFilterFilter)
+    //   .takeWhile(() => this.alive)
+    //   .subscribe((filter) => this.filter = filter);
 
     this.zoom = this.defaultZoom;
     this.selectedPlaces = [];
