@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
-  "version": "1.0.0",
-  "description": "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation",
+  "name": "itinerary",
+  "version": "1.0.3",
+  "description": "Itinerary SPA project",
   "repository": {
-    "url": "https://github.com/mgechev/angular-seed"
+    "url": "https://fisenkodv@bitbucket.org/fisenkodv/itinerary.git"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color --env-config dev",
@@ -43,8 +43,8 @@
     "compodoc": "node ./node_modules/.bin/compodoc -p src/client/tsconfig.json",
     "serve.compodoc": "node ./node_modules/.bin/compodoc -s"
   },
-  "author": "Minko Gechev <mgechev>",
-  "license": "MIT",
+  "author": "Dmitry Fisenko",
+  "license": "",
   "devDependencies": {
     "@angular/compiler-cli": "^4.1.3",
     "@angular/platform-server": "^4.1.3",
