@@ -41,7 +41,7 @@ export class MapComponent implements OnDestroy {
   }
 
   public radiusInMeters() {
-    return this.filter.distance * 1609.34;
+    return 1000;//;this.filter.distance * 1609.34;
   }
 
   public markerClick(place: MapPlaceDetails) {
