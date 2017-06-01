@@ -40,8 +40,8 @@ export class MapComponent implements OnDestroy {
     this.selectedPlaces = [];
   }
 
-  public radiusInMeters() {
-    return 1000;//;this.filter.distance * 1609.34;
+  public toMeters(distance: number): number {
+    return distance * 1609.34;
   }
 
   public markerClick(place: MapPlaceDetails) {
