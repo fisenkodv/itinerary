@@ -4,4 +4,4 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 // ngrx
-import '@ngrx/core/add/operator/select';
+//import '@ngrx/core/add/operator/select';

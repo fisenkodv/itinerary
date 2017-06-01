@@ -359,11 +359,11 @@ export class SeedConfig {
    */
   ROLLUP_INCLUDE_DIR: string[] = ['node_modules/**'];
 
- /**
-  * List of named export Object key value pairs
-  * key: dependencie file
-  * value: exported Objects
-  */
+  /**
+   * List of named export Object key value pairs
+   * key: dependencie file
+   * value: exported Objects
+   */
   ROLLUP_NAMED_EXPORTS: any[] = [];
 
   /**
@@ -399,9 +399,9 @@ export class SeedConfig {
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
       '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
       '@angular/platform-browser/testing':
-        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+      'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
       '@angular/platform-browser-dynamic/testing':
-        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+      'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
       'app/': '/app/',
@@ -684,9 +684,9 @@ export class SeedConfig {
 
   }
 
-/**
- * Convert named rollup array to object
- */
+  /**
+   * Convert named rollup array to object
+   */
   getRollupNamedExports() {
     let namedExports = {};
     this.ROLLUP_NAMED_EXPORTS.map(namedExport => {
