@@ -16,4 +16,9 @@ export class MapPlaceDetails extends PlaceDetails {
   public get opacity(): number {
     return this.isSelected ? 1.0 : this.wasSelected ? 0.7 : 0.5;
   }
+
+  public getBase(): PlaceDetails {
+    return new PlaceDetails(this.name, this.rating, this.reviews, this.categories, this.url, this.imgUrl, this.location);
+    ;
+  }
 }
