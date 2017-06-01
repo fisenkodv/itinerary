@@ -9,7 +9,6 @@ import * as FromRoot from '../redux/index';
 import * as placesActions from '../redux/places/places.actions';
 
 import { Filter, PlaceDetails } from '../models/index';
-import { MapPlaceDetails } from './map-place-details';
 
 @Component({
   moduleId: module.id,
@@ -19,52 +18,46 @@ import { MapPlaceDetails } from './map-place-details';
 })
 export class MapComponent implements OnDestroy {
   public zoom: number;
-  public places: Observable<MapPlaceDetails[]>;
+  public places: Observable<PlaceDetails[]>;
   public searchLoading: Observable<boolean>;
   public filter: Observable<Filter>;
 
   private defaultZoom = 5;
   private defaultZoomForSelectedPoint = 8;
-  private selectedPlaces: string[];
+  private selectedPlaces: Observable<PlaceDetails[]>;
 
   constructor(private store: Store<IAppState>) {
-    this.places = this.store.select(FromRoot.getPlaceEntities).map(this.toMapPlaceDetails);
+    this.places = this.store.select(FromRoot.getPlaceEntities);
+    this.selectedPlaces = this.store.select(FromRoot.getSelectedPlaceEntities);
     this.searchLoading = this.store.select(FromRoot.getSearchLoading);
     this.filter = this.store.select(FromRoot.getFilterFilter);
 
     this.zoom = this.defaultZoom;
-    this.selectedPlaces = [];
   }
 
   public toMeters(distance: number): number {
     return distance * 1609.34;
   }
 
-  public markerClick(place: MapPlaceDetails) {
-    // this.placesCommunicationService.select(place);
-    // this.places.forEach((x) => {
-    //   x.wasSelected = x.wasSelected || x.isSelected;
-    //   x.isSelected = false;
-    // });
-    // place.isSelected = true;
-    this.store.dispatch(new placesActions.SelectPlaceAction(place.getBase()));
+  public markerClick(place: PlaceDetails) {
+    this.store.dispatch(new placesActions.SelectPlaceAction(place));
   }
 
   public ngOnDestroy(): void {
   }
 
-  private toMapPlaceDetails(places: PlaceDetails[]): MapPlaceDetails[] {
-    return places.map((place) => new MapPlaceDetails(false, false, place));
+  public iconUrl(place: PlaceDetails): string {
+    const color = true//this.wasSelected || this.isSelected
+      ? 'blue'
+      : 'red';
+    return `/assets/icon/map/generic-${color}-small.png`;
   }
 
-  private setPreviousSelectedPlaces(places: PlaceDetails[]) {
-    // const selected = this.places
-    //   .filter((place) => place.wasSelected || place.isSelected)
-    //   .map((place) => place.name);
-    // this.selectedPlaces = [...selected, ...this.selectedPlaces];
-  }
-
-  private wasSelected(place: PlaceDetails): boolean {
-    return this.selectedPlaces.some((x) => x === place.name);
+  public opacity(place: PlaceDetails): number {
+    return true//this.isSelected
+      ? 1.0
+      : true//this.wasSelected
+        ? 0.7
+        : 0.5;
   }
 }

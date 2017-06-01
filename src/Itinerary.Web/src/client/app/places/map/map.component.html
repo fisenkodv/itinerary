@@ -4,7 +4,7 @@
       [title]="'Selected Location'"></agm-marker>
 
     <agm-marker *ngFor="let place of places | async" [latitude]="place.location.latitude" [longitude]="place.location.longitude"
-      [title]="place.name" [opacity]="place.opacity" [iconUrl]="place.iconUrl" (markerClick)="markerClick(place)"></agm-marker>
+      [title]="place.name" [opacity]="opacity(place)" [iconUrl]="iconUrl(place)" (markerClick)="markerClick(place)"></agm-marker>
 
     <agm-circle *ngIf="!(searchLoading | async)" [latitude]="(filter | async)?.location.latitude" [longitude]="(filter | async)?.location.longitude"
       [radius]="toMeters((filter | async)?.distance)" [fillColor]="'#673ab7'" [fillOpacity]="0.2"></agm-circle>

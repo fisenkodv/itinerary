@@ -24,3 +24,4 @@ export function reducer(state: IState = initialState, action: placesActions.Acti
 }
 
 export const getEntities = (state: IState) => state.entities;
+export const getSelectedEntities = (state: IState) => state.selectedEntities;

@@ -26,6 +26,7 @@ export const getFilterFilter = createSelector(getFilterState, filterReducers.get
 
 export const getPlacesState = (state: IAppState) => state.places.places;
 export const getPlaceEntities = createSelector(getPlacesState, placesReducers.getEntities);
+export const getSelectedPlaceEntities = createSelector(getPlacesState, placesReducers.getSelectedEntities);
 
 export const getSearchState = (state: IAppState) => state.places.search;
 export const getSearchLoading = createSelector(getSearchState, searchReducers.getLoading);
