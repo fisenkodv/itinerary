@@ -1,7 +1,7 @@
-﻿<section class="travels" fxLayout="row" fxLayoutAlign="stretch" fxFlex="grow">
+﻿<section class="travels" fxLayout="column" fxLayoutAlign="stretch" fxFlex="grow">
   <md-grid-list cols="4" rowHeight="200px">
     <md-grid-tile *ngFor="let place of places" [rowspan]="place.rows">
-      <!--<img [src]="getPlaceFileName(place.name)" alt="photo of {{place.name}}">-->
+      <img [src]="getPlaceFileName(place.name)" alt="photo of {{place.name}}">
       <md-grid-tile-footer>
         <h3 md-line>{{place.name}}</h3>
         <span md-line>{{place.name}}</span>
