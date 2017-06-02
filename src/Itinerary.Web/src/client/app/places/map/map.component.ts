@@ -31,7 +31,7 @@ export class MapComponent implements OnDestroy {
       this.store.select(FromRoot.getSearchLoading),
       this.store.select(FromRoot.isDefaultFilter),
       (loading, isDefaultFilter) => {
-        return !loading && !isDefaultFilter;
+        return !isDefaultFilter;
       });
     this.filter = this.store.select(FromRoot.getFilterFilter);
     this.zoom = this.store.select(FromRoot.getMapZoom);

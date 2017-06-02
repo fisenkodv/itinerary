@@ -13,6 +13,8 @@ export const initialState: IState = {
 
 export function reducer(state: IState = initialState, action: placesActions.Actions): IState {
   switch (action.type) {
+    case placesActions.SEARCH:
+      return Object.assign({}, state, { entities: [] });
     case placesActions.SEARCH_COMPLETE:
       return Object.assign({}, state, { entities: action.payload });
     case placesActions.SELECT_PLACE:
