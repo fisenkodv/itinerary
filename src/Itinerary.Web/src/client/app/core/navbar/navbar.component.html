@@ -1,4 +1,6 @@
-﻿
+﻿<div class="progress-bar-container">
+  <md-progress-bar *ngIf="showProgressBar | async" mode="indeterminate" color="warn"></md-progress-bar>
+</div>
 <md-toolbar color="primary">
   <a class="title" fxFlex="grow" [routerLink]="['/home']">{{'navbar.title' | translate }}</a>
   <div class="navigation-container" fxHide.xs="true">
@@ -20,9 +22,6 @@
       <md-icon>menu</md-icon>
     </button>
 </md-toolbar>
-<div class="progress-bar-container">
-  <md-progress-bar *ngIf="showProgressBar | async" mode="indeterminate" color="warn"></md-progress-bar>
-</div>
 <md-menu x-position="before" #menu="mdMenu">
   <button md-menu-item>{{'navbar.menu.settings' | translate }}</button>
   <button md-menu-item>{{'navbar.menu.theme' | translate }}</button>
