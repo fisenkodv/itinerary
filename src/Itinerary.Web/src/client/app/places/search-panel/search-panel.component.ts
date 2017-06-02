@@ -1,7 +1,7 @@
 ﻿import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
@@ -30,7 +30,7 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
   public rating: Observable<number>;
   public reviews: Observable<number>;
 
-  private alive: boolean = true;
+  private destroy: Subject<void> = new Subject<void>();
 
   constructor(
     private googlePlacesService: GooglePlacesService,
@@ -39,23 +39,29 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
   }
 
   public ngOnInit() {
-    this.filteredPlaces =  this.searchControl.valueChanges
+    this.filteredPlaces = this.searchControl.valueChanges
       .debounceTime(200)
       .switchMap((keyword) => this.googlePlacesService.autocomplete(keyword as string));
 
     this.distance = this.store.select(fromModule.getFilterDistance);
     this.rating = this.store.select(fromModule.getFilterRating);
     this.reviews = this.store.select(fromModule.getFilterReviews);
-    this.store.select(fromModule.getFilterFilter)
-      .takeWhile(() => this.alive)
-      .subscribe((filter) =>
-        this.store.dispatch(new placesActions.SearchAction(filter)));
+    Observable.combineLatest(
+      this.store.select(fromModule.getFilterFilter),
+      this.store.select(fromModule.isDefaultFilter),
+      (filter, isDefaultFilter) => {
+        return { filter, isDefaultFilter };
+      })
+      .takeUntil(this.destroy)
+      .filter((combinedResult) => combinedResult.isDefaultFilter === false)
+      .subscribe((combinedResult) =>
+        this.store.dispatch(new placesActions.SearchAction(combinedResult.filter)));
 
     this.setCurrentPosition();
   }
 
   public ngOnDestroy() {
-    this.alive = false;
+    this.destroy.next();
   }
 
   public displayPlace(autocomplete: Autocomplete): string {
@@ -65,8 +71,8 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
         .subscribe((location: Location) => {
           this.store.dispatch(new filterActions.SetLocationAction(location));
         });
-        // TODO: unsubscribe
-        // .unsubscribe();
+      // TODO: unsubscribe
+      // .unsubscribe();
     }
     return autocomplete ? autocomplete.description : '';
   }

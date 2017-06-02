@@ -16,7 +16,7 @@ export function reducer(state: IState = initialState, action: placesActions.Acti
     case placesActions.SEARCH_COMPLETE:
       return Object.assign({}, state, { entities: action.payload });
     case placesActions.SELECT_PLACE:
-      const places = [...state.selectedEntities, action.payload];
+      const places = [action.payload, ...state.selectedEntities];
       return Object.assign({}, state, { selectedEntities: places });
     default:
       return state;

@@ -25,7 +25,6 @@ export function reducer(state: IState = initialState, action: filterActions.Acti
     case filterActions.SET_RATING:
       return Object.assign({}, state, { rating: action.payload });
     case filterActions.SET_REVIEWS:
-      console.log(state);
       return Object.assign({}, state, { reviews: action.payload });
     default:
       return state;
@@ -37,3 +36,5 @@ export const getDistance = (state: IState) => state.distance;
 export const getRating = (state: IState) => state.rating;
 export const getReviews = (state: IState) => state.reviews;
 export const getFilter = (state: IState) => new Filter(state.location, state.distance, state.rating, state.reviews);
+export const isDefaultFilter = (state: IState) => state.location.latitude == initialState.location.latitude &&
+  state.location.longitude == initialState.location.longitude;

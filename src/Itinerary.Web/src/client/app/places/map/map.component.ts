@@ -17,7 +17,7 @@ import { Filter, PlaceDetails } from '../models/index';
   styleUrls: ['map.component.css']
 })
 export class MapComponent implements OnDestroy {
-  public zoom: number;
+  public zoom: Observable<number>;
   public places: Observable<PlaceDetails[]>;
   public searchLoading: Observable<boolean>;
   public filter: Observable<Filter>;
@@ -32,12 +32,15 @@ export class MapComponent implements OnDestroy {
     this.places = this.store.select(FromRoot.getPlaceEntities);
     this.searchLoading = this.store.select(FromRoot.getSearchLoading);
     this.filter = this.store.select(FromRoot.getFilterFilter);
+    this.zoom = this.store.select(FromRoot.getMapZoom);
 
     this.store.select(FromRoot.getSelectedPlaceEntities)
       .takeUntil(this.destroy)
       .subscribe((selectedPlaces) => this.selectedPlaces = selectedPlaces);
+  }
 
-    this.zoom = this.defaultZoom;
+  public ngOnDestroy(): void {
+    this.destroy.next();
   }
 
   public getRadius(filter: Filter): number {
@@ -46,10 +49,6 @@ export class MapComponent implements OnDestroy {
 
   public markerClick(place: PlaceDetails) {
     this.store.dispatch(new placesActions.SelectPlaceAction(place));
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy.next();
   }
 
   public iconUrl(place: PlaceDetails): string {

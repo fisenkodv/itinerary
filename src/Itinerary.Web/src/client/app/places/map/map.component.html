@@ -1,5 +1,5 @@
 ﻿<div class="map">
-  <agm-map [latitude]="(filter | async)?.location.latitude" [longitude]="(filter | async)?.location.longitude" [zoom]="zoom">
+  <agm-map [latitude]="(filter | async)?.location.latitude" [longitude]="(filter | async)?.location.longitude" [zoom]="zoom | async">
     <agm-marker *ngIf="!(searchLoading | async)" [latitude]="(filter | async)?.location.latitude" [longitude]="(filter | async)?.location.longitude"
       [title]="'Selected Location'"></agm-marker>
 

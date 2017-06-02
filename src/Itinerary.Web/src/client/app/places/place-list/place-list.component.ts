@@ -1,6 +1,6 @@
-﻿import { Component, ElementRef, Input } from '@angular/core';
+﻿import { Component, ElementRef, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs/Rx';
 
 import { IAppState } from '../../redux/app.state';
 import * as FromRoot from '../redux/index';
@@ -13,16 +13,28 @@ import { PlaceDetails } from '../models/index';
   templateUrl: 'place-list.component.html',
   styleUrls: ['place-list.component.css']
 })
-export class PlaceListComponent {
+export class PlaceListComponent implements OnDestroy {
   public places: Observable<PlaceDetails[]>;
 
+  private destroy: Subject<void> = new Subject<void>();
   private selectedPlace: PlaceDetails;
 
   constructor(
     private store: Store<IAppState>,
     private hostElement: ElementRef) {
-    this.selectedPlace = null;
     this.places = this.store.select(FromRoot.getPlaceEntities);
+    this.store.select(FromRoot.getSelectedPlaceEntities)
+      .takeUntil(this.destroy)
+      .subscribe((selectedPlaces) => {
+        if (selectedPlaces.length) {
+          this.selectPlaceListItem(selectedPlaces[0]);
+        }
+      });
+    this.selectedPlace = null;
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy.next();
   }
 
   public isPlaceListItemSelected(place: PlaceDetails): boolean {
@@ -40,6 +52,8 @@ export class PlaceListComponent {
 
   private selectPlaceListItem(place: PlaceDetails) {
     this.selectedPlace = place;
-    this.hostElement.nativeElement.scrollTop = document.getElementById(this.getPlaceListItemId(place)).offsetTop - 1;
+    const element = document.getElementById(this.getPlaceListItemId(place));
+    if (element)
+      this.hostElement.nativeElement.scrollTop = element.offsetTop - 1;
   }
 }
