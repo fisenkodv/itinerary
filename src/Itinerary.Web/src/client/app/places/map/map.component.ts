@@ -19,18 +19,20 @@ import { Filter, PlaceDetails } from '../models/index';
 export class MapComponent implements OnDestroy {
   public zoom: Observable<number>;
   public places: Observable<PlaceDetails[]>;
-  public searchLoading: Observable<boolean>;
+  public isMapReady: Observable<boolean>;
   public filter: Observable<Filter>;
 
   private selectedPlaces: PlaceDetails[];
   private destroy: Subject<void> = new Subject<void>();
 
-  private defaultZoom = 5;
-  private defaultZoomForSelectedPoint = 8;
-
   constructor(private store: Store<IAppState>) {
     this.places = this.store.select(FromRoot.getPlaceEntities);
-    this.searchLoading = this.store.select(FromRoot.getSearchLoading);
+    this.isMapReady = Observable.combineLatest(
+      this.store.select(FromRoot.getSearchLoading),
+      this.store.select(FromRoot.isDefaultFilter),
+      (loading, isDefaultFilter) => {
+        return !loading && !isDefaultFilter;
+      });
     this.filter = this.store.select(FromRoot.getFilterFilter);
     this.zoom = this.store.select(FromRoot.getMapZoom);
 

@@ -36,5 +36,6 @@ export const getDistance = (state: IState) => state.distance;
 export const getRating = (state: IState) => state.rating;
 export const getReviews = (state: IState) => state.reviews;
 export const getFilter = (state: IState) => new Filter(state.location, state.distance, state.rating, state.reviews);
-export const isDefaultFilter = (state: IState) => state.location.latitude == initialState.location.latitude &&
-  state.location.longitude == initialState.location.longitude;
+export const isDefaultFilter = (state: IState) =>
+  state.location.latitude === initialState.location.latitude &&
+  state.location.longitude === initialState.location.longitude;
