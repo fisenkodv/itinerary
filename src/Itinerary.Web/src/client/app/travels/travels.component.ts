@@ -16,7 +16,11 @@ export class TravelsComponent {
     { rows: 2, name: 'Volgograd' },
     { rows: 1, name: 'NY' },
     { rows: 1, name: 'LasVegas' },
-    { rows: 1, name: 'Chicago' }
+    { rows: 1, name: 'Chicago' },
+    { rows: 2, name: 'Detroit' },
+    { rows: 1, name: 'Tampa' },
+    { rows: 1, name: 'Lansing' },
+    { rows: 1, name: 'Linevo' }
   ];
 
   public showPlace(place: any) {

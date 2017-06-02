@@ -5,7 +5,7 @@ import 'rxjs/add/operator/takeWhile';
 import { Observable, Subject } from 'rxjs/Rx';
 
 import { IAppState } from '../../redux/app.state';
-import * as FromRoot from '../redux/index';
+import * as fromPlaces from '../redux/index';
 import * as placesActions from '../redux/places/places.actions';
 
 import { Filter, PlaceDetails } from '../models/index';
@@ -19,24 +19,20 @@ import { Filter, PlaceDetails } from '../models/index';
 export class MapComponent implements OnDestroy {
   public zoom: Observable<number>;
   public places: Observable<PlaceDetails[]>;
-  public isMapReady: Observable<boolean>;
+  public isDefaultFilter: Observable<boolean>;
   public filter: Observable<Filter>;
 
   private selectedPlaces: PlaceDetails[];
   private destroy: Subject<void> = new Subject<void>();
 
   constructor(private store: Store<IAppState>) {
-    this.places = this.store.select(FromRoot.getPlaceEntities);
-    this.isMapReady = Observable.combineLatest(
-      this.store.select(FromRoot.getSearchLoading),
-      this.store.select(FromRoot.isDefaultFilter),
-      (loading, isDefaultFilter) => {
-        return !isDefaultFilter;
-      });
-    this.filter = this.store.select(FromRoot.getFilterFilter);
-    this.zoom = this.store.select(FromRoot.getMapZoom);
+    this.places = this.store.select(fromPlaces.getPlaceEntities);
+    this.isDefaultFilter = this.store.select(fromPlaces.isDefaultFilter).map((isDefaultFilter) => !isDefaultFilter);
 
-    this.store.select(FromRoot.getSelectedPlaceEntities)
+    this.filter = this.store.select(fromPlaces.getFilterFilter);
+    this.zoom = this.store.select(fromPlaces.getMapZoom);
+
+    this.store.select(fromPlaces.getSelectedPlaceEntities)
       .takeUntil(this.destroy)
       .subscribe((selectedPlaces) => this.selectedPlaces = selectedPlaces);
   }

@@ -8,6 +8,7 @@ import {
   MdIconModule,
   MdInputModule,
   MdMenuModule,
+  MdProgressBarModule,
   MdSliderModule,
   MdToolbarModule,
   MdTooltipModule
@@ -23,6 +24,7 @@ import {
     MdIconModule,
     MdInputModule,
     MdMenuModule,
+    MdProgressBarModule,
     MdSliderModule,
     MdToolbarModule,
     MdTooltipModule],
@@ -36,6 +38,7 @@ import {
     MdIconModule,
     MdInputModule,
     MdMenuModule,
+    MdProgressBarModule,
     MdSliderModule,
     MdToolbarModule,
     MdTooltipModule]
