@@ -7,6 +7,6 @@
       [title]="place.name" [opacity]="opacity(place)" [iconUrl]="iconUrl(place)" (markerClick)="markerClick(place)"></agm-marker>
 
     <agm-circle *ngIf="!(searchLoading | async)" [latitude]="(filter | async)?.location.latitude" [longitude]="(filter | async)?.location.longitude"
-      [radius]="toMeters((filter | async)?.distance)" [fillColor]="'#673ab7'" [fillOpacity]="0.2"></agm-circle>
+      [radius]="getRadius(filter | async)" [fillColor]="'#673ab7'" [fillOpacity]="0.2"></agm-circle>
   </agm-map>
 </div>
