@@ -25,6 +25,12 @@ import { TravelsModule } from './travels/travels.module';
 
 import { AppComponent } from './app.component';
 
+const DevSpecificModules = [];
+
+if (String('<%= BUILD_TYPE %>') === 'dev') {
+  DevSpecificModules.push(StoreDevtoolsModule.instrumentOnlyWithExtension());
+}
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [AppComponent],
@@ -37,9 +43,9 @@ import { AppComponent } from './app.component';
     FlexLayoutModule,
     TranslationModule.forRoot(),
     Effects,
+    DevSpecificModules,
     StoreModule.provideStore(AppReducer, InitialState),
     RouterStoreModule.connectRouter(),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     AppRoutingModule,
     CoreModule.forRoot(),
     HomeModule,
