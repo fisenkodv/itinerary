@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Itinerary.Common.Models;
+using Itinerary.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -8,16 +9,16 @@ namespace Itinerary.Business.Services.Account
 {
   public class AccountService : IAccountService
   {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<User> _userManager;
 
-    public AccountService( UserManager<IdentityUser> userManager )
+    public AccountService( UserManager<User> userManager )
     {
       _userManager = userManager;
     }
 
     public async Task<ApiCallStatus> Register( string email, string password )
     {
-      var user = new IdentityUser { UserName = email, Email = email };
+      var user = new User { UserName = email, Email = email };
       IdentityResult result = await _userManager.CreateAsync( user, password );
       return new ApiCallStatus( result.Succeeded, result.Errors.Select( x => x.Description ) );
     }
