@@ -55,7 +55,7 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
       .takeUntil(this.destroy)
       .filter((combinedResult) => combinedResult.isDefaultFilter === false)
       .subscribe((combinedResult) =>
-        this.store.dispatch(new placesActions.SearchAction(combinedResult.filter)));
+        this.store.dispatch(new placesActions.GetPlacesAction([], true, null)));
 
     this.setCurrentPosition();
   }

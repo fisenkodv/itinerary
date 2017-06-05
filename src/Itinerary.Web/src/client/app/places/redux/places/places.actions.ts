@@ -1,20 +1,13 @@
 import { Action } from '@ngrx/store';
 import { Filter, PlaceDetails } from '../../models/index';
 
-export const SEARCH = '[Places] Search';
-export const SEARCH_COMPLETE = '[Places] Search Complete';
+export const GET_PLACES = '[Places] Get';
 export const SELECT_PLACE = '[Places] Select';
 
-export class SearchAction implements Action {
-  public readonly type = SEARCH;
+export class GetPlacesAction implements Action {
+  public readonly type = GET_PLACES;
 
-  constructor(public payload: Filter) { }
-}
-
-export class SearchCompleteAction implements Action {
-  public readonly type = SEARCH_COMPLETE;
-
-  constructor(public payload: PlaceDetails[]) { }
+  constructor(public payload: PlaceDetails[], public loading: boolean, public error: string) { }
 }
 
 export class SelectPlaceAction implements Action {
@@ -24,6 +17,5 @@ export class SelectPlaceAction implements Action {
 }
 
 export type Actions =
-  SearchAction |
-  SearchCompleteAction |
+  GetPlacesAction |
   SelectPlaceAction;

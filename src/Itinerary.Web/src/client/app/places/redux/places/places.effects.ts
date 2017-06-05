@@ -20,7 +20,7 @@ import * as placesActions from './places.actions';
 export class FilterEffects {
   @Effect()
   public search: Observable<Action> = this.actions
-    .ofType(placesActions.SEARCH)
+    .ofType(placesActions.GET_PLACES)
     .debounceTime(300)
     .map(toPayload)
     .switchMap((filter: Filter) => {
@@ -28,12 +28,12 @@ export class FilterEffects {
         return empty();
       }
 
-      const nextSearch = this.actions.ofType(placesActions.SEARCH).skip(1);
+      const nextSearch = this.actions.ofType(placesActions.GET_PLACES).skip(1);
 
       return this.placesService.search(filter)
         .takeUntil(nextSearch)
-        .map((places) => new placesActions.SearchCompleteAction(places))
-        .catch(() => of(new placesActions.SearchCompleteAction([])));
+        .map((places) => new placesActions.GetPlacesAction(places, false, null))
+        .catch((error) => of(new placesActions.GetPlacesAction([], false, error)));
     });
 
   constructor(

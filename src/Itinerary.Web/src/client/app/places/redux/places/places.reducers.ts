@@ -4,18 +4,24 @@ import * as placesActions from './places.actions';
 export interface IState {
   entities: PlaceDetails[];
   selectedEntities: PlaceDetails[];
+  loading: boolean;
 }
 
 export const initialState: IState = {
   entities: [],
-  selectedEntities: []
+  selectedEntities: [],
+  loading: false
 };
 
 export function reducer(state: IState = initialState, action: placesActions.Actions): IState {
   switch (action.type) {
-    case placesActions.SEARCH:
-      return Object.assign({}, state, { entities: [] });
-    case placesActions.SEARCH_COMPLETE:
+    case placesActions.GET_PLACES:
+      if (action.loading) {
+        return Object.assign({}, state, { loading: true });
+      }
+      if (action.error) {
+        return Object.assign({}, state, { entities: [], loading: false });
+      }
       return Object.assign({}, state, { entities: action.payload });
     case placesActions.SELECT_PLACE:
       const places = [action.payload, ...state.selectedEntities];
@@ -26,4 +32,5 @@ export function reducer(state: IState = initialState, action: placesActions.Acti
 }
 
 export const getEntities = (state: IState) => state.entities;
+export const getLoading = (state: IState) => state.loading;
 export const getSelectedEntities = (state: IState) => state.selectedEntities;

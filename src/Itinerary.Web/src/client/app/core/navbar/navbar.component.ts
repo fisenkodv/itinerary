@@ -23,7 +23,7 @@ export class NavbarComponent {
     private dialog: MdDialog,
     private authService: AuthService,
     private store: Store<IAppState>) {
-    this.showProgressBar = this.store.select(fromPlaces.getSearchLoading);
+    this.showProgressBar = this.store.select(fromPlaces.getLoading);
   }
 
   public signin() {

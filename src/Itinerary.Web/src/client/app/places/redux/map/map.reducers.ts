@@ -10,8 +10,7 @@ export const initialState: IState = {
 
 export function reducer(state: IState = initialState, action: placesActions.Actions): IState {
   switch (action.type) {
-    case placesActions.SEARCH:
-    case placesActions.SEARCH_COMPLETE:
+    case placesActions.GET_PLACES:
       return Object.assign({}, state, { zoom: 8 });
     default:
       return state;

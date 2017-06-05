@@ -5,7 +5,6 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import * as filterReducers from '../places/redux/filter/filter.reducers';
 import * as mapReducers from '../places/redux/map/map.reducers';
 import * as placesReducers from '../places/redux/places/places.reducers';
-import * as searchReducers from '../places/redux/search/search.reducers';
 
 import { IAppState } from './app.state';
 
@@ -13,7 +12,6 @@ export const reducers = {
   places: combineReducers({
     filter: filterReducers.reducer,
     places: placesReducers.reducer,
-    search: searchReducers.reducer,
     map: mapReducers.reducer
   })
 };
