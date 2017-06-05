@@ -7,7 +7,11 @@ export const SELECT_PLACE = '[Places] Select';
 export class GetPlacesAction implements Action {
   public readonly type = GET_PLACES;
 
-  constructor(public payload: PlaceDetails[], public loading: boolean, public error: string) { }
+  constructor(
+    public meta: { filter: Filter, loading: boolean },
+    public payload: PlaceDetails[],
+    public error: string) {
+  }
 }
 
 export class SelectPlaceAction implements Action {

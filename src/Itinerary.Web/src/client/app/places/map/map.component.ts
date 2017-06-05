@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnDestroy } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import 'rxjs/add/operator/takeWhile';
@@ -14,7 +14,8 @@ import { Filter, PlaceDetails } from '../models/index';
   moduleId: module.id,
   selector: 'map',
   templateUrl: 'map.component.html',
-  styleUrls: ['map.component.css']
+  styleUrls: ['map.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapComponent implements OnDestroy {
   public zoom: Observable<number>;
