@@ -25,10 +25,10 @@ import { TravelsModule } from './travels/travels.module';
 
 import { AppComponent } from './app.component';
 
-const DevSpecificModules = [];
+let DevSpecificModules: any = [];
 
 if (String('<%= BUILD_TYPE %>') === 'dev') {
-  DevSpecificModules.push(StoreDevtoolsModule.instrumentOnlyWithExtension());
+  DevSpecificModules = [StoreDevtoolsModule.instrumentOnlyWithExtension()];
 }
 
 @NgModule({
@@ -43,14 +43,15 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     FlexLayoutModule,
     TranslationModule.forRoot(),
     Effects,
-    DevSpecificModules,
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     StoreModule.provideStore(AppReducer, InitialState),
     RouterStoreModule.connectRouter(),
     AppRoutingModule,
     CoreModule.forRoot(),
     HomeModule,
     PlacesModule,
-    TravelsModule
+    TravelsModule,
+    DevSpecificModules
   ],
   providers: [{
     provide: APP_BASE_HREF,
