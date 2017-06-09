@@ -16,13 +16,9 @@ export const initialState: IState = {
 export function reducer(state: IState = initialState, action: placesActions.Actions): IState {
   switch (action.type) {
     case placesActions.GET_PLACES:
-      if (action.loading) {
-        return Object.assign({}, state, { loading: true });
-      }
-      if (action.error) {
-        return Object.assign({}, state, { entities: [], loading: false });
-      }
-      return Object.assign({}, state, { entities: action.payload });
+      return Object.assign({}, state, { entities: [], loading: true });
+    case placesActions.GET_PLACES_COMPLETE:
+      return Object.assign({}, state, { entities: action.payload, loading: false });
     case placesActions.SELECT_PLACE:
       const places = [action.payload, ...state.selectedEntities];
       return Object.assign({}, state, { selectedEntities: places });

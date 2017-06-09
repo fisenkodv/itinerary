@@ -32,8 +32,8 @@ export class FilterEffects {
 
       return this.placesService.search(filter)
         .takeUntil(nextSearch)
-        .map((places) => new placesActions.GetPlacesAction({ filter, loading: false }, places, null))
-        .catch((error) => of(new placesActions.GetPlacesAction({ filter, loading: false }, [], error)));
+        .map((places) => new placesActions.GetPlacesCompleteAction(places))
+        .catch((error) => of(new placesActions.GetPlacesCompleteAction([])));
     });
 
   constructor(
