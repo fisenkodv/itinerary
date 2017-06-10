@@ -20,7 +20,6 @@ import { Filter, PlaceDetails } from '../models/index';
 export class MapComponent implements OnDestroy {
   public zoom: Observable<number>;
   public places: Observable<PlaceDetails[]>;
-  public isDefaultFilter: Observable<boolean>;
   public filter: Observable<Filter>;
 
   private selectedPlaces: PlaceDetails[];
@@ -28,8 +27,6 @@ export class MapComponent implements OnDestroy {
 
   constructor(private store: Store<IAppState>) {
     this.places = this.store.select(fromPlaces.getPlaceEntities);
-    this.isDefaultFilter = this.store.select(fromPlaces.isDefaultFilter).map((isDefaultFilter) => !isDefaultFilter);
-
     this.filter = this.store.select(fromPlaces.getFilterFilter);
     this.zoom = this.store.select(fromPlaces.getMapZoom);
 

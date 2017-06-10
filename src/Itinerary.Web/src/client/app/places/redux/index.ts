@@ -23,7 +23,6 @@ export const getFilterDistance = createSelector(getFilterState, filterReducers.g
 export const getFilterRating = createSelector(getFilterState, filterReducers.getRating);
 export const getFilterReviews = createSelector(getFilterState, filterReducers.getReviews);
 export const getFilterFilter = createSelector(getFilterState, filterReducers.getFilter);
-export const isDefaultFilter = createSelector(getFilterState, filterReducers.isDefaultFilter);
 
 export const getPlacesState = (state: IAppState) => state.places.places;
 export const getPlaceEntities = createSelector(getPlacesState, placesReducers.getEntities);

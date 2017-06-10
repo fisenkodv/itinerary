@@ -46,16 +46,11 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
     this.distance = this.store.select(fromModule.getFilterDistance);
     this.rating = this.store.select(fromModule.getFilterRating);
     this.reviews = this.store.select(fromModule.getFilterReviews);
-    Observable.combineLatest(
-      this.store.select(fromModule.getFilterFilter),
-      this.store.select(fromModule.isDefaultFilter),
-      (filter, isDefaultFilter) => {
-        return { filter, isDefaultFilter };
-      })
+    this.store.select(fromModule.getFilterFilter)
       .takeUntil(this.destroy)
-      .filter((combinedResult) => !combinedResult.isDefaultFilter)
-      .subscribe((combinedResult) =>
-        this.store.dispatch(new placesActions.GetPlacesAction(combinedResult.filter)));
+      .filter((filter) => !filter.location.isDefault)
+      .subscribe((filter) =>
+        this.store.dispatch(new placesActions.GetPlacesAction(filter)));
 
     this.setCurrentPosition();
   }
