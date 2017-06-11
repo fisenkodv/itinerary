@@ -1,4 +1,4 @@
-﻿import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+﻿import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import 'rxjs/add/operator/takeWhile';
@@ -17,22 +17,22 @@ import { Filter, PlaceDetails } from '../models/index';
   styleUrls: ['map.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapComponent implements OnDestroy {
-  public zoom: Observable<number>;
-  public places: Observable<PlaceDetails[]>;
-  public filter: Observable<Filter>;
+export class MapComponent implements OnDestroy, OnInit {
+  @Input() public places: Observable<PlaceDetails[]>;
+  @Input() public selectedPlaces: Observable<PlaceDetails[]>;
+  @Input() public filter: Observable<Filter>;
+  @Input() public zoom: Observable<number>;
 
-  private selectedPlaces: PlaceDetails[];
+  private lastSelectedPlaces: PlaceDetails[];
   private destroy: Subject<void> = new Subject<void>();
 
   constructor(private store: Store<IAppState>) {
-    this.places = this.store.select(fromPlaces.getPlaceEntities);
-    this.filter = this.store.select(fromPlaces.getFilterFilter);
-    this.zoom = this.store.select(fromPlaces.getMapZoom);
+  }
 
-    this.store.select(fromPlaces.getSelectedPlaceEntities)
+  public ngOnInit(): void {
+    this.selectedPlaces
       .takeUntil(this.destroy)
-      .subscribe((selectedPlaces) => this.selectedPlaces = selectedPlaces);
+      .subscribe((selectedPlaces) => this.lastSelectedPlaces = selectedPlaces);
   }
 
   public ngOnDestroy(): void {
@@ -64,7 +64,7 @@ export class MapComponent implements OnDestroy {
   }
 
   private selectedIndex(place: PlaceDetails): number {
-    return this.selectedPlaces
+    return this.lastSelectedPlaces
       .findIndex((selectedPlace) => selectedPlace.name === place.name);
   }
 }

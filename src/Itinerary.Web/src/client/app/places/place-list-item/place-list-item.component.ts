@@ -10,8 +10,6 @@ import { PlaceDetails } from '../models/index';
   encapsulation: ViewEncapsulation.None
 })
 export class PlaceListItemComponent {
-  @Input()
-  public place: PlaceDetails;
-  @Input()
-  public isPlaceSelected: boolean;
+  @Input() public place: PlaceDetails;
+  @Input() public isPlaceSelected: boolean;
 }

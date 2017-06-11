@@ -1,4 +1,4 @@
-﻿import { Component, OnDestroy, OnInit } from '@angular/core';
+﻿import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs/Rx';
@@ -13,7 +13,7 @@ import * as filterActions from '../redux/filter/filter.actions';
 import * as fromModule from '../redux/index';
 import * as placesActions from '../redux/places/places.actions';
 
-import { Autocomplete, Location } from '../models/index';
+import { Autocomplete, Filter, Location } from '../models/index';
 import { GooglePlacesService } from '../places/index';
 
 @Component({
@@ -25,10 +25,7 @@ import { GooglePlacesService } from '../places/index';
 export class SearchPanelComponent implements OnDestroy, OnInit {
   public searchControl: FormControl;
   public filteredPlaces: Observable<Autocomplete[]>;
-
-  public distance: Observable<number>;
-  public rating: Observable<number>;
-  public reviews: Observable<number>;
+  @Input() public filter: Observable<Filter>;
 
   private destroy: Subject<void> = new Subject<void>();
 
@@ -42,11 +39,7 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
     this.filteredPlaces = this.searchControl.valueChanges
       .debounceTime(200)
       .switchMap((keyword) => this.googlePlacesService.autocomplete(keyword as string));
-
-    this.distance = this.store.select(fromModule.getFilterDistance);
-    this.rating = this.store.select(fromModule.getFilterRating);
-    this.reviews = this.store.select(fromModule.getFilterReviews);
-    this.store.select(fromModule.getFilterFilter)
+    this.filter
       .takeUntil(this.destroy)
       .filter((filter) => !filter.location.isDefault)
       .subscribe((filter) =>

@@ -1,4 +1,4 @@
-﻿import { Component, ElementRef, Input, OnDestroy } from '@angular/core';
+﻿import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs/Rx';
 
@@ -13,8 +13,9 @@ import { PlaceDetails } from '../models/index';
   templateUrl: 'place-list.component.html',
   styleUrls: ['place-list.component.css']
 })
-export class PlaceListComponent implements OnDestroy {
-  public places: Observable<PlaceDetails[]>;
+export class PlaceListComponent implements OnInit, OnDestroy {
+  @Input() public places: Observable<PlaceDetails[]>;
+  @Input() public selectedPlaces: Observable<PlaceDetails[]>;
 
   private destroy: Subject<void> = new Subject<void>();
   private selectedPlace: PlaceDetails;
@@ -22,15 +23,17 @@ export class PlaceListComponent implements OnDestroy {
   constructor(
     private store: Store<IAppState>,
     private hostElement: ElementRef) {
-    this.places = this.store.select(FromRoot.getPlaceEntities);
-    this.store.select(FromRoot.getSelectedPlaceEntities)
+    this.selectedPlace = null;
+  }
+
+  public ngOnInit(): void {
+    this.selectedPlaces
       .takeUntil(this.destroy)
       .subscribe((selectedPlaces) => {
         if (selectedPlaces.length) {
           this.selectPlaceListItem(selectedPlaces[0]);
         }
       });
-    this.selectedPlace = null;
   }
 
   public ngOnDestroy(): void {
@@ -53,7 +56,8 @@ export class PlaceListComponent implements OnDestroy {
   private selectPlaceListItem(place: PlaceDetails) {
     this.selectedPlace = place;
     const element = document.getElementById(this.getPlaceListItemId(place));
-    if (element)
+    if (element) {
       this.hostElement.nativeElement.scrollTop = element.offsetTop - 1;
+    }
   }
 }
