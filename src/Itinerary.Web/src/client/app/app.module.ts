@@ -46,11 +46,11 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     StoreModule.provideStore(AppReducer, InitialState),
     RouterStoreModule.connectRouter(),
-    AppRoutingModule,
     CoreModule.forRoot(),
     HomeModule,
     PlacesModule,
     TravelsModule,
+    AppRoutingModule,
     DevSpecificModules
   ],
   providers: [{

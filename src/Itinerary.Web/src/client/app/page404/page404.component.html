@@ -1,0 +1,13 @@
+<div class="box">
+  <h1 class="title">Oops!</h1>
+  <h2 class="sub-title">We can't seem to find the page you're looking for.
+    <br>
+     Here are some helpful links instead:
+  </h2>
+  <ul class="links">
+    <!--<li class="links__header">Here are some helpful links instead:</li>-->
+    <li class="links__link"><a [routerLink]="['/home']">{{'navbar.navigation.home' | translate }}</a></li>
+    <li class="links__link"><a [routerLink]="['/places']">{{'navbar.navigation.places' | translate }}</a></li>
+    <li class="links__link"><a [routerLink]="['/travels']">{{'navbar.navigation.travels' | translate }}</a></li>
+  </ul>
+</div>
