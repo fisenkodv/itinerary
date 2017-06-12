@@ -5,7 +5,6 @@ import 'rxjs/add/operator/takeWhile';
 import { Observable, Subject } from 'rxjs/Rx';
 
 import { IAppState } from '../../redux/app.state';
-import * as fromPlaces from '../redux/index';
 import * as placesActions from '../redux/places/places.actions';
 
 import { Filter, PlaceDetails } from '../models/index';

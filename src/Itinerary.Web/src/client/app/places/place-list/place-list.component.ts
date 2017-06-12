@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs/Rx';
 
 import { IAppState } from '../../redux/app.state';
-import * as FromRoot from '../redux/index';
 
 import { PlaceDetails } from '../models/index';
 
