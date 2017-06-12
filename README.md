@@ -138,4 +138,5 @@ letsencrypt certonly  --webroot --webroot-path=/var/www/itinerary_cert -d itiner
 * [How To Secure Nginx with Let's Encrypt on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04)
 * [Generate Google Map Icon. Red](https://www.google.com/maps/vt/icon/name=assets/icons/poi/quantum/container_background-2-medium.png,assets/icons/poi/quantum/container-2-medium.png,assets/icons/poi/quantum/generic-2-medium.png&highlight=ffffff,db4437,ffffff&color=ff000000?scale=1)
 * [Generate Google Map Icon. Blue](https://www.google.com/maps/vt/icon/name=assets/icons/poi/quantum/container_background-2-medium.png,assets/icons/poi/quantum/container-2-medium.png,assets/icons/poi/quantum/generic-2-medium.png&highlight=ffffff,4285F4,ffffff&color=ff000000?scale=3)
-
+* [Как добавить HTTPS в nginx на Ubuntu Server (16.04 и выше)](https://900913.ru/2017/06/09/kak-dobavit-ssl-na-ubuntu-server-16-04-i-vyshe/)
+* [How To Secure Nginx with Let's Encrypt on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04)
