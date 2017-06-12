@@ -52,6 +52,13 @@
       }
     }
   },
+  "404": {
+    "title": "Oops!",
+    "sub-title": {
+      "line-1": "We can't seem to find the page you're looking for.",
+      "line-2": "Here are some helpful links instead:"
+    }
+  },
   "navbar": {
     "title": "Itinerary",
     "navigation": {
