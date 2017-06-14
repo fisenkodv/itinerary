@@ -11,7 +11,7 @@ export class TranslationModule {
         useFactory: (http: Http) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
         deps: [Http]
       }
-    })
+    });
   }
 
   constructor( @Optional() @SkipSelf() parentModule: TranslateModule) {
