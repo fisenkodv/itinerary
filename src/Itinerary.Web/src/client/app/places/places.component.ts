@@ -1,8 +1,12 @@
-﻿import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+﻿import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs/Rx';
 
-import { PlacesCommunicationService, SearchCriteria } from './places-communication/index';
-import { Location, PlaceDetails, PlacesService } from './places/index';
+import { IAppState } from '../redux/app.state';
+import * as fromPlaces from './redux/index';
+import * as placesActions from './redux/places/places.actions';
+
+import { Filter, PlaceDetails } from './models/index';
 
 @Component({
   moduleId: module.id,
@@ -10,42 +14,19 @@ import { Location, PlaceDetails, PlacesService } from './places/index';
   templateUrl: 'places.component.html',
   styleUrls: ['places.component.css']
 })
-export class PlacesComponent implements OnDestroy {
-  public searchCriteria: SearchCriteria;
+export class PlacesComponent {
+  public places: Observable<PlaceDetails[]>;
+  public selectedPlaces: Observable<PlaceDetails[]>;
+  public reviews: Observable<number>;
+  public rating: Observable<number>;
+  public distance: Observable<number>;
+  public filter: Observable<Filter>;
+  public zoom: Observable<number>;
 
-  private searchCriteriaSubscription: Subscription;
-
-  constructor(
-    private placesService: PlacesService,
-    private placesCommunicationService: PlacesCommunicationService
-  ) {
-    this.searchCriteria = new SearchCriteria();
-    this.searchCriteriaSubscription = placesCommunicationService.searchCriteria
-      .subscribe((searchCriteria) => this.searchHandler(searchCriteria));
-  }
-
-  public ngOnDestroy(): void {
-    this.searchCriteriaSubscription.unsubscribe();
-  }
-
-  public searchHandler(event: SearchCriteria) {
-    if (event) {
-      this.searchCriteria = event;
-      this.searchPlaces(this.searchCriteria);
-    }
-  }
-
-  private searchPlaces(searchCriteria: SearchCriteria) {
-    if (searchCriteria.distance > 0 && searchCriteria.rating > 0) {
-      this.placesService.search(
-        searchCriteria.location.latitude,
-        searchCriteria.location.longitude,
-        searchCriteria.distance,
-        searchCriteria.rating,
-        searchCriteria.reviews)
-        .subscribe((places: PlaceDetails[]) => {
-          this.placesCommunicationService.notify(places);
-        });
-    }
+  constructor(private store: Store<IAppState>) {
+    this.places = this.store.select(fromPlaces.getPlaceEntities);
+    this.selectedPlaces = this.store.select(fromPlaces.getSelectedPlaceEntities);
+    this.filter = this.store.select(fromPlaces.getFilterFilter);
+    this.zoom = this.store.select(fromPlaces.getMapZoom);
   }
 }

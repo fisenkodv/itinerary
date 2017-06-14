@@ -56,59 +56,63 @@ export class ProjectConfig extends SeedConfig {
     const bundles = [
       {
         name: '@angular/material',
-        path: 'node_modules/@angular/material/bundles/material.umd.js',
-        packageMeta: {
-          main: 'index.js',
-          defaultExtension: 'js'
-        }
+        path: 'node_modules/@angular/material/bundles/material.umd.js'
       },
       {
         name: '@angular/flex-layout',
-        path: 'node_modules/@angular/flex-layout/bundles/flex-layout.umd.js',
-        packageMeta: {
-          main: 'index.js',
-          defaultExtension: 'js'
-        }
+        path: 'node_modules/@angular/flex-layout/bundles/flex-layout.umd.js'
       },
       {
         name: '@ngx-translate/core',
-        path: 'node_modules/@ngx-translate/core/bundles/core.umd.js',
-        packageMeta: {
-          main: 'index.js',
-          defaultExtension: 'js'
-        }
+        path: 'node_modules/@ngx-translate/core/bundles/core.umd.js'
       },
       {
         name: '@ngx-translate/http-loader',
-        path: 'node_modules/@ngx-translate/http-loader/bundles/http-loader.umd.js',
-        packageMeta: {
-          main: 'index.js',
-          defaultExtension: 'js'
-        }
+        path: 'node_modules/@ngx-translate/http-loader/bundles/http-loader.umd.js'
       },
       {
         name: 'hammerjs',
-        path: 'node_modules/hammerjs/hammer.js',
-        packageMeta: {
-          main: 'index.js',
-          defaultExtension: 'js'
-        }
+        path: 'node_modules/hammerjs/hammer.js'
       },
       {
         name: 'angular2-jwt',
-        path: 'node_modules/angular2-jwt/angular2-jwt.js',
-        packageMeta: {
-          main: 'index.js',
-          defaultExtension: 'js'
-        }
+        path: 'node_modules/angular2-jwt/angular2-jwt.js'
       },
       {
         name: '@agm/core',
-        path: 'node_modules/@agm/core/core.umd.js',
-        packageMeta: {
-          main: 'index.js',
-          defaultExtension: 'js'
-        }
+        path: 'node_modules/@agm/core/core.umd.js'
+      },
+      {
+        name: '@ngrx/core',
+        path: 'node_modules/@ngrx/core/bundles/core.umd.js'
+      },
+      {
+        name: '@ngrx/store',
+        path: 'node_modules/@ngrx/store/bundles/store.umd.js',
+      },
+      {
+        name: '@ngrx/effects',
+        path: 'node_modules/@ngrx/effects/bundles/effects.umd.js'
+      },
+      {
+        name: '@ngrx/router-store',
+        path: 'node_modules/@ngrx/router-store/bundles/router-store.umd.js'
+      },
+      {
+        name: '@ngrx/store-devtools',
+        path: 'node_modules/@ngrx/store-devtools/bundles/store-devtools.umd.js'
+      },
+      {
+        name: 'ngrx-store-freeze',
+        path: 'node_modules/ngrx-store-freeze/dist/index.js'
+      },
+      {
+        name: 'deep-freeze-strict',
+        path: 'node_modules/deep-freeze-strict/index.js'
+      },
+      {
+        name: 'reselect',
+        path: 'node_modules/reselect/dist/reselect.js'
       }
     ];
 

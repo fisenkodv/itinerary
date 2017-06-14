@@ -241,6 +241,12 @@ export class SeedConfig {
   E2E_DEST = `${this.DIST_DIR}/e2e`;
 
   /**
+   * The folder for the built files of the e2e-specs.
+   * @type {string}
+   */
+  LOCALE_DEST = `${this.DIST_DIR}/locale`;
+
+  /**
    * The folder for temporary files.
    * @type {string}
    */
@@ -353,11 +359,11 @@ export class SeedConfig {
    */
   ROLLUP_INCLUDE_DIR: string[] = ['node_modules/**'];
 
- /**
-  * List of named export Object key value pairs
-  * key: dependencie file
-  * value: exported Objects
-  */
+  /**
+   * List of named export Object key value pairs
+   * key: dependencie file
+   * value: exported Objects
+   */
   ROLLUP_NAMED_EXPORTS: any[] = [];
 
   /**
@@ -374,7 +380,6 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
-    defaultJSExtensions: true,
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations': 'node_modules/@angular/animations/bundles/animations.umd.js',
@@ -394,17 +399,22 @@ export class SeedConfig {
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
       '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
       '@angular/platform-browser/testing':
-        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+      'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
       '@angular/platform-browser-dynamic/testing':
-        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+      'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
-      'app/*': '/app/*',
+      'app/': `${this.APP_BASE}app/`,
       // For test config
-      'dist/dev/*': '/base/dist/dev/*',
-      '*': 'node_modules/*'
+      'dist/dev/': '/base/dist/dev/',
+      '': 'node_modules/'
     },
     packages: {
+      app: {
+        [this.BOOTSTRAP_DIR]: {
+          defaultExtension: 'js'
+        }
+      }
     }
   };
 
@@ -424,11 +434,10 @@ export class SeedConfig {
     base: this.PROJECT_ROOT,
     packageConfigPaths: [
       join('node_modules', '*', 'package.json'),
-      join('node_modules', '@angular', '*', 'package.json'),
+      join('node_modules', '@angular', '*', 'package.json')
       // for other modules like @ngx-translate the package.json path needs to updated here
       // otherwise npm run build.prod would fail
-      join('node_modules', '@ngx-translate', '*', 'package.json'),
-      join('node_modules', '@agm', '*', 'package.json')
+      // join('node_modules', '@ngx-translate', '*', 'package.json')
     ],
     paths: {
       // Note that for multiple apps this configuration need to be updated
@@ -677,9 +686,9 @@ export class SeedConfig {
 
   }
 
-/**
- * Convert named rollup array to object
- */
+  /**
+   * Convert named rollup array to object
+   */
   getRollupNamedExports() {
     let namedExports = {};
     this.ROLLUP_NAMED_EXPORTS.map(namedExport => {

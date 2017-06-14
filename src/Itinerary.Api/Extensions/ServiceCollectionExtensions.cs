@@ -7,6 +7,7 @@ using Itinerary.Business.Api.Google;
 using Itinerary.Business.Services.Account;
 using Itinerary.Business.Services.Places;
 using Itinerary.DataAccess.Abstract.UnitOfWork;
+using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -65,7 +66,7 @@ namespace Itinerary.Api.Extensions
 
     public static IServiceCollection AddIdentityService( this IServiceCollection services )
     {
-      services.AddIdentity<IdentityUser, IdentityRole>(
+      services.AddIdentity<User, Role>(
                 identityOptions =>
                 {
                   identityOptions.Cookies.ApplicationCookie.Events =
@@ -84,7 +85,7 @@ namespace Itinerary.Api.Extensions
                     };
                 }
               )
-              .AddEntityFrameworkStores<ItineraryDbContext>()
+              .AddEntityFrameworkStores<ItineraryDbContext, long>()
               .AddDefaultTokenProviders();
 
       return services;
@@ -96,7 +97,7 @@ namespace Itinerary.Api.Extensions
     {
       services.AddIdentityServer()
               .AddSigningCredential( CertificatesExtensions.RootCertificate )
-              .AddAspNetIdentity<IdentityUser>()
+              .AddAspNetIdentity<User>()
               .AddOperationalStore(
                 builder => builder.UseSqlite(
                   configuration.GetConnectionString(),

@@ -1,9 +1,10 @@
-﻿import { Component, ElementRef, Input } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
+﻿import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs/Rx';
 
-import { PlacesCommunicationService } from '../places-communication/places-communication.service';
-import { PlaceDetails } from '../places/models/index';
+import { IAppState } from '../../redux/app.state';
+
+import { PlaceDetails } from '../models/index';
 
 @Component({
   moduleId: module.id,
@@ -11,22 +12,31 @@ import { PlaceDetails } from '../places/models/index';
   templateUrl: 'place-list.component.html',
   styleUrls: ['place-list.component.css']
 })
-export class PlaceListComponent {
-  public places: Observable<PlaceDetails[]>;
+export class PlaceListComponent implements OnInit, OnDestroy {
+  @Input() public places: Observable<PlaceDetails[]>;
+  @Input() public selectedPlaces: Observable<PlaceDetails[]>;
 
-  private selectedPlaceSubscription: Subscription;
+  private destroy: Subject<void> = new Subject<void>();
   private selectedPlace: PlaceDetails;
 
   constructor(
-    private hostElement: ElementRef,
-    private placesCommunicationService: PlacesCommunicationService) {
+    private store: Store<IAppState>,
+    private hostElement: ElementRef) {
     this.selectedPlace = null;
+  }
 
-    this.places = placesCommunicationService.places;
+  public ngOnInit(): void {
+    this.selectedPlaces
+      .takeUntil(this.destroy)
+      .subscribe((selectedPlaces) => {
+        if (selectedPlaces.length) {
+          this.selectPlaceListItem(selectedPlaces[0]);
+        }
+      });
+  }
 
-    this.selectedPlaceSubscription = placesCommunicationService
-      .selectedPlace
-      .subscribe((place) => this.selectPlaceListItem(place));
+  public ngOnDestroy(): void {
+    this.destroy.next();
   }
 
   public isPlaceListItemSelected(place: PlaceDetails): boolean {
@@ -44,6 +54,9 @@ export class PlaceListComponent {
 
   private selectPlaceListItem(place: PlaceDetails) {
     this.selectedPlace = place;
-    this.hostElement.nativeElement.scrollTop = document.getElementById(this.getPlaceListItemId(place)).offsetTop - 1;
+    const element = document.getElementById(this.getPlaceListItemId(place));
+    if (element) {
+      this.hostElement.nativeElement.scrollTop = element.offsetTop - 1;
+    }
   }
 }

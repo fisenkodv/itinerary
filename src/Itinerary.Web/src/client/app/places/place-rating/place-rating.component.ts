@@ -7,12 +7,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['place-rating.component.css']
 })
 export class PlaceRatingComponent {
+  public stars: string[];
+
   private star_border = 'star_border';
   private star_half = 'star_half';
   private star_fill = 'star';
-
   private ratingValue: number;
-  public stars: string[];
 
   @Input()
   get rating(): number {

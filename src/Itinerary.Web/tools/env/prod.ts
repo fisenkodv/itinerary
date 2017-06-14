@@ -6,4 +6,3 @@ const ProdConfig: EnvConfig = {
 };
 
 export = ProdConfig;
-

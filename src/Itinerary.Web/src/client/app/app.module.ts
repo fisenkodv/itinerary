@@ -2,12 +2,17 @@
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Http, HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { RouterStoreModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+import { Effects } from './redux/app.effects';
+import { AppReducer } from './redux/app.reducers';
+import { InitialState } from './redux/app.state';
 
 import 'hammerjs';
 
@@ -15,11 +20,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { PlacesModule } from './places/places.module';
+import { TranslationModule } from './translation.module';
+import { TravelsModule } from './travels/travels.module';
 
 import { AppComponent } from './app.component';
 
-export function CreateTranslateLoader(http: Http) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+let DevSpecificModules: any = [];
+
+if (String('<%= BUILD_TYPE %>') === 'dev') {
+  DevSpecificModules = [StoreDevtoolsModule.instrumentOnlyWithExtension()];
 }
 
 @NgModule({
@@ -32,17 +41,17 @@ export function CreateTranslateLoader(http: Http) {
     ReactiveFormsModule,
     HttpModule,
     FlexLayoutModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (CreateTranslateLoader),
-        deps: [Http]
-      }
-    }),
-    AppRoutingModule,
+    TranslationModule.forRoot(),
+    Effects,
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    StoreModule.provideStore(AppReducer, InitialState),
+    RouterStoreModule.connectRouter(),
     CoreModule.forRoot(),
     HomeModule,
-    PlacesModule
+    PlacesModule,
+    TravelsModule,
+    AppRoutingModule,
+    DevSpecificModules
   ],
   providers: [{
     provide: APP_BASE_HREF,

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { BaseService } from '../../core/base.service';
 import { Config } from '../../shared/config/env.config';
-import { PlaceDetails } from './models/index';
+import { Filter, PlaceDetails } from '../models/index';
 
 @Injectable()
 export class PlacesService extends BaseService {
@@ -12,19 +12,14 @@ export class PlacesService extends BaseService {
     super();
   }
 
-  public search(
-    latitude: number,
-    longitude: number,
-    distance: number,
-    rating: number,
-    reviews: number): Observable<PlaceDetails[]> {
+  public search(filter: Filter): Observable<PlaceDetails[]> {
     const baseUrl = `${super.getBaseServiceUrl()}places/search`;
     const request = {
-      lat: latitude,
-      lng: longitude,
-      distance,
-      rating,
-      reviews
+      lat: filter.location.latitude,
+      lng: filter.location.longitude,
+      distance: filter.distance,
+      rating: filter.rating,
+      reviews: filter.reviews
     };
     return this.http.get(`${baseUrl}?${super.urlEncode(request)}`)
       .map((response: Response) => response.json() as PlaceDetails[]);

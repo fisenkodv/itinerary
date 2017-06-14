@@ -1,13 +1,16 @@
-﻿<md-toolbar color="primary">
+﻿<div class="progress-bar-container">
+  <md-progress-bar *ngIf="showProgressBar | async" mode="indeterminate" color="accent"></md-progress-bar>
+</div>
+<md-toolbar color="primary">
   <a class="title" fxFlex="grow" [routerLink]="['/home']">{{'navbar.title' | translate }}</a>
   <div class="navigation-container" fxHide.xs="true">
     <nav class="navigation">
       <a class="navigation__link" [routerLink]="['/home']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.home' | translate }}</a>
       <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.places' | translate }}
-          <sub class="navigation__link-sub-title">{{'navbar.navigation.us-only' | translate }}</sub>
+          <span class="navigation__link-sub-title">{{'navbar.navigation.us-only' | translate }}</span>
         </a>
       <a class="navigation__link" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.travels' | translate }}
-          <sub class="navigation__link-sub-title">{{'navbar.navigation.soon' | translate }}</sub>
+          <span class="navigation__link-sub-title">{{'navbar.navigation.soon' | translate }}</span>
         </a>
       <a class="navigation__link" *ngIf="!signedIn" (click)="signin()">{{'navbar.navigation.signin' | translate }}</a>
     </nav>

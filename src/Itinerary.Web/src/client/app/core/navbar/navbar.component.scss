@@ -13,6 +13,12 @@ $navigation-link-border-size: 4px !default;
   @include mat-elevation(1);
   z-index: 1;
 }
+.progress-bar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
 
 .title {
   font-family: 'Clicker Script';

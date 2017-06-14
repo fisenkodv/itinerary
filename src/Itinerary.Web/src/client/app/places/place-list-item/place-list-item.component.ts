@@ -1,6 +1,6 @@
 ﻿import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { PlaceDetails } from '../places/models/index';
+import { PlaceDetails } from '../models/index';
 
 @Component({
   moduleId: module.id,
@@ -10,8 +10,6 @@ import { PlaceDetails } from '../places/models/index';
   encapsulation: ViewEncapsulation.None
 })
 export class PlaceListItemComponent {
-  @Input()
-  public place: PlaceDetails;
-  @Input()
-  public isPlaceSelected: boolean;
+  @Input() public place: PlaceDetails;
+  @Input() public isPlaceSelected: boolean;
 }

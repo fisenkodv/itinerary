@@ -1,0 +1,45 @@
+@import '@angular/material/theming';
+@import '../../scss/theme';
+@import '../../scss/variables';
+
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: row-reverse;
+  align-items: center;
+  background: url("../../assets/img/404.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.box {
+  width: 45%;
+
+  .title {
+    font-size: $mat-body-font-size-base * 4;
+    font-weight: 400;
+    color: mat-color(map-get($light-theme, primary), default-contrast);
+    margin-bottom: 0;
+  }
+
+  .sub-title {
+    font-size: $mat-body-font-size-base * 2;
+    font-weight: 300;
+    color: mat-color(map-get($light-theme, primary), default-contrast);
+  }
+
+  .links {
+    list-style: none;
+    padding-left: 0;
+
+    &__link {
+      margin: $elements-padding / 2 0;
+      > a {
+        text-decoration: none;
+        color: mat-color(map-get($light-theme, primary), 100);
+      }
+    }
+  }
+}
