@@ -6,4 +6,3 @@ const DevConfig: EnvConfig = {
 };
 
 export = DevConfig;
-
