@@ -10,7 +10,6 @@ import 'rxjs/add/operator/takeWhile';
 
 import { IAppState } from '../../redux/app.state';
 import * as filterActions from '../redux/filter/filter.actions';
-import * as fromModule from '../redux/index';
 import * as placesActions from '../redux/places/places.actions';
 
 import { Autocomplete, Filter, Location } from '../models/index';
@@ -29,9 +28,8 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
 
   private destroy: Subject<void> = new Subject<void>();
 
-  constructor(
-    private googlePlacesService: GooglePlacesService,
-    private store: Store<IAppState>) {
+  constructor(private googlePlacesService: GooglePlacesService,
+              private store: Store<IAppState>) {
     this.searchControl = new FormControl();
   }
 

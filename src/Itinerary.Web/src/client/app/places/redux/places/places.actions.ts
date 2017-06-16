@@ -22,7 +22,8 @@ export class GetPlacesCompleteAction implements Action {
 export class SelectPlaceAction implements Action {
   public readonly type = SELECT_PLACE;
 
-  constructor(public payload: PlaceDetails) { }
+  constructor(public payload: PlaceDetails) {
+  }
 }
 
 export type Actions =

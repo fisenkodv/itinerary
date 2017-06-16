@@ -1,8 +1,5 @@
 ﻿import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs/Rx';
-
-import { IAppState } from '../../redux/app.state';
 
 import { PlaceDetails } from '../models/index';
 
@@ -19,16 +16,14 @@ export class PlaceListComponent implements OnInit, OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
   private selectedPlace: PlaceDetails;
 
-  constructor(
-    private store: Store<IAppState>,
-    private hostElement: ElementRef) {
+  constructor(private hostElement: ElementRef) {
     this.selectedPlace = null;
   }
 
   public ngOnInit(): void {
     this.selectedPlaces
       .takeUntil(this.destroy)
-      .subscribe((selectedPlaces) => {
+      .subscribe((selectedPlaces: PlaceDetails[]) => {
         if (selectedPlaces.length) {
           this.selectPlaceListItem(selectedPlaces[0]);
         }

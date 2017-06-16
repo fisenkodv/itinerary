@@ -15,13 +15,15 @@
       </div>
     </div>
 
-    <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png" mdTooltip="{{'places.results.tripadvisor.tooltip' | translate }}"/>
+    <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png"
+         mdTooltip="{{'places.results.tripadvisor.tooltip' | translate }}"/>
     <!--<div class="place-actions">-->
     <!--<button md-raised-button [disabled]="true">SAVE (COOMING SOON)</button>-->
     <!--</div>-->
   </div>
   <div class="place-image">
-    <div class="place-image__background" [style.background-image]="'url(' + (place.imgUrl||'/assets/img/empty_state.png') + ')'">
+    <div class="place-image__background"
+         [style.background-image]="'url(' + (place.imgUrl||'/assets/img/empty_state.png') + ')'">
     </div>
   </div>
 </div>

@@ -14,7 +14,7 @@ export class TranslationModule {
     });
   }
 
-  constructor( @Optional() @SkipSelf() parentModule: TranslateModule) {
+  constructor(@Optional() @SkipSelf() parentModule: TranslateModule) {
     if (parentModule) {
       throw new Error(
         'TranslateModule is already loaded. Import it in the AppModule only');

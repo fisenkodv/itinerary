@@ -1,5 +1,4 @@
-﻿import { AgmCoreModule } from '@agm/core';
-import { CommonModule } from '@angular/common';
+﻿import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -26,9 +25,7 @@ import { TravelsComponent } from './travels.component';
   declarations: [
     TravelsComponent
   ],
-  providers: [
-
-  ]
+  providers: []
 })
 export class TravelsModule {
 }

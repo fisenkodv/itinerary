@@ -36,7 +36,6 @@ export class FilterEffects {
         .catch((error) => of(new placesActions.GetPlacesCompleteAction([])));
     });
 
-  constructor(
-    private actions: Actions,
-    private placesService: PlacesService) { }
+  constructor(private actions: Actions, private placesService: PlacesService) {
+  }
 }

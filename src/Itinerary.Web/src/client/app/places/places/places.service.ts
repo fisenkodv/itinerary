@@ -3,7 +3,6 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { BaseService } from '../../core/base.service';
-import { Config } from '../../shared/config/env.config';
 import { Filter, PlaceDetails } from '../models/index';
 
 @Injectable()

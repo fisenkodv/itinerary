@@ -1,10 +1,9 @@
 ﻿import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 import { IAppState } from '../redux/app.state';
 import * as fromPlaces from './redux/index';
-import * as placesActions from './redux/places/places.actions';
 
 import { Filter, PlaceDetails } from './models/index';
 
