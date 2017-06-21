@@ -15,18 +15,20 @@
 }
 
 .box {
+  $font-config: mat-typography-config();
+  $font-size: mat-font-size($font-config, body-1);
   width: 45%;
 
   .title {
-    font-size: $mat-body-font-size-base * 4;
-    font-weight: 400;
+    font-size: $font-size * 4;
+    font-weight: mat-font-weight($font-config, body-1);
     color: mat-color(map-get($light-theme, primary), default-contrast);
     margin-bottom: 0;
   }
 
   .sub-title {
-    font-size: $mat-body-font-size-base * 2;
-    font-weight: 300;
+    font-size: $font-size * 2;
+    font-weight: mat-font-weight($font-config, display-4);
     color: mat-color(map-get($light-theme, primary), default-contrast);
   }
 
