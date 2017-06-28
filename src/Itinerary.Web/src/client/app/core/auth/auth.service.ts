@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { BaseService } from '../base.service';
-import { AuthResult } from './models/auth-result.model';
+import { AuthResult } from './auth-result.model';
 import { TokenStorageService, TokenType } from './token-storage.service';
 
 export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -34,7 +34,7 @@ export class AuthService extends BaseService {
     super();
   }
 
-  public loggedIn(): boolean {
+  public isSignedIn(): boolean {
     const token = this.storageService.getToken(TokenType.AccessToken);
     const expired = tokenNotExpired('token', token);
     return expired;

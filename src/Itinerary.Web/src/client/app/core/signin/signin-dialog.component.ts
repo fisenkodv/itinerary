@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
+import { AuthResult } from '../auth/auth-result.model';
 import { AuthService } from '../auth/auth.service';
-import { AuthResult } from '../auth/models/auth-result.model';
 
 @Component({
   moduleId: module.id,

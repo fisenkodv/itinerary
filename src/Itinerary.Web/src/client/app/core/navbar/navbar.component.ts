@@ -37,7 +37,7 @@ export class NavbarComponent {
     return;
   }
 
-  public get signedIn(): boolean {
-    return this.authService.loggedIn();
+  public get isSignedIn(): boolean {
+    return this.authService.isSignedIn();
   }
 }

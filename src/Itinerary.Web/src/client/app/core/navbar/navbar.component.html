@@ -9,13 +9,13 @@
       <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.places' | translate }}
           <span class="navigation__link-sub-title">{{'navbar.navigation.us-only' | translate }}</span>
         </a>
-      <a class="navigation__link" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.travels' | translate }}
+      <a class="navigation__link" *ngIf="isSignedIn" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.travels' | translate }}
           <span class="navigation__link-sub-title">{{'navbar.navigation.soon' | translate }}</span>
         </a>
-      <a class="navigation__link" *ngIf="!signedIn" (click)="signin()">{{'navbar.navigation.signin' | translate }}</a>
+      <a class="navigation__link" *ngIf="!isSignedIn" (click)="signin()">{{'navbar.navigation.signin' | translate }}</a>
     </nav>
   </div>
-  <button class="more-button" *ngIf="signedIn" md-icon-button [md-menu-trigger-for]="menu" fxHide.xs="true">
+  <button class="more-button" *ngIf="isSignedIn" md-icon-button [md-menu-trigger-for]="menu" fxHide.xs="true">
       <md-icon>more_vert</md-icon>
     </button>
   <button class="more-button" md-icon-button [md-menu-trigger-for]="navigation" fxShow.gt-xs="false">
