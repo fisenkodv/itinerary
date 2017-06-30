@@ -5,9 +5,16 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(public authenticationService: AuthService, private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService) { }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.authenticationService.isSignedIn();
+    if (!this.authService.isTokenExpired()) {
+      return true;
+    }
+
+    this.router.navigate(['/signin']);
+    return false;
   }
 }

@@ -1,22 +1,20 @@
 ﻿import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { AuthConfig, AuthHttp, tokenNotExpired } from 'angular2-jwt';
+import { AuthConfig, AuthConfigConsts, AuthHttp, JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import { BaseService } from '../base.service';
 import { AuthResult } from './auth-result.model';
-import { TokenStorageService, TokenType } from './token-storage.service';
 
 export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     tokenName: 'token',
-    tokenGetter: (() => sessionStorage.getItem('token')),
+    tokenGetter: (() => localStorage.getItem(AuthConfigConsts.DEFAULT_TOKEN_NAME)),
     globalHeaders: [{ 'Content-Type': 'application/json' }]
   }), http, options);
 }
@@ -28,16 +26,29 @@ export class AuthService extends BaseService {
   private scope: string = 'offline_access openid';
 
   constructor(
-    private http: Http,
-    private authHttp: AuthHttp,
-    private storageService: TokenStorageService) {
+    private http: Http) {
     super();
   }
 
-  public isSignedIn(): boolean {
-    const token = this.storageService.getToken(TokenType.AccessToken);
-    const expired = tokenNotExpired('token', token);
-    return expired;
+  public getToken(): string {
+    return localStorage.getItem(AuthConfigConsts.DEFAULT_TOKEN_NAME);
+  }
+
+  public setToken(token: string): void {
+    localStorage.setItem(AuthConfigConsts.DEFAULT_TOKEN_NAME, token);
+  }
+
+  public getTokenExpirationDate(token: string): Date {
+    const helper = new JwtHelper();
+    return helper.getTokenExpirationDate(token);
+  }
+
+  public isTokenExpired(token?: string): boolean {
+    if (!token) token = this.getToken();
+    if (!token) return true;
+
+    const helper = new JwtHelper();
+    return helper.isTokenExpired(token);
   }
 
   public signin(username: string, password: string): Observable<AuthResult> {
@@ -49,27 +60,18 @@ export class AuthService extends BaseService {
       username,
       password
     };
+    const requestOptions = new RequestOptions(new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }));
 
     return this.http.post(
       baseUrl,
       super.urlEncode(request),
-      this.getRequestOptions())
+      requestOptions)
       .map((response: Response) => {
-        this.store(response.json());
+        this.setToken(response.json());
         return new AuthResult(true, null);
       }).catch((error: any) => {
         const body: any = error.json();
         return Observable.throw(new AuthResult(false, body.error_description));
       });
-  }
-
-  private getRequestOptions(): RequestOptions {
-    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return new RequestOptions({ headers });
-  }
-
-  private store(body: any): void {
-    this.storageService.setToken(TokenType.AccessToken, body.access_token);
-    this.storageService.setToken(TokenType.RefreshToken, body.refresh_token);
   }
 }

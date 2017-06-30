@@ -1,20 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, RequestOptions } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthHttp } from 'angular2-jwt';
 
-import { MaterialModule } from '../shared/material.module';
 import { SharedModule } from '../shared/shared.module';
 
+import { AuthErrorHandler } from './auth/auth-error.handler';
+import { AuthGuard } from './auth/auth.guard';
 import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
-import { TokenStorageService } from './auth/token-storage.service';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { SignInDialogComponent } from './signin/signin-dialog.component';
 
 @NgModule({
   imports: [
@@ -23,14 +21,10 @@ import { SignInDialogComponent } from './signin/signin-dialog.component';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule.forChild(),
-    FlexLayoutModule,
-    MaterialModule,
     SharedModule
   ],
-  entryComponents: [
-    SignInDialogComponent
-  ],
-  declarations: [NavbarComponent, FooterComponent, SignInDialogComponent],
+  entryComponents: [],
+  declarations: [NavbarComponent, FooterComponent],
   exports: [
     NavbarComponent,
     FooterComponent
@@ -46,8 +40,12 @@ export class CoreModule {
           useFactory: AuthHttpServiceFactory,
           deps: [Http, RequestOptions]
         },
-        AuthService,
-        TokenStorageService
+        {
+          provide: ErrorHandler,
+          useClass: AuthErrorHandler
+        },
+        AuthGuard,
+        AuthService
       ]
     };
   }

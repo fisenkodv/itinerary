@@ -1,26 +1,24 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MdDialog, MdDialogRef } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
-import { AuthResult } from '../auth/auth-result.model';
-import { AuthService } from '../auth/auth.service';
+import { AuthResult } from '../core/auth/auth-result.model';
+import { AuthService } from '../core/auth/auth.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'signin-dialog',
-  templateUrl: 'signin-dialog.component.html',
-  styleUrls: ['signin-dialog.component.css']
+  selector: 'app-signin',
+  templateUrl: 'signin.component.html',
+  styleUrls: ['signin.component.css']
 })
+export class SignInComponent {
 
-export class SignInDialogComponent {
   public username: string;
   public password: string;
   public error: string;
 
   constructor(
     private translateService: TranslateService,
-    private dialogRef: MdDialogRef<SignInDialogComponent>,
     private authService: AuthService) {
   }
 
@@ -28,7 +26,7 @@ export class SignInDialogComponent {
     if (form.valid) {
       this.authService.signin(this.username, this.password)
         .subscribe((result: AuthResult) => {
-          this.dialogRef.close();
+          return null;
         }, (result: AuthResult) => {
           this.error = this.getTranslatedMessage(result.errorDescription);
         });
