@@ -1,6 +1,14 @@
 @import '@angular/material/theming';
 @import '../../scss/theme';
 
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .input {
   &--fullwidth{
     width: 100%;

@@ -24,7 +24,6 @@ import { TranslationModule } from './translation.module';
 import { TravelsModule } from './travels/travels.module';
 
 import { AppComponent } from './app.component';
-import { SignInComponent } from './signin/signin.component';
 
 let DevSpecificModules: any = [];
 

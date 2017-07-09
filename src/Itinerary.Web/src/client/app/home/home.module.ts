@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MaterialModule } from '../shared/material.module';
+import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
@@ -16,10 +16,9 @@ import { HomeComponent } from './home.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    FlexLayoutModule,
+    SharedModule,
     TranslateModule.forChild(),
-    HomeRoutingModule,
-    MaterialModule
+    HomeRoutingModule
   ],
   exports: [],
   declarations: [HomeComponent],

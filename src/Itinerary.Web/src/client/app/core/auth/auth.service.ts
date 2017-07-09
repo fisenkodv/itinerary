@@ -23,7 +23,7 @@ export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
 export class AuthService extends BaseService {
   private clientId: string = 'itineraryWebClient';
   private grantType: string = 'password';
-  private scope: string = 'offline_access openid';
+  private scope: string = 'openid';
 
   constructor(
     private http: Http) {
@@ -60,14 +60,16 @@ export class AuthService extends BaseService {
       username,
       password
     };
-    const requestOptions = new RequestOptions(new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }));
+    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const requestOptions = new RequestOptions({ headers });
 
     return this.http.post(
       baseUrl,
       super.urlEncode(request),
       requestOptions)
       .map((response: Response) => {
-        this.setToken(response.json());
+        const token = response.json().access_token;
+        this.setToken(token);
         return new AuthResult(true, null);
       }).catch((error: any) => {
         const body: any = error.json();

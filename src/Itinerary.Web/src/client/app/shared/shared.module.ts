@@ -14,12 +14,14 @@ import { JoinPipe } from './pipes/index';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     TranslateModule.forChild(),
     FlexLayoutModule,
     MaterialModule
   ],
   declarations: [JoinPipe, OnEnterPressDirective],
   exports: [
+    FormsModule,
     FlexLayoutModule,
     MaterialModule,
     JoinPipe,

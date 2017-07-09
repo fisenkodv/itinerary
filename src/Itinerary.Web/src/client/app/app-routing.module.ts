@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { SharedModule } from './shared/shared.module';
+
 import { Page404Component } from './page404/page404.component';
 import { SignInComponent } from './signin/signin.component';
 
@@ -15,7 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [Page404Component, SignInComponent],
-  imports: [RouterModule.forRoot(routes), TranslateModule.forChild()],
+  imports: [RouterModule.forRoot(routes), TranslateModule.forChild(), SharedModule],
   exports: [RouterModule],
   providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }]
 })
