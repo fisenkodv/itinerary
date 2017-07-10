@@ -12,7 +12,7 @@
       <a class="navigation__link" [routerLink]="['/travels']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.travels' | translate }}
           <span class="navigation__link-sub-title">{{'navbar.navigation.soon' | translate }}</span>
         </a>
-      <a class="navigation__link" *ngIf="!isSignedIn" [routerLink]="['/signin']">{{'navbar.navigation.signin' | translate }}</a>
+      <a class="navigation__link" *ngIf="!isSignedIn" [routerLink]="['/signin']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.signin' | translate }}</a>
     </nav>
   </div>
   <button class="more-button" *ngIf="isSignedIn" md-icon-button [md-menu-trigger-for]="menu" fxHide.xs="true">
