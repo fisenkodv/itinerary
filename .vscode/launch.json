@@ -2,13 +2,13 @@
   "version": "1.0.0",
   "configurations": [
     {
-      "name": "[Development] Launch Web",
+      "name": "[Development] Launch Api",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceRoot}/src/Itinerary.Web/bin/Debug/netcoreapp1.1/Itinerary.Web.dll",
+      "program": "${workspaceRoot}/src/Itinerary.Api/bin/Debug/netcoreapp1.1/Itinerary.Api.dll",
       "args": [],
-      "cwd": "${workspaceRoot}/src/Itinerary.Web",
+      "cwd": "${workspaceRoot}/src/Itinerary.Api",
       "stopAtEntry": false,
       "internalConsoleOptions": "openOnSessionStart",
       "launchBrowser": {
@@ -33,11 +33,11 @@
       }
     },
     {
-      "name": "[Production] Launch Web",
+      "name": "[Production] Launch Api",
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceRoot}/Itinerary.Web/bin/Debug/netcoreapp1.1/Itinerary.Web.dll",
+      "program": "${workspaceRoot}/Itinerary.Api/bin/Debug/netcoreapp1.1/Itinerary.Api.dll",
       "args": [],
       "cwd": "${workspaceRoot}",
       "stopAtEntry": false,
