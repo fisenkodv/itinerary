@@ -1,19 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Itinerary.Common.Models;
+﻿using System.Threading.Tasks;
 
-
-namespace Itinerary.Business.Services.Account
+namespace Itinerary.Business.Account
 {
   //FIXME:
   public class AccountService : IAccountService
   {
     //private readonly UserManager<User> _userManager;
-
-    public AccountService( /*UserManager<User> userManager */)
-    {
-      //_userManager = userManager;
-    }
 
     public async Task<ApiCallStatus> Register( string email, string password )
     {

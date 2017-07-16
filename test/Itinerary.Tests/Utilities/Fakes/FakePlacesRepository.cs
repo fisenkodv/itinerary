@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Itinerary.Business.Itinerary.Places;
+using Itinerary.Business.Itinerary.Places.Dto;
 using Itinerary.Business.Itinerary.Places.Model;
-using Itinerary.Common.Models;
-using Itinerary.DataAccess.Abstract.Repository;
 
 namespace Itinerary.Tests.Unit.DataAccess.Fakes
 {

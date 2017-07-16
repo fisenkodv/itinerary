@@ -1,8 +1,8 @@
-﻿using Itinerary.Business.Api.Google.Attributes;
-using Itinerary.Business.Api.Google.Places.Common.Types;
-using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.QueryBuilder;
+﻿using Itinerary.ExternalApiClient.Google.Attributes;
+using Itinerary.ExternalApiClient.Google.Places.Common.Types;
+using Itinerary.ExternalApiClient.Google.Places.Search.ParameterBuilder.QueryBuilder;
 
-namespace Itinerary.Business.Api.Google.Places.Details.ParameterBuilder
+namespace Itinerary.ExternalApiClient.Google.Places.Details.ParameterBuilder
 {
   internal class DetailsHttpQueryBuilder : SearchQueryBuilderBase, IDetailsHttpQueryBuilder
   {

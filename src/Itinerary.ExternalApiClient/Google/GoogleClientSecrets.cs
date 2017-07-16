@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Itinerary.Business.Api.Google
+namespace Itinerary.ExternalApiClient.Google
 {
   public class GoogleClientSecrets
   {

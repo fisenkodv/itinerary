@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 
-namespace Itinerary.Business.Api.Google
+namespace Itinerary.ExternalApiClient.Google
 {
   public static class GoogleClientSecretsExtensions
   {

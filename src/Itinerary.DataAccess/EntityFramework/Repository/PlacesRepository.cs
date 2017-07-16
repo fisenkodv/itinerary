@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Itinerary.Common.Models;
-using Itinerary.DataAccess.Abstract.Repository;
+using Itinerary.Business.Itinerary.Places;
+using Itinerary.Business.Itinerary.Places.Dto;
 
 namespace Itinerary.DataAccess.EntityFramework.Repository
 {

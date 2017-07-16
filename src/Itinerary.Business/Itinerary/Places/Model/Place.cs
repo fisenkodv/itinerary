@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Itinerary.Common.Models;
+using Itinerary.Business.Itinerary.Places.Dto;
 
 namespace Itinerary.Business.Itinerary.Places.Model
 {
@@ -19,11 +19,10 @@ namespace Itinerary.Business.Itinerary.Places.Model
       {
         //TODO: Fix the alghoritm, at this point it's very stupid average number
         int maxRating = Reviews.Max( x => x.Rating );
-        int rating = ( from rank in Enumerable.Range( 0, maxRating )
+        int rating = ( from rank in Enumerable.Range( start: 0, count: maxRating )
                        let rankReviews = Reviews.Count( x => x.Rating == rank )
                        select rank * rankReviews ).Sum();
         return rating / Reviews.Count;
-
       }
     }
 

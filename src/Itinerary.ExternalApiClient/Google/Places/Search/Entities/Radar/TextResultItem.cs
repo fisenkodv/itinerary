@@ -1,21 +1,20 @@
-﻿using Itinerary.Business.Api.Google.Places.Common.Entities;
-using Itinerary.Business.Api.Google.Places.Search.Entities.Common;
+﻿using Itinerary.ExternalApiClient.Google.Places.Common.Entities;
 using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Search.Entities.Radar
+namespace Itinerary.ExternalApiClient.Google.Places.Search.Entities.Radar
 {
   public class RadarResultItem
   {
-    [JsonProperty( "geometry" )]
+    [JsonProperty( propertyName: "geometry" )]
     public Geometry Geometry { get; set; }
 
-    [JsonProperty( "id" )]
+    [JsonProperty( propertyName: "id" )]
     public string Id { get; set; }
 
-    [JsonProperty( "place_id" )]
+    [JsonProperty( propertyName: "place_id" )]
     public string PlaceId { get; set; }
 
-    [JsonProperty( "reference" )]
+    [JsonProperty( propertyName: "reference" )]
     public string Reference { get; set; }
   }
 }

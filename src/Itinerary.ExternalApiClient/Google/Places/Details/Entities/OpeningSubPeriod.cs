@@ -1,13 +1,13 @@
 using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Details.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Details.Entities
 {
   public class OpeningSubPeriod
   {
-    [JsonProperty( "day" )]
+    [JsonProperty( propertyName: "day" )]
     public int Day { get; set; }
 
-    [JsonProperty( "time" )]
+    [JsonProperty( propertyName: "time" )]
     public int Time { get; set; }
   }
 }

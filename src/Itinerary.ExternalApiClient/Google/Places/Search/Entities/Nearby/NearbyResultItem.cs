@@ -1,45 +1,44 @@
-﻿using Itinerary.Business.Api.Google.Places.Common.Entities;
-using Itinerary.Business.Api.Google.Places.Search.Entities.Common;
+﻿using Itinerary.ExternalApiClient.Google.Places.Common.Entities;
 using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Search.Entities.Nearby
+namespace Itinerary.ExternalApiClient.Google.Places.Search.Entities.Nearby
 {
   public class NearbyResultItem
   {
-    [JsonProperty( "geometry" )]
+    [JsonProperty( propertyName: "geometry" )]
     public Geometry Geometry { get; set; }
 
-    [JsonProperty( "icon" )]
+    [JsonProperty( propertyName: "icon" )]
     public string Icon { get; set; }
 
-    [JsonProperty( "id" )]
+    [JsonProperty( propertyName: "id" )]
     public string Id { get; set; }
 
-    [JsonProperty( "name" )]
+    [JsonProperty( propertyName: "name" )]
     public string Name { get; set; }
 
-    [JsonProperty( "photos" )]
+    [JsonProperty( propertyName: "photos" )]
     public Photo[] Photos { get; set; }
 
-    [JsonProperty( "place_id" )]
+    [JsonProperty( propertyName: "place_id" )]
     public string PlaceId { get; set; }
 
-    [JsonProperty( "price_level" )]
+    [JsonProperty( propertyName: "price_level" )]
     public int PriceLevel { get; set; }
 
-    [JsonProperty( "rating" )]
+    [JsonProperty( propertyName: "rating" )]
     public float Rating { get; set; }
 
-    [JsonProperty( "reference" )]
+    [JsonProperty( propertyName: "reference" )]
     public string Reference { get; set; }
 
-    [JsonProperty( "scope" )]
+    [JsonProperty( propertyName: "scope" )]
     public string Scope { get; set; }
 
-    [JsonProperty( "types" )]
+    [JsonProperty( propertyName: "types" )]
     public string[] Types { get; set; }
 
-    [JsonProperty( "vicinity" )]
+    [JsonProperty( propertyName: "vicinity" )]
     public string Vicinity { get; set; }
   }
 }

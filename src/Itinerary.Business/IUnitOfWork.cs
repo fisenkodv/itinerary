@@ -1,7 +1,7 @@
 ﻿using System;
-using Itinerary.DataAccess.Abstract.Repository;
+using Itinerary.Business.Itinerary.Places;
 
-namespace Itinerary.DataAccess.Abstract.UnitOfWork
+namespace Itinerary.Business
 {
   public interface IUnitOfWork : IDisposable
   {

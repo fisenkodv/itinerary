@@ -1,4 +1,4 @@
-﻿namespace Itinerary.Common.Models.Google
+﻿namespace Itinerary.Business.Itinerary.GooglePlaces.Dto
 {
   public class Autocomplete
   {

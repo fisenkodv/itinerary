@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.QueryBuilder;
+using Itinerary.ExternalApiClient.Google.Places.Search.ParameterBuilder.QueryBuilder;
 
-namespace Itinerary.Business.Api.Google.QueryBuilder
+namespace Itinerary.ExternalApiClient.Google.QueryBuilder
 {
   internal abstract class QueryBuilderBase : IHttpQueryBuilder
   {

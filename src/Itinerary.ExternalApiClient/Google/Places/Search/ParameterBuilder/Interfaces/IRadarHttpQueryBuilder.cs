@@ -1,8 +1,8 @@
-﻿using Itinerary.Business.Api.Google.Places.Common.Types;
-using Itinerary.Business.Api.Google.Places.Search.Types;
-using Itinerary.Business.Api.Google.QueryBuilder;
+﻿using Itinerary.ExternalApiClient.Google.Places.Common.Types;
+using Itinerary.ExternalApiClient.Google.Places.Search.Types;
+using Itinerary.ExternalApiClient.Google.QueryBuilder;
 
-namespace Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.Interfaces
+namespace Itinerary.ExternalApiClient.Google.Places.Search.ParameterBuilder.Interfaces
 {
   /// <summary>
   ///   The Google Places API Radar Search Service allows you to search for up to 200 places at once,

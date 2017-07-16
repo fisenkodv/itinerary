@@ -1,69 +1,68 @@
-﻿using Itinerary.Business.Api.Google.Places.Common.Entities;
-using Itinerary.Business.Api.Google.Places.Search.Entities.Common;
+﻿using Itinerary.ExternalApiClient.Google.Places.Common.Entities;
 using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Details.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Details.Entities
 {
   public class Result
   {
-    [JsonProperty( "address_components" )]
+    [JsonProperty( propertyName: "address_components" )]
     public AddressComponent[] AddressComponents { get; set; }
 
-    [JsonProperty( "adr_address" )]
+    [JsonProperty( propertyName: "adr_address" )]
     public string AdrAddress { get; set; }
 
-    [JsonProperty( "formatted_address" )]
+    [JsonProperty( propertyName: "formatted_address" )]
     public string FormattedAddress { get; set; }
 
-    [JsonProperty( "formatted_phone_number" )]
+    [JsonProperty( propertyName: "formatted_phone_number" )]
     public string FormattedPhoneNumber { get; set; }
 
-    [JsonProperty( "geometry" )]
+    [JsonProperty( propertyName: "geometry" )]
     public Geometry Geometry { get; set; }
 
-    [JsonProperty( "icon" )]
+    [JsonProperty( propertyName: "icon" )]
     public string Icon { get; set; }
 
-    [JsonProperty( "id" )]
+    [JsonProperty( propertyName: "id" )]
     public string Id { get; set; }
 
-    [JsonProperty( "international_phone_number" )]
+    [JsonProperty( propertyName: "international_phone_number" )]
     public string InternationalPhoneNumber { get; set; }
 
-    [JsonProperty( "name" )]
+    [JsonProperty( propertyName: "name" )]
     public string Name { get; set; }
 
-    [JsonProperty( "photos" )]
+    [JsonProperty( propertyName: "photos" )]
     public Photo[] Photos { get; set; }
 
-    [JsonProperty( "place_id" )]
+    [JsonProperty( propertyName: "place_id" )]
     public string PlaceId { get; set; }
 
-    [JsonProperty( "rating" )]
+    [JsonProperty( propertyName: "rating" )]
     public float Rating { get; set; }
 
-    [JsonProperty( "reference" )]
+    [JsonProperty( propertyName: "reference" )]
     public string Reference { get; set; }
 
-    [JsonProperty( "reviews" )]
+    [JsonProperty( propertyName: "reviews" )]
     public Review[] Reviews { get; set; }
 
-    [JsonProperty( "scope" )]
+    [JsonProperty( propertyName: "scope" )]
     public string Scope { get; set; }
 
-    [JsonProperty( "types" )]
+    [JsonProperty( propertyName: "types" )]
     public string[] Types { get; set; }
 
-    [JsonProperty( "url" )]
+    [JsonProperty( propertyName: "url" )]
     public string Url { get; set; }
 
-    [JsonProperty( "utc_offset" )]
+    [JsonProperty( propertyName: "utc_offset" )]
     public int UtcOffset { get; set; }
 
-    [JsonProperty( "vicinity" )]
+    [JsonProperty( propertyName: "vicinity" )]
     public string Vicinity { get; set; }
 
-    [JsonProperty( "website" )]
+    [JsonProperty( propertyName: "website" )]
     public string Website { get; set; }
   }
 }

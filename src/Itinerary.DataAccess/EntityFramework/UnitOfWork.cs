@@ -1,6 +1,6 @@
 ﻿using System;
-using Itinerary.DataAccess.Abstract.Repository;
-using Itinerary.DataAccess.Abstract.UnitOfWork;
+using Itinerary.Business;
+using Itinerary.Business.Itinerary.Places;
 using Itinerary.DataAccess.EntityFramework.Repository;
 
 namespace Itinerary.DataAccess.EntityFramework

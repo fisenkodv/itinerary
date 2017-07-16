@@ -1,8 +1,8 @@
-﻿using Itinerary.Business.Api.Google.Places.Common.Types;
-using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.Interfaces;
-using Itinerary.Business.Api.Google.Places.Search.Types;
+﻿using Itinerary.ExternalApiClient.Google.Places.Common.Types;
+using Itinerary.ExternalApiClient.Google.Places.Search.ParameterBuilder.Interfaces;
+using Itinerary.ExternalApiClient.Google.Places.Search.Types;
 
-namespace Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.QueryBuilder
+namespace Itinerary.ExternalApiClient.Google.Places.Search.ParameterBuilder.QueryBuilder
 {
   internal class TextHttpQueryBuilder : SearchQueryBuilderBase, ITextHttpQueryBuilder
   {

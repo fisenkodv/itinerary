@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Details.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Details.Entities
 {
   public class OpeningPeriod
   {
-    [JsonProperty( "close" )]
+    [JsonProperty( propertyName: "close" )]
     public OpeningSubPeriod Close { get; set; }
 
-    [JsonProperty( "open" )]
+    [JsonProperty( propertyName: "open" )]
     public OpeningSubPeriod Open { get; set; }
   }
 }

@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Common.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Common.Entities
 {
   public class LocationPoint
   {
-    [JsonProperty( "lat" )]
+    [JsonProperty( propertyName: "lat" )]
     public double Latitude { get; set; }
 
-    [JsonProperty( "lng" )]
+    [JsonProperty( propertyName: "lng" )]
     public double Longitude { get; set; }
   }
 }

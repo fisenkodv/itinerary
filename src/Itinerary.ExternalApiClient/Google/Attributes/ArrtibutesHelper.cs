@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Itinerary.Business.Api.Google.Attributes
+namespace Itinerary.ExternalApiClient.Google.Attributes
 {
   internal static class ArrtibutesHelper
   {

@@ -1,31 +1,31 @@
 ﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Autocomplete.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Autocomplete.Entities
 {
   public class PredictionItem
   {
-    [JsonProperty( "description" )]
+    [JsonProperty( propertyName: "description" )]
     public string Description { get; set; }
 
-    [JsonProperty( "id" )]
+    [JsonProperty( propertyName: "id" )]
     public string Id { get; set; }
 
-    [JsonProperty( "matched_substrings" )]
+    [JsonProperty( propertyName: "matched_substrings" )]
     public MatchedSubstring[] MatchedSubstrings { get; set; }
 
-    [JsonProperty( "place_id" )]
+    [JsonProperty( propertyName: "place_id" )]
     public string PlaceId { get; set; }
 
-    [JsonProperty( "reference" )]
+    [JsonProperty( propertyName: "reference" )]
     public string Reference { get; set; }
 
-    [JsonProperty( "structured_formatting" )]
+    [JsonProperty( propertyName: "structured_formatting" )]
     public StructuredFormatting StructuredFormatting { get; set; }
 
-    [JsonProperty( "terms" )]
+    [JsonProperty( propertyName: "terms" )]
     public Term[] Terms { get; set; }
 
-    [JsonProperty( "types" )]
+    [JsonProperty( propertyName: "types" )]
     public string[] Types { get; set; }
   }
 }

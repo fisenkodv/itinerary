@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Itinerary.Common.Models;
-using Itinerary.Common.Models.Google;
+using Itinerary.Business.Itinerary.GooglePlaces.Dto;
+using Itinerary.Business.Itinerary.Places.Dto;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace Itinerary.Business.Services.Places
+namespace Itinerary.Business.Itinerary.GooglePlaces
 {
   public class GooglePlacesService : IGooglePlacesService
   {
@@ -19,29 +19,29 @@ namespace Itinerary.Business.Services.Places
       _memoryCache = memoryCache;
     }
 
-    public IEnumerable<Autocomplete> Autocomplete( string keyword )
-    {
-      return GetFromCache(
-        $"autosuggest_{keyword}",
-        () => { return _googleApiClient.Autocomplete( keyword ); } );
-    }
-
-    public Location Location( string placeId )
-    {
-      return GetFromCache(
-        $"location_{placeId}",
-        () => { return _googleApiClient.Location( placeId ); } );
-    }
-
     private T GetFromCache<T>( string key, Func<T> getDataAction )
     {
-      if ( !_memoryCache.TryGetValue( key, out T data ) )
+      if ( !_memoryCache.TryGetValue( key, value: out T data ) )
       {
         data = getDataAction();
         _memoryCache.Set( key, data );
       }
 
       return data;
+    }
+
+    public IEnumerable<Autocomplete> Autocomplete( string keyword )
+    {
+      return GetFromCache(
+        key: $"autosuggest_{keyword}",
+        getDataAction: () => { return _googleApiClient.Autocomplete( keyword ); } );
+    }
+
+    public Location Location( string placeId )
+    {
+      return GetFromCache(
+        key: $"location_{placeId}",
+        getDataAction: () => { return _googleApiClient.Location( placeId ); } );
     }
   }
 }

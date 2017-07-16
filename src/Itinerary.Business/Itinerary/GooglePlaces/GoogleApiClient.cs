@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
-using Itinerary.Business.Api.Google;
-using Itinerary.Business.Api.Google.Places;
-using Itinerary.Business.Api.Google.Places.Autocomplete.ParameterBuilder;
-using Itinerary.Business.Api.Google.Places.Autocomplete.Types;
-using Itinerary.Business.Api.Google.Places.Details.Entities;
-using Itinerary.Business.Api.Google.Places.Details.ParameterBuilder;
-using Itinerary.Common.Models;
-using Itinerary.Common.Models.Google;
+using Itinerary.Business.Itinerary.GooglePlaces.Dto;
+using Itinerary.Business.Itinerary.Places.Dto;
+using Itinerary.ExternalApiClient.Google;
+using Itinerary.ExternalApiClient.Google.Places;
+using Itinerary.ExternalApiClient.Google.Places.Autocomplete.ParameterBuilder;
+using Itinerary.ExternalApiClient.Google.Places.Autocomplete.Types;
+using Itinerary.ExternalApiClient.Google.Places.Details.Entities;
+using Itinerary.ExternalApiClient.Google.Places.Details.ParameterBuilder;
 
-namespace Itinerary.Business.Services.Places
+namespace Itinerary.Business.Itinerary.GooglePlaces
 {
   public class GoogleApiClient : IGoogleApiClient
   {

@@ -1,5 +1,5 @@
-﻿using Itinerary.DataAccess.Abstract.Repository;
-using Itinerary.DataAccess.Abstract.UnitOfWork;
+﻿using Itinerary.Business;
+using Itinerary.Business.Itinerary.Places;
 
 namespace Itinerary.Tests.Unit.DataAccess.Fakes
 {

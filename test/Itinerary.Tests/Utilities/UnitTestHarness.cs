@@ -1,4 +1,4 @@
-﻿using Itinerary.DataAccess.Abstract.UnitOfWork;
+﻿using Itinerary.Business;
 using Itinerary.Tests.Unit.DataAccess.Fakes;
 
 namespace Itinerary.Tests.Utilities

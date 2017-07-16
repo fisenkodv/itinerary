@@ -1,34 +1,34 @@
 using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Details.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Details.Entities
 {
   public class Review
   {
-    [JsonProperty("aspects")]
+    [JsonProperty( propertyName: "aspects" )]
     public Aspect[] Aspects { get; set; }
 
-    [JsonProperty( "author_name" )]
+    [JsonProperty( propertyName: "author_name" )]
     public string AuthorName { get; set; }
 
-    [JsonProperty( "author_url" )]
+    [JsonProperty( propertyName: "author_url" )]
     public string AuthorUrl { get; set; }
 
-    [JsonProperty( "language" )]
+    [JsonProperty( propertyName: "language" )]
     public string Language { get; set; }
 
-    [JsonProperty( "profile_photo_url" )]
+    [JsonProperty( propertyName: "profile_photo_url" )]
     public string ProfilePhotoUrl { get; set; }
 
-    [JsonProperty( "rating" )]
+    [JsonProperty( propertyName: "rating" )]
     public int Rating { get; set; }
 
-    [JsonProperty( "relative_time_description" )]
+    [JsonProperty( propertyName: "relative_time_description" )]
     public string RelativeTimeDescription { get; set; }
 
-    [JsonProperty( "text" )]
+    [JsonProperty( propertyName: "text" )]
     public string Text { get; set; }
 
-    [JsonProperty( "time" )]
+    [JsonProperty( propertyName: "time" )]
     public int Time { get; set; }
   }
 }

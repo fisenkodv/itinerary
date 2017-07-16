@@ -1,6 +1,6 @@
-﻿using Itinerary.Business.Api.Google.Places.Search.Entities.Common;
+﻿using Itinerary.ExternalApiClient.Google.Places.Search.Entities.Common;
 
-namespace Itinerary.Business.Api.Google.Places.Search.Entities.Text
+namespace Itinerary.ExternalApiClient.Google.Places.Search.Entities.Text
 {
   public class TextResult : GenericResult<TextResultItem>
   {

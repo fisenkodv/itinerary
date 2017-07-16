@@ -1,8 +1,8 @@
-﻿using Itinerary.Business.Api.Google.Places.Autocomplete.Types;
-using Itinerary.Business.Api.Google.Places.Common.Types;
-using Itinerary.Business.Api.Google.QueryBuilder;
+﻿using Itinerary.ExternalApiClient.Google.Places.Autocomplete.Types;
+using Itinerary.ExternalApiClient.Google.Places.Common.Types;
+using Itinerary.ExternalApiClient.Google.QueryBuilder;
 
-namespace Itinerary.Business.Api.Google.Places.Autocomplete.ParameterBuilder
+namespace Itinerary.ExternalApiClient.Google.Places.Autocomplete.ParameterBuilder
 {
   /// <summary>
   ///   The Place Autocomplete service is a web service that returns place predictions in response to an HTTP request.

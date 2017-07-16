@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Itinerary.Business.Itinerary.Places.Model;
-using Itinerary.Common.Models;
 
-namespace Itinerary.Business.Services.Places
+namespace Itinerary.Business.Itinerary.Places
 {
   public interface IPlacesService
   {

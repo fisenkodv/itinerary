@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Itinerary.Business.Common.Models;
 using Itinerary.Business.Itinerary.Places.Model;
-using Itinerary.Common.Models;
 
-namespace Itinerary.DataAccess.Abstract.Repository
+namespace Itinerary.Business.Itinerary.Places
 {
   public interface IPlacesRepository
   {

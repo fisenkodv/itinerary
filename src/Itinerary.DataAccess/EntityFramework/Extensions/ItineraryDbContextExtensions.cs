@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Itinerary.Common.Models;
-using Itinerary.Common.Models.Comparers;
+using Itinerary.Business.Itinerary.Places;
+using Itinerary.Business.Itinerary.Places.Dto;
 using Itinerary.DataAccess.Entities;
 using Newtonsoft.Json;
 

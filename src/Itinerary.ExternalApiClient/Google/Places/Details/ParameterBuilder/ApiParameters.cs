@@ -1,4 +1,4 @@
-﻿namespace Itinerary.Business.Api.Google.Places.Details.ParameterBuilder
+﻿namespace Itinerary.ExternalApiClient.Google.Places.Details.ParameterBuilder
 {
   internal static class ApiParameters
   {

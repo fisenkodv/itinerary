@@ -1,14 +1,13 @@
-﻿using Itinerary.Business.Api.Google.Places.Autocomplete.Entities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Details.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Details.Entities
 {
   public class DetailsResult
   {
-    [JsonProperty( "result" )]
+    [JsonProperty( propertyName: "result" )]
     public Result Result { get; set; }
 
-    [JsonProperty( "status" )]
+    [JsonProperty( propertyName: "status" )]
     public string Status { get; set; }
   }
 }

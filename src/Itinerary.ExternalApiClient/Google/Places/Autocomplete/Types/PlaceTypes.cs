@@ -1,6 +1,6 @@
-﻿using Itinerary.Business.Api.Google.Attributes;
+﻿using Itinerary.ExternalApiClient.Google.Attributes;
 
-namespace Itinerary.Business.Api.Google.Places.Autocomplete.Types
+namespace Itinerary.ExternalApiClient.Google.Places.Autocomplete.Types
 {
   public enum PlaceTypes
   {

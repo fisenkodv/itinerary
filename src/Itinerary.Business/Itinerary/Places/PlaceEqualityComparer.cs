@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Itinerary.Business.Itinerary.Places.Dto;
 
-namespace Itinerary.Common.Models.Comparers
+namespace Itinerary.Business.Itinerary.Places
 {
   public class PlaceEqualityComparer : IEqualityComparer<PlaceDetails>
   {
     public bool Equals( PlaceDetails x, PlaceDetails y )
     {
-      if ( Object.ReferenceEquals( x, y ) ) return true;
-      if ( Object.ReferenceEquals( x, null ) ) return false;
-      if ( Object.ReferenceEquals( y, null ) ) return false;
+      if ( ReferenceEquals( x, y ) ) return true;
+      if ( ReferenceEquals( x, objB: null ) ) return false;
+      if ( ReferenceEquals( y, objB: null ) ) return false;
       if ( x.GetType() != y.GetType() ) return false;
 
       return string.Equals( x.Name, y.Name ) &&

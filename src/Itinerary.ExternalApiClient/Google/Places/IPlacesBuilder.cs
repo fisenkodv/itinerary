@@ -1,6 +1,6 @@
-﻿using Itinerary.Business.Api.Google.Places.Search.ParameterBuilder.Interfaces;
+﻿using Itinerary.ExternalApiClient.Google.Places.Search.ParameterBuilder.Interfaces;
 
-namespace Itinerary.Business.Api.Google.Places
+namespace Itinerary.ExternalApiClient.Google.Places
 {
   public interface IPlacesBuilder
   {

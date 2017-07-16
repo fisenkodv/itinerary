@@ -1,16 +1,16 @@
 ﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Details.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Details.Entities
 {
   public class AddressComponent
   {
-    [JsonProperty( "long_name" )]
+    [JsonProperty( propertyName: "long_name" )]
     public string LongName { get; set; }
 
-    [JsonProperty( "short_name" )]
+    [JsonProperty( propertyName: "short_name" )]
     public string ShortNmae { get; set; }
 
-    [JsonProperty( "types" )]
+    [JsonProperty( propertyName: "types" )]
     public string[] Types { get; set; }
   }
 }

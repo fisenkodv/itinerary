@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Itinerary.Business.Services.Places;
-using Itinerary.Common.Models;
+using Itinerary.Business.Itinerary.Places;
+using Itinerary.Business.Itinerary.Places.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

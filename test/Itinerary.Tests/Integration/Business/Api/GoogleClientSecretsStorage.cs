@@ -1,5 +1,5 @@
-﻿using Itinerary.Business.Api.Google;
-using Itinerary.Business.Api.Google.Places;
+﻿using Itinerary.ExternalApiClient.Google;
+using Itinerary.ExternalApiClient.Google.Places;
 
 namespace Itinerary.Tests.Business.Api
 {

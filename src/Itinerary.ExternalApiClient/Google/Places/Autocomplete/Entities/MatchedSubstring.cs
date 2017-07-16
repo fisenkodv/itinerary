@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Autocomplete.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Autocomplete.Entities
 {
   public class MatchedSubstring
   {
-    [JsonProperty( "length" )]
+    [JsonProperty( propertyName: "length" )]
     public int Length { get; set; }
 
-    [JsonProperty( "offset" )]
+    [JsonProperty( propertyName: "offset" )]
     public int Offset { get; set; }
   }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Itinerary.Common.Models;
-using Itinerary.Common.Models.Google;
+using Itinerary.Business.Itinerary.GooglePlaces.Dto;
+using Itinerary.Business.Itinerary.Places.Dto;
 
-namespace Itinerary.Business.Services.Places
+namespace Itinerary.Business.Itinerary.GooglePlaces
 {
   public interface IGoogleApiClient
   {

@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Details.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Details.Entities
 {
   public class Aspect
   {
-    [JsonProperty( "rating" )]
+    [JsonProperty( propertyName: "rating" )]
     public int Rating { get; set; }
 
-    [JsonProperty( "type" )]
+    [JsonProperty( propertyName: "type" )]
     public string Type { get; set; }
   }
 }

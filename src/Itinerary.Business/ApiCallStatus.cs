@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Itinerary.Common.Models
+namespace Itinerary.Business
 {
   public class ApiCallStatus
   {

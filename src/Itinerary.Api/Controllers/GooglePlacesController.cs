@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Itinerary.Business.Services.Places;
-using Itinerary.Common.Models;
-using Itinerary.Common.Models.Google;
+using Itinerary.Business.Itinerary.GooglePlaces;
+using Itinerary.Business.Itinerary.GooglePlaces.Dto;
+using Itinerary.Business.Itinerary.Places.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Api.Controllers

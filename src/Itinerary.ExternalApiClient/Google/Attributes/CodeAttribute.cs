@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Itinerary.Business.Api.Google.Attributes
+namespace Itinerary.ExternalApiClient.Google.Attributes
 {
   internal class CodeAttribute : Attribute
   {

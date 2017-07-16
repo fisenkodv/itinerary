@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Itinerary.Business.Services.Account;
-using Itinerary.Common.Models;
+using Itinerary.Business;
+using Itinerary.Business.Account;
 using Itinerary.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

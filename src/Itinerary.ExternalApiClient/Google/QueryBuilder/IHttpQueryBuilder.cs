@@ -1,4 +1,4 @@
-﻿namespace Itinerary.Business.Api.Google.QueryBuilder
+﻿namespace Itinerary.ExternalApiClient.Google.QueryBuilder
 {
   public interface IHttpQueryBuilder
   {

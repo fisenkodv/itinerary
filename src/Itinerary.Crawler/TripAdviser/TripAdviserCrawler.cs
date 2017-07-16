@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Itinerary.Common.Models;
+using Itinerary.Business.Itinerary.Places.Dto;
 using Itinerary.Crawler.TripAdviser.Entities;
 using LiteDB;
 using Microsoft.Extensions.Logging;

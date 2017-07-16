@@ -1,4 +1,4 @@
-﻿namespace Itinerary.Business.Api.Google.Places.Search.Types
+﻿namespace Itinerary.ExternalApiClient.Google.Places.Search.Types
 {
   public enum RankBy
   {

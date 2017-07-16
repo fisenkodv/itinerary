@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google.Places.Autocomplete.Entities
+namespace Itinerary.ExternalApiClient.Google.Places.Autocomplete.Entities
 {
   public class AutocompleteResult
   {
-    [JsonProperty( "predictions" )]
+    [JsonProperty( propertyName: "predictions" )]
     public PredictionItem[] Predictions { get; set; }
 
-    [JsonProperty( "status" )]
+    [JsonProperty( propertyName: "status" )]
     public string Status { get; set; }
   }
 }

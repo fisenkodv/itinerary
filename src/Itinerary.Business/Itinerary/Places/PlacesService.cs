@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Itinerary.Business.Common.Models;
 using Itinerary.Business.Itinerary.Places.Model;
 using Itinerary.Common;
-using Itinerary.Common.Models;
-using Itinerary.DataAccess.Abstract.UnitOfWork;
 using JetBrains.Annotations;
 
-namespace Itinerary.Business.Services.Places
+namespace Itinerary.Business.Itinerary.Places
 {
   [UsedImplicitly]
   public class PlacesService : IPlacesService
@@ -29,10 +28,10 @@ namespace Itinerary.Business.Services.Places
           locationInfo.southEastLocation,
           rating, reviews )
         let distanceFromBasePoint = locationInfo.baseLocation.DistanceTo(
-          GeoLocation.FromDegrees(
+          location: GeoLocation.FromDegrees(
             place.Location.Latitude,
             place.Location.Longitude ),
-          GeoLocationMeasurement.Miles )
+          locationMeasurement: GeoLocationMeasurement.Miles )
         where distanceFromBasePoint <= distance
         select place;
 
@@ -48,9 +47,11 @@ namespace Itinerary.Business.Services.Places
       GeoLocation[] edgeCoordinates = baseGeoLocation.BoundingCoordinates( distance, GeoLocationMeasurement.Miles );
 
       var northWestLocation = new Location(
-        edgeCoordinates[ 1 ].GetLatitudeInDegrees(), edgeCoordinates[ 0 ].GetLongitudeInDegrees() );
+        latitude: edgeCoordinates[ 1 ].GetLatitudeInDegrees(),
+        longitude: edgeCoordinates[ 0 ].GetLongitudeInDegrees() );
       var southEastLocation = new Location(
-        edgeCoordinates[ 0 ].GetLatitudeInDegrees(), edgeCoordinates[ 1 ].GetLongitudeInDegrees() );
+        latitude: edgeCoordinates[ 0 ].GetLatitudeInDegrees(),
+        longitude: edgeCoordinates[ 1 ].GetLongitudeInDegrees() );
 
       return (northWestLocation, southEastLocation, baseGeoLocation);
     }

@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Itinerary.Common.Models;
 
-namespace Itinerary.Business.Services.Account
+namespace Itinerary.Business.Account
 {
   public interface IAccountService
   {

@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Itinerary.Business.Api.Google
+namespace Itinerary.ExternalApiClient.Google
 {
   internal sealed class ApiClient
   {
