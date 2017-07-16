@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}"
 EndProject
@@ -17,17 +17,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Tests", "test\Itinerary.Tests\Itinerary.Tests.csproj", "{50ED1CCE-680B-467A-9B73-89B3D30F0857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Tests", "test\Itinerary.Tests\Itinerary.Tests.csproj", "{50ED1CCE-680B-467A-9B73-89B3D30F0857}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Common", "src\Itinerary.Common\Itinerary.Common.csproj", "{F8AB7668-2CBE-4FC0-9CE4-4D866DB9CE7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Common", "src\Itinerary.Common\Itinerary.Common.csproj", "{F8AB7668-2CBE-4FC0-9CE4-4D866DB9CE7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.DataAccess", "src\Itinerary.DataAccess\Itinerary.DataAccess.csproj", "{E912125E-1F1C-4AEF-90E7-9DC0CDC5F982}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.DataAccess", "src\Itinerary.DataAccess\Itinerary.DataAccess.csproj", "{E912125E-1F1C-4AEF-90E7-9DC0CDC5F982}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Crawler", "src\Itinerary.Crawler\Itinerary.Crawler.csproj", "{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Crawler", "src\Itinerary.Crawler\Itinerary.Crawler.csproj", "{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Business", "src\Itinerary.Business\Itinerary.Business.csproj", "{79CE81FA-6387-46F9-8921-873154F81DA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Business", "src\Itinerary.Business\Itinerary.Business.csproj", "{79CE81FA-6387-46F9-8921-873154F81DA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Api", "src\Itinerary.Api\Itinerary.Api.csproj", "{F1D26AE7-5974-4B42-B28E-A6C74C993D28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Api", "src\Itinerary.Api\Itinerary.Api.csproj", "{F1D26AE7-5974-4B42-B28E-A6C74C993D28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.ExternalApiClient", "src\Itinerary.ExternalApiClient\Itinerary.ExternalApiClient.csproj", "{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,18 @@ Global
 		{F1D26AE7-5974-4B42-B28E-A6C74C993D28}.Release|x64.Build.0 = Release|Any CPU
 		{F1D26AE7-5974-4B42-B28E-A6C74C993D28}.Release|x86.ActiveCfg = Release|Any CPU
 		{F1D26AE7-5974-4B42-B28E-A6C74C993D28}.Release|x86.Build.0 = Release|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Debug|x64.Build.0 = Debug|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Debug|x86.Build.0 = Debug|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Release|x64.ActiveCfg = Release|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Release|x64.Build.0 = Release|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,5 +136,6 @@ Global
 		{EFEDD79A-E9C9-47EB-84B8-B937A9FEE186} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 		{79CE81FA-6387-46F9-8921-873154F81DA7} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 		{F1D26AE7-5974-4B42-B28E-A6C74C993D28} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
+		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 	EndGlobalSection
 EndGlobal

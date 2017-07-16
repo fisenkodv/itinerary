@@ -21,7 +21,9 @@ namespace Itinerary.Api.Controllers
     [HttpGet( "[action]" )]
     public IEnumerable<PlaceDetails> Search( double lat, double lng, double distance, double rating, int reviews )
     {
-      return _placesService.Search( lat, lng, distance, rating, reviews );
+      //FIXME: Fix
+      //return _placesService.Search( lat, lng, distance, rating, reviews );
+      return null;
     }
 
     [Authorize]

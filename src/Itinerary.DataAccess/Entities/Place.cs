@@ -11,7 +11,7 @@ namespace Itinerary.DataAccess.Entities
 
     public string Name { get; set; }
 
-    public float Rating { get; set; }
+    public double Rating { get; set; }
 
     public int Reviews { get; set; }
 

@@ -115,7 +115,7 @@ namespace Itinerary.Crawler.TripAdviser
 
         _logger.LogDebug( $"Read segment {lat}, {lng}. {json.Length} bytes." );
 
-        using ( var streamReader = new StreamReader( new MemoryStream( json ) ) )
+        using ( TextReader streamReader = new StreamReader( new MemoryStream( json ) ) )
         using ( var jsonTextReader = new JsonTextReader( streamReader ) )
         {
           var serializer = new Newtonsoft.Json.JsonSerializer();

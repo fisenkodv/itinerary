@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.3.1" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.4.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
@@ -25,10 +25,10 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Itinerary.Business\Itinerary.Business.csproj" />
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstract\UnitOfWork" />
     <Folder Include="EntityFramework\Migrations\Itinerary\" />
     <Folder Include="EntityFramework\Migrations\Itinerary\" />
     <Folder Include="EntityFramework\Migrations\Itinerary\" />
