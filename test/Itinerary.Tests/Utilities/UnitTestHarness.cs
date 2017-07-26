@@ -14,11 +14,6 @@ namespace Itinerary.Tests.Utilities
       PlacesRepository = new FakePlacesRepository();
     }
 
-    //public IUnitOfWork CreateUnitOfWork()
-    //{
-    //  return new FakeUnitOfWork( PlacesRepository );
-    //}
-
     public IPlacesService CreatePlacesService()
     {
       return new PlacesService( new FakeUnitOfWork( PlacesRepository ), new FakeGooglePlacesClient() );

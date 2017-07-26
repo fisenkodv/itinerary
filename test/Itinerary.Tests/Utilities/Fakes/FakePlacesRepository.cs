@@ -8,12 +8,11 @@ namespace Itinerary.Tests.Utilities.Fakes
 {
   internal class FakePlacesRepository : IPlacesRepository
   {
-    private int _id;
-    private readonly List<Place> _places;
+    private readonly Dictionary<int, Place> _places;
 
     public FakePlacesRepository()
     {
-      _places = new List<Place>();
+      _places = new Dictionary<int, Place>();
     }
 
     public IEnumerable<Place> GetPlaces(
@@ -21,7 +20,7 @@ namespace Itinerary.Tests.Utilities.Fakes
       Location southEastLocation,
       double rating )
     {
-      return _places.Where(
+      return _places.Values.Where(
         place => place.Rating >= rating &&
                  place.Location.Latitude <= northWestLocation.Latitude &&
                  place.Location.Latitude >= southEastLocation.Latitude &&
@@ -31,7 +30,22 @@ namespace Itinerary.Tests.Utilities.Fakes
 
     public void AddPlaces( IEnumerable<Place> places )
     {
-      _places.AddRange( places );
+      foreach ( Place place in places )
+      {
+        AddPlace( place );
+      }
+    }
+
+    private int AddPlace( Place place )
+    {
+      int id = GetNextId();
+      _places.Add( id, place );
+      return id;
+    }
+
+    private int GetNextId()
+    {
+      return _places.Keys.Max() + 1;
     }
   }
 }
