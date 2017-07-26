@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Itinerary.Business.Itinerary.Places;
-using Itinerary.Business.Itinerary.Places.Dto;
+using Itinerary.Business.Models.Common;
+using Itinerary.Business.Models.Places;
+using Itinerary.Business.Places;
 
 namespace Itinerary.DataAccess.EntityFramework.Repository
 {
@@ -14,25 +15,11 @@ namespace Itinerary.DataAccess.EntityFramework.Repository
       _dbContext = dbContext;
     }
 
-    IEnumerable<Business.Itinerary.Places.Model.Place> IPlacesRepository.GetPlaces(
+    public IEnumerable<Place> GetPlaces(
       Location northWestLocation,
       Location southEastLocation,
-      double rating,
-      int reviewsCount )
+      double rating )
     {
-      //IQueryable<Place> query =
-      //  _dbContext.Set<Place>()
-      //            .Where(
-      //              place => place.Rating >= rating &&
-      //                       place.Reviews >= reviewsCount &&
-      //                       place.Latitude <= northWestLocation.Latitude &&
-      //                       place.Latitude >= southEastLocation.Latitude &&
-      //                       place.Longitude <= southEastLocation.Longitude &&
-      //                       place.Longitude >= northWestLocation.Longitude )
-      //            .Include( place => place.Categories )
-      //            .ThenInclude(
-      //              placePlaceCategory => placePlaceCategory.Category );
-
       throw new NotImplementedException();
     }
   }

@@ -6,7 +6,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Itinerary.Business.Itinerary.Places.Dto;
+using Itinerary.Business.Models.Common;
+using Itinerary.Business.Places.Dto;
 using Itinerary.Crawler.TripAdviser.Entities;
 using LiteDB;
 using Microsoft.Extensions.Logging;
@@ -41,7 +42,7 @@ namespace Itinerary.Crawler.TripAdviser
 
     public void ConvertToCSharpSnapshot( string outputFile )
     {
-      IEnumerable<PlaceDetails> places = ConvertToPlaceDetails( GetSegmentsCollection().FindAll() );
+      IEnumerable<PlaceDto> places = ConvertToPlaceDetails( GetSegmentsCollection().FindAll() );
       File.WriteAllText( outputFile, JsonConvert.SerializeObject( places ) );
     }
 
@@ -175,18 +176,17 @@ namespace Itinerary.Crawler.TripAdviser
       }
     }
 
-    private static IEnumerable<PlaceDetails> ConvertToPlaceDetails( IEnumerable<Segment> segments )
+    private static IEnumerable<PlaceDto> ConvertToPlaceDetails( IEnumerable<Segment> segments )
     {
       return
         from segment in segments
         where segment.Map.Attractions.Any()
         from attraction in segment.Map.Attractions
-        select new PlaceDetails(
+        select new PlaceDto(
           attraction.CustomHover.Title ?? string.Empty,
           attraction.Rating,
           attraction.Reviews,
           attraction.Categories ?? Enumerable.Empty<string>(),
-          attraction.Url ?? string.Empty,
           attraction.ImgUrl ?? string.Empty,
           new Location( attraction.Lat, attraction.Lng ) );
     }

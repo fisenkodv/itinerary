@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Itinerary.Business.Itinerary.Places;
-using Itinerary.Business.Itinerary.Places.Dto;
+using Itinerary.Business.Places.Dto;
+using Itinerary.Business.Places.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,7 @@ namespace Itinerary.Api.Controllers
     }
 
     [HttpGet( "[action]" )]
-    public IEnumerable<PlaceDetails> Search( double lat, double lng, double distance, double rating, int reviews )
+    public IEnumerable<PlaceDto> Search( double lat, double lng, double distance, double rating, int reviews )
     {
       //FIXME: Fix
       //return _placesService.Search( lat, lng, distance, rating, reviews );

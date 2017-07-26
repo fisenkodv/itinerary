@@ -1,5 +1,4 @@
 ﻿using System;
-using Itinerary.Common.Utilities;
 
 namespace Itinerary.Common
 {
@@ -27,10 +26,10 @@ namespace Itinerary.Common
     private double _degLat; // latitude in degrees
     private double _degLon; // longitude in degrees
 
-    private static readonly double MinLat = Helpers.ConvertDegreesToRadians( -90d ); // -PI/2
-    private static readonly double MaxLat = Helpers.ConvertDegreesToRadians( 90d ); //  PI/2
-    private static readonly double MinLon = Helpers.ConvertDegreesToRadians( -180d ); // -PI
-    private static readonly double MaxLon = Helpers.ConvertDegreesToRadians( 180d ); //  PI
+    private static readonly double MinLat = DegreesConverter.ConvertDegreesToRadians( -90d ); // -PI/2
+    private static readonly double MaxLat = DegreesConverter.ConvertDegreesToRadians( 90d ); //  PI/2
+    private static readonly double MinLon = DegreesConverter.ConvertDegreesToRadians( -180d ); // -PI
+    private static readonly double MaxLon = DegreesConverter.ConvertDegreesToRadians( 180d ); //  PI
 
     private const double EarthRadiusInKilometers = 6371.01;
     private const double EarthRadiusInMiles = EarthRadiusInKilometers * 0.621371;
@@ -49,8 +48,8 @@ namespace Itinerary.Common
     {
       var result = new GeoLocation
                    {
-                     _radLat = Helpers.ConvertDegreesToRadians( latitude ),
-                     _radLon = Helpers.ConvertDegreesToRadians( longitude ),
+                     _radLat = DegreesConverter.ConvertDegreesToRadians( latitude ),
+                     _radLon = DegreesConverter.ConvertDegreesToRadians( longitude ),
                      _degLat = latitude,
                      _degLon = longitude
                    };
@@ -70,8 +69,8 @@ namespace Itinerary.Common
                    {
                      _radLat = latitude,
                      _radLon = longitude,
-                     _degLat = Helpers.ConvertRadiansToDegrees( latitude ),
-                     _degLon = Helpers.ConvertRadiansToDegrees( longitude )
+                     _degLat = DegreesConverter.ConvertRadiansToDegrees( latitude ),
+                     _degLon = DegreesConverter.ConvertRadiansToDegrees( longitude )
                    };
       result.CheckBounds();
       return result;

@@ -1,30 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Itinerary.Business.Itinerary.Places;
-using Itinerary.Business.Itinerary.Places.Dto;
-using Itinerary.Business.Itinerary.Places.Model;
+using Itinerary.Business.Models.Common;
+using Itinerary.Business.Models.Places;
+using Itinerary.Business.Places;
 
-namespace Itinerary.Tests.Unit.DataAccess.Fakes
+namespace Itinerary.Tests.Utilities.Fakes
 {
   internal class FakePlacesRepository : IPlacesRepository
   {
+    private int _id;
     private readonly List<Place> _places;
 
     public FakePlacesRepository()
     {
-      _places=new List<Place>();
+      _places = new List<Place>();
     }
-
 
     public IEnumerable<Place> GetPlaces(
       Location northWestLocation,
       Location southEastLocation,
-      double rating,
-      int reviewsCount )
+      double rating )
     {
       return _places.Where(
         place => place.Rating >= rating &&
-                 place.Reviews.Count >= reviewsCount &&
                  place.Location.Latitude <= northWestLocation.Latitude &&
                  place.Location.Latitude >= southEastLocation.Latitude &&
                  place.Location.Longitude <= southEastLocation.Longitude &&

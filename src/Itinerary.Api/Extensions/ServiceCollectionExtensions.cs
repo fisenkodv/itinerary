@@ -5,14 +5,13 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Itinerary.Business;
 using Itinerary.Business.Account;
-using Itinerary.Business.Itinerary.GooglePlaces;
-using Itinerary.Business.Itinerary.Places;
+using Itinerary.Business.Places;
+using Itinerary.Business.Places.Interfaces;
 using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework;
 using Itinerary.ExternalApiClient.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -119,7 +118,7 @@ namespace Itinerary.Api.Extensions
 
       services.AddTransient( typeof( IUnitOfWork ), typeof( UnitOfWork ) );
       services.AddTransient<IPlacesService, PlacesService>();
-      services.AddTransient<IGooglePlacesService, GooglePlacesService>();
+      //services.AddTransient<IGooglePlacesService, GooglePlacesService>();
       services.AddTransient<IAccountService, AccountService>();
 
       return services;

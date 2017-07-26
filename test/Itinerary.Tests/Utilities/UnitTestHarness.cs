@@ -1,5 +1,7 @@
 ﻿using Itinerary.Business;
-using Itinerary.Tests.Unit.DataAccess.Fakes;
+using Itinerary.Business.Places;
+using Itinerary.Business.Places.Interfaces;
+using Itinerary.Tests.Utilities.Fakes;
 
 namespace Itinerary.Tests.Utilities
 {
@@ -12,9 +14,14 @@ namespace Itinerary.Tests.Utilities
       PlacesRepository = new FakePlacesRepository();
     }
 
-    public IUnitOfWork CreateUnitOfWork()
+    //public IUnitOfWork CreateUnitOfWork()
+    //{
+    //  return new FakeUnitOfWork( PlacesRepository );
+    //}
+
+    public IPlacesService CreatePlacesService()
     {
-      return new FakeUnitOfWork( PlacesRepository );
+      return new PlacesService( new FakeUnitOfWork( PlacesRepository ), new FakeGooglePlacesClient() );
     }
   }
 }

@@ -1,7 +1,7 @@
 ﻿using Itinerary.Business;
-using Itinerary.Business.Itinerary.Places;
+using Itinerary.Business.Places;
 
-namespace Itinerary.Tests.Unit.DataAccess.Fakes
+namespace Itinerary.Tests.Utilities.Fakes
 {
   public class FakeUnitOfWork : IUnitOfWork
   {

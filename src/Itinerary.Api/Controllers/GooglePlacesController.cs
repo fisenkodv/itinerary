@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Itinerary.Business.Itinerary.GooglePlaces;
-using Itinerary.Business.Itinerary.GooglePlaces.Dto;
-using Itinerary.Business.Itinerary.Places.Dto;
+using Itinerary.Business.Models.Places;
+using Itinerary.Business.Places.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Api.Controllers
@@ -10,23 +9,23 @@ namespace Itinerary.Api.Controllers
   [Route( "api/v{version:apiVersion}/google/places" )]
   public class GooglePlacesController : Controller
   {
-    private readonly IGooglePlacesService _googlePlacesService;
+    private readonly IPlacesService _googlePlacesService;
 
-    public GooglePlacesController( IGooglePlacesService googlePlacesService )
+    public GooglePlacesController( IPlacesService googlePlacesService )
     {
       _googlePlacesService = googlePlacesService;
     }
 
     [HttpGet( "[action]" )]
-    public IEnumerable<Autocomplete> Autocomplete( string keyword )
+    public IEnumerable<PlaceLocation> Autocomplete( string keyword )
     {
-      return _googlePlacesService.Autocomplete( keyword );
+      return _googlePlacesService.Search( keyword );
     }
 
-    [HttpGet( "[action]" )]
-    public Location Location( string placeId )
-    {
-      return _googlePlacesService.Location( placeId );
-    }
+    //[HttpGet( "[action]" )]
+    //public Location Location( string placeId )
+    //{
+    //  return _googlePlacesService.Location( placeId );
+    //}
   }
 }

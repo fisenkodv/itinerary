@@ -1,5 +1,5 @@
 ﻿using System;
-using Itinerary.Business.Itinerary.Places;
+using Itinerary.Business.Places;
 
 namespace Itinerary.Business
 {

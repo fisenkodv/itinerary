@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Itinerary.Business;
 using Itinerary.Business.Account;
+using Itinerary.Business.Models.Users;
 using Itinerary.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace Itinerary.Api.Controllers
     {
       ApiCallStatus result;
       if ( ModelState.IsValid )
-        result = await _accountService.Register( model.Email, model.Password );
+        result = await _accountService.Register( new User() { Email = model.Email, Password = model.Password } );
       else
         result = new ApiCallStatus(
           false, ModelState.Values.SelectMany( x => x.Errors ).Select( x => x.ErrorMessage ) );
