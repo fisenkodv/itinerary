@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Itinerary.Business.Models.Users;
+using Itinerary.Business.Identity.Abstractions;
+using Itinerary.Business.Identity.Models;
 
-namespace Itinerary.Business.Account
+namespace Itinerary.Business.Identity
 {
   //FIXME:
   public class AccountService : IAccountService

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Itinerary.Business.Models.Common;
+using Itinerary.Business.Places.Models;
 
 namespace Itinerary.Business.Places.Dto
 {

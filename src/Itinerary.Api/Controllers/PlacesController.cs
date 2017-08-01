@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Itinerary.Business.Places.Abstractions;
 using Itinerary.Business.Places.Dto;
-using Itinerary.Business.Places.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Itinerary.Business;
-using Itinerary.Business.Models.Common;
-using Itinerary.Business.Models.Places;
 using Itinerary.Business.Places.Dto;
+using Itinerary.Business.Places.Models;
 using Xunit;
 
 namespace Itinerary.Tests.Unit

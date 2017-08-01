@@ -1,4 +1,4 @@
-﻿namespace Itinerary.Business.Models.Users
+﻿namespace Itinerary.Business.Identity.Models
 {
   public class User
   {

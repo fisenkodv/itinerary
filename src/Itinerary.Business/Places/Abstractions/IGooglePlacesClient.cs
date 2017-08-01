@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Itinerary.Business.Models.Places;
+using Itinerary.Business.Places.Models;
 
-namespace Itinerary.Business.Places.Interfaces
+namespace Itinerary.Business.Places.Abstractions
 {
   public interface IGooglePlacesClient
   {

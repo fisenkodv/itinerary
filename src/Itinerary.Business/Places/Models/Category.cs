@@ -1,4 +1,4 @@
-﻿namespace Itinerary.Business.Models.Places
+﻿namespace Itinerary.Business.Places.Models
 {
   public class Category
   {

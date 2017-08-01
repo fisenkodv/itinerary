@@ -1,4 +1,4 @@
-﻿namespace Itinerary.Business.Models.Common
+﻿namespace Itinerary.Business.Places.Models
 {
   public class Location
   {

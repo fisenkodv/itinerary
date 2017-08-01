@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Itinerary.Business.Places;
 using Itinerary.Business.Places.Dto;
 using Itinerary.DataAccess.Entities;
 using Newtonsoft.Json;

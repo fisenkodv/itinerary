@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Itinerary.Business.Models.Places;
-using Itinerary.Business.Places.Interfaces;
+using Itinerary.Business.Places.Abstractions;
+using Itinerary.Business.Places.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Api.Controllers

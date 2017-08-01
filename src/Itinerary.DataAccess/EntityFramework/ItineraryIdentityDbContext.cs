@@ -1,12 +1,12 @@
-using Itinerary.DataAccess.Entities;
+﻿using Itinerary.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Itinerary.DataAccess.EntityFramework
 {
-  public class CustomIdentityDbContext : IdentityDbContext<User, Role, long>
+  public class ItineraryIdentityDbContext : IdentityDbContext<User, Role, long>
   {
-    public CustomIdentityDbContext( DbContextOptions dbContextOptions )
+    protected ItineraryIdentityDbContext( DbContextOptions dbContextOptions )
       : base( dbContextOptions )
     {
     }

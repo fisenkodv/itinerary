@@ -21,4 +21,7 @@
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
 </Project>

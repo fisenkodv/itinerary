@@ -1,6 +1,5 @@
-﻿using Itinerary.Business;
-using Itinerary.Business.Places;
-using Itinerary.Business.Places.Interfaces;
+﻿using Itinerary.Business.Places;
+using Itinerary.Business.Places.Abstractions;
 using Itinerary.Tests.Utilities.Fakes;
 
 namespace Itinerary.Tests.Utilities

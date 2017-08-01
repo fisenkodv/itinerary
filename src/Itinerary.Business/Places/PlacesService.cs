@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Itinerary.Business.Models.Common;
-using Itinerary.Business.Models.Places;
-using Itinerary.Business.Places.Interfaces;
+using Itinerary.Business.Places.Abstractions;
+using Itinerary.Business.Places.Models;
 using Itinerary.Common;
 using JetBrains.Annotations;
 

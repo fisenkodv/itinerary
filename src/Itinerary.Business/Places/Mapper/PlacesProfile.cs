@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Itinerary.Business.Models.Places;
 using Itinerary.Business.Places.Dto;
+using Itinerary.Business.Places.Models;
 
 namespace Itinerary.Business.Places.Mapper
 {

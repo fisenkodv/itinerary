@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Itinerary.Business.Models.Common;
-using Itinerary.Business.Models.Places;
+using Itinerary.Business.Places.Models;
 
-namespace Itinerary.Business.Places
+namespace Itinerary.Business.Places.Abstractions
 {
   public interface IPlacesRepository
   {

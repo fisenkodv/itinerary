@@ -1,6 +1,4 @@
-﻿using Itinerary.Business.Models.Common;
-
-namespace Itinerary.Business.Models.Places
+﻿namespace Itinerary.Business.Places.Models
 {
   public class PlaceLocation
   {
