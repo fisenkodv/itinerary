@@ -6,9 +6,9 @@ namespace Itinerary.Api.Extensions
 {
   public static class CertificatesExtensions
   {
-    public static X509Certificate2 RootCertificate = new X509Certificate2(
+    public static readonly X509Certificate2 RootCertificate = new X509Certificate2(
       Path.Combine( "Certificates", "ItineraryRoot.pfx" ) );
 
-    public static X509SecurityKey SigningKey = new X509SecurityKey( RootCertificate );
+    public static readonly X509SecurityKey SigningKey = new X509SecurityKey( RootCertificate );
   }
 }
