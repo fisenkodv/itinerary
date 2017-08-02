@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Itinerary.Business;
 using Itinerary.Business.Places.Abstractions;
 using Itinerary.Business.Places.Dto;
+using Itinerary.Business.Places.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +23,14 @@ namespace Itinerary.Api.Controllers
     [HttpGet( "[action]" )]
     public IEnumerable<PlaceDto> Search( double lat, double lng, double distance, double rating, int reviews )
     {
-      //FIXME: Fix
-      //return _placesService.Search( lat, lng, distance, rating, reviews );
-      return null;
+      IEnumerable<Place> places = _placesService.Search( new Location( lat, lng ), distance, rating );
+      return Mapper.Instance.Map<Place, PlaceDto>( places );
+    }
+
+    [HttpGet( "[action]" )]
+    public IEnumerable<PlaceLocation> Autocomplete( string keyword )
+    {
+      return _placesService.Search( keyword );
     }
 
     [Authorize]
