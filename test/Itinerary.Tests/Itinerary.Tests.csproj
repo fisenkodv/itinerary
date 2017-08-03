@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Itinerary.Business\Itinerary.Business.csproj" />
-    <ProjectReference Include="..\..\src\Itinerary.ExternalApiClient\Itinerary.ExternalApiClient.csproj" />
+    <ProjectReference Include="..\..\src\Itinerary.GoogleApiClient\Itinerary.GoogleApiClient.csproj" />
   </ItemGroup>
 
   <ItemGroup>
