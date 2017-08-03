@@ -44,7 +44,7 @@ namespace Itinerary.Tests.Utilities.Fakes
 
     private int GetNextId()
     {
-      return _places.Keys.Max() + 1;
+      return _places.Keys.Any() ? _places.Keys.Max() + 1 : 1;
     }
   }
 }

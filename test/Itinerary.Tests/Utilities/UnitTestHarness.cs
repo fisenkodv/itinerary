@@ -6,7 +6,7 @@ namespace Itinerary.Tests.Utilities
 {
   internal class UnitTestHarness
   {
-    public FakePlacesRepository PlacesRepository { get; private set; }
+    public FakePlacesRepository PlacesRepository { get; }
 
     public UnitTestHarness()
     {
