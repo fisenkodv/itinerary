@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Itinerary.Tests.Integration
 {
-  public class GooglePlacesApiClientTests
+  public class GoogleApiClientTests
   {
     [Fact]
     public async void It_should_return_nearby_search_results()
