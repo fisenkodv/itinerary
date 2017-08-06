@@ -10,6 +10,7 @@ using Itinerary.Business.Places;
 using Itinerary.Business.Places.Abstractions;
 using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework;
+using Itinerary.DataAccess.Extensions;
 using Itinerary.GoogleApiClient;
 using Itinerary.GoogleApiClient.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -24,16 +25,6 @@ namespace Itinerary.Api.Extensions
 {
   public static class ServiceCollectionExtensions
   {
-    private static readonly string MigrationAssemblyName = typeof( ItineraryDbContext )
-      .GetTypeInfo()
-      .Assembly.GetName()
-      .Name;
-
-    public static string GetConnectionString( this IConfiguration configuration )
-    {
-      return configuration.GetConnectionString( "SqliteConnection" );
-    }
-
     public static IServiceCollection AddCompression(
       this IServiceCollection services,
       IConfiguration configuration )
@@ -55,13 +46,7 @@ namespace Itinerary.Api.Extensions
       IConfiguration configuration )
     {
       services.AddEntityFramework();
-      services.AddDbContext<ItineraryDbContext>(
-        builder =>
-        {
-          builder.UseSqlite(
-            configuration.GetConnectionString(),
-            options => options.MigrationsAssembly( MigrationAssemblyName ) );
-        } );
+      services.AddDbContext<ItineraryDbContext>( builder => builder.InitDbContext( configuration ) );
 
       return services;
     }
@@ -69,26 +54,26 @@ namespace Itinerary.Api.Extensions
     public static IServiceCollection AddIdentityService( this IServiceCollection services )
     {
       services.AddIdentity<User, Role>(
-                identityOptions =>
-                {
-                  identityOptions.Cookies.ApplicationCookie.Events =
-                    new CookieAuthenticationEvents
-                    {
-                      OnRedirectToLogin =
-                        context =>
-                        {
-                          if ( context.Request.Path.StartsWithSegments( "/api" ) )
-                            context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
-                          else
-                            context.Response.Redirect( context.RedirectUri );
+                 identityOptions =>
+                 {
+                   identityOptions.Cookies.ApplicationCookie.Events =
+                     new CookieAuthenticationEvents
+                     {
+                       OnRedirectToLogin =
+                         context =>
+                         {
+                           if ( context.Request.Path.StartsWithSegments( "/api" ) )
+                             context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
+                           else
+                             context.Response.Redirect( context.RedirectUri );
 
-                          return Task.CompletedTask;
-                        }
-                    };
-                }
-              )
-              .AddEntityFrameworkStores<ItineraryDbContext, long>()
-              .AddDefaultTokenProviders();
+                           return Task.CompletedTask;
+                         }
+                     };
+                 }
+               )
+               .AddEntityFrameworkStores<ItineraryDbContext, long>()
+               .AddDefaultTokenProviders();
 
       return services;
     }
@@ -98,16 +83,10 @@ namespace Itinerary.Api.Extensions
       IConfiguration configuration )
     {
       services.AddIdentityServer()
-              .AddSigningCredential( CertificatesExtensions.RootCertificate )
-              .AddAspNetIdentity<User>()
-              .AddOperationalStore(
-                builder => builder.UseSqlite(
-                  configuration.GetConnectionString(),
-                  options => options.MigrationsAssembly( MigrationAssemblyName ) ) )
-              .AddConfigurationStore(
-                builder => builder.UseSqlite(
-                  configuration.GetConnectionString(),
-                  options => options.MigrationsAssembly( MigrationAssemblyName ) ) );
+               .AddSigningCredential( CertificatesExtensions.RootCertificate )
+               .AddAspNetIdentity<User>()
+               .AddOperationalStore( builder => builder.InitDbContext( configuration ) )
+               .AddConfigurationStore( builder => builder.InitDbContext( configuration ) );
 
       return services;
     }

@@ -56,23 +56,21 @@ namespace Itinerary.Api
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure( IApplicationBuilder app, IHostingEnvironment env )
     {
-      if ( env.IsDevelopment() )
-      {
-        InitializeDatabase( app );
-      }
+      if ( env.IsDevelopment() || env.IsIntegration() )
+        InitializeDatabase( app, env );
+
       app.UseCors( "AllowAllOrigins" );
       app.UseIdentity();
 
       JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
       app.UseIdentityServer();
-      var tokenValidationParameters =
-        new TokenValidationParameters
-        {
-          ValidateIssuerSigningKey = true,
-          ValidateIssuer = false,
-          ValidateAudience = false,
-          IssuerSigningKey = CertificatesExtensions.SigningKey
-        };
+      var tokenValidationParameters = new TokenValidationParameters
+                                      {
+                                        ValidateIssuerSigningKey = true,
+                                        ValidateIssuer = false,
+                                        ValidateAudience = false,
+                                        IssuerSigningKey = CertificatesExtensions.SigningKey
+                                      };
 
       app.UseJwtBearerAuthentication(
         new JwtBearerOptions
@@ -84,12 +82,12 @@ namespace Itinerary.Api
       app.UseMvc();
     }
 
-    private static void InitializeDatabase( IApplicationBuilder app )
+    private static void InitializeDatabase( IApplicationBuilder app, IHostingEnvironment env )
     {
       using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
       {
         serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
-        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData();
+        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData( env );
         serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
         serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().Database.Migrate();
         serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().EnsureSeedData();

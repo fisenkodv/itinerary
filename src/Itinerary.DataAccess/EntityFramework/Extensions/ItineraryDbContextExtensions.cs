@@ -3,17 +3,18 @@ using System.IO;
 using System.Linq;
 using Itinerary.Business.Places.Dto;
 using Itinerary.DataAccess.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 
 namespace Itinerary.DataAccess.EntityFramework.Extensions
 {
   public static class ItineraryDbContextExtensions
   {
-    public static void EnsureSeedData( this ItineraryDbContext context )
+    public static void EnsureSeedData( this ItineraryDbContext context, IHostingEnvironment env )
     {
       if ( context.AllMigrationsApplied() )
       {
-        string path = Path.Combine( "Data", "PlacesSnapshot.json" );
+        string path = Path.Combine( "Data", $"PlacesSnapshot.{env.EnvironmentName}.json" );
         List<PlaceDto> placeDetails = JsonConvert
           .DeserializeObject<IEnumerable<PlaceDto>>( File.ReadAllText( path ) )
           .Distinct( new PlaceEqualityComparer() )

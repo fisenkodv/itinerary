@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Itinerary.Tests.Utilities
 {
+  //TODO: remove db in constructor if exists, move test snapshot to test project
   public abstract class IntegrationTestBase
   {
     private readonly HttpClient _httpClient;
