@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Itinerary.Business.Places.Abstractions;
 using Itinerary.Business.Places.Models;
-using Itinerary.GoogleApiClient.Google;
-using Itinerary.GoogleApiClient.Google.Places;
-using Itinerary.GoogleApiClient.Google.Places.Autocomplete.ParameterBuilder;
-using Itinerary.GoogleApiClient.Google.Places.Autocomplete.Types;
-using Itinerary.GoogleApiClient.Google.Places.Details.Entities;
-using Itinerary.GoogleApiClient.Google.Places.Details.ParameterBuilder;
+using Itinerary.GoogleApiClient.Places;
+using Itinerary.GoogleApiClient.Places.Autocomplete.ParameterBuilder;
+using Itinerary.GoogleApiClient.Places.Autocomplete.Types;
+using Itinerary.GoogleApiClient.Places.Details.Entities;
+using Itinerary.GoogleApiClient.Places.Details.ParameterBuilder;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Itinerary.GoogleApiClient
 {
+  [UsedImplicitly]
   public class GooglePlacesClient : IGooglePlacesClient
   {
     private readonly IMemoryCache _memoryCache;

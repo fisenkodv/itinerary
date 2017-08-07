@@ -12,7 +12,6 @@ using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework;
 using Itinerary.DataAccess.Extensions;
 using Itinerary.GoogleApiClient;
-using Itinerary.GoogleApiClient.Google;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;

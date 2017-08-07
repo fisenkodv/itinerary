@@ -1,5 +1,5 @@
-﻿using Itinerary.GoogleApiClient.Google;
-using Itinerary.GoogleApiClient.Google.Places;
+﻿using Itinerary.GoogleApiClient;
+using Itinerary.GoogleApiClient.Places;
 
 namespace Itinerary.Tests.Utilities
 {

@@ -1,14 +1,14 @@
-﻿using Itinerary.GoogleApiClient.Google.Places;
-using Itinerary.GoogleApiClient.Google.Places.Autocomplete.Entities;
-using Itinerary.GoogleApiClient.Google.Places.Autocomplete.ParameterBuilder;
-using Itinerary.GoogleApiClient.Google.Places.Autocomplete.Types;
-using Itinerary.GoogleApiClient.Google.Places.Common.Types;
-using Itinerary.GoogleApiClient.Google.Places.Details.Entities;
-using Itinerary.GoogleApiClient.Google.Places.Details.ParameterBuilder;
-using Itinerary.GoogleApiClient.Google.Places.Search.Entities.Nearby;
-using Itinerary.GoogleApiClient.Google.Places.Search.Entities.Radar;
-using Itinerary.GoogleApiClient.Google.Places.Search.Entities.Text;
-using Itinerary.GoogleApiClient.Google.Places.Search.ParameterBuilder.Interfaces;
+﻿using Itinerary.GoogleApiClient.Places;
+using Itinerary.GoogleApiClient.Places.Autocomplete.Entities;
+using Itinerary.GoogleApiClient.Places.Autocomplete.ParameterBuilder;
+using Itinerary.GoogleApiClient.Places.Autocomplete.Types;
+using Itinerary.GoogleApiClient.Places.Common.Types;
+using Itinerary.GoogleApiClient.Places.Details.Entities;
+using Itinerary.GoogleApiClient.Places.Details.ParameterBuilder;
+using Itinerary.GoogleApiClient.Places.Search.Entities.Nearby;
+using Itinerary.GoogleApiClient.Places.Search.Entities.Radar;
+using Itinerary.GoogleApiClient.Places.Search.Entities.Text;
+using Itinerary.GoogleApiClient.Places.Search.ParameterBuilder.Interfaces;
 using Itinerary.Tests.Utilities;
 using Xunit;
 

@@ -6,6 +6,7 @@ using Itinerary.Api;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Itinerary.Tests.Utilities
 {
@@ -15,21 +16,27 @@ namespace Itinerary.Tests.Utilities
 
     protected IntegrationTestBase()
     {
-      CleanUp();
-
       _httpClient = GetClient();
     }
 
     public void Dispose()
     {
       _httpClient?.Dispose();
-      CleanUp();
+
+      const string dbFileName = "itinerary.integration.db";
+      if ( File.Exists( dbFileName ) )
+        File.Delete( dbFileName );
     }
 
-    protected async Task<string> Get( string url )
+    protected async Task<string> GetAsync( string url )
     {
       HttpResponseMessage response = await _httpClient.GetAsync( url );
       return await response.Content.ReadAsStringAsync();
+    }
+
+    protected T FromJson<T>( string json )
+    {
+      return JsonConvert.DeserializeObject<T>( json );
     }
 
     private static HttpClient GetClient()
@@ -37,18 +44,11 @@ namespace Itinerary.Tests.Utilities
       IConfigurationRoot configuration = new ConfigurationBuilder().Build();
       IWebHostBuilder builder = new WebHostBuilder()
         .UseEnvironment( "Integration" )
-         .UseConfiguration( configuration )
-         .UseStartup<Startup>();
+        .UseConfiguration( configuration )
+        .UseStartup<Startup>();
       var testServer = new TestServer( builder );
       HttpClient client = testServer.CreateClient();
       return client;
-    }
-
-    private static void CleanUp()
-    {
-      const string dbFileName = "itinerary.integration.db";
-      if ( File.Exists( dbFileName ) )
-        File.Delete( dbFileName );
     }
   }
 }

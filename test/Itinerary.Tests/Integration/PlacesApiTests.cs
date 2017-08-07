@@ -1,4 +1,8 @@
-﻿using Itinerary.Tests.Utilities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Itinerary.Business.Places.Models;
+using Itinerary.Tests.Utilities;
 using Xunit;
 
 namespace Itinerary.Tests.Integration
@@ -8,9 +12,15 @@ namespace Itinerary.Tests.Integration
     [Fact]
     public async void It_should_return_expected_autocomplete_result()
     {
-      string result = await Get( "/api/v1/places/autocomplete?keyword=kalamazoo" );
+      string result = await GetAsync( "/api/v1/places/autocomplete?keyword=portage" );
 
-      Assert.NotEmpty( result );
+      List<PlaceLocation> placeLocations = FromJson<IEnumerable<PlaceLocation>>( result ).ToList();
+
+      Assert.NotEmpty( placeLocations );
+      Assert.All(
+        placeLocations,
+        placeLocation =>
+          Assert.Contains( "portage", placeLocation.Name, StringComparison.CurrentCultureIgnoreCase ) );
     }
   }
 }
