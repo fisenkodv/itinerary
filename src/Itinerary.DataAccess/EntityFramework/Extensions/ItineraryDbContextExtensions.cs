@@ -12,9 +12,9 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
   {
     public static void EnsureSeedData( this ItineraryDbContext context, IHostingEnvironment env )
     {
-      if ( context.AllMigrationsApplied() )
+      string path = Path.Combine( "Data", $"PlacesSnapshot.{env.EnvironmentName}.json" );
+      if ( File.Exists( path ) && context.AllMigrationsApplied() )
       {
-        string path = Path.Combine( "Data", $"PlacesSnapshot.{env.EnvironmentName}.json" );
         List<PlaceDto> placeDetails = JsonConvert
           .DeserializeObject<IEnumerable<PlaceDto>>( File.ReadAllText( path ) )
           .Distinct( new PlaceEqualityComparer() )

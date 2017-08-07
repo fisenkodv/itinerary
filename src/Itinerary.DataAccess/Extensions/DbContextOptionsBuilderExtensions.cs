@@ -14,8 +14,13 @@ namespace Itinerary.DataAccess.Extensions
 
     public static void InitDbContext( this DbContextOptionsBuilder builder, IConfiguration configuration )
     {
+      builder.InitDbContext( configuration.GetConnectionString( Constants.DefaultConnectinStringName ) );
+    }
+
+    public static void InitDbContext( this DbContextOptionsBuilder builder, string connectionString )
+    {
       builder.UseSqlite(
-        configuration.GetConnectionString( "SqliteConnection" ),
+        connectionString,
         options => options.MigrationsAssembly( MigrationAssemblyName ) );
     }
   }
