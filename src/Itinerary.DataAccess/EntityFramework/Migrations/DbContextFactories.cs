@@ -32,7 +32,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations
     private static string GetConnectionString( DbContextFactoryOptions options )
     {
       IConfigurationBuilder builder = new ConfigurationBuilder()
-        .SetBasePath( options.ApplicationBasePath )
+        .SetBasePath( options.ContentRootPath )
         .AddJsonFile( "appsettings.json" )
         .AddJsonFile( $"appsettings.{options.EnvironmentName}.json", true )
         .AddEnvironmentVariables();
