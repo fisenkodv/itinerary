@@ -2,7 +2,7 @@
 
 namespace Itinerary.Common
 {
-  public class DegreesConverter
+  public static class DegreesConverter
   {
     public static double ConvertDegreesToRadians( double degrees )
     {
