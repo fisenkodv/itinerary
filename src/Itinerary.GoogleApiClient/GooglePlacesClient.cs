@@ -43,6 +43,7 @@ namespace Itinerary.GoogleApiClient
                            .Autocomplete( autocompleteQueryBuilder )
                            .Result
                            .Predictions
+                           .AsParallel()
                            .Select( x => new PlaceLocation( x.Description, GetLocation( x.PlaceId ) ) );
                        } );
     }

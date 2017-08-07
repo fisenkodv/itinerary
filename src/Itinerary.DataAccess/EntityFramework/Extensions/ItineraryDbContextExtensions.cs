@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Itinerary.Business.Places.Dto;
 using Itinerary.DataAccess.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
@@ -15,16 +14,15 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
       string path = Path.Combine( "Data", $"PlacesSnapshot.{env.EnvironmentName}.json" );
       if ( File.Exists( path ) && context.AllMigrationsApplied() )
       {
-        //TODO: Need save external url address, at this point PlaceDto don't have this property
-        List<PlaceDto> placeDetails = JsonConvert
-          .DeserializeObject<IEnumerable<PlaceDto>>( File.ReadAllText( path ) )
-          .Distinct( new PlaceEqualityComparer() )
+        List<PlaceSnapshotItem> placeDetails = JsonConvert
+          .DeserializeObject<IEnumerable<PlaceSnapshotItem>>( File.ReadAllText( path ) )
+          .Distinct()
           .ToList();
 
         if ( !context.PlaceCategories.Any() )
         {
           var categories = new List<string>();
-          foreach ( PlaceDto placeDetail in placeDetails )
+          foreach ( PlaceSnapshotItem placeDetail in placeDetails )
             categories.AddRange( placeDetail.Categories );
 
           context.PlaceCategories.AddRange( categories.Distinct().Select( x => new PlaceCategory { Name = x } ) );
@@ -40,9 +38,10 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
                                       let place = new Place
                                                   {
                                                     Categories = categories,
+                                                    Url = placeDetail.Url,
                                                     ImgUrl = placeDetail.ImageUrl,
-                                                    Latitude = placeDetail.Location.Latitude,
-                                                    Longitude = placeDetail.Location.Longitude,
+                                                    Latitude = placeDetail.Latitude,
+                                                    Longitude = placeDetail.Longitude,
                                                     Name = placeDetail.Name,
                                                     Rating = placeDetail.Rating,
                                                     Reviews = placeDetail.Reviews
