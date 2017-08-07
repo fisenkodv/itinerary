@@ -9,7 +9,7 @@ namespace Itinerary.Business.Places.Models
       Categories = new List<Category>();
     }
 
-    public int PlaceId { get; set; }
+    public long PlaceId { get; set; }
 
     public string Name { get; set; }
 

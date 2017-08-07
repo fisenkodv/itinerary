@@ -14,7 +14,7 @@ namespace Itinerary.GoogleApiClient
       _jsonSerializer = JsonSerializer.Create();
     }
 
-    public async Task<T> GetResponse<T>( string queryUrl )
+    public async Task<T> GetResponseAsync<T>( string queryUrl )
     {
       using ( var client = new HttpClient() )
       {

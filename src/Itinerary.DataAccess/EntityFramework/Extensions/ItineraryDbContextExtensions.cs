@@ -15,6 +15,7 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
       string path = Path.Combine( "Data", $"PlacesSnapshot.{env.EnvironmentName}.json" );
       if ( File.Exists( path ) && context.AllMigrationsApplied() )
       {
+        //TODO: Need save external url address, at this point PlaceDto don't have this property
         List<PlaceDto> placeDetails = JsonConvert
           .DeserializeObject<IEnumerable<PlaceDto>>( File.ReadAllText( path ) )
           .Distinct( new PlaceEqualityComparer() )

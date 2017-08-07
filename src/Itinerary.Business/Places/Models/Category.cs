@@ -2,13 +2,14 @@
 {
   public class Category
   {
-    public Category( string name )
+    public Category( long categoryId, string name )
     {
+      CategoryId = categoryId;
       Name = name;
     }
 
-    public int CategoryId { get; set; }
+    public long CategoryId { get; }
 
-    public string Name { get; set; }
+    public string Name { get; }
   }
 }

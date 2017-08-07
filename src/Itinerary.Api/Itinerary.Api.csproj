@@ -32,17 +32,6 @@
     <ProjectReference Include="..\Itinerary.GoogleApiClient\Itinerary.GoogleApiClient.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\PlacesSnapshot.Development.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\PlacesSnapshot.Production.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\PlacesSnapshot.Integration.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>

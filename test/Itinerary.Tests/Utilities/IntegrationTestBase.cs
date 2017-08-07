@@ -34,7 +34,7 @@ namespace Itinerary.Tests.Utilities
       return await response.Content.ReadAsStringAsync();
     }
 
-    protected T FromJson<T>( string json )
+    protected static T FromJson<T>( string json )
     {
       return JsonConvert.DeserializeObject<T>( json );
     }

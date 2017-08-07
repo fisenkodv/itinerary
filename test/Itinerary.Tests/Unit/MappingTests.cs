@@ -17,7 +17,7 @@ namespace Itinerary.Tests.Unit
                       latitude: 42.2290029,
                       longitude: -85.58352060000001 ),
                     Name = "Test Name",
-                    Categories = new[] { "a", "b", "c" }.Select( x => new Category( x ) ).ToList(),
+                    Categories = new[] { "a", "b", "c" }.Select( ( x, index ) => new Category( index, x ) ).ToList(),
                     ImageUrl = "http://server.com/image.png",
                     Rating = 4.5,
                     Reviews = 10
@@ -27,6 +27,7 @@ namespace Itinerary.Tests.Unit
 
       Assert.NotNull( dto );
       Assert.Equal( dto.Location.Longitude, model.Location.Longitude );
+      Assert.Equal( dto.ImageUrl, model.ImageUrl);
       Assert.Contains(
         dto.Categories, dtoCategory => model.Categories.Exists( category => category.Name == dtoCategory ) );
     }

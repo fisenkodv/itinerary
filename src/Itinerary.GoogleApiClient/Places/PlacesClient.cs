@@ -41,7 +41,7 @@ namespace Itinerary.GoogleApiClient.Places
     private static Task<T> GetResponse<T>( IHttpQueryBuilder httpQueryBuilder )
     {
       var apiClient = new ApiClient();
-      return apiClient.GetResponse<T>( queryUrl: httpQueryBuilder.Build() );
+      return apiClient.GetResponseAsync<T>( queryUrl: httpQueryBuilder.Build() );
     }
   }
 }

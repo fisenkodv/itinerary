@@ -8,12 +8,10 @@ using Itinerary.GoogleApiClient.Places.Autocomplete.ParameterBuilder;
 using Itinerary.GoogleApiClient.Places.Autocomplete.Types;
 using Itinerary.GoogleApiClient.Places.Details.Entities;
 using Itinerary.GoogleApiClient.Places.Details.ParameterBuilder;
-using JetBrains.Annotations;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Itinerary.GoogleApiClient
 {
-  [UsedImplicitly]
   public class GooglePlacesClient : IGooglePlacesClient
   {
     private readonly IMemoryCache _memoryCache;
