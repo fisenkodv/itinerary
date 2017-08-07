@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Itinerary.Api;
 using Microsoft.AspNetCore.Hosting;
@@ -7,17 +9,24 @@ using Microsoft.Extensions.Configuration;
 
 namespace Itinerary.Tests.Utilities
 {
-  //TODO: remove db in constructor if exists, move test snapshot to test project
-  public abstract class IntegrationTestBase
+  public abstract class IntegrationTestBase : IDisposable
   {
     private readonly HttpClient _httpClient;
 
-    public IntegrationTestBase()
+    protected IntegrationTestBase()
     {
+      CleanUp();
+
       _httpClient = GetClient();
     }
 
-    public async Task<string> Get( string url )
+    public void Dispose()
+    {
+      _httpClient?.Dispose();
+      CleanUp();
+    }
+
+    protected async Task<string> Get( string url )
     {
       HttpResponseMessage response = await _httpClient.GetAsync( url );
       return await response.Content.ReadAsStringAsync();
@@ -25,15 +34,21 @@ namespace Itinerary.Tests.Utilities
 
     private static HttpClient GetClient()
     {
-      IConfigurationRoot configuration = new ConfigurationBuilder()
-        .Build();
+      IConfigurationRoot configuration = new ConfigurationBuilder().Build();
       IWebHostBuilder builder = new WebHostBuilder()
         .UseEnvironment( "Integration" )
-        .UseConfiguration( configuration )
-        .UseStartup<Startup>();
+         .UseConfiguration( configuration )
+         .UseStartup<Startup>();
       var testServer = new TestServer( builder );
       HttpClient client = testServer.CreateClient();
       return client;
+    }
+
+    private static void CleanUp()
+    {
+      const string dbFileName = "itinerary.integration.db";
+      if ( File.Exists( dbFileName ) )
+        File.Delete( dbFileName );
     }
   }
 }

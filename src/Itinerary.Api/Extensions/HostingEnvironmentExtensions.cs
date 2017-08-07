@@ -5,7 +5,7 @@ namespace Itinerary.Api.Extensions
 {
   public static class HostingEnvironmentExtensions
   {
-    public static readonly string IntegrationTest = "Integration";
+    private const string IntegrationTest = "Integration";
 
     public static bool IsIntegration( this IHostingEnvironment hostingEnvironment )
     {
