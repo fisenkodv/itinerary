@@ -34,6 +34,12 @@ namespace Itinerary.Tests.Utilities
       return await response.Content.ReadAsStringAsync();
     }
 
+    protected async Task<T> GetAsync<T>( string url )
+    {
+      string resultString = await GetAsync( url );
+      return FromJson<T>( resultString );
+    }
+
     protected static T FromJson<T>( string json )
     {
       return JsonConvert.DeserializeObject<T>( json );
