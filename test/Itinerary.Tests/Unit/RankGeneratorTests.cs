@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Itinerary.Common;
 using Xunit;
@@ -8,11 +9,16 @@ namespace Itinerary.Tests.Unit
   public class RankGeneratorTests
   {
     [Fact]
-    public void It_should_return_best_rank()
+    public void It_should_return_ranks()
     {
-      List<Rank> ranks = RankGenerator.GetRanks( 2, 3.5 ).ToList();
+      Stopwatch stopwatch = Stopwatch.StartNew();
+      List<Rank> ranks = RankGenerator.GetRanks( 400, 3.25 ).ToList();
+      stopwatch.Stop();
+
+      long generationTime = stopwatch.ElapsedMilliseconds;
 
       Assert.NotEmpty( ranks );
+      Assert.True( generationTime < 100, $"Elapsed time was: {generationTime}ms, but expected: 100ms" );
     }
 
     [Fact]

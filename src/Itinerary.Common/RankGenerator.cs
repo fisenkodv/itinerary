@@ -8,11 +8,12 @@ namespace Itinerary.Common
   {
     public static Rank GetRank( int reviewsCount, double rankValue )
     {
-      return GetRanks( reviewsCount, rankValue ).OrderBy( x => x.StandardDeviation ).First();
+      return GetRanks( reviewsCount, rankValue ).ToList().OrderBy( x => x.StandardDeviation ).First();
     }
 
     public static IEnumerable<Rank> GetRanks( int reviewsCount, double rankValue )
     {
+      int numberOfFoundRanks = 0;
       bool finishSearch = false;
       int reviewCountTopRange = reviewsCount + 1;
 
@@ -28,8 +29,12 @@ namespace Itinerary.Common
 
           foreach ( int threes in Enumerable.Range( 0, reviewCountTopRange - ones - twos ) )
           {
+            if ( numberOfFoundRanks > 100 )
+              yield break;
             foreach ( int fours in Enumerable.Range( 0, reviewCountTopRange - ones - twos - threes ) )
             {
+              if ( numberOfFoundRanks > 100 )
+                yield break;
               foreach ( int fives in Enumerable.Range( 0, reviewCountTopRange - ones - twos - threes - fours ) )
               {
                 if ( ones + twos + threes + fours + fives != reviewsCount ) continue;
@@ -37,6 +42,7 @@ namespace Itinerary.Common
                 if ( Math.Abs( rank.Average - rankValue ) < 0.001 )
                 {
                   finishSearch = true;
+                  numberOfFoundRanks++;
                   yield return rank;
                 }
               }
@@ -49,6 +55,7 @@ namespace Itinerary.Common
 
   public class Rank
   {
+    //TODO: Convert to dictionary
     private readonly int[] _ratings;
 
     public Rank( int fives, int fours, int threes, int twos, int ones )
