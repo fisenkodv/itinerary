@@ -37,7 +37,7 @@ namespace Itinerary.DataAccess.EntityFramework.Repository
           {
             PlaceId = entity.Id,
             Name = entity.Name,
-            Reviews = entity.Reviews,
+            Reviews = entity.Reviews.Count,
             Rating = entity.Rating,
             ImageUrl = entity.ImgUrl,
             Location = new Location( entity.Latitude, entity.Longitude ),

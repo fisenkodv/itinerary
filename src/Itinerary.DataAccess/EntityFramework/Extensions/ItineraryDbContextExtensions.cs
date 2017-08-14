@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Itinerary.Common;
 using Itinerary.DataAccess.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
@@ -33,20 +34,22 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
           Dictionary<string, PlaceCategory> createdCategories =
             context.PlaceCategories.ToDictionary( x => x.Name, x => x );
 
-          IEnumerable<Place> places = from placeDetail in placeDetails
-                                      let categories = GetPlaceCategories( createdCategories, placeDetail.Categories )
-                                      let place = new Place
-                                                  {
-                                                    Categories = categories,
-                                                    Url = placeDetail.Url,
-                                                    ImgUrl = placeDetail.ImageUrl,
-                                                    Latitude = placeDetail.Latitude,
-                                                    Longitude = placeDetail.Longitude,
-                                                    Name = placeDetail.Name,
-                                                    Rating = placeDetail.Rating,
-                                                    Reviews = placeDetail.Reviews
-                                                  }
-                                      select place;
+          IEnumerable<Place> places =
+            from placeDetail in placeDetails
+            let categories = GetPlaceCategories( createdCategories, placeDetail.Categories )
+            let reviews = GetReviews( placeDetail.Reviews, placeDetail.Rating )
+            let place = new Place
+                        {
+                          Categories = categories,
+                          Url = placeDetail.Url,
+                          ImgUrl = placeDetail.ImageUrl,
+                          Latitude = placeDetail.Latitude,
+                          Longitude = placeDetail.Longitude,
+                          Name = placeDetail.Name,
+                          Rating = placeDetail.Rating,
+                          Reviews = reviews
+                        }
+            select place;
           context.Places.AddRange( places );
           context.SaveChanges();
         }
@@ -63,6 +66,15 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
                  .Select( placeCategory => new PlacePlaceCategory { Category = placeCategory } )
                  .ToList()
                : new List<PlacePlaceCategory>();
+    }
+
+    private static ICollection<Review> GetReviews( int reviewsCount, double rankValue )
+    {
+      IEnumerable<Review> result = from rating in RankGenerator.GetRank( reviewsCount, rankValue ).GetRatings()
+                                   from review in Enumerable.Range( 0, rating.count )
+                                   select new Review { Rating = rating.value };
+
+      return result.ToList();
     }
   }
 }

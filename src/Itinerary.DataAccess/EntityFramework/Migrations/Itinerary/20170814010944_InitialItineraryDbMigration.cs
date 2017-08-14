@@ -18,8 +18,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Rating = table.Column<float>(nullable: false),
-                    Reviews = table.Column<int>(nullable: false),
+                    Rating = table.Column<double>(nullable: false),
                     Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -93,6 +92,27 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Review",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Comment = table.Column<string>(nullable: true),
+                    PlaceId = table.Column<long>(nullable: true),
+                    Rating = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Review", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Review_Places_PlaceId",
+                        column: x => x.PlaceId,
+                        principalTable: "Places",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,6 +263,11 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                 column: "PlaceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Review_PlaceId",
+                table: "Review",
+                column: "PlaceId");
+
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
@@ -287,6 +312,9 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 
             migrationBuilder.DropTable(
                 name: "PlacePlaceCategories");
+
+            migrationBuilder.DropTable(
+                name: "Review");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");

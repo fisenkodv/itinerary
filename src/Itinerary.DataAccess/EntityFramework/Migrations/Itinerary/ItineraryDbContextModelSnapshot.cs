@@ -45,9 +45,7 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
 
                     b.Property<string>("Name");
 
-                    b.Property<float>("Rating");
-
-                    b.Property<int>("Reviews");
+                    b.Property<double>("Rating");
 
                     b.Property<string>("Url");
 
@@ -85,6 +83,24 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                     b.HasIndex("PlaceId");
 
                     b.ToTable("PlacePlaceCategories");
+                });
+
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.Review", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comment");
+
+                    b.Property<long?>("PlaceId");
+
+                    b.Property<int>("Rating");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaceId");
+
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("Itinerary.DataAccess.Entities.Role", b =>
@@ -259,6 +275,13 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations.Itinerary
                         .WithMany("Categories")
                         .HasForeignKey("PlaceId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Itinerary.DataAccess.Entities.Review", b =>
+                {
+                    b.HasOne("Itinerary.DataAccess.Entities.Place")
+                        .WithMany("Reviews")
+                        .HasForeignKey("PlaceId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<long>", b =>

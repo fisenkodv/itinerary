@@ -6,31 +6,37 @@ namespace Itinerary.Common
 {
   public static class RankGenerator
   {
+    public static Rank GetRank( int reviewsCount, double rankValue )
+    {
+      return GetRanks( reviewsCount, rankValue ).OrderBy( x => x.StandardDeviation ).First();
+    }
+
     public static IEnumerable<Rank> GetRanks( int reviewsCount, double rankValue )
     {
-      bool areRanksFound = false;
+      bool finishSearch = false;
+      int reviewCountTopRange = reviewsCount + 1;
 
-      foreach ( int ones in Enumerable.Range( 0, reviewsCount ) )
+      foreach ( int ones in Enumerable.Range( 0, reviewCountTopRange ) )
       {
-        if ( areRanksFound )
+        if ( finishSearch )
           yield break;
 
-        foreach ( int twos in Enumerable.Range( 0, reviewsCount - ones ) )
+        foreach ( int twos in Enumerable.Range( 0, reviewCountTopRange - ones ) )
         {
-          if ( areRanksFound )
+          if ( finishSearch )
             yield break;
 
-          foreach ( int threes in Enumerable.Range( 0, reviewsCount - ones - twos ) )
+          foreach ( int threes in Enumerable.Range( 0, reviewCountTopRange - ones - twos ) )
           {
-            foreach ( int fours in Enumerable.Range( 0, reviewsCount - ones - twos - threes ) )
+            foreach ( int fours in Enumerable.Range( 0, reviewCountTopRange - ones - twos - threes ) )
             {
-              foreach ( int fives in Enumerable.Range( 0, reviewsCount - ones - twos - threes - fours ) )
+              foreach ( int fives in Enumerable.Range( 0, reviewCountTopRange - ones - twos - threes - fours ) )
               {
                 if ( ones + twos + threes + fours + fives != reviewsCount ) continue;
                 var rank = new Rank( fives, fours, threes, twos, ones );
                 if ( Math.Abs( rank.Average - rankValue ) < 0.001 )
                 {
-                  areRanksFound = true;
+                  finishSearch = true;
                   yield return rank;
                 }
               }
@@ -60,7 +66,7 @@ namespace Itinerary.Common
 
     public int Ones => _ratings[ 4 ];
 
-    public double Average => _ratings.Sum() / ( double ) _ratings.Length;
+    public double Average => ( 5.0 * Fives + 4.0 * Fours + 3.0 * Threes + 2.0 * Twos + 1.0 * Ones ) / _ratings.Sum();
 
     public double StandardDeviation =>
       Math.Sqrt( 1.0 / ( _ratings.Length - 1 ) * _ratings.Sum( value => Math.Pow( value - Average, 2 ) ) );
@@ -76,6 +82,18 @@ namespace Itinerary.Common
         IEnumerable<double> distances = _ratings.Select( rating => Math.Abs( rating - avg ) );
         return distances.Sum();
       }
+    }
+
+    public IEnumerable<(int value, int count)> GetRatings()
+    {
+      return new[]
+             {
+               (5, Fives),
+               (4, Fours),
+               (3, Threes),
+               (2, Twos),
+               (1, Ones)
+             };
     }
 
     public override string ToString()

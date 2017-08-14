@@ -7,13 +7,14 @@ namespace Itinerary.DataAccess.Entities
     public Place()
     {
       Categories = new List<PlacePlaceCategory>();
+      Reviews = new List<Review>();
     }
 
     public string Name { get; set; }
 
     public double Rating { get; set; }
 
-    public int Reviews { get; set; }
+    //public int Reviews { get; set; }
 
     public string Url { get; set; }
 
@@ -24,5 +25,7 @@ namespace Itinerary.DataAccess.Entities
     public double Longitude { get; set; }
 
     public ICollection<PlacePlaceCategory> Categories { get; set; }
+
+    public ICollection<Review> Reviews { get; set; }
   }
 }
