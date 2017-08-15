@@ -1,9 +1,11 @@
-﻿using System;
+using System;
+using System.IO;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Itinerary.DataAccess.Extensions;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
 namespace Itinerary.DataAccess.EntityFramework.Migrations
@@ -16,10 +18,10 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations
   /// </summary>
   public class DbContextFactoryNeededForMigrationsBase
   {
-    protected T Create<T>( DbContextFactoryOptions options, Func<DbContextOptionsBuilder<T>, T> dbContextFactory )
+    protected T Create<T>( Func<DbContextOptionsBuilder<T>, T> dbContextFactory )
       where T : DbContext
     {
-      string connectionString = GetConnectionString( options );
+      string connectionString = GetConnectionString();
       if ( string.IsNullOrEmpty( connectionString ) )
         throw new ArgumentException( $"{nameof(connectionString)} is null or empty.", nameof(connectionString) );
 
@@ -29,12 +31,12 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations
       return dbContextFactory( optionsBuilder );
     }
 
-    private static string GetConnectionString( DbContextFactoryOptions options )
+    private static string GetConnectionString()
     {
       IConfigurationBuilder builder = new ConfigurationBuilder()
-        .SetBasePath( options.ContentRootPath )
+        .SetBasePath( Directory.GetCurrentDirectory() )
         .AddJsonFile( "appsettings.json" )
-        .AddJsonFile( $"appsettings.{options.EnvironmentName}.json", true )
+        .AddJsonFile( $"appsettings.{Environment.GetEnvironmentVariable( "ASPNETCORE_ENVIRONMENT" )}.json", true )
         .AddEnvironmentVariables();
 
       IConfigurationRoot config = builder.Build();
@@ -50,32 +52,30 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations
   }
 
   public class ItineraryDbContextFactoryNeededForMigrations
-    : DbContextFactoryNeededForMigrationsBase, IDbContextFactory<ItineraryDbContext>
+    : DbContextFactoryNeededForMigrationsBase, IDesignTimeDbContextFactory<ItineraryDbContext>
   {
-    public ItineraryDbContext Create( DbContextFactoryOptions options )
+    public ItineraryDbContext CreateDbContext( string[] args )
     {
-      return Create<ItineraryDbContext>( options, optionsBuilder => new ItineraryDbContext( optionsBuilder.Options ) );
+      return Create<ItineraryDbContext>( optionsBuilder => new ItineraryDbContext( optionsBuilder.Options ) );
     }
   }
 
   public class PersistedGrantDbContextFactoryNeededForMigrations
-    : DbContextFactoryNeededForMigrationsBase, IDbContextFactory<PersistedGrantDbContext>
+    : DbContextFactoryNeededForMigrationsBase, IDesignTimeDbContextFactory<PersistedGrantDbContext>
   {
-    public PersistedGrantDbContext Create( DbContextFactoryOptions options )
+    public PersistedGrantDbContext CreateDbContext( string[] args )
     {
       return Create<PersistedGrantDbContext>(
-        options,
         optionsBuilder => new PersistedGrantDbContext( optionsBuilder.Options, new OperationalStoreOptions() ) );
     }
   }
 
   public class ConfigurationDbContextFactoryNeededForMigrations
-    : DbContextFactoryNeededForMigrationsBase, IDbContextFactory<ConfigurationDbContext>
+    : DbContextFactoryNeededForMigrationsBase, IDesignTimeDbContextFactory<ConfigurationDbContext>
   {
-    public ConfigurationDbContext Create( DbContextFactoryOptions options )
+    public ConfigurationDbContext CreateDbContext( string[] args )
     {
       return Create<ConfigurationDbContext>(
-        options,
         optionsBuilder => new ConfigurationDbContext( optionsBuilder.Options, new ConfigurationStoreOptions() ) );
     }
   }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Itinerary.Business;
 using Itinerary.Business.Places.Abstractions;
@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Api.Controllers
 {
-  [ApiVersion( "1.0" )]
-  [Route( "api/v{version:apiVersion}/[controller]" )]
+  //[ApiVersion( "1.0" )]
+  //[Route( "api/v{version:apiVersion}/[controller]" )]
+  [Route( "api/v1/[controller]" )]
   public class PlacesController : Controller
   {
     private readonly IPlacesService _placesService;

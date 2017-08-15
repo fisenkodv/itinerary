@@ -1,5 +1,6 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.Extensions.Configuration;
 
 namespace Itinerary.Api
@@ -23,5 +24,11 @@ namespace Itinerary.Api
 
       host.Run();
     }
+
+    //todo: https://docs.microsoft.com/en-us/ef/core/miscellaneous/1x-2x-upgrade
+    //public static IWebHost BuildWebHost( string[] args ) =>
+    //  WebHost.CreateDefaultBuilder( args )
+    //         .UseStartup<Startup>()
+    //         .Build();
   }
 }

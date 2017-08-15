@@ -1,8 +1,5 @@
-﻿using System;
+using System;
 using System.IO.Compression;
-using System.Net;
-using System.Reflection;
-using System.Threading.Tasks;
 using Itinerary.Business;
 using Itinerary.Business.Identity;
 using Itinerary.Business.Identity.Abstractions;
@@ -12,11 +9,9 @@ using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework;
 using Itinerary.DataAccess.Extensions;
 using Itinerary.GoogleApiClient;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -44,8 +39,8 @@ namespace Itinerary.Api.Extensions
       this IServiceCollection services,
       IConfiguration configuration )
     {
-      services.AddEntityFramework();
-      services.AddDbContext<ItineraryDbContext>( builder => builder.InitDbContext( configuration ) );
+      services.AddEntityFrameworkSqlite();
+      services.AddDbContextPool<ItineraryDbContext>( builder => builder.InitDbContext( configuration ) );
 
       return services;
     }
@@ -55,23 +50,24 @@ namespace Itinerary.Api.Extensions
       services.AddIdentity<User, Role>(
                  identityOptions =>
                  {
-                   identityOptions.Cookies.ApplicationCookie.Events =
-                     new CookieAuthenticationEvents
-                     {
-                       OnRedirectToLogin =
-                         context =>
-                         {
-                           if ( context.Request.Path.StartsWithSegments( "/api" ) )
-                             context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
-                           else
-                             context.Response.Redirect( context.RedirectUri );
+                   //TODO: FIX!
+                   //identityOptions.Cookies.ApplicationCookie.Events =
+                   //  new CookieAuthenticationEvents
+                   //  {
+                   //    OnRedirectToLogin =
+                   //      context =>
+                   //      {
+                   //        if ( context.Request.Path.StartsWithSegments( "/api" ) )
+                   //          context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
+                   //        else
+                   //          context.Response.Redirect( context.RedirectUri );
 
-                           return Task.CompletedTask;
-                         }
-                     };
+                   //        return Task.CompletedTask;
+                   //      }
+                   //  };
                  }
                )
-               .AddEntityFrameworkStores<ItineraryDbContext, long>()
+               .AddEntityFrameworkStores<ItineraryDbContext>()
                .AddDefaultTokenProviders();
 
       return services;
@@ -81,11 +77,11 @@ namespace Itinerary.Api.Extensions
       this IServiceCollection services,
       IConfiguration configuration )
     {
-      services.AddIdentityServer()
-               .AddSigningCredential( CertificatesExtensions.RootCertificate )
-               .AddAspNetIdentity<User>()
-               .AddOperationalStore( builder => builder.InitDbContext( configuration ) )
-               .AddConfigurationStore( builder => builder.InitDbContext( configuration ) );
+      //services.AddIdentityServer()
+      //         .AddSigningCredential( CertificatesExtensions.RootCertificate )
+      //         .AddAspNetIdentity<User>()
+      //         .AddOperationalStore( builder => builder.InitDbContext( configuration ) )
+      //         .AddConfigurationStore( builder => builder.InitDbContext( configuration ) );
 
       return services;
     }

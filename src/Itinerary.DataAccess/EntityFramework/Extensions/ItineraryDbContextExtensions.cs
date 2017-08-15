@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Itinerary.Common;
 using Itinerary.DataAccess.Entities;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +13,7 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
   {
     public static void EnsureSeedData( this ItineraryDbContext context, IHostingEnvironment env )
     {
-      string path = Path.Combine( "Data", $"PlacesSnapshot.{env.EnvironmentName}.json" );
+      string path = GetSnapshotFilePath( env );
       if ( File.Exists( path ) && context.AllMigrationsApplied() )
       {
         List<PlaceSnapshotItem> placeDetails = JsonConvert
@@ -56,6 +57,15 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
       }
     }
 
+    private static string GetSnapshotFilePath( IHostingEnvironment env )
+    {
+      string location = Assembly.GetEntryAssembly().Location;
+      string directory = Path.GetDirectoryName( location );
+      string path = Path.Combine( directory, "Data", $"PlacesSnapshot.{env.EnvironmentName}.json" );
+
+      return path;
+    }
+
     private static ICollection<PlacePlaceCategory> GetPlaceCategories(
       IReadOnlyDictionary<string, PlaceCategory> existingCategories,
       IEnumerable<string> categories )
@@ -70,9 +80,10 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
 
     private static ICollection<Review> GetReviews( int reviewsCount, double rankValue )
     {
-      IEnumerable<Review> result = from rating in RankGenerator.GetRank( reviewsCount, rankValue ).GetRatings()
-                                   from review in Enumerable.Range( 0, rating.count )
-                                   select new Review { Rating = rating.value };
+      return Enumerable.Empty<Review>().ToList();
+      IEnumerable<Review> result = from rating in RankGenerator.GetRank( reviewsCount, rankValue ).Ratings
+                                   from review in Enumerable.Range( 0, rating.Value )
+                                   select new Review { Rating = rating.Key };
 
       return result.ToList();
     }

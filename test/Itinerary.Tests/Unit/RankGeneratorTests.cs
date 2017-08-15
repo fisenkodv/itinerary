@@ -12,7 +12,7 @@ namespace Itinerary.Tests.Unit
     public void It_should_return_ranks()
     {
       Stopwatch stopwatch = Stopwatch.StartNew();
-      List<Rank> ranks = RankGenerator.GetRanks( 400, 3.25 ).ToList();
+      List<Rank> ranks = RankGenerator.GetRanks( 1000, 3.25 ).ToList();
       stopwatch.Stop();
 
       long generationTime = stopwatch.ElapsedMilliseconds;

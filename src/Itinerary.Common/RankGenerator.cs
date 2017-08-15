@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Linq;
 
 namespace Itinerary.Common
@@ -55,57 +57,34 @@ namespace Itinerary.Common
 
   public class Rank
   {
-    //TODO: Convert to dictionary
-    private readonly int[] _ratings;
+    private readonly ReadOnlyDictionary<int, int> _ratings;
 
     public Rank( int fives, int fours, int threes, int twos, int ones )
     {
-      _ratings = new[] { fives, fours, threes, twos, ones };
+      _ratings = new ReadOnlyDictionary<int, int>(
+        new Dictionary<int, int>
+        {
+          [ 5 ] = fives,
+          [ 4 ] = fours,
+          [ 3 ] = threes,
+          [ 2 ] = twos,
+          [ 1 ] = ones,
+        } );
     }
 
-    public int Fives => _ratings[ 0 ];
-
-    public int Fours => _ratings[ 1 ];
-
-    public int Threes => _ratings[ 2 ];
-
-    public int Twos => _ratings[ 3 ];
-
-    public int Ones => _ratings[ 4 ];
-
-    public double Average => ( 5.0 * Fives + 4.0 * Fours + 3.0 * Threes + 2.0 * Twos + 1.0 * Ones ) / _ratings.Sum();
+    public double Average => _ratings.Aggregate( 0.0, ( sum, pair ) => sum + pair.Key * pair.Value ) /
+                             _ratings.Values.Sum();
 
     public double StandardDeviation =>
-      Math.Sqrt( 1.0 / ( _ratings.Length - 1 ) * _ratings.Sum( value => Math.Pow( value - Average, 2 ) ) );
+      Math.Sqrt( 1.0 / ( _ratings.Count - 1 ) * _ratings.Values.Sum( value => Math.Pow( value - Average, 2 ) ) );
 
-    public double AverageDeviation
-    {
-      get
-      {
-        int min = _ratings.Min();
-        int max = _ratings.Max();
-        double avg = ( max - min ) / 2.0;
+    public ReadOnlyDictionary<int, int> Ratings => _ratings;
 
-        IEnumerable<double> distances = _ratings.Select( rating => Math.Abs( rating - avg ) );
-        return distances.Sum();
-      }
-    }
-
-    public IEnumerable<(int value, int count)> GetRatings()
-    {
-      return new[]
-             {
-               (5, Fives),
-               (4, Fours),
-               (3, Threes),
-               (2, Twos),
-               (1, Ones)
-             };
-    }
+    public int this[ int rating ] => _ratings[ rating ];
 
     public override string ToString()
     {
-      return $"5({Fives}):4({Fours}):3({Threes}):2({Twos}):1({Ones}):SD({StandardDeviation}):AD({AverageDeviation})";
+      return $"5({this[ 5 ]}):4({this[ 4 ]}):3({this[ 3 ]}):2({this[ 2 ]}):1({this[ 1 ]}):SD({StandardDeviation})";
     }
   }
 }

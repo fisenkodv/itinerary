@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using Itinerary.Business;
 using Itinerary.Business.Identity.Abstractions;
@@ -10,8 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Itinerary.Api.Controllers
 {
   [Authorize]
-  [ApiVersion( "1.0" )]
-  [Route( "api/v{version:apiVersion}/[controller]" )]
+  //[ApiVersion( "1.0" )]
+  //[Route( "api/v{version:apiVersion}/[controller]" )]
+  [Route( "api/v1/[controller]" )]
   public class AccountController : Controller
   {
     private readonly IAccountService _accountService;
