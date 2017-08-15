@@ -1,19 +1,24 @@
 using System;
 using System.IO.Compression;
+using System.Net;
+using System.Threading.Tasks;
 using Itinerary.Business;
 using Itinerary.Business.Identity;
-using Itinerary.Business.Identity.Abstractions;
 using Itinerary.Business.Places;
 using Itinerary.Business.Places.Abstractions;
 using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework;
 using Itinerary.DataAccess.Extensions;
 using Itinerary.GoogleApiClient;
+using Itinerary.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Itinerary.Api.Extensions
 {
@@ -45,44 +50,51 @@ namespace Itinerary.Api.Extensions
       return services;
     }
 
-    public static IServiceCollection AddIdentityService( this IServiceCollection services )
+    public static IServiceCollection AddIdentity( this IServiceCollection services, IConfiguration configuration )
     {
-      services.AddIdentity<User, Role>(
-                 identityOptions =>
-                 {
-                   //TODO: FIX!
-                   //identityOptions.Cookies.ApplicationCookie.Events =
-                   //  new CookieAuthenticationEvents
-                   //  {
-                   //    OnRedirectToLogin =
-                   //      context =>
-                   //      {
-                   //        if ( context.Request.Path.StartsWithSegments( "/api" ) )
-                   //          context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
-                   //        else
-                   //          context.Response.Redirect( context.RedirectUri );
+      services.AddIdentity<User, Role>()
+              .AddEntityFrameworkStores<ItineraryDbContext>()
+              .AddDefaultTokenProviders();
 
-                   //        return Task.CompletedTask;
-                   //      }
-                   //  };
-                 }
-               )
-               .AddEntityFrameworkStores<ItineraryDbContext>()
-               .AddDefaultTokenProviders();
+      services.AddAuthentication(
+                options =>
+                {
+                  options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                  options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                } )
+              .AddJwtBearer(
+                options =>
+                {
+                  options.SaveToken = true;
+                  options.TokenValidationParameters =
+                    new TokenValidationParameters
+                    {
+                      ValidIssuer = configuration[ "JWT:Issuer" ],
+                      ValidAudience = configuration[ "JWT:Audience" ],
+                      IssuerSigningKey = CertificatesExtensions.SigningKey,
+                      ValidateIssuerSigningKey = true,
+                      ValidateLifetime = true
+                    };
+                } )
+              .AddCookie(
+                options =>
+                {
+                  options.Events =
+                    new CookieAuthenticationEvents
+                    {
+                      OnRedirectToLogin =
+                        context =>
+                        {
+                          if ( context.Request.Path.StartsWithSegments( "/api" ) )
+                            context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
+                          else
+                            context.Response.Redirect( context.RedirectUri );
 
-      return services;
-    }
-
-    public static IServiceCollection AddIdentityServerService(
-      this IServiceCollection services,
-      IConfiguration configuration )
-    {
-      //services.AddIdentityServer()
-      //         .AddSigningCredential( CertificatesExtensions.RootCertificate )
-      //         .AddAspNetIdentity<User>()
-      //         .AddOperationalStore( builder => builder.InitDbContext( configuration ) )
-      //         .AddConfigurationStore( builder => builder.InitDbContext( configuration ) );
-
+                          return Task.CompletedTask;
+                        }
+                    };
+                } );
       return services;
     }
 

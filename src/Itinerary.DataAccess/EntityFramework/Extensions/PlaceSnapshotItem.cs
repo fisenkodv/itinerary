@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace Itinerary.DataAccess.EntityFramework.Extensions
@@ -6,6 +7,8 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
   [UsedImplicitly]
   internal class PlaceSnapshotItem : IEqualityComparer<PlaceSnapshotItem>
   {
+    private const double Tolerance = 0.001;
+
     public string Name { get; set; }
 
     public double Rating { get; set; }
@@ -30,10 +33,10 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
       if ( x.GetType() != y.GetType() ) return false;
 
       return string.Equals( x.Name, y.Name ) &&
-             x.Rating == y.Rating &&
+             Math.Abs( x.Rating - y.Rating ) < Tolerance &&
              x.Reviews == y.Reviews &&
-             y.Latitude == x.Latitude &&
-             x.Longitude == y.Longitude;
+             Math.Abs( y.Latitude - x.Latitude ) < Tolerance &&
+             Math.Abs( x.Longitude - y.Longitude ) < Tolerance;
     }
 
     public int GetHashCode( PlaceSnapshotItem obj )

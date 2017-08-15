@@ -1,7 +1,6 @@
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using Itinerary.Common;
 using Itinerary.DataAccess.Entities;
 using Microsoft.AspNetCore.Hosting;
@@ -13,11 +12,12 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
   {
     public static void EnsureSeedData( this ItineraryDbContext context, IHostingEnvironment env )
     {
-      string path = GetSnapshotFilePath( env );
-      if ( File.Exists( path ) && context.AllMigrationsApplied() )
+      string name = $"PlacesSnapshot.{env.EnvironmentName}.json";
+      Type type = typeof( ItineraryDbContextExtensions );
+      if ( ResourceUtil.Exists( type, name ) && context.AllMigrationsApplied() )
       {
         List<PlaceSnapshotItem> placeDetails = JsonConvert
-          .DeserializeObject<IEnumerable<PlaceSnapshotItem>>( File.ReadAllText( path ) )
+          .DeserializeObject<IEnumerable<PlaceSnapshotItem>>( ResourceUtil.GetEmbeddedResourceText( type, name ) )
           .Distinct()
           .ToList();
 
@@ -55,15 +55,6 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
           context.SaveChanges();
         }
       }
-    }
-
-    private static string GetSnapshotFilePath( IHostingEnvironment env )
-    {
-      string location = Assembly.GetEntryAssembly().Location;
-      string directory = Path.GetDirectoryName( location );
-      string path = Path.Combine( directory, "Data", $"PlacesSnapshot.{env.EnvironmentName}.json" );
-
-      return path;
     }
 
     private static ICollection<PlacePlaceCategory> GetPlaceCategories(

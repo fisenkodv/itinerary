@@ -1,16 +1,12 @@
-using System.IdentityModel.Tokens.Jwt;
-using IdentityServer4.EntityFramework.DbContexts;
 using Itinerary.Api.Extensions;
 using Itinerary.DataAccess.EntityFramework;
 using Itinerary.DataAccess.EntityFramework.Extensions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Itinerary.Api
 {
@@ -34,7 +30,7 @@ namespace Itinerary.Api
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices( IServiceCollection services )
     {
-      //services.AddCompression( Configuration );
+      services.AddCompression( Configuration );
       services.AddMemoryCache();
       services.AddMvc();
       //services.AddApiVersioning(
@@ -43,14 +39,14 @@ namespace Itinerary.Api
       //    options.ReportApiVersions = true;
       //    options.AssumeDefaultVersionWhenUnspecified = true;
       //  } );
-      //services.AddCors(
-      //  options => options.AddPolicy(
-      //    "AllowAllOrigins",
-      //    builder => { builder.AllowAnyOrigin(); } ) );
+      services.AddCors(
+        options => options.AddPolicy(
+          "AllowAllOrigins",
+          builder => { builder.AllowAnyOrigin(); } ) );
 
       services.AddDatabaseServices( Configuration );
-      //services.AddIdentityService();
-      //services.AddIdentityServerService( Configuration );
+
+      services.AddIdentity();
       services.AddCustomServices( Configuration );
     }
 
@@ -60,27 +56,7 @@ namespace Itinerary.Api
       InitializeDatabase( app, env );
 
       app.UseCors( "AllowAllOrigins" );
-
-      //TODO: https://github.com/aspnet/Security/issues/1310
-      //app.UseAuthentication();
-
-      //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-      //app.UseIdentityServer();
-      var tokenValidationParameters = new TokenValidationParameters
-                                      {
-                                        ValidateIssuerSigningKey = true,
-                                        ValidateIssuer = false,
-                                        ValidateAudience = false,
-                                        IssuerSigningKey = CertificatesExtensions.SigningKey
-                                      };
-
-      //app.UseJwtBearerAuthentication(
-      //  new JwtBearerOptions
-      //  {
-      //    //AutomaticAuthenticate = true,
-      //    TokenValidationParameters = tokenValidationParameters
-      //  } );
-
+      app.UseAuthentication();
       app.UseMvc();
     }
 
@@ -90,9 +66,6 @@ namespace Itinerary.Api
       {
         serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
         serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData( env );
-        //serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-        //serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().Database.Migrate();
-        //serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().EnsureSeedData();
       }
     }
   }

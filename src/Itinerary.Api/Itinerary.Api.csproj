@@ -18,10 +18,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
-    <PackageReference Include="IdentityServer4" Version="1.5.2" />
-    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="1.2.1" />
-    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="1.0.1" />
-    <PackageReference Include="IdentityServer4.EntityFramework" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="1.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.0" />
@@ -35,6 +31,7 @@
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
     <ProjectReference Include="..\Itinerary.DataAccess\Itinerary.DataAccess.csproj" />
     <ProjectReference Include="..\Itinerary.GoogleApiClient\Itinerary.GoogleApiClient.csproj" />
+    <ProjectReference Include="..\Itinerary.Identity\Itinerary.Identity.csproj" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />

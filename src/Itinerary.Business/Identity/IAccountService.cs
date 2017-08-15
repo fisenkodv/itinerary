@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Itinerary.Business.Identity.Models;
 
-namespace Itinerary.Business.Identity.Abstractions
+namespace Itinerary.Business.Identity
 {
   public interface IAccountService
   {

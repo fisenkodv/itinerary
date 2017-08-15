@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace Itinerary.Web.ViewModels
+namespace Itinerary.Api.ViewModels
 {
   public class RegisterViewModel
   {
