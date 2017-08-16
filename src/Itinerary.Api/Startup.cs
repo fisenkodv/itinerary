@@ -46,7 +46,7 @@ namespace Itinerary.Api
 
       services.AddDatabaseServices( Configuration );
 
-      services.AddIdentity();
+      services.AddIdentity( Configuration );
       services.AddCustomServices( Configuration );
     }
 

@@ -29,7 +29,7 @@ namespace Itinerary.Api.Controllers
 
     public AccountController(
       IAccountService accountService,
-      UserManager<Itinerary.DataAccess.Entities.User> userManager)
+      UserManager<DataAccess.Entities.User> userManager)
     {
       _accountService = accountService;
       _userManager = userManager;
@@ -52,17 +52,17 @@ namespace Itinerary.Api.Controllers
     }
 
     [AllowAnonymous]
-    [HttpGet( "token" )]
-    public async Task<IActionResult> Token( string username, string password )
+    [HttpPost( "token" )]
+    public async Task<IActionResult> Token( [FromBody]TokenViewModel model )
     {
       if ( !ModelState.IsValid )
       {
         return BadRequest();
       }
 
-      var user = await _userManager.FindByNameAsync( username );
+      var user = await _userManager.FindByNameAsync( model.Username );
 
-      if ( user == null || _userManager.PasswordHasher.VerifyHashedPassword( user, user.PasswordHash, password ) !=
+      if ( user == null || _userManager.PasswordHasher.VerifyHashedPassword( user, user.PasswordHash, model.Password ) !=
            PasswordVerificationResult.Success )
       {
         return BadRequest();
