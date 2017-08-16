@@ -5,6 +5,7 @@ using Itinerary.Business.Identity;
 using Itinerary.Business.Identity.Models;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 
 namespace Itinerary.Identity
 {
@@ -12,10 +13,12 @@ namespace Itinerary.Identity
   public class AccountService : IAccountService
   {
     private readonly UserManager<DataAccess.Entities.User> _userManager;
+    private readonly IConfiguration _configuration;
 
-    public AccountService( UserManager<DataAccess.Entities.User> userManager )
+    public AccountService( UserManager<DataAccess.Entities.User> userManager, IConfiguration configuration )
     {
       _userManager = userManager;
+      _configuration = configuration;
     }
 
     public async Task<ApiCallStatus> Register( User user )
