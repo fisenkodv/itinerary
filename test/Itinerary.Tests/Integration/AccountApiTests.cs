@@ -1,8 +1,6 @@
 using System;
-using Itinerary.Business;
 using Itinerary.Business.Identity.Dto;
 using Itinerary.Tests.Utilities;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Itinerary.Tests.Integration
@@ -45,10 +43,10 @@ namespace Itinerary.Tests.Integration
                         password = "Welcome01!"
                       };
 
-      JToken tokenResponse = await PostAsync<JToken>( "/api/v1/account/token", tokenBody );
+      JwtToken jwtToken = await PostAsync<JwtToken>( "/api/v1/account/token", tokenBody );
 
-      Assert.NotNull( tokenResponse );
-      Assert.NotNull( tokenResponse[ "token" ].ToString() );
+      Assert.NotNull( jwtToken );
+      Assert.NotNull( jwtToken.Token );
     }
   }
 }
