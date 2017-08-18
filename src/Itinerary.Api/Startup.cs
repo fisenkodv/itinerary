@@ -64,8 +64,9 @@ namespace Itinerary.Api
     {
       using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
       {
-        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
-        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData( env );
+        var itineraryDbContext = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
+        itineraryDbContext.Database.Migrate();
+        itineraryDbContext.EnsureSeedData( env );
       }
     }
   }

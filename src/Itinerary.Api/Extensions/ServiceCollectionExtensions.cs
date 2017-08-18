@@ -6,6 +6,7 @@ using Itinerary.Business;
 using Itinerary.Business.Identity;
 using Itinerary.Business.Places;
 using Itinerary.Business.Places.Abstractions;
+using Itinerary.Common.Cryptography;
 using Itinerary.DataAccess.Entities;
 using Itinerary.DataAccess.EntityFramework;
 using Itinerary.DataAccess.Extensions;
@@ -70,8 +71,8 @@ namespace Itinerary.Api.Extensions
                   options.TokenValidationParameters =
                     new TokenValidationParameters
                     {
-                      ValidIssuer = configuration[ "JWT:Issuer" ],
-                      ValidAudience = configuration[ "JWT:Audience" ],
+                      ValidIssuer = configuration.GetValue<string>( "JWT:Issuer" ),
+                      ValidAudience = configuration.GetValue<string>( "JWT:Audience" ),
                       IssuerSigningKey = CertificatesExtensions.SigningKey,
                       ValidateIssuerSigningKey = true,
                       ValidateLifetime = true

@@ -1,20 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using Itinerary.Api.Extensions;
 using Itinerary.Api.ViewModels;
-using Itinerary.Business;
 using Itinerary.Business.Identity;
+using Itinerary.Business.Identity.Dto;
 using Itinerary.Business.Identity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Itinerary.Api.Controllers
 {
@@ -29,7 +21,7 @@ namespace Itinerary.Api.Controllers
 
     public AccountController(
       IAccountService accountService,
-      UserManager<DataAccess.Entities.User> userManager)
+      UserManager<DataAccess.Entities.User> userManager )
     {
       _accountService = accountService;
       _userManager = userManager;
@@ -39,11 +31,11 @@ namespace Itinerary.Api.Controllers
     [HttpPost( "[action]" )]
     public async Task<IActionResult> Register( [FromBody] RegisterViewModel model )
     {
-      ApiCallStatus result;
+      RegisterResult result;
       if ( ModelState.IsValid )
         result = await _accountService.Register( new User { Email = model.Email, Password = model.Password } );
       else
-        result = new ApiCallStatus(
+        result = new RegisterResult(
           false, ModelState.Values.SelectMany( x => x.Errors ).Select( x => x.ErrorMessage ) );
 
       return result.Succeeded
@@ -53,51 +45,17 @@ namespace Itinerary.Api.Controllers
 
     [AllowAnonymous]
     [HttpPost( "token" )]
-    public async Task<IActionResult> Token( [FromBody]TokenViewModel model )
+    public async Task<IActionResult> Token( [FromBody] TokenViewModel model )
     {
       if ( !ModelState.IsValid )
-      {
         return BadRequest();
-      }
 
-      var user = await _userManager.FindByNameAsync( model.Username );
+      JwtToken token =
+        await _accountService.Token( new User { Username = model.Username, Password = model.Password } );
 
-      if ( user == null || _userManager.PasswordHasher.VerifyHashedPassword( user, user.PasswordHash, model.Password ) !=
-           PasswordVerificationResult.Success )
-      {
-        return BadRequest();
-      }
-
-      var token = await GetJwtSecurityToken( user );
-
-      return Ok(
-        new
-        {
-          token = new JwtSecurityTokenHandler().WriteToken( token ),
-          expiration = token.ValidTo
-        } );
-    }
-
-    private async Task<JwtSecurityToken> GetJwtSecurityToken( Itinerary.DataAccess.Entities.User user )
-    {
-      var userClaims = await _userManager.GetClaimsAsync( user );
-
-      return new JwtSecurityToken(
-        issuer: "Api", //_appConfiguration.Value.SiteUrl,
-        audience: "http://localhost:5000", //_appConfiguration.Value.SiteUrl,
-        claims: GetTokenClaims( user ).Union( userClaims ),
-        expires: DateTime.UtcNow.AddMinutes( 10 ),
-        signingCredentials: new SigningCredentials( CertificatesExtensions.SigningKey, SecurityAlgorithms.RsaSha256 )
-      );
-    }
-
-    private static IEnumerable<Claim> GetTokenClaims( Itinerary.DataAccess.Entities.User user )
-    {
-      return new List<Claim>
-             {
-               new Claim( JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString() ),
-               new Claim( JwtRegisteredClaimNames.Sub, user.UserName )
-             };
+      return token == null
+               ? ( IActionResult ) BadRequest()
+               : Ok( token );
     }
   }
 }

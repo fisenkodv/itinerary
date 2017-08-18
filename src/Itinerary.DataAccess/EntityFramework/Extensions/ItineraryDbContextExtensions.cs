@@ -12,7 +12,7 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
   {
     public static void EnsureSeedData( this ItineraryDbContext context, IHostingEnvironment env )
     {
-      string name = $"PlacesSnapshot.{env.EnvironmentName}.json";
+      string name = $"Itinerary.DataAccess.Data.PlacesSnapshot.{env.EnvironmentName}.json";
       Type type = typeof( ItineraryDbContextExtensions );
       if ( ResourceUtil.Exists( type, name ) && context.AllMigrationsApplied() )
       {

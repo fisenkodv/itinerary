@@ -1,9 +1,6 @@
 using System;
 using System.IO;
-using IdentityServer4.EntityFramework.DbContexts;
-using IdentityServer4.EntityFramework.Options;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Itinerary.DataAccess.Extensions;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -57,26 +54,6 @@ namespace Itinerary.DataAccess.EntityFramework.Migrations
     public ItineraryDbContext CreateDbContext( string[] args )
     {
       return Create<ItineraryDbContext>( optionsBuilder => new ItineraryDbContext( optionsBuilder.Options ) );
-    }
-  }
-
-  public class PersistedGrantDbContextFactoryNeededForMigrations
-    : DbContextFactoryNeededForMigrationsBase, IDesignTimeDbContextFactory<PersistedGrantDbContext>
-  {
-    public PersistedGrantDbContext CreateDbContext( string[] args )
-    {
-      return Create<PersistedGrantDbContext>(
-        optionsBuilder => new PersistedGrantDbContext( optionsBuilder.Options, new OperationalStoreOptions() ) );
-    }
-  }
-
-  public class ConfigurationDbContextFactoryNeededForMigrations
-    : DbContextFactoryNeededForMigrationsBase, IDesignTimeDbContextFactory<ConfigurationDbContext>
-  {
-    public ConfigurationDbContext CreateDbContext( string[] args )
-    {
-      return Create<ConfigurationDbContext>(
-        optionsBuilder => new ConfigurationDbContext( optionsBuilder.Options, new ConfigurationStoreOptions() ) );
     }
   }
 }

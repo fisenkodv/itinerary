@@ -1,5 +1,6 @@
 using System;
 using Itinerary.Business;
+using Itinerary.Business.Identity.Dto;
 using Itinerary.Tests.Utilities;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -17,10 +18,10 @@ namespace Itinerary.Tests.Integration
                            password = "Welcome01!"
                          };
 
-      ApiCallStatus apiCallStatus = await PostAsync<ApiCallStatus>( "/api/v1/account/register", registerBody );
+      RegisterResult registerResult = await PostAsync<RegisterResult>( "/api/v1/account/register", registerBody );
 
-      Assert.True( apiCallStatus.Succeeded );
-      Assert.Empty( apiCallStatus.Errors );
+      Assert.True( registerResult.Succeeded );
+      Assert.Empty( registerResult.Errors );
     }
 
     [Fact]
@@ -33,7 +34,7 @@ namespace Itinerary.Tests.Integration
                            password = "Welcome01!"
                          };
 
-      ApiCallStatus registerResonse = await PostAsync<ApiCallStatus>( "/api/v1/account/register", registerBody );
+      RegisterResult registerResonse = await PostAsync<RegisterResult>( "/api/v1/account/register", registerBody );
 
       Assert.True( registerResonse.Succeeded );
       Assert.Empty( registerResonse.Errors );
