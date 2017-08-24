@@ -56,7 +56,7 @@ namespace Itinerary.Identity
         audience: _configuration.GetValue<string>( "JWT:Audience" ),
         claims: await GetTokenClaims( user ),
         expires: DateTime.UtcNow.AddSeconds( _configuration.GetValue( "JWT:Lifetime", 60 * 60 * 24 ) ),
-        signingCredentials: CertificatesExtensions.SigningCredentials
+        signingCredentials: CertificateExtensions.SigningCredentials
       );
     }
 

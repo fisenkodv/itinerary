@@ -73,7 +73,7 @@ namespace Itinerary.Api.Extensions
                     {
                       ValidIssuer = configuration.GetValue<string>( "JWT:Issuer" ),
                       ValidAudience = configuration.GetValue<string>( "JWT:Audience" ),
-                      IssuerSigningKey = CertificatesExtensions.SigningKey,
+                      IssuerSigningKey = CertificateExtensions.SigningKey,
                       ValidateIssuerSigningKey = true,
                       ValidateLifetime = true
                     };

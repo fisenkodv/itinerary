@@ -8,18 +8,7 @@
     <None Remove="Migrations\**" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\PlacesSnapshot.Development.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\PlacesSnapshot.Integration.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\PlacesSnapshot.Production.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <None Remove="Data\PlacesSnapshots.zip" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.0.0" />
@@ -41,6 +30,9 @@
   <PropertyGroup>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\PlacesSnapshots.zip" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Itinerary.Business\Itinerary.Business.csproj" />
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />

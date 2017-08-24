@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using FluentAssertions;
 using Itinerary.Common;
 using Xunit;
 
@@ -17,8 +18,8 @@ namespace Itinerary.Tests.Unit
 
       long generationTime = stopwatch.ElapsedMilliseconds;
 
-      Assert.NotEmpty( ranks );
-      Assert.True( generationTime < 100, $"Elapsed time was: {generationTime}ms, but expected: 100ms" );
+      ranks.Should().NotBeNullOrEmpty();
+      generationTime.Should().BeLessOrEqualTo( 100, $"Elapsed time was: {generationTime}ms, but expected: 100ms" );
     }
 
     [Fact]
@@ -27,8 +28,8 @@ namespace Itinerary.Tests.Unit
       List<Rank> ranks = RankGenerator.GetRanks( 100, 3.5 ).ToList();
       Rank rank = RankGenerator.GetRank( 100, 3.5 );
 
-      Assert.NotEmpty( ranks );
-      Assert.Equal( rank.StandardDeviation, ranks.Min( x => x.StandardDeviation ) );
+      ranks.Should().NotBeNullOrEmpty();
+      rank.StandardDeviation.Should().Be( ranks.Min( x => x.StandardDeviation ) );
     }
   }
 }

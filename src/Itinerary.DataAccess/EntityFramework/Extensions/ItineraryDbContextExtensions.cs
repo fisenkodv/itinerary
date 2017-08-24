@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using Itinerary.Common;
 using Itinerary.DataAccess.Entities;
@@ -12,12 +14,11 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
   {
     public static void EnsureSeedData( this ItineraryDbContext context, IHostingEnvironment env )
     {
-      string name = $"Itinerary.DataAccess.Data.PlacesSnapshot.{env.EnvironmentName}.json";
-      Type type = typeof( ItineraryDbContextExtensions );
-      if ( ResourceUtil.Exists( type, name ) && context.AllMigrationsApplied() )
+      string snapshotData = GetSnaphotData( env.EnvironmentName );
+      if ( !string.IsNullOrEmpty( snapshotData ) && context.AllMigrationsApplied() )
       {
         List<PlaceSnapshotItem> placeDetails = JsonConvert
-          .DeserializeObject<IEnumerable<PlaceSnapshotItem>>( ResourceUtil.GetEmbeddedResourceText( type, name ) )
+          .DeserializeObject<IEnumerable<PlaceSnapshotItem>>( snapshotData )
           .Distinct()
           .ToList();
 
@@ -55,6 +56,29 @@ namespace Itinerary.DataAccess.EntityFramework.Extensions
           context.SaveChanges();
         }
       }
+    }
+
+    private static string GetSnaphotData( string environmentName )
+    {
+      const string name = "Itinerary.DataAccess.Data.PlacesSnapshots.zip";
+      Type type = typeof( ItineraryDbContextExtensions );
+      if ( ResourceUtil.Exists( type, name ) )
+      {
+        using ( var archive =
+          new ZipArchive( new MemoryStream( ResourceUtil.GetEmbeddedResourceBytes( type, name ) ) ) )
+        {
+          ZipArchiveEntry entry = archive.GetEntry( $"PlacesSnapshot.{environmentName}.json" );
+          if ( entry != null )
+          {
+            using ( TextReader reader = new StreamReader( entry.Open() ) )
+            {
+              return reader.ReadToEnd();
+            }
+          }
+        }
+      }
+
+      return null;
     }
 
     private static ICollection<PlacePlaceCategory> GetPlaceCategories(
