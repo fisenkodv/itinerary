@@ -22,22 +22,44 @@ namespace Itinerary.Tests.Unit
       var places = JsonConvert.DeserializeObject<List<PlaceSnapshotItem>>( File.ReadAllText( fileName ) );
 
       var reviews =
-        places.Select( x => new { reviews = x.Reviews, rating = x.Rating } ).ToLookup( x => x.rating );
+        places.Select( x => new Pair { rating = x.Rating, reviews = x.Reviews } ).Distinct( new Pair() )
+              .ToLookup( x => x.rating ).ToList();
 
-      var results = new ConcurrentBag<(int reviews, double rating, List<Rank> ranks)>();
+      var results = new ConcurrentBag<(Pair pair, List<Rank> ranks)>();
       reviews.AsParallel().ForAll(
         x =>
         {
           x.AsParallel().ForAll(
             rating =>
             {
-              results.Add(
-                (rating.reviews, x.Key,
-                RankGenerator.GetRanks( rating.reviews, x.Key ).ToList() ) );
+              File.WriteAllText( $"{rating.reviews}_{x.Key}.json", JsonConvert.SerializeObject( RankGenerator.GetRanks( rating.reviews, x.Key ).ToList() ) );
+             
             } );
         } );
 
       File.WriteAllText( "out.json", JsonConvert.SerializeObject( results ) );
+    }
+
+    public class Pair : IEqualityComparer<Pair>
+    {
+      public int reviews { get; set; }
+
+      public double rating { get; set; }
+
+      public bool Equals( Pair x, Pair y )
+      {
+        return x.rating == y.rating && x.reviews == y.reviews;
+      }
+
+      public int GetHashCode( Pair obj )
+      {
+        unchecked
+        {
+          int result = obj.reviews.GetHashCode();
+          result = ( result * 397 ) ^ obj.rating.GetHashCode();
+          return result;
+        }
+      }
     }
 
     [Fact]
