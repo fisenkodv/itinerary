@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Itinerary.Api;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
@@ -13,20 +15,20 @@ namespace Itinerary.Tests.Utilities
 {
   public abstract class IntegrationTestBase : IDisposable
   {
+    private const string DbFileName = "itinerary.integration.db";
+
     private readonly HttpClient _httpClient;
 
     protected IntegrationTestBase()
     {
+      Cleanup();
       _httpClient = GetClient();
     }
 
     public void Dispose()
     {
       _httpClient?.Dispose();
-
-      const string dbFileName = "itinerary.integration.db";
-      if ( File.Exists( dbFileName ) )
-        File.Delete( dbFileName );
+      Cleanup();
     }
 
     protected async Task<T> GetAsync<T>( string url )
@@ -57,14 +59,24 @@ namespace Itinerary.Tests.Utilities
 
     private static HttpClient GetClient()
     {
+      var configurationBuilder = new ConfigurationBuilder();
+      configurationBuilder.AddCommandLine(
+        new string[] { "--connectionString", "Data Source=out.db" },
+        new Dictionary<string, string>() { [ "--connectionString" ] = "ConnectionStrings:Initinerary" } );
       IConfigurationRoot configuration = new ConfigurationBuilder().Build();
-      IWebHostBuilder builder = new WebHostBuilder()
-        .UseEnvironment( "Integration" )
-        .UseConfiguration( configuration )
-        .UseStartup<Startup>();
+      IWebHostBuilder builder = WebHost.CreateDefaultBuilder( null )
+                                       .UseEnvironment( "Integration" )
+                                       .UseConfiguration( configurationBuilder.Build() )
+                                       .UseStartup<Startup>();
       var testServer = new TestServer( builder );
       HttpClient client = testServer.CreateClient();
       return client;
+    }
+
+    private static void Cleanup()
+    {
+      if ( File.Exists( DbFileName ) )
+        File.Delete( DbFileName );
     }
   }
 }

@@ -1,6 +1,6 @@
 using Itinerary.Api.Extensions;
-using Itinerary.DataAccess.EntityFramework;
-using Itinerary.DataAccess.EntityFramework.Extensions;
+using Itinerary.Data.EntityFramework;
+using Itinerary.Data.EntityFramework.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,16 +12,20 @@ namespace Itinerary.Api
 {
   public class Startup
   {
-    public IConfigurationRoot Configuration { get; }
+    public IConfiguration Configuration { get; }
 
-    public Startup( IHostingEnvironment env, ILoggerFactory loggerFactory )
+    public Startup( IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory )
     {
-      Configuration = new ConfigurationBuilder()
-        .SetBasePath( env.ContentRootPath )
-        .AddJsonFile( "appsettings.json", optional: true, reloadOnChange: true )
-        .AddJsonFile( $"appsettings.{env.EnvironmentName}.json", optional: true )
-        .AddEnvironmentVariables()
-        .Build();
+      //Configuration = new ConfigurationBuilder()
+      //  .SetBasePath( env.ContentRootPath )
+      //  .AddJsonFile( "appsettings.json", optional: true, reloadOnChange: true )
+      //  .AddJsonFile( $"appsettings.{env.EnvironmentName}.json", optional: true )
+      //  .AddEnvironmentVariables()
+
+      //  .Build();
+      Configuration = configuration;
+
+
 
       loggerFactory.AddConsole( Configuration.GetSection( "Logging" ) );
       loggerFactory.AddDebug();

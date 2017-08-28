@@ -17,10 +17,10 @@ namespace Itinerary.Identity
   [UsedImplicitly]
   public class AccountService : IAccountService
   {
-    private readonly UserManager<DataAccess.Entities.User> _userManager;
+    private readonly UserManager<Data.Entities.User> _userManager;
     private readonly IConfiguration _configuration;
 
-    public AccountService( UserManager<DataAccess.Entities.User> userManager, IConfiguration configuration )
+    public AccountService( UserManager<Data.Entities.User> userManager, IConfiguration configuration )
     {
       _userManager = userManager;
       _configuration = configuration;
@@ -28,14 +28,14 @@ namespace Itinerary.Identity
 
     public async Task<RegisterResult> Register( User user )
     {
-      var userEntity = new DataAccess.Entities.User { UserName = user.Username ?? user.Email, Email = user.Email };
+      var userEntity = new Data.Entities.User { UserName = user.Username ?? user.Email, Email = user.Email };
       IdentityResult result = await _userManager.CreateAsync( userEntity, user.Password );
       return new RegisterResult( result.Succeeded, result.Errors.Select( x => x.Description ) );
     }
 
     public async Task<JwtToken> Token( User user )
     {
-      DataAccess.Entities.User existingUser = await _userManager.FindByNameAsync( user.Username );
+      Data.Entities.User existingUser = await _userManager.FindByNameAsync( user.Username );
 
       if ( existingUser == null ||
            _userManager.PasswordHasher.VerifyHashedPassword(
@@ -49,7 +49,7 @@ namespace Itinerary.Identity
         expiration: securityToken.ValidTo );
     }
 
-    private async Task<JwtSecurityToken> GetJwtSecurityToken( DataAccess.Entities.User user )
+    private async Task<JwtSecurityToken> GetJwtSecurityToken( Data.Entities.User user )
     {
       return new JwtSecurityToken(
         issuer: _configuration.GetValue<string>( "JWT:Issuer" ),
@@ -60,7 +60,7 @@ namespace Itinerary.Identity
       );
     }
 
-    private async Task<IEnumerable<Claim>> GetTokenClaims( DataAccess.Entities.User user )
+    private async Task<IEnumerable<Claim>> GetTokenClaims( Data.Entities.User user )
     {
       IList<Claim> userClaims = await _userManager.GetClaimsAsync( user );
 

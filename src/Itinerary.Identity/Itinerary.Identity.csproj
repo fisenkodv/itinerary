@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Itinerary.Business\Itinerary.Business.csproj" />
-    <ProjectReference Include="..\Itinerary.DataAccess\Itinerary.DataAccess.csproj" />
+    <ProjectReference Include="..\Itinerary.Data\Itinerary.Data.csproj" />
   </ItemGroup>
 
 </Project>
