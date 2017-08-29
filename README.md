@@ -1,4 +1,4 @@
-﻿# Itinerary Web Application
+# Itinerary Web Application
 
 ## Projects
 ### Itinerary.Web
@@ -56,8 +56,7 @@ dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c Persi
 Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\Itinerary.postman_collection.json```
 
 ## Google API
-* Places API ```AIzaSyAHtJrpKyxsARFESBwI-a0qaWjsD5ZW-3w```
-* Google Maps JavaScript API ```AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M```
+[API Credentials](https://console.cloud.google.com/apis/credentials?project=itinerary-1488041928048)
 
 ## Deployment to Digital Ocean
 

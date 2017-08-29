@@ -9,11 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9642DFEB-4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}"
 	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		bitbucket-pipelines.yml = bitbucket-pipelines.yml
-		configs\itinerary.conf = configs\itinerary.conf
-		configs\nginx.conf = configs\nginx.conf
 		README.md = README.md
 		src\Version.cs = src\Version.cs
 	EndProjectSection
@@ -31,6 +27,22 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.GoogleApiClient", "src\Itinerary.GoogleApiClient\Itinerary.GoogleApiClient.csproj", "{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Identity", "src\Itinerary.Identity\Itinerary.Identity.csproj", "{4580B544-3E8D-4F80-BFCB-DB7C587F19B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI Configuration", "CI Configuration", "{8CA0BFB9-0CED-49EC-A5D0-65E29C57EF28}"
+	ProjectSection(SolutionItems) = preProject
+		bitbucket-pipelines.yml = bitbucket-pipelines.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server Configuration", "Server Configuration", "{798176C6-B0A9-4D97-9767-C11B29C49C74}"
+	ProjectSection(SolutionItems) = preProject
+		configs\itinerary.conf = configs\itinerary.conf
+		configs\nginx.conf = configs\nginx.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Editor Configuration", "Editor Configuration", "{11867F9E-6864-4860-A7B4-98FC8DBCAF2A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,6 +150,9 @@ Global
 		{F1D26AE7-5974-4B42-B28E-A6C74C993D28} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 		{B73E33F1-E03E-4EC0-A58B-76A3399F93EC} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 		{4580B544-3E8D-4F80-BFCB-DB7C587F19B4} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
+		{8CA0BFB9-0CED-49EC-A5D0-65E29C57EF28} = {9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}
+		{798176C6-B0A9-4D97-9767-C11B29C49C74} = {9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}
+		{11867F9E-6864-4860-A7B4-98FC8DBCAF2A} = {9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6207A33-628E-481D-A32B-96E0812F7219}

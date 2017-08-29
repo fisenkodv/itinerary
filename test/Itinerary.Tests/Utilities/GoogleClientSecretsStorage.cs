@@ -1,4 +1,4 @@
-﻿using Itinerary.GoogleApiClient;
+using Itinerary.GoogleApiClient;
 using Itinerary.GoogleApiClient.Places;
 
 namespace Itinerary.Tests.Utilities
@@ -10,7 +10,7 @@ namespace Itinerary.Tests.Utilities
     private GoogleClientSecretsStorage()
     {
       ClientSecrets =
-        new GoogleClientSecrets( new[] { (PlacesBuilder.ApiName, "AIzaSyAGaGW1OsIQaqg_TEmHfcs9RO1lynP4f9I") } );
+        new GoogleClientSecrets( new[] { (PlacesBuilder.ApiName, "AIzaSyCIRow0QXhirpXJRfhn1grZ0mz0G2juHHk") } );
     }
 
     public static GoogleClientSecretsStorage Instance => _instance ?? ( _instance = new GoogleClientSecretsStorage() );
