@@ -3,11 +3,6 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
-    <EmbeddedResource Remove="Migrations\**" />
-    <None Remove="Migrations\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Data\PlacesSnapshots.zip" />
   </ItemGroup>
   <ItemGroup>
@@ -41,4 +36,10 @@
     <Folder Include="EntityFramework\Migrations\Itinerary\" />
     <Folder Include="EntityFramework\Repository" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Version.cs" Link="Version.cs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
 </Project>
