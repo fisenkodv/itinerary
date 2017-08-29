@@ -52,9 +52,6 @@ Create IdentityServer PersistedGrant migration
 dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o EntityFramework/Migrations/IdentityServer/PersistedGrantDb
 ```
 
-#### Itinerary API ####
-Use [Postman](https://www.getpostman.com/) to see api collection from ```docs\Itinerary.postman_collection.json```
-
 ## Google API
 [API Credentials](https://console.cloud.google.com/apis/credentials?project=itinerary-1488041928048)
 
