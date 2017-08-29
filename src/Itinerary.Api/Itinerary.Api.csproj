@@ -31,7 +31,7 @@
     <ProjectReference Include="..\Itinerary.Common\Itinerary.Common.csproj" />
     <ProjectReference Include="..\Itinerary.Data\Itinerary.Data.csproj" />
     <ProjectReference Include="..\Itinerary.GoogleApiClient\Itinerary.GoogleApiClient.csproj" />
-    <ProjectReference Include="..\Itinerary.Identity\Itinerary.Identity.csproj" />
+    <ProjectReference Include="..\Itinerary.Security\Itinerary.Security.csproj" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />

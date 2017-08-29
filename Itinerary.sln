@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}"
 EndProject
@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Api", "src\Itiner
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.GoogleApiClient", "src\Itinerary.GoogleApiClient\Itinerary.GoogleApiClient.csproj", "{B73E33F1-E03E-4EC0-A58B-76A3399F93EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Identity", "src\Itinerary.Identity\Itinerary.Identity.csproj", "{4580B544-3E8D-4F80-BFCB-DB7C587F19B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Security", "src\Itinerary.Security\Itinerary.Security.csproj", "{4580B544-3E8D-4F80-BFCB-DB7C587F19B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI Configuration", "CI Configuration", "{8CA0BFB9-0CED-49EC-A5D0-65E29C57EF28}"
 	ProjectSection(SolutionItems) = preProject
