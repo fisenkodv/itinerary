@@ -1,4 +1,4 @@
-﻿using Itinerary.Data.Entities;
+using Itinerary.Data.Entities;
 using Itinerary.Data.EntityFramework.Configurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +9,8 @@ namespace Itinerary.Data.EntityFramework
     private readonly DbContextOptions<ItineraryDbContext> _dbContextOptions;
 
     public DbSet<Place> Places { get; set; }
+
+    public DbSet<Review> Reviews { get; set; }
 
     public DbSet<PlaceCategory> PlaceCategories { get; set; }
 
@@ -24,6 +26,8 @@ namespace Itinerary.Data.EntityFramework
     {
       base.OnModelCreating( modelBuilder );
 
+      modelBuilder.Entity<Place>().Configure();
+      modelBuilder.Entity<Review>().Configure();
       modelBuilder.Entity<PlaceCategory>().Configure();
       modelBuilder.Entity<PlacePlaceCategory>().Configure();
       modelBuilder.Entity<Entities.Itinerary>().Configure();

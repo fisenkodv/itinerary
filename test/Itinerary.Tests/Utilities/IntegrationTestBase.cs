@@ -15,20 +15,20 @@ namespace Itinerary.Tests.Utilities
 {
   public abstract class IntegrationTestBase : IDisposable
   {
-    private const string DbFileName = "itinerary.integration.db";
-
+    private readonly string _dbFileName;
     private readonly HttpClient _httpClient;
 
     protected IntegrationTestBase()
     {
-      Cleanup();
+      _dbFileName = $"itinerary{Guid.NewGuid():N}.integration.db";
       _httpClient = GetClient();
     }
 
     public void Dispose()
     {
       _httpClient?.Dispose();
-      Cleanup();
+      if ( File.Exists( _dbFileName ) )
+        File.Delete( _dbFileName );
     }
 
     protected async Task<T> GetAsync<T>( string url )
@@ -57,13 +57,15 @@ namespace Itinerary.Tests.Utilities
       return JsonConvert.DeserializeObject<T>( json );
     }
 
-    private static HttpClient GetClient()
+    private HttpClient GetClient()
     {
       var configurationBuilder = new ConfigurationBuilder();
       configurationBuilder.AddCommandLine(
-        new string[] { "--connectionString", "Data Source=out.db" },
-        new Dictionary<string, string>() { [ "--connectionString" ] = "ConnectionStrings:Initinerary" } );
-      IConfigurationRoot configuration = new ConfigurationBuilder().Build();
+        args: new[] { "--connectionString", $"Data Source={_dbFileName}" },
+        switchMappings: new Dictionary<string, string>
+                        {
+                          [ "--connectionString" ] = "ConnectionStrings:Initinerary"
+                        } );
       IWebHostBuilder builder = WebHost.CreateDefaultBuilder( null )
                                        .UseEnvironment( "Integration" )
                                        .UseConfiguration( configurationBuilder.Build() )
@@ -71,12 +73,6 @@ namespace Itinerary.Tests.Utilities
       var testServer = new TestServer( builder );
       HttpClient client = testServer.CreateClient();
       return client;
-    }
-
-    private static void Cleanup()
-    {
-      if ( File.Exists( DbFileName ) )
-        File.Delete( DbFileName );
     }
   }
 }

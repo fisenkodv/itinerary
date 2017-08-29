@@ -47,10 +47,8 @@ namespace Itinerary.Data.EntityFramework.Extensions
       {
         int result = obj.Name.GetHashCode();
 
-        result = ( result * 397 ) ^ obj.Ratings.GetHashCode();
-
+        result = ( result * 397 ) ^ obj.Url.GetHashCode();
         result = ( result * 397 ) ^ obj.Latitude.GetHashCode();
-
         result = ( result * 397 ) ^ obj.Longitude.GetHashCode();
 
         return result;

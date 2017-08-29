@@ -41,17 +41,20 @@ namespace Itinerary.Data.EntityFramework.Migrations.Itinerary
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ImgUrl");
+                    b.Property<string>("ImgUrl")
+                        .HasMaxLength(512);
 
                     b.Property<double>("Latitude");
 
                     b.Property<double>("Longitude");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
 
                     b.Property<double>("Rating");
 
-                    b.Property<string>("Url");
+                    b.Property<string>("Url")
+                        .HasMaxLength(512);
 
                     b.HasKey("Id");
 
@@ -94,7 +97,8 @@ namespace Itinerary.Data.EntityFramework.Migrations.Itinerary
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Comment");
+                    b.Property<string>("Comment")
+                        .HasMaxLength(4000);
 
                     b.Property<long?>("PlaceId");
 
@@ -104,7 +108,7 @@ namespace Itinerary.Data.EntityFramework.Migrations.Itinerary
 
                     b.HasIndex("PlaceId");
 
-                    b.ToTable("Review");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Itinerary.Data.Entities.Role", b =>
@@ -283,7 +287,7 @@ namespace Itinerary.Data.EntityFramework.Migrations.Itinerary
 
             modelBuilder.Entity("Itinerary.Data.Entities.Review", b =>
                 {
-                    b.HasOne("Itinerary.Data.Entities.Place")
+                    b.HasOne("Itinerary.Data.Entities.Place", "Place")
                         .WithMany("Reviews")
                         .HasForeignKey("PlaceId");
                 });

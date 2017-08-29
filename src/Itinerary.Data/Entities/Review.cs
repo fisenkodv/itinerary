@@ -4,6 +4,8 @@ namespace Itinerary.Data.Entities
   {
     public int Rating { get; set; }
 
+    public Place Place { get; set; }
+
     public string Comment { get; set; }
   }
 }
