@@ -6,7 +6,7 @@ using System.Linq;
 using Itinerary.Business.Places;
 using Itinerary.Business.Places.Abstractions;
 using Itinerary.Common;
-using Itinerary.Data.Entities;
+using Itinerary.Data.Entity;
 using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json;
 

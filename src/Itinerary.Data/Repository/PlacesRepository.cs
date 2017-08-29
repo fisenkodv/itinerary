@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Itinerary.Business.Places.Abstractions;
 using Itinerary.Business.Places.Models;
+using Itinerary.Data.EntityFramework;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Itinerary.Data.EntityFramework.Repository
+namespace Itinerary.Data.Repository
 {
+  [UsedImplicitly]
   public class PlacesRepository : IPlacesRepository
   {
     private readonly ItineraryDbContext _dbContext;
@@ -20,8 +23,8 @@ namespace Itinerary.Data.EntityFramework.Repository
       Location southEastLocation,
       double rating )
     {
-      IQueryable<Entities.Place> query =
-        _dbContext.Set<Entities.Place>()
+      IQueryable<Entity.Place> query =
+        _dbContext.Set<Entity.Place>()
                   .Where(
                     place => place.Rating >= rating &&
                              place.Latitude <= northWestLocation.Latitude &&

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Itinerary.Data.Entities
+namespace Itinerary.Data.Entity
 {
   public sealed class Role : IdentityRole<long>
   {

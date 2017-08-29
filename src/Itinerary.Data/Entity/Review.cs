@@ -1,4 +1,4 @@
-namespace Itinerary.Data.Entities
+namespace Itinerary.Data.Entity
 {
   public class Review : EntityBase
   {

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace Itinerary.Data.Entities
+namespace Itinerary.Data.Entity
 {
   public class PlaceCategory : EntityBase
   {

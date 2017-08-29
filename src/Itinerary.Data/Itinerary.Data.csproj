@@ -34,7 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EntityFramework\Migrations\Itinerary\" />
-    <Folder Include="EntityFramework\Repository" />
+    <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Version.cs" Link="Version.cs" />

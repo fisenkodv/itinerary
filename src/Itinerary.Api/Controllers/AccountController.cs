@@ -17,11 +17,11 @@ namespace Itinerary.Api.Controllers
   public class AccountController : Controller
   {
     private readonly IAccountService _accountService;
-    private readonly UserManager<Data.Entities.User> _userManager;
+    private readonly UserManager<Data.Entity.User> _userManager;
 
     public AccountController(
       IAccountService accountService,
-      UserManager<Data.Entities.User> userManager )
+      UserManager<Data.Entity.User> userManager )
     {
       _accountService = accountService;
       _userManager = userManager;

@@ -1,9 +1,8 @@
-﻿using System.Reflection;
-using Itinerary.Data.EntityFramework;
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Itinerary.Data.Extensions
+namespace Itinerary.Data.EntityFramework.Extensions
 {
   public static class DbContextOptionsBuilderExtensions
   {

@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using Itinerary.Data.Extensions;
+using Itinerary.Data.EntityFramework.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;

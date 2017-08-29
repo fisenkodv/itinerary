@@ -5,7 +5,7 @@ namespace Itinerary.Data.EntityFramework.Configurations
 {
   internal static class ItineraryConfig
   {
-    public static void Configure( this EntityTypeBuilder<Entities.Itinerary> entity )
+    public static void Configure( this EntityTypeBuilder<Entity.Itinerary> entity )
     {
       entity.HasKey( x => x.Id );
       entity.Property( x => x.Name ).HasMaxLength( 256 );

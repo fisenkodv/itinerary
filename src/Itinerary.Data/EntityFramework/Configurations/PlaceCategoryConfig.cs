@@ -1,4 +1,4 @@
-﻿using Itinerary.Data.Entities;
+using Itinerary.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
