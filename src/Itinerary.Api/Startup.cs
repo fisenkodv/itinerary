@@ -1,6 +1,7 @@
 using Itinerary.Api.Extensions;
 using Itinerary.Data.EntityFramework;
 using Itinerary.Data.EntityFramework.Extensions;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -10,22 +11,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Itinerary.Api
 {
+  [UsedImplicitly]
   public class Startup
   {
-    public IConfiguration Configuration { get; }
+    private IConfiguration Configuration { get; }
 
-    public Startup( IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory )
+    public Startup( IConfiguration configuration, ILoggerFactory loggerFactory )
     {
-      //Configuration = new ConfigurationBuilder()
-      //  .SetBasePath( env.ContentRootPath )
-      //  .AddJsonFile( "appsettings.json", optional: true, reloadOnChange: true )
-      //  .AddJsonFile( $"appsettings.{env.EnvironmentName}.json", optional: true )
-      //  .AddEnvironmentVariables()
-
-      //  .Build();
       Configuration = configuration;
-
-
 
       loggerFactory.AddConsole( Configuration.GetSection( "Logging" ) );
       loggerFactory.AddDebug();

@@ -19,15 +19,15 @@ namespace Itinerary.Data.EntityFramework.Extensions
       string snapshotData = GetSnaphotData( env.EnvironmentName );
       if ( !string.IsNullOrEmpty( snapshotData ) && context.AllMigrationsApplied() )
       {
-        Dictionary<string, PlaceSnapshotItem> placeDetails = JsonConvert
+        List<PlaceSnapshotItem> placeDetails = JsonConvert
           .DeserializeObject<IEnumerable<PlaceSnapshotItem>>( snapshotData )
           .Distinct( new PlaceSnapshotItem() )
-          .ToDictionary( x => x.Name, x => x );
+          .ToList();
 
         if ( !context.PlaceCategories.Any() )
         {
           var categories = new List<string>();
-          foreach ( PlaceSnapshotItem placeDetail in placeDetails.Values )
+          foreach ( PlaceSnapshotItem placeDetail in placeDetails )
             categories.AddRange( placeDetail.Categories );
 
           context.PlaceCategories.AddRange( categories.Distinct().Select( x => new PlaceCategory { Name = x } ) );
@@ -39,12 +39,12 @@ namespace Itinerary.Data.EntityFramework.Extensions
           Dictionary<string, PlaceCategory> createdCategories =
             context.PlaceCategories.ToDictionary( x => x.Name, x => x );
 
-          double allPlacesReviewsAverage = placeDetails.Values.Average( x => x.AverageReview );
+          double allPlacesReviewsAverage = placeDetails.Average( x => x.AverageReview );
 
           IEnumerable<Place> places =
-            from placeDetail in placeDetails.Values
+            from placeDetail in placeDetails
             let categories = GetPlaceCategories( createdCategories, placeDetail.Categories )
-            //let reviews = GetReviews( placeDetail )
+            let reviews = GetReviews( placeDetail )
             let place = new Place
                         {
                           Categories = categories,
@@ -54,19 +54,10 @@ namespace Itinerary.Data.EntityFramework.Extensions
                           Longitude = placeDetail.Longitude,
                           Name = placeDetail.Name,
                           Rating = GetRating( placeDetail, allPlacesReviewsAverage ),
-                          //Reviews = reviews
+                          Reviews = reviews
                         }
             select place;
           context.Places.AddRange( places );
-          context.SaveChanges();
-
-          ICollection<Review> reviews = context
-            .Places
-            .ToList()
-            .SelectMany( savedPlace => GetReviews( placeDetails[ savedPlace.Name ], savedPlace ) )
-            .ToList();
-
-          context.Reviews.AddRange( reviews );
           context.SaveChanges();
         }
       }
@@ -105,12 +96,12 @@ namespace Itinerary.Data.EntityFramework.Extensions
                .ToList() ?? new List<PlacePlaceCategory>();
     }
 
-    private static ICollection<Review> GetReviews( PlaceSnapshotItem place, Place savedPlace )
+    private static ICollection<Review> GetReviews( PlaceSnapshotItem place )
     {
       return place
         .Ratings
         .SelectMany(
-          x => Enumerable.Range( 0, x.Value ).Select( _ => new Review { Rating = x.Key, Place = savedPlace } ) )
+          x => Enumerable.Range( 0, x.Value ).Select( _ => new Review { Rating = x.Key } ) )
         .ToList();
     }
 
