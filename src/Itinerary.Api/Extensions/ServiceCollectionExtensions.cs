@@ -9,6 +9,7 @@ using Itinerary.Business.Places.Abstractions;
 using Itinerary.Common.Cryptography;
 using Itinerary.Data.Entities;
 using Itinerary.Data.EntityFramework;
+using Itinerary.Data.EntityFramework.Repository;
 using Itinerary.Data.Extensions;
 using Itinerary.GoogleApiClient;
 using Itinerary.Identity;
@@ -105,7 +106,7 @@ namespace Itinerary.Api.Extensions
     {
       services.AddSingleton( configuration.GetGoogleClientSecrets() );
 
-      services.AddTransient( typeof( IUnitOfWork ), typeof( UnitOfWork ) );
+      services.AddTransient<IPlacesRepository, PlacesRepository>();
       services.AddTransient<IPlacesService, PlacesService>();
       services.AddTransient<IGooglePlacesClient, GooglePlacesClient>();
       services.AddTransient<IAccountService, AccountService>();

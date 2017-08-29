@@ -10,12 +10,12 @@ namespace Itinerary.Business.Places
   [UsedImplicitly]
   public class PlacesService : IPlacesService
   {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IPlacesRepository _placesRepository;
     private readonly IGooglePlacesClient _googlePlacesClient;
 
-    public PlacesService( IUnitOfWork unitOfWork, IGooglePlacesClient googlePlacesClient )
+    public PlacesService( IPlacesRepository placesRepository, IGooglePlacesClient googlePlacesClient )
     {
-      _unitOfWork = unitOfWork;
+      _placesRepository = placesRepository;
       _googlePlacesClient = googlePlacesClient;
     }
 
@@ -25,7 +25,7 @@ namespace Itinerary.Business.Places
         GetLocationInfo( location.Latitude, location.Longitude, distance );
 
       IEnumerable<Place> places =
-        from place in _unitOfWork.PlacesRepository.GetPlaces(
+        from place in _placesRepository.GetPlaces(
           locationInfo.northWestLocation,
           locationInfo.southEastLocation,
           rating )

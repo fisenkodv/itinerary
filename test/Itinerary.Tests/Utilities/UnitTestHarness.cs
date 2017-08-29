@@ -1,4 +1,4 @@
-﻿using Itinerary.Business.Places;
+using Itinerary.Business.Places;
 using Itinerary.Business.Places.Abstractions;
 using Itinerary.Tests.Utilities.Fakes;
 
@@ -15,7 +15,7 @@ namespace Itinerary.Tests.Utilities
 
     public IPlacesService CreatePlacesService()
     {
-      return new PlacesService( new FakeUnitOfWork( PlacesRepository ), new FakeGooglePlacesClient() );
+      return new PlacesService( PlacesRepository, new FakeGooglePlacesClient() );
     }
   }
 }
