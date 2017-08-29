@@ -1,3 +1,4 @@
+using System;
 using Itinerary.Api.Extensions;
 using Itinerary.Data.EntityFramework;
 using Itinerary.Data.EntityFramework.Extensions;
@@ -12,22 +13,29 @@ using Microsoft.Extensions.Logging;
 namespace Itinerary.Api
 {
   [UsedImplicitly]
-  public class Startup
+  public class Startup : IStartup
   {
-    private IConfiguration Configuration { get; }
+    private readonly IHostingEnvironment _hostingEnvironment;
+    private readonly IConfiguration _configuration;
 
-    public Startup( IConfiguration configuration, ILoggerFactory loggerFactory )
+    public Startup(
+      IHostingEnvironment hostingEnvironment,
+      IConfiguration configuration,
+      ILoggerFactory loggerFactory )
     {
-      Configuration = configuration;
+      _hostingEnvironment = hostingEnvironment;
+      _configuration = configuration;
 
-      loggerFactory.AddConsole( Configuration.GetSection( "Logging" ) );
+      loggerFactory.AddConsole( _configuration.GetSection( "Logging" ) );
       loggerFactory.AddDebug();
     }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices( IServiceCollection services )
+    /// <summary>
+    /// This method gets called by the runtime. Use this method to add services to the container.
+    /// </summary>
+    public IServiceProvider ConfigureServices( IServiceCollection services )
     {
-      services.AddCompression( Configuration );
+      services.AddCompression( _configuration );
       services.AddMemoryCache();
       services.AddMvc();
       //services.AddApiVersioning(
@@ -41,29 +49,33 @@ namespace Itinerary.Api
           "AllowAllOrigins",
           builder => { builder.AllowAnyOrigin(); } ) );
 
-      services.AddDatabaseServices( Configuration );
+      services.AddDatabaseServices( _configuration );
 
-      services.AddIdentity( Configuration );
-      services.AddCustomServices( Configuration );
+      services.AddIdentity( _configuration );
+      services.AddCustomServices( _configuration );
+
+      return services.BuildServiceProvider();
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure( IApplicationBuilder app, IHostingEnvironment env )
+    /// <summary>
+    /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    /// </summary>
+    public void Configure( IApplicationBuilder app )
     {
-      InitializeDatabase( app, env );
+      InitializeDatabase( app );
 
       app.UseCors( "AllowAllOrigins" );
       app.UseAuthentication();
       app.UseMvc();
     }
 
-    private static void InitializeDatabase( IApplicationBuilder app, IHostingEnvironment env )
+    private void InitializeDatabase( IApplicationBuilder app )
     {
       using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
       {
         var itineraryDbContext = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
         itineraryDbContext.Database.Migrate();
-        itineraryDbContext.EnsureSeedData( env );
+        itineraryDbContext.EnsureSeedData( _hostingEnvironment );
       }
     }
   }
