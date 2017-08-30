@@ -13,20 +13,11 @@ export class GooglePlacesService extends BaseService {
   }
 
   public autocomplete(keyword: string): Observable<Autocomplete[]> {
-    const baseUrl = `${super.getBaseServiceUrl()}google/places/autocomplete`;
+    const baseUrl = `${super.getBaseApiUrl()}/places/autocomplete`;
     const request = {
       keyword
     };
     return this.http.get(`${baseUrl}?${super.urlEncode(request)}`)
       .map((response: Response) => response.json() as Autocomplete[]);
-  }
-
-  public location(placeId: string): Observable<Location> {
-    const baseUrl = `${super.getBaseServiceUrl()}google/places/location`;
-    const request = {
-      placeid: placeId
-    };
-    return this.http.get(`${baseUrl}?${super.urlEncode(request)}`)
-      .map((response: Response) => response.json() as Location);
   }
 }

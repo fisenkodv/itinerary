@@ -12,7 +12,7 @@ export class PlacesService extends BaseService {
   }
 
   public search(filter: Filter): Observable<PlaceDetails[]> {
-    const baseUrl = `${super.getBaseServiceUrl()}places/search`;
+    const baseUrl = `${super.getBaseApiUrl()}/places/search`;
     const request = {
       lat: filter.location.latitude,
       lng: filter.location.longitude,
