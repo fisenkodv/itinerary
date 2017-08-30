@@ -5,7 +5,6 @@ using Itinerary.Business.Identity;
 using Itinerary.Business.Identity.Dto;
 using Itinerary.Business.Identity.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Api.Controllers
@@ -17,14 +16,10 @@ namespace Itinerary.Api.Controllers
   public class AccountController : Controller
   {
     private readonly IAccountService _accountService;
-    private readonly UserManager<Data.Entity.User> _userManager;
 
-    public AccountController(
-      IAccountService accountService,
-      UserManager<Data.Entity.User> userManager )
+    public AccountController( IAccountService accountService )
     {
       _accountService = accountService;
-      _userManager = userManager;
     }
 
     [AllowAnonymous]
