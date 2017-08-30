@@ -22,7 +22,7 @@ namespace Itinerary.Api.Controllers
     }
 
     [HttpGet( "[action]" )]
-    public IEnumerable<PlaceDto> Search( double lat, double lng, double distance, double rating, int reviews )
+    public IEnumerable<PlaceDto> Search( double lat, double lng, double distance, double rating )
     {
       IEnumerable<Place> places = _placesService.Search( new Location( lat, lng ), distance, rating );
       return Mapper.Instance.Map<Place, PlaceDto>( places );
