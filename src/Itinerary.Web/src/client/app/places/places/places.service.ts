@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
 import { BaseService } from '../../core/base.service';
@@ -7,7 +7,7 @@ import { Filter, PlaceDetails } from '../models/index';
 
 @Injectable()
 export class PlacesService extends BaseService {
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     super();
   }
 
@@ -20,7 +20,6 @@ export class PlacesService extends BaseService {
       rating: filter.rating,
       reviews: filter.reviews
     };
-    return this.http.get(`${baseUrl}?${super.urlEncode(request)}`)
-      .map((response: Response) => response.json() as PlaceDetails[]);
+    return this.http.get<PlaceDetails[]>(`${baseUrl}?${super.urlEncode(request)}`);
   }
 }

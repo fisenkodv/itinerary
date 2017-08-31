@@ -153,6 +153,7 @@
     "@angular/router": "^4.3.0",
     "@angular/service-worker": "^1.0.0-beta.16",
     "@angular/flex-layout": "^2.0.0-beta.9",
+    "@angular/cdk": "^2.0.0-beta.10",
     "@angular/material": "^2.0.0-beta.10",
     "@agm/core": "^1.0.0-beta.1",
     "@ngx-translate/core": "^7.2.0",

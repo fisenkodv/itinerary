@@ -52,13 +52,7 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
 
   public displayPlace(autocomplete: Autocomplete): string {
     if (autocomplete !== null && autocomplete.placeId) {
-      this.googlePlacesService
-        .location(autocomplete.placeId)
-        .subscribe((location: Location) => {
-          this.store.dispatch(new filterActions.SetLocationAction(location));
-        });
-      // TODO: unsubscribe
-      // .unsubscribe();
+     //TODO: location now must be in autocomplete result item
     }
     return autocomplete ? autocomplete.description : '';
   }

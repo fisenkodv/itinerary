@@ -1,5 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthConfig, AuthConfigConsts, AuthHttp, JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/throw';
@@ -26,7 +27,7 @@ export class AuthService extends BaseService {
   private scope: string = 'offline_access openid';
 
   constructor(
-    private http: Http) {
+    private http: HttpClient) {
     super();
   }
 
@@ -60,17 +61,18 @@ export class AuthService extends BaseService {
       username,
       password
     };
-    const requestOptions = new RequestOptions(new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }));
 
-    return this.http.post(
+    return this.http.post<any>(
       baseUrl,
-      super.urlEncode(request),
-      requestOptions)
-      .map((response: Response) => {
-        this.setToken(response.json());
+      request,
+      {
+        headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+      })
+      .map((response: any) => {
+        //this.setToken(response);
         return new AuthResult(true, null);
       }).catch((error: any) => {
-        const body: any = error.json();
+        const body: any = error;
         return Observable.throw(new AuthResult(false, body.error_description));
       });
   }

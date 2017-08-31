@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Http, RequestOptions } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -38,7 +39,7 @@ export class CoreModule {
         {
           provide: AuthHttp,
           useFactory: AuthHttpServiceFactory,
-          deps: [Http, RequestOptions]
+          deps: [HttpClient, Http, RequestOptions]
         },
         {
           provide: ErrorHandler,
