@@ -55,10 +55,6 @@ export class ProjectConfig extends SeedConfig {
 
     const bundles = [
       {
-        name: '@angular/common/http',
-        main: 'bundles/common-http.umd.js'
-      },
-      {
         name: '@angular/material',
         path: 'node_modules/@angular/material/bundles/material.umd.js'
       },
@@ -113,6 +109,10 @@ export class ProjectConfig extends SeedConfig {
       {
         name: '@angular/cdk/cdk',
         path: 'node_modules/@angular/cdk/bundles/cdk.umd.js'
+      },
+      {
+        name: '@angular/common/http',
+        main: 'bundles/common-http.umd.js'
       },
       {
         name: '@angular/flex-layout',
@@ -177,7 +177,7 @@ export class ProjectConfig extends SeedConfig {
           main: 'tslib.js',
           defaultExtension: 'js'
         }
-      },
+      }
     ];
 
     this.addPackagesBundles(bundles);
