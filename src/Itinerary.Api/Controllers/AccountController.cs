@@ -10,9 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Itinerary.Api.Controllers
 {
   [Authorize]
-  //[ApiVersion( "1.0" )]
-  //[Route( "api/v{version:apiVersion}/[controller]" )]
-  [Route( "api/v1/[controller]" )]
+  [ApiVersion( "1.0" )]
+  [Route( "api/v{version:apiVersion}/[controller]" )]
   public class AccountController : Controller
   {
     private readonly IAccountService _accountService;
