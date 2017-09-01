@@ -9,9 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Itinerary.Api.Controllers
 {
-  //[ApiVersion( "1.0" )]
-  //[Route( "api/v{version:apiVersion}/[controller]" )]
-  [Route( "api/v1/[controller]" )]
+  [ApiVersion( "1.0" )]
+  [Route( "api/v{version:apiVersion}/[controller]" )]
   public class PlacesController : Controller
   {
     private readonly IPlacesService _placesService;

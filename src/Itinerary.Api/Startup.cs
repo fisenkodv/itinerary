@@ -38,12 +38,14 @@ namespace Itinerary.Api
       services.AddCompression( _configuration );
       services.AddMemoryCache();
       services.AddMvc();
-      //services.AddApiVersioning(
-      //  options =>
-      //  {
-      //    options.ReportApiVersions = true;
-      //    options.AssumeDefaultVersionWhenUnspecified = true;
-      //  } );
+
+      services.AddApiVersioning(
+        options =>
+        {
+          options.ReportApiVersions = true;
+          options.AssumeDefaultVersionWhenUnspecified = true;
+        } );
+
       services.AddCors(
         options => options.AddPolicy(
           "AllowAllOrigins",
