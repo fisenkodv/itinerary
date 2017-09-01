@@ -55,8 +55,64 @@ export class ProjectConfig extends SeedConfig {
 
     const bundles = [
       {
+        name: '@angular/common/http',
+        main: 'bundles/common-http.umd.js'
+      },
+      {
         name: '@angular/material',
         path: 'node_modules/@angular/material/bundles/material.umd.js'
+      },
+      {
+        name: '@angular/cdk/a11y',
+        path: 'node_modules/@angular/cdk/bundles/cdk-a11y.umd.js'
+      },
+      {
+        name: '@angular/cdk/bidi',
+        path: 'node_modules/@angular/cdk/bundles/cdk-bidi.umd.js'
+      },
+      {
+        name: '@angular/cdk/coercion',
+        path: 'node_modules/@angular/cdk/bundles/cdk-coercion.umd.js'
+      },
+      {
+        name: '@angular/cdk/collections',
+        path: 'node_modules/@angular/cdk/bundles/cdk-collections.umd.js'
+      },
+      {
+        name: '@angular/cdk/keycodes',
+        path: 'node_modules/@angular/cdk/bundles/cdk-keycodes.umd.js'
+      },
+      {
+        name: '@angular/cdk/observers',
+        path: 'node_modules/@angular/cdk/bundles/cdk-observers.umd.js'
+      },
+      {
+        name: '@angular/cdk/overlay',
+        path: 'node_modules/@angular/cdk/bundles/cdk-overlay.umd.js'
+      },
+      {
+        name: '@angular/cdk/platform',
+        path: 'node_modules/@angular/cdk/bundles/cdk-platform.umd.js'
+      },
+      {
+        name: '@angular/cdk/portal',
+        path: 'node_modules/@angular/cdk/bundles/cdk-portal.umd.js'
+      },
+      {
+        name: '@angular/cdk/rxjs',
+        path: 'node_modules/@angular/cdk/bundles/cdk-rxjs.umd.js'
+      },
+      {
+        name: '@angular/cdk/scrolling',
+        path: 'node_modules/@angular/cdk/bundles/cdk-scrolling.umd.js'
+      },
+      {
+        name: '@angular/cdk/table',
+        path: 'node_modules/@angular/cdk/bundles/cdk-table.umd.js'
+      },
+      {
+        name: '@angular/cdk/cdk',
+        path: 'node_modules/@angular/cdk/bundles/cdk.umd.js'
       },
       {
         name: '@angular/flex-layout',
@@ -113,7 +169,15 @@ export class ProjectConfig extends SeedConfig {
       {
         name: 'reselect',
         path: 'node_modules/reselect/dist/reselect.js'
-      }
+      },
+      {
+        name: 'tslib',
+        path: 'node_modules/tslib',
+        packageMeta: {
+          main: 'tslib.js',
+          defaultExtension: 'js'
+        }
+      },
     ];
 
     this.addPackagesBundles(bundles);

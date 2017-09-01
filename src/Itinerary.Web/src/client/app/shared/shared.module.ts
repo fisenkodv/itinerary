@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,6 +13,7 @@ import { JoinPipe } from './pipes/index';
 
 @NgModule({
   imports: [
+    HttpClientModule,
     CommonModule,
     RouterModule,
     TranslateModule.forChild(),
@@ -20,6 +22,8 @@ import { JoinPipe } from './pipes/index';
   ],
   declarations: [JoinPipe, OnEnterPressDirective],
   exports: [
+    TranslateModule,
+    HttpClientModule,
     FlexLayoutModule,
     MaterialModule,
     JoinPipe,

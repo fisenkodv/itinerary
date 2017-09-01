@@ -1,12 +1,10 @@
 ﻿import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RouterModule, Routes } from '@angular/router';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -37,13 +35,11 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
   declarations: [AppComponent],
   entryComponents: [AppComponent],
   imports: [
+    RouterModule,
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    HttpModule,
-    FlexLayoutModule,
     TranslationModule.forRoot(),
     Effects,
     StoreDevtoolsModule.instrumentOnlyWithExtension(),

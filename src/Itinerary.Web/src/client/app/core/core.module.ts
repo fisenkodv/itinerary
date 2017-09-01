@@ -22,10 +22,13 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule.forChild(),
-    SharedModule
+    SharedModule.forRoot()
   ],
   entryComponents: [],
-  declarations: [NavbarComponent, FooterComponent],
+  declarations: [
+    NavbarComponent,
+    FooterComponent
+  ],
   exports: [
     NavbarComponent,
     FooterComponent
@@ -36,15 +39,15 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        {
-          provide: AuthHttp,
-          useFactory: AuthHttpServiceFactory,
-          deps: [HttpClient, Http, RequestOptions]
-        },
-        {
-          provide: ErrorHandler,
-          useClass: AuthErrorHandler
-        },
+        // {
+        //   provide: AuthHttp,
+        //   useFactory: AuthHttpServiceFactory,
+        //   deps: [HttpClient, Http, RequestOptions]
+        // },
+        // {
+        //   provide: ErrorHandler,
+        //   useClass: AuthErrorHandler
+        // },
         AuthGuard,
         AuthService
       ]

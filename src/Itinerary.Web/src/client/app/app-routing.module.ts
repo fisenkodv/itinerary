@@ -15,7 +15,10 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [Page404Component, SignInComponent],
-  imports: [RouterModule.forRoot(routes), TranslateModule.forChild()],
+  imports: [
+    RouterModule.forRoot(routes/*,{ enableTracing: true}*/),
+    TranslateModule.forChild()
+  ],
   exports: [RouterModule],
   providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }]
 })

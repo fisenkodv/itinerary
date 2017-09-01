@@ -18,9 +18,10 @@ export class NavbarComponent {
   public showProgressBar: Observable<boolean>;
 
   constructor(
-    private authService: AuthService,
-    private store: Store<IAppState>) {
-    this.showProgressBar = this.store.select(fromPlaces.getLoading);
+    //private authService: AuthService,
+    //private store: Store<IAppState>
+  ) {
+    //this.showProgressBar = this.store.select(fromPlaces.getLoading);
   }
 
   public signout() {
@@ -28,6 +29,6 @@ export class NavbarComponent {
   }
 
   public get isSignedIn(): boolean {
-    return !this.authService.isTokenExpired();
+    return false;//return !this.authService.isTokenExpired();
   }
 }
