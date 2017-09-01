@@ -51,9 +51,9 @@ namespace Itinerary.Api
           "AllowAllOrigins",
           builder => { builder.AllowAnyOrigin(); } ) );
 
-      services.AddDatabaseServices( _configuration );
+      services.AddPersistentStorage( _configuration );
 
-      services.AddIdentity( _configuration );
+      services.AddSecurity( _configuration );
       services.AddCustomServices( _configuration );
 
       return services.BuildServiceProvider();
