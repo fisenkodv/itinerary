@@ -2,7 +2,7 @@ import { Config } from '../shared/config/env.config';
 
 export abstract class BaseService {
   protected getBaseApiUrl(): string {
-    return `${Config.API}/v1`;
+    return `${Config.API}/api/v1`;
   }
 
   protected urlEncode(obj: any): string {
