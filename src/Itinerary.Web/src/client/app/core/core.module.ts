@@ -1,10 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Http, RequestOptions } from '@angular/http';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { AuthHttp } from 'angular2-jwt';
 
 import { SharedModule } from '../shared/shared.module';
@@ -17,11 +11,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule.forChild(),
     SharedModule.forRoot()
   ],
   entryComponents: [],
@@ -30,6 +19,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     FooterComponent
   ],
   exports: [
+    SharedModule,
     NavbarComponent,
     FooterComponent
   ]
