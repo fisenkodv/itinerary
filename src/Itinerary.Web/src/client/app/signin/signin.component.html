@@ -1,16 +1,16 @@
 <h1>{{'signin.title' | translate }}</h1>
-<!-- <div >
+<div>
   <form #form="ngForm">
-    <md-input-container class="input--fullwidth">
+    <md-form-field class="input--fullwidth">
       <input name="username" type="email" required mdInput [(ngModel)]="username" (onEnter)="signIn(form)">
       <md-placeholder>{{'signin.username.placeholder' | translate }}</md-placeholder>
-    </md-input-container>
-    <md-input-container class="input--fullwidth">
+    </md-form-field>
+    <md-form-field class="input--fullwidth">
       <input name="password" type="password" required mdInput [(ngModel)]="password" (onEnter)="signIn(form)">
       <md-placeholder>{{'signin.password.placeholder' | translate }}</md-placeholder>
-    </md-input-container>
+    </md-form-field>
   </form>
-</div> -->
+</div>
 <div>
   <button md-raised-button color="primary" (click)="signIn(form)">{{'signin.signin-button.label' | translate }}</button>
   <span class="error-message">{{error}}</span>
