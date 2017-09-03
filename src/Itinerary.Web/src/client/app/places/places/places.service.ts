@@ -17,8 +17,7 @@ export class PlacesService extends BaseService {
       lat: filter.location.latitude,
       lng: filter.location.longitude,
       distance: filter.distance,
-      rating: filter.rating,
-      reviews: filter.reviews
+      rating: filter.rating
     };
     return this.http.get<PlaceDetails[]>(`${baseUrl}?${super.urlEncode(request)}`);
   }

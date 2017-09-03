@@ -65,10 +65,6 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
     this.store.dispatch(new filterActions.SetRatingAction(value));
   }
 
-  public changeReviewsHandler({ value }: any) {
-    this.store.dispatch(new filterActions.SetReviewsAction(value));
-  }
-
   private setCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {

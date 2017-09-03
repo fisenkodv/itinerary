@@ -27,12 +27,4 @@
       </md-slider>
     </div>
   </section>
-
-  <section fxFlex="grow">
-    <div fxLayout="row">
-      <label class="search-panel__label" fxFlexAlign="center" fxFlex="nogrow">{{'places.search.review.label' | translate }}</label>
-      <md-slider fxFlex="grow" [min]="0" [max]="500" [step]="50" [thumb-label]="true" [vertical]="false" [value]="(filter | async)?.reviews" (change)="changeReviewsHandler($event)">
-      </md-slider>
-    </div>
-  </section>
 </section>

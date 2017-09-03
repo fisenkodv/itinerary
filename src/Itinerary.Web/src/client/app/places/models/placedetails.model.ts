@@ -7,7 +7,7 @@ export class PlaceDetails {
     public reviews: number,
     public categories: string[],
     public url: string,
-    public imgUrl: string,
+    public imageUrl: string,
     public location: Location) {
   }
 }
