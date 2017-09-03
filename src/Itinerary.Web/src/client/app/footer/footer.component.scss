@@ -1,6 +1,6 @@
 ﻿@import '@angular/material/theming';
-@import '../../../scss/theme';
-@import '../../../scss/variables';
+@import '../../scss/theme';
+@import '../../scss/variables';
 
 @mixin _mat-footer-color($palette) {
   background: mat-color($palette);

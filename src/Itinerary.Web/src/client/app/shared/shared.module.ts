@@ -13,14 +13,7 @@ import { OnEnterPressDirective } from './directives/index';
 import { JoinPipe } from './pipes/index';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    HttpClientModule,
-    FlexLayoutModule,
-    MaterialModule,
-    TranslateModule.forChild()
-  ],
+  imports: [],
   declarations: [JoinPipe, OnEnterPressDirective],
   exports: [
     CommonModule,

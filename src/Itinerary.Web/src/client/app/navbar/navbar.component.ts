@@ -3,10 +3,10 @@ import { Observable } from 'rxjs/Rx';
 
 import { Store } from '@ngrx/store';
 
-import * as fromPlaces from '../../places/redux/index';
-import { IAppState } from '../../redux/app.state';
+import * as fromPlaces from '../places/redux/index';
+import { IAppState } from '../redux/app.state';
 
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../core/auth/auth.service';
 
 @Component({
   moduleId: module.id,

@@ -1,28 +1,15 @@
 import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { AuthHttp } from 'angular2-jwt';
 
-import { SharedModule } from '../shared/shared.module';
-
 import { AuthErrorHandler } from './auth/auth-error.handler';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  imports: [
-    SharedModule.forRoot()
-  ],
+  imports: [],
   entryComponents: [],
-  declarations: [
-    NavbarComponent,
-    FooterComponent
-  ],
-  exports: [
-    SharedModule,
-    NavbarComponent,
-    FooterComponent
-  ]
+  declarations: [],
+  exports: []
 })
 export class CoreModule {
   public static forRoot(): ModuleWithProviders {

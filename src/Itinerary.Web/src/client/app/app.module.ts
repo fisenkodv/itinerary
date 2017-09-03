@@ -22,7 +22,9 @@ import { TravelsModule } from './travels/travels.module';
 
 import { AppComponent } from './app.component';
 import { SignInComponent } from './signin/signin.component';
-
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
+import { SharedModule } from './shared/shared.module';
 let DevSpecificModules: any = [];
 
 if (String('<%= BUILD_TYPE %>') === 'dev') {
@@ -30,7 +32,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavbarComponent, FooterComponent],
   entryComponents: [AppComponent],
   imports: [
     BrowserAnimationsModule,
@@ -41,6 +43,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
     StoreModule.provideStore(AppReducer, InitialState),
     RouterStoreModule.connectRouter(),
     CoreModule.forRoot(),
+    SharedModule,
     HomeModule,
     PlacesModule,
     TravelsModule,
