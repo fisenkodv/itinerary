@@ -51,10 +51,10 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
   }
 
   public displayPlace(autocomplete: Autocomplete): string {
-    if (autocomplete !== null && autocomplete.placeId) {
-     //TODO: location now must be in autocomplete result item
+    if (autocomplete !== null && autocomplete.name) {
+      this.store.dispatch(new filterActions.SetLocationAction(autocomplete.location));
     }
-    return autocomplete ? autocomplete.description : '';
+    return autocomplete ? autocomplete.name : '';
   }
 
   public changeDistanceHandler({ value }: any) {

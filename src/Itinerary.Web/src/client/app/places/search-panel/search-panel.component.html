@@ -8,7 +8,7 @@
 
   <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayPlace.bind(this)">
     <md-option *ngFor="let place of filteredPlaces | async" [value]="place">
-      {{ place.description }}
+      {{ place.name }}
     </md-option>
   </md-autocomplete>
 
