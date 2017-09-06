@@ -57,8 +57,7 @@ export class AuthService extends BaseService {
 
     return this.http.post<any>(
       baseUrl,
-      request
-    )
+      request)
       .map((response: any) => {
         this.setToken(response);
         return new AuthResult(true, null);
