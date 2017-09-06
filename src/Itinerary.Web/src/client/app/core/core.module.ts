@@ -1,4 +1,5 @@
 import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 
 import { AuthErrorHandler } from './auth/auth-error.handler';
@@ -16,15 +17,15 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        // {
-        //   provide: AuthHttp,
-        //   useFactory: AuthHttpServiceFactory,
-        //   deps: [HttpClient, Http, RequestOptions]
-        // },
-        // {
-        //   provide: ErrorHandler,
-        //   useClass: AuthErrorHandler
-        // },
+        {
+          provide: AuthHttp,
+          useFactory: AuthHttpServiceFactory,
+          deps: [Http, RequestOptions]
+        },
+        {
+          provide: ErrorHandler,
+          useClass: AuthErrorHandler
+        },
         AuthGuard,
         AuthService
       ]

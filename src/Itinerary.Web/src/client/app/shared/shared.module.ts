@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -18,6 +19,7 @@ import { JoinPipe } from './pipes/index';
   exports: [
     CommonModule,
     RouterModule,
+    HttpModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

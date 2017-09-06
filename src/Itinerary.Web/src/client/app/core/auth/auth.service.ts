@@ -22,10 +22,6 @@ export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
 
 @Injectable()
 export class AuthService extends BaseService {
-  private clientId: string = 'itineraryWebClient';
-  private grantType: string = 'password';
-  private scope: string = 'offline_access openid';
-
   constructor(
     private http: HttpClient) {
     super();
@@ -55,21 +51,16 @@ export class AuthService extends BaseService {
   public signin(username: string, password: string): Observable<AuthResult> {
     const baseUrl = `${super.getBaseApiUrl()}/account/token`;
     const request: any = {
-      client_id: this.clientId,
-      grant_type: this.grantType,
-      scope: this.scope,
       username,
       password
     };
 
     return this.http.post<any>(
       baseUrl,
-      request,
-      {
-        headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-      })
+      request
+    )
       .map((response: any) => {
-        //this.setToken(response);
+        this.setToken(response);
         return new AuthResult(true, null);
       }).catch((error: any) => {
         const body: any = error;
