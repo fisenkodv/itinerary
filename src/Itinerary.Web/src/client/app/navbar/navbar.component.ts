@@ -19,9 +19,9 @@ export class NavbarComponent {
 
   constructor(
     //private authService: AuthService,
-    //private store: Store<IAppState>
+    private store: Store<IAppState>
   ) {
-    //this.showProgressBar = this.store.select(fromPlaces.getLoading);
+    this.showProgressBar = this.store.select(fromPlaces.getLoading);
   }
 
   public signout() {
