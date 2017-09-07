@@ -1,10 +1,10 @@
-import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { AuthHttp } from 'angular2-jwt';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AuthErrorHandler } from './auth/auth-error.handler';
+import { AuthErrorInterceptor } from './auth/auth-error.interceptor';
+import { JWTInterceptor } from './auth/jwt.interceptor';
 import { AuthGuard } from './auth/auth.guard';
-import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   imports: [],
@@ -18,13 +18,14 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         {
-          provide: AuthHttp,
-          useFactory: AuthHttpServiceFactory,
-          deps: [Http, RequestOptions]
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthErrorInterceptor,
+          multi: true
         },
         {
-          provide: ErrorHandler,
-          useClass: AuthErrorHandler
+          provide: HTTP_INTERCEPTORS,
+          useClass: JWTInterceptor,
+          multi: true
         },
         AuthGuard,
         AuthService

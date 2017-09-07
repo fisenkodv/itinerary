@@ -1,7 +1,6 @@
-﻿import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthConfig, AuthConfigConsts, AuthHttp, JwtHelper } from 'angular2-jwt';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AuthConfigConsts, JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/timer';
@@ -11,14 +10,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { BaseService } from '../base.service';
 import { AuthResult } from './auth-result.model';
-
-export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig({
-    tokenName: 'token',
-    tokenGetter: (() => localStorage.getItem(AuthConfigConsts.DEFAULT_TOKEN_NAME)),
-    globalHeaders: [{ 'Content-Type': 'application/json' }]
-  }), http, options);
-}
+import { AuthToken } from './auth-token.model';
 
 @Injectable()
 export class AuthService extends BaseService {
@@ -55,11 +47,11 @@ export class AuthService extends BaseService {
       password
     };
 
-    return this.http.post<any>(
+    return this.http.post<AuthToken>(
       baseUrl,
       request)
-      .map((response: any) => {
-        this.setToken(response);
+      .map((response: AuthToken) => {
+        this.setToken(response.token);
         return new AuthResult(true, null);
       }).catch((error: any) => {
         const body: any = error;

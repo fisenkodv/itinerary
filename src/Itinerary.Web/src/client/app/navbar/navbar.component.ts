@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { Store } from '@ngrx/store';
@@ -18,7 +18,7 @@ export class NavbarComponent {
   public showProgressBar: Observable<boolean>;
 
   constructor(
-    //private authService: AuthService,
+    private authService: AuthService,
     private store: Store<IAppState>
   ) {
     this.showProgressBar = this.store.select(fromPlaces.getLoading);
@@ -29,6 +29,6 @@ export class NavbarComponent {
   }
 
   public get isSignedIn(): boolean {
-    return false;//return !this.authService.isTokenExpired();
+    return !this.authService.isTokenExpired();
   }
 }
