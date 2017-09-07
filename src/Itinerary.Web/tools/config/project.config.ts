@@ -112,7 +112,7 @@ export class ProjectConfig extends SeedConfig {
       },
       {
         name: '@angular/common/http',
-        main: 'bundles/common-http.umd.js'
+        path: 'node_modules/@angular/common/bundles/common-http.umd.js'
       },
       {
         name: '@angular/flex-layout',
