@@ -1,6 +1,6 @@
-﻿import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions, Response } from '@angular/http';
-import { AuthConfig, AuthConfigConsts, AuthHttp, JwtHelper } from 'angular2-jwt';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AuthConfigConsts, JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/timer';
@@ -10,23 +10,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { BaseService } from '../base.service';
 import { AuthResult } from './auth-result.model';
-
-export function AuthHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig({
-    tokenName: 'token',
-    tokenGetter: (() => localStorage.getItem(AuthConfigConsts.DEFAULT_TOKEN_NAME)),
-    globalHeaders: [{ 'Content-Type': 'application/json' }]
-  }), http, options);
-}
+import { AuthToken } from './auth-token.model';
 
 @Injectable()
 export class AuthService extends BaseService {
-  private clientId: string = 'itineraryWebClient';
-  private grantType: string = 'password';
-  private scope: string = 'openid';
-
   constructor(
-    private http: Http) {
+    private http: HttpClient) {
     super();
   }
 
@@ -52,27 +41,20 @@ export class AuthService extends BaseService {
   }
 
   public signin(username: string, password: string): Observable<AuthResult> {
-    const baseUrl = `${super.getBaseServiceUrl(false)}connect/token`;
+    const baseUrl = `${super.getBaseApiUrl()}/account/token`;
     const request: any = {
-      client_id: this.clientId,
-      grant_type: this.grantType,
-      scope: this.scope,
       username,
       password
     };
-    const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    const requestOptions = new RequestOptions({ headers });
 
-    return this.http.post(
+    return this.http.post<AuthToken>(
       baseUrl,
-      super.urlEncode(request),
-      requestOptions)
-      .map((response: Response) => {
-        const token = response.json().access_token;
-        this.setToken(token);
+      request)
+      .map((response: AuthToken) => {
+        this.setToken(response.token);
         return new AuthResult(true, null);
       }).catch((error: any) => {
-        const body: any = error.json();
+        const body: any = error;
         return Observable.throw(new AuthResult(false, body.error_description));
       });
   }

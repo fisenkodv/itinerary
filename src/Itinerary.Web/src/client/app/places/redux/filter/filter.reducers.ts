@@ -5,14 +5,12 @@ export interface IState {
   location: Location;
   distance: number;
   rating: number;
-  reviews: number;
 }
 
 export const initialState: IState = {
   location: Location.createDefault(),
   distance: 50,
-  rating: 4.0,
-  reviews: 250
+  rating: 4.0
 };
 
 export function reducer(state: IState = initialState, action: filterActions.Actions): IState {
@@ -23,8 +21,6 @@ export function reducer(state: IState = initialState, action: filterActions.Acti
       return Object.assign({}, state, {isDefault: false, distance: action.payload});
     case filterActions.SET_RATING:
       return Object.assign({}, state, {isDefault: false, rating: action.payload});
-    case filterActions.SET_REVIEWS:
-      return Object.assign({}, state, {isDefault: false, reviews: action.payload});
     default:
       return state;
   }
@@ -33,5 +29,4 @@ export function reducer(state: IState = initialState, action: filterActions.Acti
 export const getLocation = (state: IState) => state.location;
 export const getDistance = (state: IState) => state.distance;
 export const getRating = (state: IState) => state.rating;
-export const getReviews = (state: IState) => state.reviews;
-export const getFilter = (state: IState) => new Filter(state.location, state.distance, state.rating, state.reviews);
+export const getFilter = (state: IState) => new Filter(state.location, state.distance, state.rating);

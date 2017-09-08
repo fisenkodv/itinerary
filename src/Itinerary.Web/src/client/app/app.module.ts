@@ -1,8 +1,5 @@
 ﻿import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -24,7 +21,10 @@ import { TranslationModule } from './translation.module';
 import { TravelsModule } from './travels/travels.module';
 
 import { AppComponent } from './app.component';
-
+import { SignInComponent } from './signin/signin.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
+import { SharedModule } from './shared/shared.module';
 let DevSpecificModules: any = [];
 
 if (String('<%= BUILD_TYPE %>') === 'dev') {
@@ -32,21 +32,18 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavbarComponent, FooterComponent],
   entryComponents: [AppComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    FlexLayoutModule,
     TranslationModule.forRoot(),
     Effects,
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     StoreModule.provideStore(AppReducer, InitialState),
     RouterStoreModule.connectRouter(),
     CoreModule.forRoot(),
+    SharedModule,
     HomeModule,
     PlacesModule,
     TravelsModule,

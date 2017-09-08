@@ -4,7 +4,6 @@ import { Location } from '../../models/index';
 export const SET_LOCATION = '[Filter] Set location';
 export const SET_DISTANCE = '[Filter] Set distance';
 export const SET_RATING = '[Filter] Set rating';
-export const SET_REVIEWS = '[Filter] Set review';
 
 export class SetLocationAction implements Action {
   public readonly type = SET_LOCATION;
@@ -24,13 +23,6 @@ export class SetRatingAction implements Action {
   constructor(public payload: number) { }
 }
 
-export class SetReviewsAction implements Action {
-  public readonly type = SET_REVIEWS;
-
-  constructor(public payload: number) { }
-}
-
 export type Actions = SetLocationAction
   | SetDistanceAction
-  | SetRatingAction
-  | SetReviewsAction;
+  | SetRatingAction;

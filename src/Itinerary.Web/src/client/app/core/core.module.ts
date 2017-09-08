@@ -1,34 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Http, RequestOptions } from '@angular/http';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { AuthHttp } from 'angular2-jwt';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { SharedModule } from '../shared/shared.module';
-
-import { AuthErrorHandler } from './auth/auth-error.handler';
+import { AuthErrorInterceptor } from './auth/auth-error.interceptor';
+import { JWTInterceptor } from './auth/jwt.interceptor';
 import { AuthGuard } from './auth/auth.guard';
-import { AuthHttpServiceFactory, AuthService } from './auth/auth.service';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule.forChild(),
-    SharedModule
-  ],
+  imports: [],
   entryComponents: [],
-  declarations: [NavbarComponent, FooterComponent],
-  exports: [
-    NavbarComponent,
-    FooterComponent
-  ]
+  declarations: [],
+  exports: []
 })
 export class CoreModule {
   public static forRoot(): ModuleWithProviders {
@@ -36,13 +18,14 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         {
-          provide: AuthHttp,
-          useFactory: AuthHttpServiceFactory,
-          deps: [Http, RequestOptions]
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthErrorInterceptor,
+          multi: true
         },
         {
-          provide: ErrorHandler,
-          useClass: AuthErrorHandler
+          provide: HTTP_INTERCEPTORS,
+          useClass: JWTInterceptor,
+          multi: true
         },
         AuthGuard,
         AuthService

@@ -1,98 +1,83 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using IdentityServer4.EntityFramework.DbContexts;
+using System;
 using Itinerary.Api.Extensions;
-using Itinerary.DataAccess.EntityFramework;
-using Itinerary.DataAccess.EntityFramework.Extensions;
+using Itinerary.Data.EntityFramework;
+using Itinerary.Data.EntityFramework.Extensions;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Itinerary.Api
 {
-  public class Startup
+  [UsedImplicitly]
+  public class Startup : IStartup
   {
-    public IConfigurationRoot Configuration { get; }
+    private readonly IHostingEnvironment _hostingEnvironment;
+    private readonly IConfiguration _configuration;
 
-    public Startup( IHostingEnvironment env, ILoggerFactory loggerFactory )
+    public Startup(
+      IHostingEnvironment hostingEnvironment,
+      IConfiguration configuration,
+      ILoggerFactory loggerFactory )
     {
-      Configuration = new ConfigurationBuilder()
-        .SetBasePath( env.ContentRootPath )
-        .AddJsonFile( "appsettings.json", optional: true, reloadOnChange: true )
-        .AddJsonFile( $"appsettings.{env.EnvironmentName}.json", optional: true )
-        .AddEnvironmentVariables()
-        .Build();
+      _hostingEnvironment = hostingEnvironment;
+      _configuration = configuration;
 
-      loggerFactory.AddConsole( Configuration.GetSection( "Logging" ) );
+      loggerFactory.AddConsole( _configuration.GetSection( "Logging" ) );
       loggerFactory.AddDebug();
     }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices( IServiceCollection services )
+    /// <summary>
+    /// This method gets called by the runtime. Use this method to add services to the container.
+    /// </summary>
+    public IServiceProvider ConfigureServices( IServiceCollection services )
     {
-      services.AddCompression( Configuration );
+      services.AddCompression( _configuration );
       services.AddMemoryCache();
       services.AddMvc();
+
       services.AddApiVersioning(
         options =>
         {
           options.ReportApiVersions = true;
           options.AssumeDefaultVersionWhenUnspecified = true;
         } );
+
       services.AddCors(
         options => options.AddPolicy(
           "AllowAllOrigins",
           builder => { builder.AllowAnyOrigin(); } ) );
 
-      services.AddDatabaseServices( Configuration );
-      services.AddIdentityService();
-      services.AddIdentityServerService( Configuration );
-      services.AddCustomServices( Configuration );
+      services.AddPersistentStorage( _configuration );
+
+      services.AddSecurity( _configuration );
+      services.AddCustomServices( _configuration );
+
+      return services.BuildServiceProvider();
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure( IApplicationBuilder app, IHostingEnvironment env )
+    /// <summary>
+    /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    /// </summary>
+    public void Configure( IApplicationBuilder app )
     {
-      if ( env.IsDevelopment() )
-      {
-        InitializeDatabase( app );
-      }
+      InitializeDatabase( app );
+
       app.UseCors( "AllowAllOrigins" );
-      app.UseIdentity();
-
-      JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-      app.UseIdentityServer();
-      var tokenValidationParameters =
-        new TokenValidationParameters
-        {
-          ValidateIssuerSigningKey = true,
-          ValidateIssuer = false,
-          ValidateAudience = false,
-          IssuerSigningKey = CertificatesExtensions.SigningKey
-        };
-
-      app.UseJwtBearerAuthentication(
-        new JwtBearerOptions
-        {
-          AutomaticAuthenticate = true,
-          TokenValidationParameters = tokenValidationParameters
-        } );
-
+      app.UseAuthentication();
       app.UseMvc();
     }
 
-    private static void InitializeDatabase( IApplicationBuilder app )
+    private void InitializeDatabase( IApplicationBuilder app )
     {
       using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
       {
-        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().Database.Migrate();
-        serviceScope.ServiceProvider.GetService<ItineraryDbContext>().EnsureSeedData();
-        serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-        serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().Database.Migrate();
-        serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>().EnsureSeedData();
+        var itineraryDbContext = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
+        itineraryDbContext.Database.Migrate();
+        itineraryDbContext.EnsureSeedData( _hostingEnvironment );
       }
     }
   }

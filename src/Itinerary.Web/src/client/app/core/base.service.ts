@@ -2,9 +2,8 @@ import { URLSearchParams } from '@angular/http'
 import { Config } from '../shared/config/env.config';
 
 export abstract class BaseService {
-  protected getBaseServiceUrl(appendVersion: boolean = true): string {
-    const version = appendVersion ? `api/${Config.APIVersion}/` : '';
-    return `${Config.API}${version}`;
+  protected getBaseApiUrl(): string {
+    return `${Config.API}/api/v1`;
   }
 
   protected urlEncode(obj: any): string {

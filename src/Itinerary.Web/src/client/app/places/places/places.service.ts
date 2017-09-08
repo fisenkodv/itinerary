@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
 import { BaseService } from '../../core/base.service';
@@ -7,20 +7,18 @@ import { Filter, PlaceDetails } from '../models/index';
 
 @Injectable()
 export class PlacesService extends BaseService {
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     super();
   }
 
   public search(filter: Filter): Observable<PlaceDetails[]> {
-    const baseUrl = `${super.getBaseServiceUrl()}places/search`;
+    const baseUrl = `${super.getBaseApiUrl()}/places/search`;
     const request = {
       lat: filter.location.latitude,
       lng: filter.location.longitude,
       distance: filter.distance,
-      rating: filter.rating,
-      reviews: filter.reviews
+      rating: filter.rating
     };
-    return this.http.get(`${baseUrl}?${super.urlEncode(request)}`)
-      .map((response: Response) => response.json() as PlaceDetails[]);
+    return this.http.get<PlaceDetails[]>(`${baseUrl}?${super.urlEncode(request)}`);
   }
 }

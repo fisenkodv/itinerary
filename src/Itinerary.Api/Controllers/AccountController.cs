@@ -1,8 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
-using Itinerary.Business.Services.Account;
-using Itinerary.Common.Models;
-using Itinerary.Web.ViewModels;
+using Itinerary.Api.ViewModels;
+using Itinerary.Business.Identity;
+using Itinerary.Business.Identity.Dto;
+using Itinerary.Business.Identity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,16 +25,31 @@ namespace Itinerary.Api.Controllers
     [HttpPost( "[action]" )]
     public async Task<IActionResult> Register( [FromBody] RegisterViewModel model )
     {
-      ApiCallStatus result;
+      RegisterResult result;
       if ( ModelState.IsValid )
-        result = await _accountService.Register( model.Email, model.Password );
+        result = await _accountService.Register( new User { Email = model.Email, Password = model.Password } );
       else
-        result = new ApiCallStatus(
+        result = new RegisterResult(
           false, ModelState.Values.SelectMany( x => x.Errors ).Select( x => x.ErrorMessage ) );
 
       return result.Succeeded
                ? ( IActionResult ) Ok( result )
                : BadRequest( result );
+    }
+
+    [AllowAnonymous]
+    [HttpPost( "token" )]
+    public async Task<IActionResult> Token( [FromBody] TokenViewModel model )
+    {
+      if ( !ModelState.IsValid )
+        return BadRequest();
+
+      JwtToken token =
+        await _accountService.Token( new User { Username = model.Username, Password = model.Password } );
+
+      return token == null
+               ? ( IActionResult ) BadRequest()
+               : Ok( token );
     }
   }
 }

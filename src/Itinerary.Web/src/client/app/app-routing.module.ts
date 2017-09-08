@@ -1,7 +1,6 @@
 ﻿import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -17,7 +16,10 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [Page404Component, SignInComponent],
-  imports: [RouterModule.forRoot(routes), TranslateModule.forChild(), SharedModule],
+  imports: [
+    SharedModule,
+    RouterModule.forRoot(routes/*,{ enableTracing: true}*/),
+  ],
   exports: [RouterModule],
   providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }]
 })

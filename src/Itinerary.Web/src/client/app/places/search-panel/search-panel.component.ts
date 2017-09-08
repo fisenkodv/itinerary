@@ -51,16 +51,10 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
   }
 
   public displayPlace(autocomplete: Autocomplete): string {
-    if (autocomplete !== null && autocomplete.placeId) {
-      this.googlePlacesService
-        .location(autocomplete.placeId)
-        .subscribe((location: Location) => {
-          this.store.dispatch(new filterActions.SetLocationAction(location));
-        });
-      // TODO: unsubscribe
-      // .unsubscribe();
+    if (autocomplete !== null && autocomplete.name) {
+      this.store.dispatch(new filterActions.SetLocationAction(autocomplete.location));
     }
-    return autocomplete ? autocomplete.description : '';
+    return autocomplete ? autocomplete.name : '';
   }
 
   public changeDistanceHandler({ value }: any) {
@@ -69,10 +63,6 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
 
   public changeRatingHandler({ value }: any) {
     this.store.dispatch(new filterActions.SetRatingAction(value));
-  }
-
-  public changeReviewsHandler({ value }: any) {
-    this.store.dispatch(new filterActions.SetReviewsAction(value));
   }
 
   private setCurrentPosition() {

@@ -1,9 +1,5 @@
 ﻿import { AgmCoreModule } from '@agm/core';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { TranslateModule } from '@ngx-translate/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { PlacesRoutingModule } from './places-routing.module';
@@ -19,11 +15,6 @@ import { GooglePlacesService, PlacesService } from './places/index';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    TranslateModule.forChild(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M',
       libraries: ['places']
@@ -31,13 +22,7 @@ import { GooglePlacesService, PlacesService } from './places/index';
     SharedModule,
     PlacesRoutingModule
   ],
-  exports: [
-    PlacesComponent,
-    SearchPanelComponent,
-    PlaceListComponent,
-    PlaceListItemComponent,
-    MapComponent
-  ],
+  exports: [],
   declarations: [
     PlacesComponent,
     SearchPanelComponent,

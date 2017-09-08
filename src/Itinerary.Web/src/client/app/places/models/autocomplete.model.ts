@@ -1,6 +1,8 @@
+import { Location } from './location.model';
+
 export class Autocomplete {
   constructor(
-    public placeId: string,
-    public description: string) {
+    public name: string,
+    public location: Location) {
   }
 }

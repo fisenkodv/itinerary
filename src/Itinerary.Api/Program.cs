@@ -1,6 +1,5 @@
-﻿using System.IO;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 
 namespace Itinerary.Api
 {
@@ -8,20 +7,13 @@ namespace Itinerary.Api
   {
     public static void Main( string[] args )
     {
-      IConfigurationRoot configuration = new ConfigurationBuilder()
-        .AddCommandLine( args )
-        .Build();
-
-      IWebHost host = new WebHostBuilder()
-        .UseKestrel()
-        .UseContentRoot( Directory.GetCurrentDirectory() )
-        .UseConfiguration( configuration )
-        .UseIISIntegration()
-        .UseStartup<Startup>()
-        .UseApplicationInsights()
-        .Build();
-
-      host.Run();
+      BuildWebHost( args ).Run();
     }
+
+    private static IWebHost BuildWebHost( string[] args ) =>
+      WebHost.CreateDefaultBuilder( args )
+             .UseStartup<Startup>()
+             .UseApplicationInsights()
+             .Build();
   }
 }
