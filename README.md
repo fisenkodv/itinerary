@@ -61,7 +61,7 @@ __From Digital Ocean to dev environment__:
 
 macOS, Linux: 
 ```
-rsync -a root@1itinerary.site:/etc/nginx/nginx.conf .
+rsync -a root@itinerary.site:/etc/nginx/nginx.conf .
 ```
 Windows:
 ```
@@ -117,7 +117,7 @@ supervisor ```/etc/supervisor/conf.d/itinerary.conf```
 [API Credentials](https://console.cloud.google.com/apis/credentials?project=itinerary-1488041928048)
 
 # Guidelines ##
-1. [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)
+* [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)
 
 # Links
 * [Microsoft ASP.NET Core JavaScript Services](https://github.com/aspnet/JavaScriptServices)
