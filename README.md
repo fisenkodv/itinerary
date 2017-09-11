@@ -97,24 +97,24 @@ All certificates are placed: ```/etc/letsencrypt/live/itinerary.site/```
 To generate certificates:
 * Comment line
 ```
-return                      301 https://$host$request_uri;
+return 301 https://$host$request_uri;
 ``` 
 in nginx.config
 * Restart nginx ```service nginx restart```
-* Call
+* Execute
 ```
 letsencrypt certonly  --webroot --webroot-path=/var/www/itinerary_cert -d itinerary.site -d www.itinerary.site -d itinerary.reise -d www.itinerary.reise
 ```
 * Uncomment line above
 * Restart nginx
 
-### Pathes
+### Path
 nginx ```/etc/nginx/nginx.conf```
 
 supervisor ```/etc/supervisor/conf.d/itinerary.conf```
 
 # Google API
-[API Credentials](https://console.cloud.google.com/apis/credentials?project=itinerary-1488041928048)
+* [API Credentials](https://console.cloud.google.com/apis/credentials?project=itinerary-1488041928048)
 
 # Guidelines ##
 * [Overall structural guidelines](https://angular.io/docs/ts/latest/guide/style-guide.html#!#file-tree)
