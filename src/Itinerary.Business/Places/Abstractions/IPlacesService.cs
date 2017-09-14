@@ -8,8 +8,8 @@ namespace Itinerary.Business.Places.Abstractions
     IEnumerable<Place> Search(
       Location location,
       double distance,
-      double rating );
+      double rating);
 
-    IEnumerable<PlaceLocation> Search( string keyword );
+    IEnumerable<PlaceLocation> Search(string keyword);
   }
 }

@@ -4,10 +4,10 @@ namespace Itinerary.GoogleApiClient.Places.Common.Entities
 {
   public class ViewPort
   {
-    [JsonProperty( propertyName: "northeast" )]
+    [JsonProperty(propertyName: "northeast")]
     public LocationPoint NorthEast { get; set; }
 
-    [JsonProperty( propertyName: "southwest" )]
+    [JsonProperty(propertyName: "southwest")]
     public LocationPoint SouthWest { get; set; }
   }
 }

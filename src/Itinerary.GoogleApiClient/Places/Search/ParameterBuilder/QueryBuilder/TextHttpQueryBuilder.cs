@@ -8,50 +8,50 @@ namespace Itinerary.GoogleApiClient.Places.Search.ParameterBuilder.QueryBuilder
   {
     private const string BaseUrl = "https://maps.googleapis.com/maps/api/place/textsearch/json?";
 
-    public TextHttpQueryBuilder( string apiKey )
-      : base( BaseUrl, apiKey )
+    public TextHttpQueryBuilder(string apiKey)
+      : base(BaseUrl, apiKey)
     {
     }
 
-    public ITextHttpQueryBuilder Query( string query )
+    public ITextHttpQueryBuilder Query(string query)
     {
-      SetQuery( query );
+      SetQuery(query);
       return this;
     }
 
-    public ITextHttpQueryBuilder Location( double latitude, double longitude )
+    public ITextHttpQueryBuilder Location(double latitude, double longitude)
     {
-      SetLocation( latitude, longitude );
+      SetLocation(latitude, longitude);
       return this;
     }
 
-    public ITextHttpQueryBuilder Radius( int radius )
+    public ITextHttpQueryBuilder Radius(int radius)
     {
-      SetRadius( radius );
+      SetRadius(radius);
       return this;
     }
 
-    public ITextHttpQueryBuilder Language( Languages language )
+    public ITextHttpQueryBuilder Language(Languages language)
     {
-      SetLanguage( language );
+      SetLanguage(language);
       return this;
     }
 
-    public ITextHttpQueryBuilder Price( int? minprice, int? maxprice )
+    public ITextHttpQueryBuilder Price(int? minprice, int? maxprice)
     {
-      SetPrice( minprice, maxprice );
+      SetPrice(minprice, maxprice);
       return this;
     }
 
-    public ITextHttpQueryBuilder PageToken( string pageToken )
+    public ITextHttpQueryBuilder PageToken(string pageToken)
     {
-      SetPageToken( pageToken );
+      SetPageToken(pageToken);
       return this;
     }
 
-    public ITextHttpQueryBuilder Type( SearchTypes type )
+    public ITextHttpQueryBuilder Type(SearchTypes type)
     {
-      SetType( type );
+      SetType(type);
       return this;
     }
   }

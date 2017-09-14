@@ -11,16 +11,16 @@ namespace Itinerary.Api.Extensions
   {
     public static IServiceCollection AddCompression(
       this IServiceCollection services,
-      IConfiguration configuration )
+      IConfiguration configuration)
     {
-      if ( !string.Equals(
-             configuration[ "EnableCompression" ],
-             bool.TrueString,
-             StringComparison.CurrentCultureIgnoreCase ) ) return services;
+      if (!string.Equals(
+            configuration["EnableCompression"],
+            bool.TrueString,
+            StringComparison.CurrentCultureIgnoreCase)) return services;
 
       services.Configure<GzipCompressionProviderOptions>(
-        options => options.Level = CompressionLevel.Optimal );
-      services.AddResponseCompression( options => { options.Providers.Add<GzipCompressionProvider>(); } );
+        options => options.Level = CompressionLevel.Optimal);
+      services.AddResponseCompression(options => { options.Providers.Add<GzipCompressionProvider>(); });
 
       return services;
     }

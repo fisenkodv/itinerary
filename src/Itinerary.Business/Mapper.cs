@@ -7,7 +7,7 @@ namespace Itinerary.Business
 {
   public class Mapper
   {
-    private static readonly Lazy<Mapper> _instance = new Lazy<Mapper>( () => new Mapper() );
+    private static readonly Lazy<Mapper> _instance = new Lazy<Mapper>(() => new Mapper());
     private readonly IMapper _mapper;
 
     private Mapper()
@@ -17,20 +17,20 @@ namespace Itinerary.Business
         {
           cfg.AddProfile<PlacesProfile>();
           //cfg.AddProfiles( GetType().AssemblyQualifiedName );
-        } );
+        });
       _mapper = config.CreateMapper();
     }
 
     public static Mapper Instance => _instance.Value;
 
-    public TDestination Map<TSource, TDestination>( TSource source )
+    public TDestination Map<TSource, TDestination>(TSource source)
     {
-      return _mapper.Map<TSource, TDestination>( source );
+      return _mapper.Map<TSource, TDestination>(source);
     }
 
-    public IEnumerable<TDestination> Map<TSource, TDestination>( IEnumerable<TSource> source )
+    public IEnumerable<TDestination> Map<TSource, TDestination>(IEnumerable<TSource> source)
     {
-      return _mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>( source );
+      return _mapper.Map<IEnumerable<TSource>, IEnumerable<TDestination>>(source);
     }
   }
 }

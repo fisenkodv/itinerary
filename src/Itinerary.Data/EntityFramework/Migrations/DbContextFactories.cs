@@ -15,34 +15,34 @@ namespace Itinerary.Data.EntityFramework.Migrations
   /// </summary>
   public class DbContextFactoryNeededForMigrationsBase
   {
-    protected T Create<T>( Func<DbContextOptionsBuilder<T>, T> dbContextFactory )
+    protected T Create<T>(Func<DbContextOptionsBuilder<T>, T> dbContextFactory)
       where T : DbContext
     {
       string connectionString = GetConnectionString();
-      if ( string.IsNullOrEmpty( connectionString ) )
-        throw new ArgumentException( $"{nameof(connectionString)} is null or empty.", nameof(connectionString) );
+      if (string.IsNullOrEmpty(connectionString))
+        throw new ArgumentException($"{nameof(connectionString)} is null or empty.", nameof(connectionString));
 
       var optionsBuilder = new DbContextOptionsBuilder<T>();
-      optionsBuilder.InitDbContext( connectionString );
+      optionsBuilder.InitDbContext(connectionString);
 
-      return dbContextFactory( optionsBuilder );
+      return dbContextFactory(optionsBuilder);
     }
 
     private static string GetConnectionString()
     {
       IConfigurationBuilder builder = new ConfigurationBuilder()
-        .SetBasePath( Directory.GetCurrentDirectory() )
-        .AddJsonFile( "appsettings.json" )
-        .AddJsonFile( $"appsettings.{Environment.GetEnvironmentVariable( "ASPNETCORE_ENVIRONMENT" )}.json", true )
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", true)
         .AddEnvironmentVariables();
 
       IConfigurationRoot config = builder.Build();
 
-      string connectionString = config.GetConnectionString( Constants.DefaultConnectinStringName );
+      string connectionString = config.GetConnectionString(Constants.DefaultConnectinStringName);
 
-      if ( string.IsNullOrWhiteSpace( connectionString ) )
+      if (string.IsNullOrWhiteSpace(connectionString))
         throw new InvalidOperationException(
-          $"Could not find a connection string named '{Constants.DefaultConnectinStringName}'." );
+          $"Could not find a connection string named '{Constants.DefaultConnectinStringName}'.");
 
       return connectionString;
     }
@@ -51,9 +51,9 @@ namespace Itinerary.Data.EntityFramework.Migrations
   public class ItineraryDbContextFactoryNeededForMigrations
     : DbContextFactoryNeededForMigrationsBase, IDesignTimeDbContextFactory<ItineraryDbContext>
   {
-    public ItineraryDbContext CreateDbContext( string[] args )
+    public ItineraryDbContext CreateDbContext(string[] args)
     {
-      return Create<ItineraryDbContext>( optionsBuilder => new ItineraryDbContext( optionsBuilder.Options ) );
+      return Create<ItineraryDbContext>(optionsBuilder => new ItineraryDbContext(optionsBuilder.Options));
     }
   }
 }

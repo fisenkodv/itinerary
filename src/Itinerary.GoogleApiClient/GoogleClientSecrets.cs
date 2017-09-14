@@ -7,11 +7,11 @@ namespace Itinerary.GoogleApiClient
   {
     private readonly Dictionary<string, string> _apiKeys;
 
-    public GoogleClientSecrets( IEnumerable<(string serviceName, string apiKey )> apiKeys )
+    public GoogleClientSecrets(IEnumerable<(string serviceName, string apiKey )> apiKeys)
     {
-      _apiKeys = apiKeys.ToDictionary( x => x.serviceName, x => x.apiKey );
+      _apiKeys = apiKeys.ToDictionary(x => x.serviceName, x => x.apiKey);
     }
 
-    public string this[ string serviceName ] => _apiKeys[ serviceName ];
+    public string this[string serviceName] => _apiKeys[serviceName];
   }
 }

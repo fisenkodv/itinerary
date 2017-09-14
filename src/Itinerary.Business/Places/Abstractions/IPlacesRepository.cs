@@ -8,12 +8,13 @@ namespace Itinerary.Business.Places.Abstractions
     IEnumerable<Place> GetPlaces(
       Location northWestLocation,
       Location southEastLocation,
-      double rating );
+      double rating);
   }
 
-  public interface IReviewsRepository {
-    IEnumerable<Review> GetReviews( int placeId );
+  public interface IReviewsRepository
+  {
+    IEnumerable<Review> GetReviews(int placeId);
 
-    int AddReview( Review review );
+    int AddReview(Review review);
   }
 }

@@ -8,7 +8,7 @@ namespace Itinerary.Business.Identity.Dto
 
     public DateTime Expiration { get; }
 
-    public JwtToken( string token, DateTime expiration )
+    public JwtToken(string token, DateTime expiration)
     {
       Token = token;
       Expiration = expiration;

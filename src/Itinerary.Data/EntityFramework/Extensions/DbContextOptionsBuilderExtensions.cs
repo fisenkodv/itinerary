@@ -11,16 +11,16 @@ namespace Itinerary.Data.EntityFramework.Extensions
       .Assembly.GetName()
       .Name;
 
-    public static void InitDbContext( this DbContextOptionsBuilder builder, IConfiguration configuration )
+    public static void InitDbContext(this DbContextOptionsBuilder builder, IConfiguration configuration)
     {
-      builder.InitDbContext( configuration.GetConnectionString( Constants.DefaultConnectinStringName ) );
+      builder.InitDbContext(configuration.GetConnectionString(Constants.DefaultConnectinStringName));
     }
 
-    public static void InitDbContext( this DbContextOptionsBuilder builder, string connectionString )
+    public static void InitDbContext(this DbContextOptionsBuilder builder, string connectionString)
     {
       builder.UseSqlite(
         connectionString,
-        options => options.MigrationsAssembly( MigrationAssemblyName ) );
+        options => options.MigrationsAssembly(MigrationAssemblyName));
     }
   }
 }

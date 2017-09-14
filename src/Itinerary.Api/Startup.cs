@@ -21,21 +21,21 @@ namespace Itinerary.Api
     public Startup(
       IHostingEnvironment hostingEnvironment,
       IConfiguration configuration,
-      ILoggerFactory loggerFactory )
+      ILoggerFactory loggerFactory)
     {
       _hostingEnvironment = hostingEnvironment;
       _configuration = configuration;
 
-      loggerFactory.AddConsole( _configuration.GetSection( "Logging" ) );
+      loggerFactory.AddConsole(_configuration.GetSection("Logging"));
       loggerFactory.AddDebug();
     }
 
     /// <summary>
     /// This method gets called by the runtime. Use this method to add services to the container.
     /// </summary>
-    public IServiceProvider ConfigureServices( IServiceCollection services )
+    public IServiceProvider ConfigureServices(IServiceCollection services)
     {
-      services.AddCompression( _configuration );
+      services.AddCompression(_configuration);
       services.AddMemoryCache();
       services.AddMvc();
 
@@ -44,17 +44,17 @@ namespace Itinerary.Api
         {
           options.ReportApiVersions = true;
           options.AssumeDefaultVersionWhenUnspecified = true;
-        } );
+        });
 
       services.AddCors(
         options => options.AddPolicy(
           "AllowAllOrigins",
-          builder => { builder.AllowAnyOrigin(); } ) );
+          builder => { builder.AllowAnyOrigin(); }));
 
-      services.AddPersistentStorage( _configuration );
+      services.AddPersistentStorage(_configuration);
 
-      services.AddSecurity( _configuration );
-      services.AddCustomServices( _configuration );
+      services.AddSecurity(_configuration);
+      services.AddCustomServices(_configuration);
 
       return services.BuildServiceProvider();
     }
@@ -62,22 +62,22 @@ namespace Itinerary.Api
     /// <summary>
     /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     /// </summary>
-    public void Configure( IApplicationBuilder app )
+    public void Configure(IApplicationBuilder app)
     {
-      InitializeDatabase( app );
+      InitializeDatabase(app);
 
-      app.UseCors( "AllowAllOrigins" );
+      app.UseCors("AllowAllOrigins");
       app.UseAuthentication();
       app.UseMvc();
     }
 
-    private void InitializeDatabase( IApplicationBuilder app )
+    private void InitializeDatabase(IApplicationBuilder app)
     {
-      using ( IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope() )
+      using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
       {
         var itineraryDbContext = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
         itineraryDbContext.Database.Migrate();
-        itineraryDbContext.EnsureSeedData( _hostingEnvironment );
+        itineraryDbContext.EnsureSeedData(_hostingEnvironment);
       }
     }
   }

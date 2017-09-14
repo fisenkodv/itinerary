@@ -6,4 +6,4 @@
 [assembly:
   System.Diagnostics.CodeAnalysis.SuppressMessage(
     "Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "type",
-    Target = "~T:Itinerary.GoogleApiClient.Google.Places.Search.Types.SearchTypes" )]
+    Target = "~T:Itinerary.GoogleApiClient.Google.Places.Search.Types.SearchTypes")]

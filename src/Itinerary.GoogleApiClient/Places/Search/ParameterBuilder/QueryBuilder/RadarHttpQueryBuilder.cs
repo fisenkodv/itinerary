@@ -8,50 +8,50 @@ namespace Itinerary.GoogleApiClient.Places.Search.ParameterBuilder.QueryBuilder
   {
     private const string BaseUrl = "https://maps.googleapis.com/maps/api/place/radarsearch/json?";
 
-    public RadarHttpQueryBuilder( string apiKey )
-      : base( BaseUrl, apiKey )
+    public RadarHttpQueryBuilder(string apiKey)
+      : base(BaseUrl, apiKey)
     {
     }
 
-    public IRadarHttpQueryBuilder Location( double latitude, double longitude )
+    public IRadarHttpQueryBuilder Location(double latitude, double longitude)
     {
-      SetLocation( latitude, longitude );
+      SetLocation(latitude, longitude);
       return this;
     }
 
-    public IRadarHttpQueryBuilder Radius( int radius )
+    public IRadarHttpQueryBuilder Radius(int radius)
     {
-      SetRadius( radius );
+      SetRadius(radius);
       return this;
     }
 
-    public IRadarHttpQueryBuilder Keyword( string keyword )
+    public IRadarHttpQueryBuilder Keyword(string keyword)
     {
-      SetKeyword( keyword );
+      SetKeyword(keyword);
       return this;
     }
 
-    public IRadarHttpQueryBuilder Language( Languages language )
+    public IRadarHttpQueryBuilder Language(Languages language)
     {
-      SetLanguage( language );
+      SetLanguage(language);
       return this;
     }
 
-    public IRadarHttpQueryBuilder Price( int? minprice, int? maxprice )
+    public IRadarHttpQueryBuilder Price(int? minprice, int? maxprice)
     {
-      SetPrice( minprice, maxprice );
+      SetPrice(minprice, maxprice);
       return this;
     }
 
-    public IRadarHttpQueryBuilder Names( params string[] names )
+    public IRadarHttpQueryBuilder Names(params string[] names)
     {
-      SetNames( names );
+      SetNames(names);
       return this;
     }
 
-    public IRadarHttpQueryBuilder Type( SearchTypes type )
+    public IRadarHttpQueryBuilder Type(SearchTypes type)
     {
-      SetType( type );
+      SetType(type);
       return this;
     }
   }

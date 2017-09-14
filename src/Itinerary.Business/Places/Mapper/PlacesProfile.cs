@@ -9,7 +9,7 @@ namespace Itinerary.Business.Places.Mapper
     public PlacesProfile()
     {
       CreateMap<Place, PlaceDto>().ReverseMap();
-      CreateMap<Category, string>().ConvertUsing( category => category.Name );
+      CreateMap<Category, string>().ConvertUsing(category => category.Name);
     }
   }
 }

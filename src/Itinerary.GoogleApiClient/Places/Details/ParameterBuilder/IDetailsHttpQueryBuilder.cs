@@ -14,13 +14,13 @@ namespace Itinerary.GoogleApiClient.Places.Details.ParameterBuilder
     /// <summary>
     ///   A textual identifier that uniquely identifies a place, returned from a Place Search.
     /// </summary>
-    IDetailsHttpQueryBuilder Place( string placeId );
+    IDetailsHttpQueryBuilder Place(string placeId);
 
     /// <summary>
     ///   A textual identifier that uniquely identifies a place, returned from a Place Search.
     ///   Note: The reference is now deprecated in favor of placeid.
     /// </summary>
-    IDetailsHttpQueryBuilder Reference( string reference );
+    IDetailsHttpQueryBuilder Reference(string reference);
 
     /// <summary>
     ///   The language code, indicating in which language the results should be returned, if possible.
@@ -28,6 +28,6 @@ namespace Itinerary.GoogleApiClient.Places.Details.ParameterBuilder
     /// </summary>
     /// <param name="language"></param>
     /// <returns></returns>
-    IDetailsHttpQueryBuilder Language( Languages language );
+    IDetailsHttpQueryBuilder Language(Languages language);
   }
 }

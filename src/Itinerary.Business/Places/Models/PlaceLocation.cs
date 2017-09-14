@@ -2,7 +2,7 @@
 {
   public class PlaceLocation
   {
-    public PlaceLocation( string name, Location location )
+    public PlaceLocation(string name, Location location)
     {
       Name = name;
       Location = location;

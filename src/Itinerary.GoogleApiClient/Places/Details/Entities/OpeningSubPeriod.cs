@@ -4,10 +4,10 @@ namespace Itinerary.GoogleApiClient.Places.Details.Entities
 {
   public class OpeningSubPeriod
   {
-    [JsonProperty( propertyName: "day" )]
+    [JsonProperty(propertyName: "day")]
     public int Day { get; set; }
 
-    [JsonProperty( propertyName: "time" )]
+    [JsonProperty(propertyName: "time")]
     public int Time { get; set; }
   }
 }

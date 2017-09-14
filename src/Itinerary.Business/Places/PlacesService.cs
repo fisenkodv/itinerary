@@ -13,52 +13,52 @@ namespace Itinerary.Business.Places
     private readonly IPlacesRepository _placesRepository;
     private readonly IGooglePlacesClient _googlePlacesClient;
 
-    public PlacesService( IPlacesRepository placesRepository, IGooglePlacesClient googlePlacesClient )
+    public PlacesService(IPlacesRepository placesRepository, IGooglePlacesClient googlePlacesClient)
     {
       _placesRepository = placesRepository;
       _googlePlacesClient = googlePlacesClient;
     }
 
-    public IEnumerable<Place> Search( Location location, double distance, double rating )
+    public IEnumerable<Place> Search(Location location, double distance, double rating)
     {
       (Location northWestLocation, Location southEastLocation, GeoLocation baseLocation) locationInfo =
-        GetLocationInfo( location.Latitude, location.Longitude, distance );
+        GetLocationInfo(location.Latitude, location.Longitude, distance);
 
       IEnumerable<Place> places =
         from place in _placesRepository.GetPlaces(
           locationInfo.northWestLocation,
           locationInfo.southEastLocation,
-          rating )
+          rating)
         let distanceFromBasePoint = locationInfo.baseLocation.DistanceTo(
           location: GeoLocation.FromDegrees(
             place.Location.Latitude,
-            place.Location.Longitude ),
-          locationMeasurement: GeoLocationMeasurement.Miles )
+            place.Location.Longitude),
+          locationMeasurement: GeoLocationMeasurement.Miles)
         where distanceFromBasePoint <= distance
         select place;
 
       return places;
     }
 
-    public IEnumerable<PlaceLocation> Search( string keyword )
+    public IEnumerable<PlaceLocation> Search(string keyword)
     {
-      return _googlePlacesClient.GetPlaces( keyword );
+      return _googlePlacesClient.GetPlaces(keyword);
     }
 
     private static (Location northWestLocation, Location southEastLocation, GeoLocation baseLocation) GetLocationInfo(
       double latitude,
       double longitude,
-      double distance )
+      double distance)
     {
-      GeoLocation baseGeoLocation = GeoLocation.FromDegrees( latitude, longitude );
-      GeoLocation[] edgeCoordinates = baseGeoLocation.BoundingCoordinates( distance, GeoLocationMeasurement.Miles );
+      GeoLocation baseGeoLocation = GeoLocation.FromDegrees(latitude, longitude);
+      GeoLocation[] edgeCoordinates = baseGeoLocation.BoundingCoordinates(distance, GeoLocationMeasurement.Miles);
 
       var northWestLocation = new Location(
-        latitude: edgeCoordinates[ 1 ].GetLatitudeInDegrees(),
-        longitude: edgeCoordinates[ 0 ].GetLongitudeInDegrees() );
+        latitude: edgeCoordinates[1].GetLatitudeInDegrees(),
+        longitude: edgeCoordinates[0].GetLongitudeInDegrees());
       var southEastLocation = new Location(
-        latitude: edgeCoordinates[ 0 ].GetLatitudeInDegrees(),
-        longitude: edgeCoordinates[ 1 ].GetLongitudeInDegrees() );
+        latitude: edgeCoordinates[0].GetLatitudeInDegrees(),
+        longitude: edgeCoordinates[1].GetLongitudeInDegrees());
 
       return (northWestLocation, southEastLocation, baseGeoLocation);
     }

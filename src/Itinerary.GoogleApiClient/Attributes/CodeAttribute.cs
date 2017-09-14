@@ -4,7 +4,7 @@ namespace Itinerary.GoogleApiClient.Attributes
 {
   internal class CodeAttribute : Attribute
   {
-    public CodeAttribute( string code )
+    public CodeAttribute(string code)
     {
       Code = code;
     }

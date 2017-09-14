@@ -9,32 +9,32 @@ namespace Itinerary.GoogleApiClient.QueryBuilder
     private readonly string _baseUrl;
     private readonly List<QueryParameter> _parameters;
 
-    protected QueryBuilderBase( string baseUrl, string apiKey )
+    protected QueryBuilderBase(string baseUrl, string apiKey)
     {
       _baseUrl = baseUrl;
       _parameters = new List<QueryParameter>();
 
-      AddParameter( ApiParameters.ApiKey, apiKey );
+      AddParameter(ApiParameters.ApiKey, apiKey);
     }
 
-    protected void AddParameter( string name, string value )
+    protected void AddParameter(string name, string value)
     {
-      _parameters.Add( item: new QueryParameter( name, value, parameterWithoutValue: false ) );
+      _parameters.Add(item: new QueryParameter(name, value, parameterWithoutValue: false));
     }
 
-    protected void AddParameter( string name )
+    protected void AddParameter(string name)
     {
-      _parameters.Add( item: new QueryParameter( name, value: null, parameterWithoutValue: true ) );
+      _parameters.Add(item: new QueryParameter(name, value: null, parameterWithoutValue: true));
     }
 
-    private string GetParameter( string name )
+    private string GetParameter(string name)
     {
-      return _parameters.FirstOrDefault( x => x.Name == name ).Value;
+      return _parameters.FirstOrDefault(x => x.Name == name).Value;
     }
 
-    public bool IsParameterPresent( string name )
+    public bool IsParameterPresent(string name)
     {
-      return !string.IsNullOrEmpty( value: GetParameter( name ) );
+      return !string.IsNullOrEmpty(value: GetParameter(name));
     }
 
     public string Build()
@@ -45,12 +45,12 @@ namespace Itinerary.GoogleApiClient.QueryBuilder
                                                               : $"{parameter.Name}={parameter.Value}"
                                        select queryParameter;
 
-      return $"{_baseUrl}{string.Join( separator: "&", values: parameters )}";
+      return $"{_baseUrl}{string.Join(separator: "&", values: parameters)}";
     }
 
     private class QueryParameter
     {
-      public QueryParameter( string name, string value, bool parameterWithoutValue )
+      public QueryParameter(string name, string value, bool parameterWithoutValue)
       {
         Name = name;
         Value = value;

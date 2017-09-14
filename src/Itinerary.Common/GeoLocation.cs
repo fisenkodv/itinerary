@@ -26,10 +26,10 @@ namespace Itinerary.Common
     private double _degLat; // latitude in degrees
     private double _degLon; // longitude in degrees
 
-    private static readonly double MinLat = DegreesConverter.ConvertDegreesToRadians( -90d ); // -PI/2
-    private static readonly double MaxLat = DegreesConverter.ConvertDegreesToRadians( 90d ); //  PI/2
-    private static readonly double MinLon = DegreesConverter.ConvertDegreesToRadians( -180d ); // -PI
-    private static readonly double MaxLon = DegreesConverter.ConvertDegreesToRadians( 180d ); //  PI
+    private static readonly double MinLat = DegreesConverter.ConvertDegreesToRadians(-90d); // -PI/2
+    private static readonly double MaxLat = DegreesConverter.ConvertDegreesToRadians(90d); //  PI/2
+    private static readonly double MinLon = DegreesConverter.ConvertDegreesToRadians(-180d); // -PI
+    private static readonly double MaxLon = DegreesConverter.ConvertDegreesToRadians(180d); //  PI
 
     private const double EarthRadiusInKilometers = 6371.01;
     private const double EarthRadiusInMiles = EarthRadiusInKilometers * 0.621371;
@@ -44,12 +44,12 @@ namespace Itinerary.Common
     /// <param name="latitude">The latitude, in degrees.</param>
     /// <param name="longitude">The longitude, in degrees.</param>
     /// <returns>GeoLocation in Degrees</returns>
-    public static GeoLocation FromDegrees( double latitude, double longitude )
+    public static GeoLocation FromDegrees(double latitude, double longitude)
     {
       var result = new GeoLocation
                    {
-                     _radLat = DegreesConverter.ConvertDegreesToRadians( latitude ),
-                     _radLon = DegreesConverter.ConvertDegreesToRadians( longitude ),
+                     _radLat = DegreesConverter.ConvertDegreesToRadians(latitude),
+                     _radLon = DegreesConverter.ConvertDegreesToRadians(longitude),
                      _degLat = latitude,
                      _degLon = longitude
                    };
@@ -63,14 +63,14 @@ namespace Itinerary.Common
     /// <param name="latitude">The latitude, in radians.</param>
     /// <param name="longitude">The longitude, in radians.</param>
     /// <returns>GeoLocation in Radians</returns>
-    public static GeoLocation FromRadians( double latitude, double longitude )
+    public static GeoLocation FromRadians(double latitude, double longitude)
     {
       var result = new GeoLocation
                    {
                      _radLat = latitude,
                      _radLon = longitude,
-                     _degLat = DegreesConverter.ConvertRadiansToDegrees( latitude ),
-                     _degLon = DegreesConverter.ConvertRadiansToDegrees( longitude )
+                     _degLat = DegreesConverter.ConvertRadiansToDegrees(latitude),
+                     _degLon = DegreesConverter.ConvertRadiansToDegrees(longitude)
                    };
       result.CheckBounds();
       return result;
@@ -78,9 +78,9 @@ namespace Itinerary.Common
 
     private void CheckBounds()
     {
-      if ( _radLat < MinLat || _radLat > MaxLat ||
-           _radLon < MinLon || _radLon > MaxLon )
-        throw new Exception( "Arguments are out of bounds" );
+      if (_radLat < MinLat || _radLat > MaxLat ||
+          _radLon < MinLon || _radLon > MaxLon)
+        throw new Exception("Arguments are out of bounds");
     }
 
     /// <summary>
@@ -130,15 +130,15 @@ namespace Itinerary.Common
     /// <param name="location">Location to act as the centre point</param>
     /// <param name="locationMeasurement">Location measurement</param>
     /// <returns>the distance, measured in the same unit as the radius argument.</returns>
-    public double DistanceTo( GeoLocation location, GeoLocationMeasurement locationMeasurement )
+    public double DistanceTo(GeoLocation location, GeoLocationMeasurement locationMeasurement)
     {
       double earthRadius = locationMeasurement == GeoLocationMeasurement.Kilometers
                              ? EarthRadiusInKilometers
                              : EarthRadiusInMiles;
       return Math.Acos(
-               Math.Sin( _radLat ) * Math.Sin( location._radLat ) +
-               Math.Cos( _radLat ) * Math.Cos( location._radLat ) *
-               Math.Cos( _radLon - location._radLon ) ) * earthRadius;
+               Math.Sin(_radLat) * Math.Sin(location._radLat) +
+               Math.Cos(_radLat) * Math.Cos(location._radLat) *
+               Math.Cos(_radLon - location._radLon)) * earthRadius;
     }
 
     /// <summary>
@@ -171,10 +171,10 @@ namespace Itinerary.Common
     /// or equal to the longitude of the first array element
     /// or smaller or equal to the longitude of the second
     /// array element.</returns>
-    public GeoLocation[] BoundingCoordinates( double distance, GeoLocationMeasurement locationMeasurement )
+    public GeoLocation[] BoundingCoordinates(double distance, GeoLocationMeasurement locationMeasurement)
     {
-      if ( distance < 0d )
-        throw new Exception( "Distance cannot be less than 0" );
+      if (distance < 0d)
+        throw new Exception("Distance cannot be less than 0");
 
       double earthRadius = locationMeasurement == GeoLocationMeasurement.Kilometers
                              ? EarthRadiusInKilometers
@@ -187,29 +187,29 @@ namespace Itinerary.Common
       double maxLat = _radLat + radDist;
 
       double minLon, maxLon;
-      if ( minLat > MinLat && maxLat < MaxLat )
+      if (minLat > MinLat && maxLat < MaxLat)
       {
         double deltaLon = Math.Asin(
-          Math.Sin( radDist ) /
-          Math.Cos( _radLat ) );
+          Math.Sin(radDist) /
+          Math.Cos(_radLat));
         minLon = _radLon - deltaLon;
-        if ( minLon < MinLon ) minLon += 2d * Math.PI;
+        if (minLon < MinLon) minLon += 2d * Math.PI;
         maxLon = _radLon + deltaLon;
-        if ( maxLon > MaxLon ) maxLon -= 2d * Math.PI;
+        if (maxLon > MaxLon) maxLon -= 2d * Math.PI;
       }
       else
       {
         // a pole is within the distance
-        minLat = Math.Max( minLat, MinLat );
-        maxLat = Math.Min( maxLat, MaxLat );
+        minLat = Math.Max(minLat, MinLat);
+        maxLat = Math.Min(maxLat, MaxLat);
         minLon = MinLon;
         maxLon = MaxLon;
       }
 
       return new GeoLocation[]
              {
-               FromRadians( minLat, minLon ),
-               FromRadians( maxLat, maxLon )
+               FromRadians(minLat, minLon),
+               FromRadians(maxLat, maxLon)
              };
     }
   }

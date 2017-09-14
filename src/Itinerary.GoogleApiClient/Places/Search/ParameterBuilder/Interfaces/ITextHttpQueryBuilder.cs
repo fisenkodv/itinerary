@@ -13,18 +13,18 @@ namespace Itinerary.GoogleApiClient.Places.Search.ParameterBuilder.Interfaces
   /// </summary>
   public interface ITextHttpQueryBuilder : IHttpQueryBuilder
   {
-    ITextHttpQueryBuilder Query( string query );
+    ITextHttpQueryBuilder Query(string query);
 
-    ITextHttpQueryBuilder Location( double latitude, double longitude );
+    ITextHttpQueryBuilder Location(double latitude, double longitude);
 
-    ITextHttpQueryBuilder Radius( int radius );
+    ITextHttpQueryBuilder Radius(int radius);
 
-    ITextHttpQueryBuilder Language( Languages language );
+    ITextHttpQueryBuilder Language(Languages language);
 
-    ITextHttpQueryBuilder Price( int? minprice, int? maxprice );
+    ITextHttpQueryBuilder Price(int? minprice, int? maxprice);
 
-    ITextHttpQueryBuilder PageToken( string pageToken );
+    ITextHttpQueryBuilder PageToken(string pageToken);
 
-    ITextHttpQueryBuilder Type( SearchTypes type );
+    ITextHttpQueryBuilder Type(SearchTypes type);
   }
 }

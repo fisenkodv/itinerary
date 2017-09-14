@@ -2,7 +2,7 @@
 {
   public class Category
   {
-    public Category( long categoryId, string name )
+    public Category(long categoryId, string name)
     {
       CategoryId = categoryId;
       Name = name;

@@ -17,28 +17,28 @@ namespace Itinerary.Tests.Utilities.Fakes
     public IEnumerable<Place> GetPlaces(
       Location northWestLocation,
       Location southEastLocation,
-      double rating )
+      double rating)
     {
       return _places.Values.Where(
         place => place.Rating >= rating &&
                  place.Location.Latitude <= northWestLocation.Latitude &&
                  place.Location.Latitude >= southEastLocation.Latitude &&
                  place.Location.Longitude <= southEastLocation.Longitude &&
-                 place.Location.Longitude >= northWestLocation.Longitude );
+                 place.Location.Longitude >= northWestLocation.Longitude);
     }
 
-    public void AddPlaces( IEnumerable<Place> places )
+    public void AddPlaces(IEnumerable<Place> places)
     {
-      foreach ( Place place in places )
+      foreach (Place place in places)
       {
-        AddPlace( place );
+        AddPlace(place);
       }
     }
 
-    private int AddPlace( Place place )
+    private int AddPlace(Place place)
     {
       int id = GetNextId();
-      _places.Add( id, place );
+      _places.Add(id, place);
       return id;
     }
 

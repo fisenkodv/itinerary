@@ -13,35 +13,35 @@ namespace Itinerary.GoogleApiClient.Places
 {
   public class PlacesClient
   {
-    public static Task<NearbyResult> NearbySearch( INearbyHttpQueryBuilder httpQueryBuilder )
+    public static Task<NearbyResult> NearbySearch(INearbyHttpQueryBuilder httpQueryBuilder)
     {
-      return GetResponse<NearbyResult>( httpQueryBuilder );
+      return GetResponse<NearbyResult>(httpQueryBuilder);
     }
 
-    public static Task<TextResult> TextSearch( ITextHttpQueryBuilder httpQueryBuilder )
+    public static Task<TextResult> TextSearch(ITextHttpQueryBuilder httpQueryBuilder)
     {
-      return GetResponse<TextResult>( httpQueryBuilder );
+      return GetResponse<TextResult>(httpQueryBuilder);
     }
 
-    public static Task<RadarResult> RadarSearch( IRadarHttpQueryBuilder httpQueryBuilder )
+    public static Task<RadarResult> RadarSearch(IRadarHttpQueryBuilder httpQueryBuilder)
     {
-      return GetResponse<RadarResult>( httpQueryBuilder );
+      return GetResponse<RadarResult>(httpQueryBuilder);
     }
 
-    public static Task<AutocompleteResult> Autocomplete( IAutocompleteHttpQueryBuilder httpQueryBuilder )
+    public static Task<AutocompleteResult> Autocomplete(IAutocompleteHttpQueryBuilder httpQueryBuilder)
     {
-      return GetResponse<AutocompleteResult>( httpQueryBuilder );
+      return GetResponse<AutocompleteResult>(httpQueryBuilder);
     }
 
-    public static Task<DetailsResult> Details( IDetailsHttpQueryBuilder httpQueryBuilder )
+    public static Task<DetailsResult> Details(IDetailsHttpQueryBuilder httpQueryBuilder)
     {
-      return GetResponse<DetailsResult>( httpQueryBuilder );
+      return GetResponse<DetailsResult>(httpQueryBuilder);
     }
 
-    private static Task<T> GetResponse<T>( IHttpQueryBuilder httpQueryBuilder )
+    private static Task<T> GetResponse<T>(IHttpQueryBuilder httpQueryBuilder)
     {
       var apiClient = new ApiClient();
-      return apiClient.GetResponseAsync<T>( queryUrl: httpQueryBuilder.Build() );
+      return apiClient.GetResponseAsync<T>(queryUrl: httpQueryBuilder.Build());
     }
   }
 }

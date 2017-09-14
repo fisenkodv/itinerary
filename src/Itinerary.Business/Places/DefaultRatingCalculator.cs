@@ -11,15 +11,15 @@ namespace Itinerary.Business.Places
     private readonly double _allPlacesReviewsAverage;
     private const int M = 100;
 
-    public DefaultRatingCalculator( double allPlacesReviewsAverage )
+    public DefaultRatingCalculator(double allPlacesReviewsAverage)
     {
       _allPlacesReviewsAverage = allPlacesReviewsAverage;
     }
 
-    public double GetRating( double placeReviewAverage, int placeReviewsCount )
+    public double GetRating(double placeReviewAverage, int placeReviewsCount)
     {
-      return placeReviewsCount / ( ( double ) placeReviewsCount + M ) * placeReviewAverage +
-             M / ( ( double ) placeReviewsCount + M ) * _allPlacesReviewsAverage;
+      return placeReviewsCount / ((double)placeReviewsCount + M) * placeReviewAverage +
+             M / ((double)placeReviewsCount + M) * _allPlacesReviewsAverage;
     }
   }
 }

@@ -14,7 +14,7 @@ namespace Itinerary.Api.Extensions
 {
   internal static class SecurityExtentions
   {
-    public static IServiceCollection AddSecurity( this IServiceCollection services, IConfiguration configuration )
+    public static IServiceCollection AddSecurity(this IServiceCollection services, IConfiguration configuration)
     {
       services.AddIdentity<User, Role>()
               .AddEntityFrameworkStores<ItineraryDbContext>()
@@ -26,7 +26,7 @@ namespace Itinerary.Api.Extensions
                   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                   options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                } )
+                })
               .AddJwtBearer(
                 options =>
                 {
@@ -34,13 +34,14 @@ namespace Itinerary.Api.Extensions
                   options.TokenValidationParameters =
                     new TokenValidationParameters
                     {
-                      ValidIssuer = configuration.GetValue<string>( "JWT:Issuer" ),
-                      ValidAudience = configuration.GetValue<string>( "JWT:Audience" ),
-                      IssuerSigningKey = CertificateExtensions.GetSigningKey( configuration.GetValue<string>( "JWT:SecretKey" ) ),
+                      ValidIssuer = configuration.GetValue<string>("JWT:Issuer"),
+                      ValidAudience = configuration.GetValue<string>("JWT:Audience"),
+                      IssuerSigningKey =
+                        CertificateExtensions.GetSigningKey(configuration.GetValue<string>("JWT:SecretKey")),
                       ValidateIssuerSigningKey = true,
                       ValidateLifetime = true
                     };
-                } )
+                })
               .AddCookie(
                 options =>
                 {
@@ -50,15 +51,15 @@ namespace Itinerary.Api.Extensions
                       OnRedirectToLogin =
                         context =>
                         {
-                          if ( context.Request.Path.StartsWithSegments( "/api" ) )
-                            context.Response.StatusCode = ( int ) HttpStatusCode.Unauthorized;
+                          if (context.Request.Path.StartsWithSegments("/api"))
+                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                           else
-                            context.Response.Redirect( context.RedirectUri );
+                            context.Response.Redirect(context.RedirectUri);
 
                           return Task.CompletedTask;
                         }
                     };
-                } );
+                });
 
       return services;
     }

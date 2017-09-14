@@ -10,46 +10,45 @@ using Microsoft.AspNetCore.Mvc;
 namespace Itinerary.Api.Controllers
 {
   [Authorize]
-  [ApiVersion( "1.0" )]
-  [Route( "api/v{version:apiVersion}/[controller]" )]
+  [ApiVersion("1.0")]
+  [Route("api/v{version:apiVersion}/[controller]")]
   public class AccountController : Controller
   {
     private readonly IAccountService _accountService;
 
-    public AccountController( IAccountService accountService )
+    public AccountController(IAccountService accountService)
     {
       _accountService = accountService;
     }
 
     [AllowAnonymous]
-    [HttpPost( "[action]" )]
-    public async Task<IActionResult> Register( [FromBody] RegisterViewModel model )
+    [HttpPost("[action]")]
+    public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
     {
       RegisterResult result;
-      if ( ModelState.IsValid )
-        result = await _accountService.Register( new User { Email = model.Email, Password = model.Password } );
+      if (ModelState.IsValid)
+        result = await _accountService.Register(new User { Email = model.Email, Password = model.Password });
       else
         result = new RegisterResult(
-          false, ModelState.Values.SelectMany( x => x.Errors ).Select( x => x.ErrorMessage ) );
+          false, ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
 
       return result.Succeeded
-               ? ( IActionResult ) Ok( result )
-               : BadRequest( result );
+               ? (IActionResult)Ok(result)
+               : BadRequest(result);
     }
 
     [AllowAnonymous]
-    [HttpPost( "token" )]
-    public async Task<IActionResult> Token( [FromBody] TokenViewModel model )
+    [HttpPost("token")]
+    public async Task<IActionResult> Token([FromBody] TokenViewModel model)
     {
-      if ( !ModelState.IsValid )
+      if (!ModelState.IsValid)
         return BadRequest();
 
-      JwtToken token =
-        await _accountService.Token( new User { Username = model.Username, Password = model.Password } );
+      JwtToken token = await _accountService.Token(new User { Username = model.Username, Password = model.Password });
 
       return token == null
-               ? ( IActionResult ) BadRequest()
-               : Ok( token );
+               ? (IActionResult)BadRequest()
+               : Ok(token);
     }
   }
 }

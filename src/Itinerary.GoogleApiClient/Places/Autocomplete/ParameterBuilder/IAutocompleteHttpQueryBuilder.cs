@@ -16,7 +16,7 @@ namespace Itinerary.GoogleApiClient.Places.Autocomplete.ParameterBuilder
     ///   The text string on which to search. The Place Autocomplete service will return candidate matches
     ///   based on this string and order results based on their perceived relevance.
     /// </summary>
-    IAutocompleteHttpQueryBuilder Input( string input );
+    IAutocompleteHttpQueryBuilder Input(string input);
 
     /// <summary>
     ///   The position, in the input term, of the last character that the service uses to match predictions.
@@ -26,19 +26,19 @@ namespace Itinerary.GoogleApiClient.Places.Autocomplete.ParameterBuilder
     ///   against 'Goo abc'. If no offset is supplied, the service will use the whole term.
     ///   The offset should generally be set to the position of the text caret.
     /// </summary>
-    IAutocompleteHttpQueryBuilder Offset( int offset );
+    IAutocompleteHttpQueryBuilder Offset(int offset);
 
     /// <summary>
     ///   The point around which you wish to retrieve place information. Must be specified as latitude,longitude.
     /// </summary>
-    IAutocompleteHttpQueryBuilder Location( double latitude, double longitude );
+    IAutocompleteHttpQueryBuilder Location(double latitude, double longitude);
 
     /// <summary>
     ///   The distance (in meters) within which to return place results.
     ///   Note that setting a radius biases results to the indicated area, but may not fully restrict results to
     ///   the specified area.
     /// </summary>
-    IAutocompleteHttpQueryBuilder Radius( int radius );
+    IAutocompleteHttpQueryBuilder Radius(int radius);
 
     /// <summary>
     ///   The language code, indicating in which language the results should be returned, if possible.
@@ -47,12 +47,12 @@ namespace Itinerary.GoogleApiClient.Places.Autocomplete.ParameterBuilder
     ///   list may not be exhaustive. If language is not supplied, the Place Autocomplete service will attempt to use
     ///   the native language of the domain from which the request is sent.
     /// </summary>
-    IAutocompleteHttpQueryBuilder Language( Languages language );
+    IAutocompleteHttpQueryBuilder Language(Languages language);
 
     /// <summary>
     ///   The types of place results to return. See Place Types below. If no type is specified, all types will be returned.
     /// </summary>
-    IAutocompleteHttpQueryBuilder Types( PlaceTypes placeTypes );
+    IAutocompleteHttpQueryBuilder Types(PlaceTypes placeTypes);
 
     /// <summary>
     ///   A grouping of places to which you would like to restrict your results. Currently, you can use components to filter
@@ -62,7 +62,7 @@ namespace Itinerary.GoogleApiClient.Places.Autocomplete.ParameterBuilder
     ///   For example: components=country:us|country:pr|country:vi|country:gu|country:mp would restrict your results to
     ///   places within the United States and its unincorporated organized territories.
     /// </summary>
-    IAutocompleteHttpQueryBuilder Components( params string[] countryCodes );
+    IAutocompleteHttpQueryBuilder Components(params string[] countryCodes);
 
     /// <summary>
     ///   Returns only those places that are strictly within the region defined by location and radius.

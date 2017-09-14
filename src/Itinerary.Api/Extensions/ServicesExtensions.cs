@@ -13,9 +13,9 @@ namespace Itinerary.Api.Extensions
   {
     public static IServiceCollection AddCustomServices(
       this IServiceCollection services,
-      IConfiguration configuration )
+      IConfiguration configuration)
     {
-      services.AddSingleton( configuration.GetGoogleClientSecrets() );
+      services.AddSingleton(configuration.GetGoogleClientSecrets());
 
       services.AddTransient<IPlacesRepository, PlacesRepository>();
       services.AddTransient<IPlacesService, PlacesService>();

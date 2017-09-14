@@ -10,13 +10,13 @@ namespace Itinerary.Tests.Utilities.Fakes
     private readonly Dictionary<string, PlaceLocation> _placeLocations =
       new Dictionary<string, PlaceLocation>
       {
-        [ "kalamazoo" ] = new PlaceLocation( "Kalamazoo", new Location( 42.201154, -85.580002 ) )
+        ["kalamazoo"] = new PlaceLocation("Kalamazoo", new Location(42.201154, -85.580002))
       };
 
-    public IEnumerable<PlaceLocation> GetPlaces( string keyword )
+    public IEnumerable<PlaceLocation> GetPlaces(string keyword)
     {
-      return _placeLocations.Keys.Where( x => x.Contains( keyword ) )
-                            .Select( x => _placeLocations[ x ] );
+      return _placeLocations.Keys.Where(x => x.Contains(keyword))
+                            .Select(x => _placeLocations[x]);
     }
   }
 }

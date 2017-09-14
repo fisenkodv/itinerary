@@ -8,50 +8,50 @@ namespace Itinerary.GoogleApiClient.Places.Search.ParameterBuilder.QueryBuilder
   {
     private const string BaseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
 
-    public NearbyHttpQueryBuilder( string apiKey )
-      : base( BaseUrl, apiKey )
+    public NearbyHttpQueryBuilder(string apiKey)
+      : base(BaseUrl, apiKey)
     {
     }
 
-    public INearbyHttpQueryBuilder Radius( int radius )
+    public INearbyHttpQueryBuilder Radius(int radius)
     {
-      SetRadius( radius );
+      SetRadius(radius);
       return this;
     }
 
-    public INearbyHttpQueryBuilder Location( double latitude, double longitude )
+    public INearbyHttpQueryBuilder Location(double latitude, double longitude)
     {
-      SetLocation( latitude, longitude );
+      SetLocation(latitude, longitude);
       return this;
     }
 
-    public INearbyHttpQueryBuilder RankingBy( RankBy rankBy )
+    public INearbyHttpQueryBuilder RankingBy(RankBy rankBy)
     {
-      SetRankingBy( rankBy );
+      SetRankingBy(rankBy);
       return this;
     }
 
-    public INearbyHttpQueryBuilder Keyword( string keyword )
+    public INearbyHttpQueryBuilder Keyword(string keyword)
     {
-      SetKeyword( keyword );
+      SetKeyword(keyword);
       return this;
     }
 
-    public INearbyHttpQueryBuilder Language( Languages language )
+    public INearbyHttpQueryBuilder Language(Languages language)
     {
-      SetLanguage( language );
+      SetLanguage(language);
       return this;
     }
 
-    public INearbyHttpQueryBuilder Price( int? minprice, int? maxprice )
+    public INearbyHttpQueryBuilder Price(int? minprice, int? maxprice)
     {
-      SetPrice( minprice, maxprice );
+      SetPrice(minprice, maxprice);
       return this;
     }
 
-    public INearbyHttpQueryBuilder Names( params string[] names )
+    public INearbyHttpQueryBuilder Names(params string[] names)
     {
-      SetNames( names );
+      SetNames(names);
       return this;
     }
   }

@@ -19,13 +19,13 @@ namespace Itinerary.GoogleApiClient
 
     public GooglePlacesClient(
       IMemoryCache memoryCache,
-      GoogleClientSecrets googleClientSecrets )
+      GoogleClientSecrets googleClientSecrets)
     {
       _memoryCache = memoryCache;
       _googleClientSecrets = googleClientSecrets;
     }
 
-    public IEnumerable<PlaceLocation> GetPlaces( string keyword )
+    public IEnumerable<PlaceLocation> GetPlaces(string keyword)
     {
       return GetFromCache(
         key: $"autosuggest_{keyword}",
@@ -33,22 +33,22 @@ namespace Itinerary.GoogleApiClient
                        {
                          IAutocompleteHttpQueryBuilder
                            autocompleteQueryBuilder =
-                             PlacesBuilder.Create( _googleClientSecrets )
+                             PlacesBuilder.Create(_googleClientSecrets)
                                           .Autocomplete()
-                                          .Input( keyword )
-                                          .Types( PlaceTypes.Cities )
-                                          .Components( "us" );
+                                          .Input(keyword)
+                                          .Types(PlaceTypes.Cities)
+                                          .Components("us");
 
                          return PlacesClient
-                           .Autocomplete( autocompleteQueryBuilder )
+                           .Autocomplete(autocompleteQueryBuilder)
                            .Result
                            .Predictions
                            .AsParallel()
-                           .Select( x => new PlaceLocation( x.Description, GetLocation( x.PlaceId ) ) );
-                       } );
+                           .Select(x => new PlaceLocation(x.Description, GetLocation(x.PlaceId)));
+                       });
     }
 
-    private Location GetLocation( string placeId )
+    private Location GetLocation(string placeId)
     {
       return GetFromCache(
         key: $"location_{placeId}",
@@ -56,24 +56,24 @@ namespace Itinerary.GoogleApiClient
                        {
                          IDetailsHttpQueryBuilder
                            detailsHttpQueryBuilder =
-                             PlacesBuilder.Create( _googleClientSecrets )
+                             PlacesBuilder.Create(_googleClientSecrets)
                                           .Details()
-                                          .Place( placeId );
+                                          .Place(placeId);
 
                          Result place = PlacesClient
-                           .Details( detailsHttpQueryBuilder )
+                           .Details(detailsHttpQueryBuilder)
                            .Result
                            .Result;
 
-                         return new Location( place.Geometry.Location.Latitude, place.Geometry.Location.Longitude );
-                       } );
+                         return new Location(place.Geometry.Location.Latitude, place.Geometry.Location.Longitude);
+                       });
     }
 
-    private T GetFromCache<T>( string key, Func<T> getDataAction )
+    private T GetFromCache<T>(string key, Func<T> getDataAction)
     {
-      if ( _memoryCache.TryGetValue( key, value: out T data ) ) return data;
+      if (_memoryCache.TryGetValue(key, value: out T data)) return data;
       data = getDataAction();
-      _memoryCache.Set( key, data );
+      _memoryCache.Set(key, data);
 
       return data;
     }

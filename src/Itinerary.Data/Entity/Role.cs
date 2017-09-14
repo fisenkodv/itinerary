@@ -8,7 +8,7 @@ namespace Itinerary.Data.Entity
     {
     }
 
-    public Role( string name )
+    public Role(string name)
       : this()
     {
       Name = name;

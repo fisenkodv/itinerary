@@ -9,10 +9,10 @@ namespace Itinerary.Api.Extensions
   {
     public static IServiceCollection AddPersistentStorage(
       this IServiceCollection services,
-      IConfiguration configuration )
+      IConfiguration configuration)
     {
       services.AddEntityFrameworkSqlite();
-      services.AddDbContextPool<ItineraryDbContext>( builder => builder.InitDbContext( configuration ) );
+      services.AddDbContextPool<ItineraryDbContext>(builder => builder.InitDbContext(configuration));
 
       return services;
     }

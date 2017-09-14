@@ -12,18 +12,18 @@ namespace Itinerary.GoogleApiClient.Places.Search.ParameterBuilder.Interfaces
   /// </summary>
   public interface IRadarHttpQueryBuilder : IHttpQueryBuilder
   {
-    IRadarHttpQueryBuilder Location( double latitude, double longitude );
+    IRadarHttpQueryBuilder Location(double latitude, double longitude);
 
-    IRadarHttpQueryBuilder Radius( int radius );
+    IRadarHttpQueryBuilder Radius(int radius);
 
-    IRadarHttpQueryBuilder Keyword( string keyword );
+    IRadarHttpQueryBuilder Keyword(string keyword);
 
-    IRadarHttpQueryBuilder Language( Languages language );
+    IRadarHttpQueryBuilder Language(Languages language);
 
-    IRadarHttpQueryBuilder Price( int? minprice, int? maxprice );
+    IRadarHttpQueryBuilder Price(int? minprice, int? maxprice);
 
-    IRadarHttpQueryBuilder Names( params string[] names );
+    IRadarHttpQueryBuilder Names(params string[] names);
 
-    IRadarHttpQueryBuilder Type( SearchTypes type );
+    IRadarHttpQueryBuilder Type(SearchTypes type);
   }
 }

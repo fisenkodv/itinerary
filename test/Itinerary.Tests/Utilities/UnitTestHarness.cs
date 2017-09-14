@@ -15,7 +15,7 @@ namespace Itinerary.Tests.Utilities
 
     public IPlacesService CreatePlacesService()
     {
-      return new PlacesService( PlacesRepository, new FakeGooglePlacesClient() );
+      return new PlacesService(PlacesRepository, new FakeGooglePlacesClient());
     }
   }
 }

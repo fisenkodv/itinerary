@@ -2,7 +2,7 @@
 {
   public class Location
   {
-    public Location( double latitude, double longitude )
+    public Location(double latitude, double longitude)
     {
       Latitude = latitude;
       Longitude = longitude;

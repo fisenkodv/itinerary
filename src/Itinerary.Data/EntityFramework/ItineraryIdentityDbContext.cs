@@ -6,8 +6,8 @@ namespace Itinerary.Data.EntityFramework
 {
   public class ItineraryIdentityDbContext : IdentityDbContext<User, Role, long>
   {
-    protected ItineraryIdentityDbContext( DbContextOptions dbContextOptions )
-      : base( dbContextOptions )
+    protected ItineraryIdentityDbContext(DbContextOptions dbContextOptions)
+      : base(dbContextOptions)
     {
     }
   }

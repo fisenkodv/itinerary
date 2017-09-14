@@ -4,13 +4,13 @@ namespace Itinerary.GoogleApiClient.Places.Search.Entities.Common
 {
   public class GenericResult<T>
   {
-    [JsonProperty( propertyName: "next_page_token" )]
+    [JsonProperty(propertyName: "next_page_token")]
     public string NextPageToken { get; set; }
 
-    [JsonProperty( propertyName: "results" )]
+    [JsonProperty(propertyName: "results")]
     public T[] Results { get; set; }
 
-    [JsonProperty( propertyName: "status" )]
+    [JsonProperty(propertyName: "status")]
     public string Status { get; set; }
   }
 }

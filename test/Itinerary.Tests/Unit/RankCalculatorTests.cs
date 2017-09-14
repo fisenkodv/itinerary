@@ -19,24 +19,24 @@ namespace Itinerary.Tests.Unit
                      new Place { Rating = 7, Reviews = 100 }
                    };
 
-      var maxReviews = places.Max( x => x.Reviews );
-      var a = Math.Pow( maxReviews, 0.1 );
+      var maxReviews = places.Max(x => x.Reviews);
+      var a = Math.Pow(maxReviews, 0.1);
 
-      var res1 = places.Select( x => GetPlaceRank( x, a ) ).ToList();
+      var res1 = places.Select(x => GetPlaceRank(x, a)).ToList();
 
-      var average = places.Average( x => x.Rating );
-      var res2 = places.Select( x => GetPlaceRank( x, average, 100 ) ).ToList();
+      var average = places.Average(x => x.Rating);
+      var res2 = places.Select(x => GetPlaceRank(x, average, 100)).ToList();
     }
 
-    private double GetPlaceRank( Place place, double a )
+    private double GetPlaceRank(Place place, double a)
     {
-      return ( Math.Log( place.Reviews, a ) + place.Rating ) / 2;
+      return (Math.Log(place.Reviews, a) + place.Rating) / 2;
     }
 
-    private double GetPlaceRank( Place place, double average, int m )
+    private double GetPlaceRank(Place place, double average, int m)
     {
-      return place.Reviews / ( ( double ) place.Reviews + m ) * place.Rating +
-             m / ( ( double ) place.Reviews + m ) * average;
+      return place.Reviews / ((double)place.Reviews + m) * place.Rating +
+             m / ((double)place.Reviews + m) * average;
     }
   }
 }

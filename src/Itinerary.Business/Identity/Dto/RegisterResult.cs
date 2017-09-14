@@ -8,7 +8,7 @@ namespace Itinerary.Business.Identity.Dto
 
     public IEnumerable<string> Errors { get; }
 
-    public RegisterResult( bool succeeded, IEnumerable<string> errors )
+    public RegisterResult(bool succeeded, IEnumerable<string> errors)
     {
       Succeeded = succeeded;
       Errors = errors;

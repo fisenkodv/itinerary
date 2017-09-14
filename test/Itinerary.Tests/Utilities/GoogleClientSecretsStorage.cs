@@ -10,10 +10,10 @@ namespace Itinerary.Tests.Utilities
     private GoogleClientSecretsStorage()
     {
       ClientSecrets =
-        new GoogleClientSecrets( new[] { (PlacesBuilder.ApiName, "AIzaSyCIRow0QXhirpXJRfhn1grZ0mz0G2juHHk") } );
+        new GoogleClientSecrets(new[] { (PlacesBuilder.ApiName, "AIzaSyCIRow0QXhirpXJRfhn1grZ0mz0G2juHHk") });
     }
 
-    public static GoogleClientSecretsStorage Instance => _instance ?? ( _instance = new GoogleClientSecretsStorage() );
+    public static GoogleClientSecretsStorage Instance => _instance ?? (_instance = new GoogleClientSecretsStorage());
 
     public GoogleClientSecrets ClientSecrets { get; }
   }

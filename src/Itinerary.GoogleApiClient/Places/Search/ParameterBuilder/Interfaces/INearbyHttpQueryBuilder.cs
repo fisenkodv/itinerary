@@ -10,18 +10,18 @@ namespace Itinerary.GoogleApiClient.Places.Search.ParameterBuilder.Interfaces
   /// </summary>
   public interface INearbyHttpQueryBuilder : IHttpQueryBuilder
   {
-    INearbyHttpQueryBuilder Radius( int radius );
+    INearbyHttpQueryBuilder Radius(int radius);
 
-    INearbyHttpQueryBuilder Location( double latitude, double longitude );
+    INearbyHttpQueryBuilder Location(double latitude, double longitude);
 
-    INearbyHttpQueryBuilder RankingBy( RankBy rankBy );
+    INearbyHttpQueryBuilder RankingBy(RankBy rankBy);
 
-    INearbyHttpQueryBuilder Keyword( string keyword );
+    INearbyHttpQueryBuilder Keyword(string keyword);
 
-    INearbyHttpQueryBuilder Language( Languages language );
+    INearbyHttpQueryBuilder Language(Languages language);
 
-    INearbyHttpQueryBuilder Price( int? minprice, int? maxprice );
+    INearbyHttpQueryBuilder Price(int? minprice, int? maxprice);
 
-    INearbyHttpQueryBuilder Names( params string[] names );
+    INearbyHttpQueryBuilder Names(params string[] names);
   }
 }

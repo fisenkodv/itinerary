@@ -16,10 +16,10 @@ namespace Itinerary.Tests.Integration
                            password = "Welcome01!"
                          };
 
-      RegisterResult registerResult = await PostAsync<RegisterResult>( "/api/v1/account/register", registerBody );
+      RegisterResult registerResult = await PostAsync<RegisterResult>("/api/v1/account/register", registerBody);
 
-      Assert.True( registerResult.Succeeded );
-      Assert.Empty( registerResult.Errors );
+      Assert.True(registerResult.Succeeded);
+      Assert.Empty(registerResult.Errors);
     }
 
     [Fact]
@@ -32,10 +32,10 @@ namespace Itinerary.Tests.Integration
                            password = "Welcome01!"
                          };
 
-      RegisterResult registerResonse = await PostAsync<RegisterResult>( "/api/v1/account/register", registerBody );
+      RegisterResult registerResonse = await PostAsync<RegisterResult>("/api/v1/account/register", registerBody);
 
-      Assert.True( registerResonse.Succeeded );
-      Assert.Empty( registerResonse.Errors );
+      Assert.True(registerResonse.Succeeded);
+      Assert.Empty(registerResonse.Errors);
 
       var tokenBody = new
                       {
@@ -43,10 +43,10 @@ namespace Itinerary.Tests.Integration
                         password = "Welcome01!"
                       };
 
-      JwtToken jwtToken = await PostAsync<JwtToken>( "/api/v1/account/token", tokenBody );
+      JwtToken jwtToken = await PostAsync<JwtToken>("/api/v1/account/token", tokenBody);
 
-      Assert.NotNull( jwtToken );
-      Assert.NotNull( jwtToken.Token );
+      Assert.NotNull(jwtToken);
+      Assert.NotNull(jwtToken.Token);
     }
   }
 }

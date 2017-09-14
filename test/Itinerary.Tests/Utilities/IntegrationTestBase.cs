@@ -27,34 +27,34 @@ namespace Itinerary.Tests.Utilities
     public void Dispose()
     {
       _httpClient?.Dispose();
-      if ( File.Exists( _dbFileName ) )
-        File.Delete( _dbFileName );
+      if (File.Exists(_dbFileName))
+        File.Delete(_dbFileName);
     }
 
-    protected async Task<T> GetAsync<T>( string url )
+    protected async Task<T> GetAsync<T>(string url)
     {
-      HttpResponseMessage response = await _httpClient.GetAsync( url );
-      string resultString = await GetResponseString( response );
-      return FromJson<T>( resultString );
+      HttpResponseMessage response = await _httpClient.GetAsync(url);
+      string resultString = await GetResponseString(response);
+      return FromJson<T>(resultString);
     }
 
-    protected async Task<T> PostAsync<T>( string url, object body )
+    protected async Task<T> PostAsync<T>(string url, object body)
     {
       HttpContent content = new StringContent(
-        JsonConvert.SerializeObject( body ), Encoding.UTF8, "application/json" );
-      HttpResponseMessage response = await _httpClient.PostAsync( url, content );
-      string resultString = await GetResponseString( response );
-      return FromJson<T>( resultString );
+        JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
+      HttpResponseMessage response = await _httpClient.PostAsync(url, content);
+      string resultString = await GetResponseString(response);
+      return FromJson<T>(resultString);
     }
 
-    private static async Task<string> GetResponseString( HttpResponseMessage response )
+    private static async Task<string> GetResponseString(HttpResponseMessage response)
     {
       return await response.Content.ReadAsStringAsync();
     }
 
-    private static T FromJson<T>( string json )
+    private static T FromJson<T>(string json)
     {
-      return JsonConvert.DeserializeObject<T>( json );
+      return JsonConvert.DeserializeObject<T>(json);
     }
 
     private HttpClient GetClient()
@@ -64,13 +64,13 @@ namespace Itinerary.Tests.Utilities
         args: new[] { "--connectionString", $"Data Source={_dbFileName}" },
         switchMappings: new Dictionary<string, string>
                         {
-                          [ "--connectionString" ] = "ConnectionStrings:Initinerary"
-                        } );
-      IWebHostBuilder builder = WebHost.CreateDefaultBuilder( null )
-                                       .UseEnvironment( "Integration" )
-                                       .UseConfiguration( configurationBuilder.Build() )
+                          ["--connectionString"] = "ConnectionStrings:Initinerary"
+                        });
+      IWebHostBuilder builder = WebHost.CreateDefaultBuilder(null)
+                                       .UseEnvironment("Integration")
+                                       .UseConfiguration(configurationBuilder.Build())
                                        .UseStartup<Startup>();
-      var testServer = new TestServer( builder );
+      var testServer = new TestServer(builder);
       HttpClient client = testServer.CreateClient();
       return client;
     }

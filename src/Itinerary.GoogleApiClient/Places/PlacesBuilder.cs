@@ -11,44 +11,44 @@ namespace Itinerary.GoogleApiClient.Places
 
     private readonly string _apiKey;
 
-    private PlacesBuilder( GoogleClientSecrets clientSecrets )
+    private PlacesBuilder(GoogleClientSecrets clientSecrets)
     {
-      _apiKey = GetApiKey( clientSecrets );
+      _apiKey = GetApiKey(clientSecrets);
     }
 
-    public static PlacesBuilder Create( GoogleClientSecrets clientSecrets )
+    public static PlacesBuilder Create(GoogleClientSecrets clientSecrets)
     {
-      return new PlacesBuilder( clientSecrets );
+      return new PlacesBuilder(clientSecrets);
     }
 
     public IAutocompleteHttpQueryBuilder Autocomplete()
     {
-      return new AutocompleteHttpQueryBuilder( _apiKey );
+      return new AutocompleteHttpQueryBuilder(_apiKey);
     }
 
     public IDetailsHttpQueryBuilder Details()
     {
-      return new DetailsHttpQueryBuilder( _apiKey );
+      return new DetailsHttpQueryBuilder(_apiKey);
     }
 
-    private static string GetApiKey( GoogleClientSecrets clientSecrets )
+    private static string GetApiKey(GoogleClientSecrets clientSecrets)
     {
-      return clientSecrets[ ApiName ];
+      return clientSecrets[ApiName];
     }
 
     public INearbyHttpQueryBuilder NearbySearch()
     {
-      return new NearbyHttpQueryBuilder( _apiKey );
+      return new NearbyHttpQueryBuilder(_apiKey);
     }
 
     public ITextHttpQueryBuilder TextSearch()
     {
-      return new TextHttpQueryBuilder( _apiKey );
+      return new TextHttpQueryBuilder(_apiKey);
     }
 
     public IRadarHttpQueryBuilder RadarSearch()
     {
-      return new RadarHttpQueryBuilder( _apiKey );
+      return new RadarHttpQueryBuilder(_apiKey);
     }
   }
 }

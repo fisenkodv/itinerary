@@ -15,21 +15,21 @@ namespace Itinerary.Tests.Unit
                   {
                     Location = new Location(
                       latitude: 42.2290029,
-                      longitude: -85.58352060000001 ),
+                      longitude: -85.58352060000001),
                     Name = "Test Name",
-                    Categories = new[] { "a", "b", "c" }.Select( ( x, index ) => new Category( index, x ) ).ToList(),
+                    Categories = new[] { "a", "b", "c" }.Select((x, index) => new Category(index, x)).ToList(),
                     ImageUrl = "http://server.com/image.png",
                     Rating = 4.5,
                     Reviews = 10
                   };
 
-      PlaceDto dto = Mapper.Instance.Map<Place, PlaceDto>( model );
+      PlaceDto dto = Mapper.Instance.Map<Place, PlaceDto>(model);
 
-      Assert.NotNull( dto );
-      Assert.Equal( dto.Location.Longitude, model.Location.Longitude );
-      Assert.Equal( dto.ImageUrl, model.ImageUrl);
+      Assert.NotNull(dto);
+      Assert.Equal(dto.Location.Longitude, model.Location.Longitude);
+      Assert.Equal(dto.ImageUrl, model.ImageUrl);
       Assert.Contains(
-        dto.Categories, dtoCategory => model.Categories.Exists( category => category.Name == dtoCategory ) );
+        dto.Categories, dtoCategory => model.Categories.Exists(category => category.Name == dtoCategory));
     }
   }
 }

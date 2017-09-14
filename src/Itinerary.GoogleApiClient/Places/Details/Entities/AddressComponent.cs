@@ -4,13 +4,13 @@ namespace Itinerary.GoogleApiClient.Places.Details.Entities
 {
   public class AddressComponent
   {
-    [JsonProperty( propertyName: "long_name" )]
+    [JsonProperty(propertyName: "long_name")]
     public string LongName { get; set; }
 
-    [JsonProperty( propertyName: "short_name" )]
+    [JsonProperty(propertyName: "short_name")]
     public string ShortName { get; set; }
 
-    [JsonProperty( propertyName: "types" )]
+    [JsonProperty(propertyName: "types")]
     public string[] Types { get; set; }
   }
 }

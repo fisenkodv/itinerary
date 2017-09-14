@@ -13,7 +13,7 @@ namespace Itinerary.Data.Repository
   {
     private readonly ItineraryDbContext _dbContext;
 
-    public PlacesRepository( ItineraryDbContext dbContext )
+    public PlacesRepository(ItineraryDbContext dbContext)
     {
       _dbContext = dbContext;
     }
@@ -21,7 +21,7 @@ namespace Itinerary.Data.Repository
     public IEnumerable<Place> GetPlaces(
       Location northWestLocation,
       Location southEastLocation,
-      double rating )
+      double rating)
     {
       IQueryable<Entity.Place> query =
         _dbContext.Set<Entity.Place>()
@@ -30,9 +30,9 @@ namespace Itinerary.Data.Repository
                              place.Latitude <= northWestLocation.Latitude &&
                              place.Latitude >= southEastLocation.Latitude &&
                              place.Longitude <= southEastLocation.Longitude &&
-                             place.Longitude >= northWestLocation.Longitude )
-                  .Include( place => place.Categories )
-                  .ThenInclude( placePlaceCategory => placePlaceCategory.Category );
+                             place.Longitude >= northWestLocation.Longitude)
+                  .Include(place => place.Categories)
+                  .ThenInclude(placePlaceCategory => placePlaceCategory.Category);
 
       return query.Select(
         entity =>
@@ -43,10 +43,10 @@ namespace Itinerary.Data.Repository
             Reviews = entity.Reviews.Count,
             Rating = entity.Rating,
             ImageUrl = entity.ImgUrl,
-            Location = new Location( entity.Latitude, entity.Longitude ),
+            Location = new Location(entity.Latitude, entity.Longitude),
             Categories = new List<Category>(
-              entity.Categories.Select( category => new Category( category.Category.Id, category.Category.Name ) ) )
-          } );
+              entity.Categories.Select(category => new Category(category.Category.Id, category.Category.Name)))
+          });
     }
   }
 }

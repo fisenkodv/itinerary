@@ -6,8 +6,8 @@ namespace Itinerary.Business.Identity
 {
   public interface IAccountService
   {
-    Task<RegisterResult> Register( User user );
+    Task<RegisterResult> Register(User user);
 
-    Task<JwtToken> Token( User user );
+    Task<JwtToken> Token(User user);
   }
 }

@@ -8,27 +8,27 @@ namespace Itinerary.GoogleApiClient.Places.Details.ParameterBuilder
   {
     private const string BaseUrl = "https://maps.googleapis.com/maps/api/place/details/json?";
 
-    public DetailsHttpQueryBuilder( string apiKey )
-      : base( BaseUrl, apiKey )
+    public DetailsHttpQueryBuilder(string apiKey)
+      : base(BaseUrl, apiKey)
     {
     }
 
-    public IDetailsHttpQueryBuilder Place( string placeId )
+    public IDetailsHttpQueryBuilder Place(string placeId)
     {
-      AddParameter( ApiParameters.PlaceId, placeId );
+      AddParameter(ApiParameters.PlaceId, placeId);
       return this;
     }
 
-    public IDetailsHttpQueryBuilder Reference( string reference )
+    public IDetailsHttpQueryBuilder Reference(string reference)
     {
-      AddParameter( ApiParameters.Reference, reference );
+      AddParameter(ApiParameters.Reference, reference);
       return this;
     }
 
-    public IDetailsHttpQueryBuilder Language( Languages language )
+    public IDetailsHttpQueryBuilder Language(Languages language)
     {
-      CodeAttribute codeAttribute = ArrtibutesHelper.GetEnumCodeAttribute( language );
-      AddParameter( ApiParameters.Language, codeAttribute?.Code );
+      CodeAttribute codeAttribute = ArrtibutesHelper.GetEnumCodeAttribute(language);
+      AddParameter(ApiParameters.Language, codeAttribute?.Code);
       return this;
     }
   }

@@ -7,15 +7,15 @@ namespace Itinerary.GoogleApiClient
 {
   public static class GoogleClientSecretsExtensions
   {
-    public static GoogleClientSecrets GetGoogleClientSecrets( this IConfiguration configuration )
+    public static GoogleClientSecrets GetGoogleClientSecrets(this IConfiguration configuration)
     {
-      IConfigurationSection section = configuration?.GetSection( key: "API:Google" );
+      IConfigurationSection section = configuration?.GetSection(key: "API:Google");
       IEnumerable<ValueTuple<string, string>> apiKeys =
         Enumerable.Empty<(string serviceName, string apiKey)>();
-      if ( section != null )
-        apiKeys = section.GetChildren().Select( x => (x.Key, x.Value) );
+      if (section != null)
+        apiKeys = section.GetChildren().Select(x => (x.Key, x.Value));
 
-      return new GoogleClientSecrets( apiKeys );
+      return new GoogleClientSecrets(apiKeys);
     }
   }
 }

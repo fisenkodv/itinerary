@@ -12,7 +12,7 @@ namespace Itinerary.Business.Places.Dto
       int reviews,
       IEnumerable<string> categories,
       string imageUrl,
-      Location location )
+      Location location)
     {
       Name = name;
       Rating = rating;

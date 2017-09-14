@@ -16,15 +16,15 @@ namespace Itinerary.Data.EntityFramework
 
     public DbSet<Entity.Itinerary> Itineraries { get; set; }
 
-    public ItineraryDbContext( DbContextOptions<ItineraryDbContext> dbContextOptions )
-      : base( dbContextOptions )
+    public ItineraryDbContext(DbContextOptions<ItineraryDbContext> dbContextOptions)
+      : base(dbContextOptions)
     {
       _dbContextOptions = dbContextOptions;
     }
 
-    protected override void OnModelCreating( ModelBuilder modelBuilder )
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      base.OnModelCreating( modelBuilder );
+      base.OnModelCreating(modelBuilder);
 
       modelBuilder.Entity<Place>().Configure();
       modelBuilder.Entity<Review>().Configure();
