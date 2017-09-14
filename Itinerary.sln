@@ -31,6 +31,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI Configuration", "CI Configuration", "{8CA0BFB9-0CED-49EC-A5D0-65E29C57EF28}"
 	ProjectSection(SolutionItems) = preProject
 		bitbucket-pipelines.yml = bitbucket-pipelines.yml
+		appveyor.yml = appveyor.yml
+    .travis.yml = .travis.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server Configuration", "Server Configuration", "{798176C6-B0A9-4D97-9767-C11B29C49C74}"
