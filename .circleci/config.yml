@@ -1,0 +1,65 @@
+version: 2
+
+working_directory: &working_directory /home/circleci/project
+key: &src-cache-key src-{{ .Branch }}-{{ .Revision }}
+key: &art-app-key art-app-{{ .Branch }}-{{ .Revision }}
+
+restore_cache: &restore_src
+  key: *src-cache-key
+
+docker: &docker_node
+  - image: circleci/node:9.2.1
+
+run: &npm_install
+  name: Install npm dependencies
+  command: |
+    echo Project path: ${project_path}
+    cd ${project_path}
+    npm config set progress=false
+    npm install
+
+run: &npm_build
+  name: Run prod build
+  command: |
+    echo Project path: ${project_path}
+    cd ${project_path}
+    npm run build.prod
+
+jobs:
+  checkout_source:
+    docker: *docker_node
+    working_directory: ~/project
+    steps:
+      - checkout
+      - save_cache:
+          key: *src-cache-key
+          paths:
+            - ~/project
+  build_app:
+    environment:
+      project_path: src/Itinerary.Web
+    docker: *docker_node
+    working_directory: *working_directory
+    steps:
+      - restore_cache: *restore_src
+      - restore_cache:
+          key: deps-app-npm-{{ .Branch }}-{{ checksum "src/Itinerary.Web/package.json" }}
+      - run: *npm_install
+      - save_cache:
+          key: deps-app-npm-{{ .Branch }}-{{ checksum "src/AItinerary.Web/package.json" }}
+          paths:
+            - src/Itinerary.Web/node_modules
+      - run: *npm_build
+      - save_cache:
+          key: *art-app-key
+          paths:
+            - build/web
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - checkout_source
+      - build_app:
+          requires:
+            - checkout_source
