@@ -3,7 +3,7 @@
   "version": "1.0.5",
   "description": "Itinerary SPA project",
   "repository": {
-    "url": "https://fisenkodv@bitbucket.org/fisenkodv/itinerary.git"
+    "url": "https://github.com/fisenkodv/itinerary.git"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color --env-config dev",

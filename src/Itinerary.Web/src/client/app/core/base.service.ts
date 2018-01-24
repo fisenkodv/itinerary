@@ -1,4 +1,4 @@
-import { URLSearchParams } from '@angular/http'
+import { URLSearchParams } from '@angular/http';
 import { Config } from '../shared/config/env.config';
 
 export abstract class BaseService {
