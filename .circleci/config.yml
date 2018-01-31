@@ -16,6 +16,7 @@ run: &npm_install
     echo Project path: ${project_path}
     cd ${project_path}
     npm config set progress=false
+    npm install -g @angular/cli
     npm install
 
 run: &npm_build
