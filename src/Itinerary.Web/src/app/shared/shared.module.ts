@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-
 import { TranslateModule } from '@ngx-translate/core';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { OnEnterPressDirective } from './directives';
 import { MaterialModule } from './material.module';
-
-import { OnEnterPressDirective } from './directives/index';
-import { JoinPipe } from './pipes/index';
+import { JoinPipe } from './pipes';
 
 @NgModule({
   imports: [],

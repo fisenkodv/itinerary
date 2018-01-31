@@ -22,7 +22,9 @@ export class FilterEffects {
   public search: Observable<Action> = this.actions
     .ofType(placesActions.GET_PLACES)
     .debounceTime(300)
-    .map((action: placesActions.GetPlacesAction) => action.payload)
+    .map((action: placesActions.GetPlacesAction) => {
+      return action.payload;
+    })
     .switchMap((filter: Filter) => {
       if (filter === null) {
         return empty();
