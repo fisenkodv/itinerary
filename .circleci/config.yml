@@ -16,7 +16,6 @@ run: &npm_install
     echo Project path: ${project_path}
     cd ${project_path}
     npm config set progress=false
-    npm install -g @angular/cli
     npm install
 
 run: &npm_build
@@ -24,7 +23,7 @@ run: &npm_build
   command: |
     echo Project path: ${project_path}
     cd ${project_path}
-    ng run build.prod
+    node node_modules/@angular/cli/bin/ng build --prod
 
 jobs:
   checkout_source:
