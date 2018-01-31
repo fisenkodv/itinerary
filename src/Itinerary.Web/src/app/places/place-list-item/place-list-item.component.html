@@ -1,0 +1,29 @@
+<div [@fadeInOut] class="place-list-item" [class.place-list-item--highlight]="isPlaceSelected">
+  <div class="place-text-content">
+    <div class="place-header">
+      <div class="place-title-container">
+        <h3 class="place-title">
+          <a class="place-title__link" href="http://tripadviser.com{{place.url}}" target="_blank">{{place.name}}</a>
+        </h3>
+        <h4 class="place-subtitle">{{place.categories|join:", "}}</h4>
+        <span class="place-rating-container">
+          <span class="place-rating">
+            <place-rating [rating]="place.rating"></place-rating>
+          </span>
+          <span class="place-reviews">({{place.reviews}})</span>
+        </span>
+      </div>
+    </div>
+
+    <img class="trip-adviser-logo" src="/assets/img/trip-adviser-logo.png"
+         matTooltip="{{'places.results.tripadvisor.tooltip' | translate }}"/>
+    <!--<div class="place-actions">-->
+    <!--<button md-raised-button [disabled]="true">SAVE (COOMING SOON)</button>-->
+    <!--</div>-->
+  </div>
+  <div class="place-image">
+    <div class="place-image__background"
+         [style.background-image]="'url(' + (place.imageUrl||'/assets/img/empty_state.png') + ')'">
+    </div>
+  </div>
+</div>

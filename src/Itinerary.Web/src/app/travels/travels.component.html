@@ -1,0 +1,14 @@
+﻿<section class="travels" fxLayout="column" fxLayoutAlign="stretch" fxFlex="grow">
+  <mat-grid-list cols="4" rowHeight="200px">
+    <mat-grid-tile *ngFor="let place of places" [rowspan]="place.rows">
+      <img [src]="getPlaceFileName(place.name)" alt="photo of {{place.name}}">
+      <mat-grid-tile-footer>
+        <h3 mat-line>{{place.name}}</h3>
+        <span mat-line>{{place.name}}</span>
+        <button mat-icon-button (click)="showPlace(place)">
+          <mat-icon>info</mat-icon>
+        </button>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+</section>

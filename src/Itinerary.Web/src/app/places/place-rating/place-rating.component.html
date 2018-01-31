@@ -1,0 +1,5 @@
+<ol class="rating" matTooltip="{{rating | number:'.0-2'}} stars">
+  <li class="rating-star" *ngFor="let star of stars">
+    <mat-icon class="rating-star__icon" color="warn">{{star}}</mat-icon>
+  </li>
+</ol>
