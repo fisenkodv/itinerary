@@ -23,7 +23,7 @@ run: &npm_build
   command: |
     echo Project path: ${project_path}
     cd ${project_path}
-    npm run build.prod
+    ng run build.prod
 
 jobs:
   checkout_source:
