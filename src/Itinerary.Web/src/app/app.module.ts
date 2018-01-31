@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -15,7 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeModule } from './home/home.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PlacesModule } from './places/places.module';
-import { Effects } from './redux/app.effects';
+import { effects } from './redux/app.effects';
 import { reducers } from './redux/app.reducers';
 import { InitialState } from './redux/app.state';
 import { SharedModule } from './shared/shared.module';
@@ -39,7 +40,7 @@ if (!environment.production) {
     BrowserAnimationsModule,
     BrowserModule,
     TranslationModule.forRoot(),
-    Effects,
+    EffectsModule.forRoot(effects),
     StoreModule.forRoot(reducers, { initialState: InitialState }),
     StoreRouterConnectingModule,
     CoreModule.forRoot(),
