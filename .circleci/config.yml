@@ -81,10 +81,10 @@ jobs:
       - run:
           name: Create archives
           command: |
-            ssh -v root@itinerary.site
+            ssh -v $DROPLET_USER@$DROPLET_IP
             #sudo apt-get update
             #sudo apt install -y rsync
-            #scp -r root@itinerary.site:/var/www/itinerary1 build/
+            #scp -r $DROPLET_USER@$DROPLET_IP:/var/www/itinerary1 build/
 
 workflows:
   version: 2
