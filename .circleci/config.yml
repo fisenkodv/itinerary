@@ -81,6 +81,8 @@ jobs:
       - run:
           name: Create archives
           command: |
+            sudo apt-get update
+            sudo apt install -y rsync
             rsync -a build/ root@itinerary.site:/var/www/itinerary1 -v
 
 workflows:
