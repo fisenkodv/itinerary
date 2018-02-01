@@ -282,3 +282,4 @@ src/Itinerary.Web/Client/dist/
 src/Itinerary.Crawler/download/
 .DS_Store
 /src/Itinerary.Api/itinerary.dev.db
+build/**

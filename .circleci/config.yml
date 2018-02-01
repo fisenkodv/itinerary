@@ -3,12 +3,16 @@ version: 2
 working_directory: &working_directory /home/circleci/project
 key: &src-cache-key src-{{ .Branch }}-{{ .Revision }}
 key: &art-app-key art-app-{{ .Branch }}-{{ .Revision }}
+key: &art-api-key art-api-{{ .Branch }}-{{ .Revision }}
 
 restore_cache: &restore_src
   key: *src-cache-key
 
 docker: &docker_node
   - image: circleci/node:9.2.1
+
+docker: &docker_api
+  - image: microsoft/dotnet:2.0.5-sdk-2.1.4
 
 run: &npm_install
   name: Install npm dependencies
@@ -35,6 +39,18 @@ jobs:
           key: *src-cache-key
           paths:
             - ~/project
+  build_api:
+    docker: *docker_api
+    working_directory: *working_directory
+    steps:
+      - restore_cache: *restore_src
+      - run:
+          name: Build api project
+          command: dotnet publish src/Itinerary.Api/Itinerary.Api.csproj -o ../../build/api -c Release
+      - save_cache:
+          key: *art-api-key
+          paths:
+            - build/api
   build_app:
     environment:
       project_path: src/Itinerary.Web
@@ -54,6 +70,18 @@ jobs:
           key: *art-app-key
           paths:
             - build/web
+  emit_artifacts:
+    docker: *docker_node
+    working_directory: *working_directory
+    steps:
+      - restore_cache:
+          key: *art-api-key
+      - restore_cache:
+          key: *art-app-key
+      - run:
+          name: Create archives
+          command: |
+            rsync -a build/ root@itinerary.site:/var/www/itinerary1 -v
 
 workflows:
   version: 2
@@ -63,3 +91,14 @@ workflows:
       - build_app:
           requires:
             - checkout_source
+      - build_api:
+          requires:
+            - checkout_source
+      - emit_artifacts:
+          filters:
+            branches:
+              ignore:
+                - feature/migrate-to-angular-cli
+          requires:
+            - build_app
+            - emit_artifacts

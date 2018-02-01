@@ -1,4 +1,4 @@
-import { Filter, Location, USGeoCenterLatitude, USGeoCenterLongitude } from '../../models/index';
+import { Filter, Location, USGeoCenterLatitude, USGeoCenterLongitude } from '../../models';
 import * as filterActions from './filter.actions';
 
 export interface IState {
