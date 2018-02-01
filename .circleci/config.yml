@@ -97,7 +97,7 @@ workflows:
       - emit_artifacts:
           filters:
             branches:
-              ignore:
+              only:
                 - feature/migrate-to-angular-cli
           requires:
             - build_app
