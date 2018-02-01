@@ -71,7 +71,6 @@ jobs:
           paths:
             - build/web
   emit_artifacts:
-    docker: *docker_node
     working_directory: *working_directory
     steps:
       - restore_cache:
