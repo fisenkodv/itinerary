@@ -46,7 +46,7 @@ jobs:
           key: deps-app-npm-{{ .Branch }}-{{ checksum "src/Itinerary.Web/package.json" }}
       - run: *npm_install
       - save_cache:
-          key: deps-app-npm-{{ .Branch }}-{{ checksum "src/AItinerary.Web/package.json" }}
+          key: deps-app-npm-{{ .Branch }}-{{ checksum "src/Itinerary.Web/package.json" }}
           paths:
             - src/Itinerary.Web/node_modules
       - run: *npm_build
