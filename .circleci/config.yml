@@ -101,4 +101,4 @@ workflows:
                 - feature/migrate-to-angular-cli
           requires:
             - build_app
-            - emit_artifacts
+            - build_api
