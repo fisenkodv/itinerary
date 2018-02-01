@@ -17,7 +17,7 @@ import { HomeModule } from './home/home.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PlacesModule } from './places/places.module';
 import { effects } from './redux/app.effects';
-import { reducers } from './redux/app.reducers';
+import { reducers, reducerToken, reducerProvider } from './redux/app.reducers';
 import { InitialState } from './redux/app.state';
 import { SharedModule } from './shared/shared.module';
 import { TranslationModule } from './translation.module';
@@ -41,7 +41,8 @@ if (!environment.production) {
     BrowserModule,
     TranslationModule.forRoot(),
     EffectsModule.forRoot(effects),
-    StoreModule.forRoot(reducers, { initialState: InitialState }),
+    StoreModule.forRoot(reducerToken, { initialState: InitialState }),
+    //StoreModule.forRoot(reducers, { initialState: InitialState }),
     StoreRouterConnectingModule,
     CoreModule.forRoot(),
     SharedModule,
@@ -51,6 +52,7 @@ if (!environment.production) {
     AppRoutingModule,
     DevSpecificModules
   ],
+  providers: [reducerProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {

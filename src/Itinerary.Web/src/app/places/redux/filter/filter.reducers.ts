@@ -1,4 +1,4 @@
-import { Filter, Location } from '../../models/index';
+import { Filter, Location, USGeoCenterLatitude, USGeoCenterLongitude } from '../../models/index';
 import * as filterActions from './filter.actions';
 
 export interface IState {
@@ -8,7 +8,7 @@ export interface IState {
 }
 
 export const initialState: IState = {
-  location: Location.createDefault(),
+  location: { latitude: USGeoCenterLatitude, longitude: USGeoCenterLongitude } as Location,
   distance: 50,
   rating: 4.0
 };
@@ -16,11 +16,11 @@ export const initialState: IState = {
 export function reducer(state: IState = initialState, action: filterActions.Actions): IState {
   switch (action.type) {
     case filterActions.SET_LOCATION:
-      return Object.assign({}, state, {isDefault: false, location: action.payload});
+      return Object.assign({}, state, { isDefault: false, location: action.payload });
     case filterActions.SET_DISTANCE:
-      return Object.assign({}, state, {isDefault: false, distance: action.payload});
+      return Object.assign({}, state, { isDefault: false, distance: action.payload });
     case filterActions.SET_RATING:
-      return Object.assign({}, state, {isDefault: false, rating: action.payload});
+      return Object.assign({}, state, { isDefault: false, rating: action.payload });
     default:
       return state;
   }
