@@ -83,8 +83,6 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get -y --force-yes install sshpass
-            #ssh -v $DROPLET_USER@$DROPLET_IP
-            #sudo apt install -y rsync
             sshpass -p $DROPLET_USER_PASSWORD scp -r $DROPLET_USER@$DROPLET_IP:/var/www/itinerary1 build/
 
 workflows:
@@ -98,11 +96,11 @@ workflows:
       - build_api:
           requires:
             - checkout_source
-      - emit_artifacts:
-          filters:
-            branches:
-              only:
-                - feature/migrate-to-angular-cli
-          requires:
-            - build_app
-            - build_api
+      # - emit_artifacts:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - feature/migrate-to-angular-cli
+      #     requires:
+      #       - build_app
+      #       - build_api
