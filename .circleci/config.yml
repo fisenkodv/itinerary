@@ -81,9 +81,6 @@ jobs:
       - run:
           name: Publish artifacts
           command: |
-            cat /etc/ssh/ssh_config
-            ls -la ~/.ssh/
-            cat ~/.ssh/id_rsa
             ssh -v $DROPLET_USER@$DROPLET_IP
             #sudo apt-get update
             #sudo apt install -y rsync
