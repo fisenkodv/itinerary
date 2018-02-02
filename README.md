@@ -1,9 +1,7 @@
 # Itinerary Web Application
 
 ## Build Status
-[![Build status](https://ci.appveyor.com/api/projects/status/e0g1520nlc9urj2q?svg=true)](https://ci.appveyor.com/project/fisenkodv/itinerary)
-[![Build Status](https://travis-ci.org/fisenkodv/itinerary.svg?branch=develop)](https://travis-ci.org/fisenkodv/itinerary)
-
+[![CircleCI](https://circleci.com/gh/fisenkodv/itinerary.svg?style=svg)](https://circleci.com/gh/fisenkodv/itinerary)
 
 ## Development
 ### Itinerary.Api
