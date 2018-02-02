@@ -81,10 +81,11 @@ jobs:
       - run:
           name: Publish artifacts
           command: |
-            ssh -v $DROPLET_USER@$DROPLET_IP
+            apt install sshpass
+            #ssh -v $DROPLET_USER@$DROPLET_IP
             #sudo apt-get update
             #sudo apt install -y rsync
-            #scp -r $DROPLET_USER@$DROPLET_IP:/var/www/itinerary1 build/
+            sshpass -p $DROPLET_USER_PASSWORD scp -r $DROPLET_USER@$DROPLET_IP:/var/www/itinerary1 build/
 
 workflows:
   version: 2
