@@ -82,8 +82,8 @@ jobs:
           name: Publish artifacts
           command: |
             cat /etc/ssh/ssh_config
-            ls -la /home/circleci/.ssh/
-            ls -la /etc/ssh/
+            ls -la ~/.ssh/
+            cat ~/.ssh/id_rsa
             ssh -v $DROPLET_USER@$DROPLET_IP
             #sudo apt-get update
             #sudo apt install -y rsync
