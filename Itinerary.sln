@@ -5,16 +5,12 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9642DFEB-4937-484F-BDB0-B3808731A114}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		README.md = README.md
 		src\Version.cs = src\Version.cs
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Tests", "test\Itinerary.Tests\Itinerary.Tests.csproj", "{50ED1CCE-680B-467A-9B73-89B3D30F0857}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Itinerary.Common", "src\Itinerary.Common\Itinerary.Common.csproj", "{F8AB7668-2CBE-4FC0-9CE4-4D866DB9CE7E}"
 EndProject
@@ -32,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI Configuration", "CI Conf
 	ProjectSection(SolutionItems) = preProject
 		bitbucket-pipelines.yml = bitbucket-pipelines.yml
 		appveyor.yml = appveyor.yml
-    .travis.yml = .travis.yml
+				.travis.yml = .travis.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server Configuration", "Server Configuration", "{798176C6-B0A9-4D97-9767-C11B29C49C74}"
@@ -46,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Editor Configuration", "Edi
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinerary.Tests", "src\Itinerary.Tests\Itinerary.Tests.csproj", "{0AFDDDA7-EC93-41C8-999E-91D674C26E73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,18 +54,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|x64.Build.0 = Debug|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Debug|x86.Build.0 = Debug|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|x64.ActiveCfg = Release|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|x64.Build.0 = Release|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|x86.ActiveCfg = Release|Any CPU
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857}.Release|x86.Build.0 = Release|Any CPU
 		{F8AB7668-2CBE-4FC0-9CE4-4D866DB9CE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8AB7668-2CBE-4FC0-9CE4-4D866DB9CE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8AB7668-2CBE-4FC0-9CE4-4D866DB9CE7E}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -140,12 +126,23 @@ Global
 		{4580B544-3E8D-4F80-BFCB-DB7C587F19B4}.Release|x64.Build.0 = Release|Any CPU
 		{4580B544-3E8D-4F80-BFCB-DB7C587F19B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{4580B544-3E8D-4F80-BFCB-DB7C587F19B4}.Release|x86.Build.0 = Release|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Debug|x64.Build.0 = Debug|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Debug|x86.Build.0 = Debug|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Release|x64.ActiveCfg = Release|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Release|x64.Build.0 = Release|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Release|x86.ActiveCfg = Release|Any CPU
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{50ED1CCE-680B-467A-9B73-89B3D30F0857} = {9642DFEB-4937-484F-BDB0-B3808731A114}
 		{F8AB7668-2CBE-4FC0-9CE4-4D866DB9CE7E} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 		{E912125E-1F1C-4AEF-90E7-9DC0CDC5F982} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 		{79CE81FA-6387-46F9-8921-873154F81DA7} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
@@ -155,6 +152,7 @@ Global
 		{8CA0BFB9-0CED-49EC-A5D0-65E29C57EF28} = {9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}
 		{798176C6-B0A9-4D97-9767-C11B29C49C74} = {9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}
 		{11867F9E-6864-4860-A7B4-98FC8DBCAF2A} = {9D284A3F-1F2D-4AF5-A990-38D35FF0E56E}
+		{0AFDDDA7-EC93-41C8-999E-91D674C26E73} = {D70A7DB2-0DA4-4444-B5CA-BEB7E87FB8E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6207A33-628E-481D-A32B-96E0812F7219}

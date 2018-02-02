@@ -1,9 +1,0 @@
-﻿/* TEAM */
-Author: Dmitry Fisenko
-Twitter: @fisenkodv
-
-/* SITE */
-Last update: 04/07/2017
-Language: English
-Doctype: HTML5
-IDE: Visual Studio Code

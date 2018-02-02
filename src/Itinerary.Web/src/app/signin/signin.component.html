@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-title>{{'signin.title' | translate }}</mat-card-title>
+  <mat-card-content>
+    <div>
+      <form #form="ngForm">
+        <mat-form-field class="input--fullwidth">
+          <input name="username" type="email" required matInput [(ngModel)]="username" (onEnter)="signIn(form)">
+          <mat-placeholder>{{'signin.username.placeholder' | translate }}</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field class="input--fullwidth">
+          <input name="password" type="password" required matInput [(ngModel)]="password" (onEnter)="signIn(form)">
+          <mat-placeholder>{{'signin.password.placeholder' | translate }}</mat-placeholder>
+        </mat-form-field>
+      </form>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="signIn(form)">{{'signin.signin-button.label' | translate }}</button>
+      <span class="error-message">{{error}}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

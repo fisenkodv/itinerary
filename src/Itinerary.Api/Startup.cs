@@ -49,7 +49,7 @@ namespace Itinerary.Api
       services.AddCors(
         options => options.AddPolicy(
           "AllowAllOrigins",
-          builder => { builder.AllowAnyOrigin(); }));
+          builder => builder.AllowAnyOrigin()));
 
       services.AddPersistentStorage(_configuration);
 
@@ -73,7 +73,7 @@ namespace Itinerary.Api
 
     private void InitializeDatabase(IApplicationBuilder app)
     {
-      using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+      using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
       {
         var itineraryDbContext = serviceScope.ServiceProvider.GetService<ItineraryDbContext>();
         itineraryDbContext.Database.Migrate();
