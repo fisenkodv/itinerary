@@ -81,6 +81,7 @@ jobs:
       - run:
           name: Publish artifacts
           command: |
+            echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD2+CJJe/MoC2rcFUIODIDLxmQhTPJc6PubYDjo9eHff/RcLxvECNlUh+8coLwJVOpHuzUhQS9vJHr4/tyaa+7K4JvL1AtaR1TUKalZPOBjDu+QQ8cUhgdrKTv9DNewWfzlN3nChXvKmTuo6+kjcCnCyRZWyxkZg9Q4rR7oJPDbj0MaflNgJHqjYk3bWBseJRxSiL+MlnivLbuGqXtH7vTzXQqUFBzE+FPtuFGpqNL1+Yc/E1exBFkdI71HYmT6ZQM1COsj4qFE6YRQ1dtrduAyg8B4d0KQVvvm4mUnFPEYm2c8csGclsMQuyV7gRWEN3c1IHXikpfWTl1adXS2sSgV root@itinerary-web-nyc3-01' >> /home/circleci/known_hosts
             ssh -v $DROPLET_USER@$DROPLET_IP
             #sudo apt-get update
             #sudo apt install -y rsync
