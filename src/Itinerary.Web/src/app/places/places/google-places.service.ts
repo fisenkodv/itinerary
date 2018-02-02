@@ -13,14 +13,10 @@ export class GooglePlacesService extends BaseService {
   }
 
   public autocomplete(keyword: string): Observable<Autocomplete[]> {
-    const baseUrl = `${super.getBaseApiUrl()}/places/autocomplete`;
-    const options = {
-      headers: new HttpHeaders()
-        .set('Access-Control-Allow-Origin', '*')
-    };
+    const baseUrl = `${super.getBaseApiUrl()}/google/places/autocomplete`;
     const request = {
       keyword
     };
-    return this.http.get<Autocomplete[]>(`${baseUrl}?${super.urlEncode(request)}`, options);
+    return this.http.get<Autocomplete[]>(`${baseUrl}?${super.urlEncode(request)}`);
   }
 }

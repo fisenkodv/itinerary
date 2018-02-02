@@ -42,7 +42,6 @@ if (!environment.production) {
     TranslationModule.forRoot(),
     EffectsModule.forRoot(effects),
     StoreModule.forRoot(reducerToken, { initialState: InitialState }),
-    //StoreModule.forRoot(reducers, { initialState: InitialState }),
     StoreRouterConnectingModule,
     CoreModule.forRoot(),
     SharedModule,

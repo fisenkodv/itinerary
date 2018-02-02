@@ -2,7 +2,7 @@ import { URLSearchParams } from '@angular/http';
 
 export abstract class BaseService {
   protected getBaseApiUrl(): string {
-   return 'http://localhost:5000/api/v1';
+   return '/api/v1';
   }
 
   protected urlEncode(obj: any): string {
