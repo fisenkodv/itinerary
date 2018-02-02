@@ -78,9 +78,6 @@ jobs:
           key: *art-api-key
       - restore_cache:
           key: *art-app-key
-      - add_ssh_keys:
-          fingerprints:
-            - "3d:68:da:03:9b:20:80:f6:2e:73:66:62:83:7f:72:f3"
       - run:
           name: Publish artifacts
           command: |
