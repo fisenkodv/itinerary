@@ -81,9 +81,9 @@ jobs:
       - run:
           name: Publish artifacts
           command: |
-            apt install sshpass
+            sudo apt-get update
+            sudo apt-get install sshpass
             #ssh -v $DROPLET_USER@$DROPLET_IP
-            #sudo apt-get update
             #sudo apt install -y rsync
             sshpass -p $DROPLET_USER_PASSWORD scp -r $DROPLET_USER@$DROPLET_IP:/var/www/itinerary1 build/
 
