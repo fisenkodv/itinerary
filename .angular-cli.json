@@ -29,11 +29,11 @@
       }
     }
   ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
+    "e2e": {
+      "protractor": {
+        "config": "./protractor.conf.js"
+      }
+    },
   "lint": [
     {
       "project": "src/tsconfig.app.json",
@@ -54,7 +54,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "component": {}
   }
 }
