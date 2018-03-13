@@ -1,0 +1,16 @@
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin for-media-query($media-query) {
+  @media #{$media-query} {
+    @content;
+  }
+}

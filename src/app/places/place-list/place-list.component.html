@@ -1,0 +1,5 @@
+﻿<div class="place-list">
+  <place-list-item *ngFor="let place of places | async; trackBy: trackPlace" [place]="place"
+                   [isPlaceSelected]="isPlaceListItemSelected(place)"
+                   [id]="getPlaceListItemId(place)"></place-list-item>
+</div>

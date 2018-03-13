@@ -1,0 +1,16 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+:host {
+  padding: $elements-padding * 2;
+}
+
+.search-panel {
+  &__title {
+    margin-top: 0;
+  }
+
+  &__label {
+    padding-right: $elements-padding;
+  }
+}
