@@ -1,0 +1,17 @@
+{
+  "preset": "jest-preset-angular",
+  "setupTestFrameworkScriptFile": "<rootDir>/src/test.jest.ts",
+  "coverageReporters": [
+    "lcov",
+    "text-summary"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "index.ts"
+  ],
+  "mapCoverage": true,
+  "testURL": "http://localhost:4200",
+  "roots": [
+    "<rootDir>/src/"
+  ]
+}
