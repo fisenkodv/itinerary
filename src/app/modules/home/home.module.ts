@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 
-//import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../shared.module';
+import { TranslationModule } from '../translation.module';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
 @NgModule({
   imports: [
-    //SharedModule,
+    SharedModule,
+    TranslationModule.forRoot(),
     HomeRoutingModule,
   ],
   exports: [],

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { Store } from '@ngrx/store';
+//import { Store } from '@ngrx/store';
 
 //import * as fromPlaces from '../places/redux/index';
-import { IAppState } from '@app/state/app.state';
+//import { IAppState } from '@app/state/app.state';
 
 import { AuthService } from '@app/services';
 
@@ -19,7 +19,7 @@ export class NavbarComponent {
 
   constructor(
     private authService: AuthService,
-    private store: Store<IAppState>
+    //private store: Store<IAppState>
   ) {
     //this.showProgressBar = this.store.select(fromPlaces.getLoading);
   }

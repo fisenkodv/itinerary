@@ -8,15 +8,15 @@ import { Page404Component, SignInComponent } from '@app/components';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'signin', component: SignInComponent },
-  { path: '**', redirectTo: '404' },
-  { path: '404', component: Page404Component }
+  // { path: 'signin', component: SignInComponent },
+  // { path: '**', redirectTo: '404' },
+  // { path: '404', component: Page404Component }
 ];
 
 @NgModule({
   declarations: [
-    Page404Component,
-    SignInComponent
+    // Page404Component,
+    // SignInComponent
   ],
   imports: [
     //SharedModule,

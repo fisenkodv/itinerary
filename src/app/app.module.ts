@@ -4,7 +4,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent, NavbarComponent } from '@app/components';
-import { HomeModule, PlacesModule, SharedModule, TranslationModule, TravelsModule } from '@app/modules';
+import {
+  HomeModule,
+  //PlacesModule,
+  SharedModule,
+  TranslationModule,
+  // TravelsModule
+} from '@app/modules';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -20,7 +26,7 @@ import { AppComponent } from './app.component';
 let DevSpecificModules: any = [];
 
 if (!environment.production) {
-  DevSpecificModules = [StoreDevtoolsModule.instrument({ maxAge: 50 })];
+  //DevSpecificModules = [StoreDevtoolsModule.instrument({ maxAge: 50 })];
 }
 
 @NgModule({
@@ -36,11 +42,11 @@ if (!environment.production) {
     TranslationModule.forRoot(),
     // EffectsModule.forRoot(effects),
     // StoreModule.forRoot(reducerToken, { initialState: InitialState }),
-    StoreRouterConnectingModule,
-    SharedModule,
+    //StoreRouterConnectingModule,
+    SharedModule.forRoot(),
     HomeModule,
-    PlacesModule,
-    TravelsModule,
+    // PlacesModule,
+    // TravelsModule,
     AppRoutingModule,
     DevSpecificModules
   ],
