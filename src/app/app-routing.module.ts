@@ -2,11 +2,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { Page404Component, SignInComponent } from '@app/components';
+import { Page404Component, SignInComponent } from '@app/pages';
 //import { SharedModule } from './shared/shared.module';
 
 
 const routes: Routes = [
+  { path: 'home', loadChildren: 'app/modules/home/home.module#HomeModule' },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   // { path: 'signin', component: SignInComponent },
   // { path: '**', redirectTo: '404' },

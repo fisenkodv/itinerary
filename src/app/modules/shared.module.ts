@@ -1,25 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { OnEnterPressDirective } from '@app/directives';
+import { AuthGuard } from '@app/guards';
+import { AuthErrorInterceptor, JWTInterceptor } from '@app/interceptors/';
+import { JoinPipe } from '@app/pipes';
+import { AuthService } from '@app/services';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { OnEnterPressDirective } from '@app/directives';
 import { MaterialModule } from './material.module';
-import { JoinPipe } from '@app/pipes';
-
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { AuthErrorInterceptor, JWTInterceptor } from '@app/interceptors/';
-
-import { AuthGuard } from '@app/guards';
-import { AuthService } from '@app/services';
+import { TranslationModule } from './translation.module';
 
 @NgModule({
-  imports: [],
+  imports: [
+    TranslationModule.forRoot()
+  ],
   declarations: [JoinPipe, OnEnterPressDirective],
   exports: [
     CommonModule,

@@ -8,7 +8,7 @@ import {
   HomeModule,
   //PlacesModule,
   SharedModule,
-  TranslationModule,
+  //TranslationModule,
   // TravelsModule
 } from '@app/modules';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -39,7 +39,7 @@ if (!environment.production) {
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    TranslationModule.forRoot(),
+    //TranslationModule.forRoot(),
     // EffectsModule.forRoot(effects),
     // StoreModule.forRoot(reducerToken, { initialState: InitialState }),
     //StoreRouterConnectingModule,

@@ -9,7 +9,7 @@ import { HomeComponent } from './home.component';
 @NgModule({
   imports: [
     SharedModule,
-    TranslationModule.forRoot(),
+    //TranslationModule.forRoot(),
     HomeRoutingModule,
   ],
   exports: [],
