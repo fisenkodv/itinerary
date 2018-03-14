@@ -8,9 +8,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 
-import { BaseService } from '../base.service';
-import { AuthResult } from './auth-result.model';
-import { AuthToken } from './auth-token.model';
+import { BaseService } from '@app/services';
+import { AuthResult, AuthToken } from '../models';
 
 @Injectable()
 export class AuthService extends BaseService {

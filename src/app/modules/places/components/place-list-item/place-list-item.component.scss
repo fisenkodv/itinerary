@@ -1,7 +1,7 @@
 @import ' ~@angular/material/theming';
-@import '../../scss/theme';
-@import '../../scss/variables';
-@import '../../scss/mixins';
+@import '../../../../styles/theme';
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
 
 $foreground: map-get($light-theme, foreground);
 $secondary-color: mat-color($foreground, secondary-text);

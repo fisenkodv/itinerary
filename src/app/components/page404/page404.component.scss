@@ -1,13 +1,13 @@
 @import '~@angular/material/theming';
-@import '../scss/theme';
-@import '../scss/variables';
+@import '../../styles/theme';
+@import '../../styles/variables';
 
 :host {
   display: flex;
   flex: 1;
   flex-direction: row-reverse;
   align-items: center;
-  background: url("../../assets/img/404.jpg") no-repeat center center fixed;
+  background: url("../../../assets/img/404.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

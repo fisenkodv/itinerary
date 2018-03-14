@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { AuthResult } from '../core/auth/auth-result.model';
-import { AuthService } from '../core/auth/auth.service';
+import { AuthResult } from '@app/models';
+import { AuthService } from '@app/services';
 
 @Component({
   moduleId: module.id,

@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { BaseService } from '../../core/base.service';
+import { BaseService } from '@app/services';
 import { Filter, PlaceDetails } from '../models/index';
 
 @Injectable()

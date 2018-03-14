@@ -1,7 +1,7 @@
 ﻿import { Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { PlaceDetails } from '../models/index';
-import { fadeInOut } from '../../shared/animations/fade-in-out';
+import { PlaceDetails } from '../../models';
+import { fadeInOut } from '@app/animations';
 
 @Component({
   moduleId: module.id,

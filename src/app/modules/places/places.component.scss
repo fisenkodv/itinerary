@@ -1,6 +1,6 @@
 ﻿@import '~@angular/material/theming';
-@import '../scss/theme';
-@import '../scss/variables';
+@import '../../styles/theme';
+@import '../../styles/variables';
 
 $foreground: map-get($light-theme, foreground);
 $foreground-color: mat-color($foreground, secondary-text);

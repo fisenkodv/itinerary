@@ -13,7 +13,7 @@ import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
 import { Filter } from '../../models';
-import { PlacesService } from '../../places';
+import { PlacesService } from '../../services';
 import * as placesActions from './places.actions';
 
 @Injectable()

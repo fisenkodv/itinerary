@@ -2,7 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { PlaceDetails } from '../models/index';
+import { PlaceDetails } from '../../models/index';
 
 @Component({
   moduleId: module.id,

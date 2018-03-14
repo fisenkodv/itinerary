@@ -4,13 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 //import * as fromPlaces from '../places/redux/index';
-import { IAppState } from '../redux/app.state';
+import { IAppState } from '@app/state/app.state';
 
-import { AuthService } from '../core/auth/auth.service';
+import { AuthService } from '@app/services';
 
 @Component({
   moduleId: module.id,
-  selector: 'navbar',
+  selector: 'app-navbar',
   templateUrl: 'navbar.component.html',
   styleUrls: ['navbar.component.scss']
 })

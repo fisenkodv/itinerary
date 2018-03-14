@@ -5,10 +5,10 @@ import 'rxjs/add/operator/takeWhile';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { IAppState } from '../../redux/app.state';
-import * as placesActions from '../redux/places/places.actions';
+import { IAppState } from '../../../../state/app.state';
+import * as placesActions from '../../state/places/places.actions';
 
-import { Filter, PlaceDetails } from '../models/index';
+import { Filter, PlaceDetails } from '../../models';
 
 @Component({
   moduleId: module.id,

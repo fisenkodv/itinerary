@@ -2,9 +2,9 @@
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { IAppState } from '../redux/app.state';
+import { IAppState } from '@app/state/app.state';
 import { Filter, PlaceDetails } from './models';
-import * as fromPlaces from './redux';
+import * as fromPlaces from './state';
 
 @Component({
   moduleId: module.id,

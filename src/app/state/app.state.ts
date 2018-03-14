@@ -1,4 +1,4 @@
-import * as Places from '../places/redux/index';
+import * as Places from '../modules/places/state';
 
 export interface IAppState {
   places: Places.IPlacesState;

@@ -2,9 +2,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { Page404Component } from './page404/page404.component';
-import { SharedModule } from './shared/shared.module';
-import { SignInComponent } from './signin/signin.component';
+import { Page404Component, SignInComponent } from '@app/components';
+//import { SharedModule } from './shared/shared.module';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,7 +19,7 @@ const routes: Routes = [
     SignInComponent
   ],
   imports: [
-    SharedModule,
+    //SharedModule,
     RouterModule.forRoot(routes/*,{ enableTracing: true}*/),
   ],
   exports: [RouterModule],

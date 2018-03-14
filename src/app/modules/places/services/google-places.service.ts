@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { BaseService } from '../../core/base.service';
+import { BaseService } from '@app/services';
 import { Autocomplete, Location } from './../models/index';
 
 @Injectable()

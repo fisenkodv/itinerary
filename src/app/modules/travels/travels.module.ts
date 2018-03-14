@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { SharedModule } from '../shared/shared.module';
+//import { SharedModule } from '../shared/shared.module';
 import { TravelsRoutingModule } from './travels-routing.module';
 import { TravelsComponent } from './travels.component';
 
@@ -15,7 +15,7 @@ import { TravelsComponent } from './travels.component';
     ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forChild(),
-    SharedModule,
+    //SharedModule,
     TravelsRoutingModule
   ],
   exports: [

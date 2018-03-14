@@ -7,9 +7,16 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { OnEnterPressDirective } from './directives';
+import { OnEnterPressDirective } from '@app/directives';
 import { MaterialModule } from './material.module';
-import { JoinPipe } from './pipes';
+import { JoinPipe } from '@app/pipes';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { AuthErrorInterceptor, JWTInterceptor } from '@app/interceptors/';
+
+import { AuthGuard } from '@app/guards';
+import { AuthService } from '@app/services';
 
 @NgModule({
   imports: [],
@@ -26,6 +33,20 @@ import { JoinPipe } from './pipes';
     TranslateModule,
     JoinPipe,
     OnEnterPressDirective
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JWTInterceptor,
+      multi: true
+    },
+    AuthGuard,
+    AuthService
   ]
 })
 export class SharedModule {

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { IAppState } from '../../redux/app.state';
+import { IAppState } from '../../../state/app.state';
 import * as filterReducers from './filter/filter.reducers';
 import * as mapReducers from './map/map.reducers';
 import * as placesReducers from './places/places.reducers';

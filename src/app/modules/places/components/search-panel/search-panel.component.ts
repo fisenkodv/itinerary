@@ -10,11 +10,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { IAppState } from '../../redux/app.state';
-import { Autocomplete, Filter, Location } from '../models';
-import { GooglePlacesService } from '../places';
-import * as filterActions from '../redux/filter/filter.actions';
-import * as placesActions from '../redux/places/places.actions';
+import { IAppState } from '../../../../state/app.state';
+import { Autocomplete, Filter, Location } from '../../models';
+import { GooglePlacesService } from '../../services';
+import * as filterActions from '../../state/filter/filter.actions';
+import * as placesActions from '../../state/places/places.actions';
 
 @Component({
   moduleId: module.id,
