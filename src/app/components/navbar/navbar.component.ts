@@ -6,8 +6,6 @@ import { Observable } from 'rxjs/Observable';
 //import * as fromPlaces from '../places/redux/index';
 //import { IAppState } from '@app/state/app.state';
 
-import { AuthService } from '@app/services';
-
 @Component({
   moduleId: module.id,
   selector: 'app-navbar',
@@ -18,7 +16,6 @@ export class NavbarComponent {
   public showProgressBar: Observable<boolean>;
 
   constructor(
-    private authService: AuthService,
     //private store: Store<IAppState>
   ) {
     //this.showProgressBar = this.store.select(fromPlaces.getLoading);
@@ -26,9 +23,5 @@ export class NavbarComponent {
 
   public signout() {
     return;
-  }
-
-  public get isSignedIn(): boolean {
-    return !this.authService.isTokenExpired();
   }
 }

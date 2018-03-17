@@ -7,8 +7,7 @@
     },
     "about": {
       "title": "About \"Itinerary\"",
-      "description":
-        "Do you want to spend less time planning your trip without missing anything? Then this site is for you! You will easily find all the most interesting and popular places, but also you will quickly build and maintain the best route here."
+      "description": "Do you want to spend less time planning your trip without missing anything? Then this site is for you! You will easily find all the most interesting and popular places, but also you will quickly build and maintain the best route here."
     },
     "features": {
       "title": "Our Features",
@@ -64,31 +63,8 @@
     "navigation": {
       "home": "Home",
       "places": "Places",
-      "travels": "Travels",
-      "soon": "Soon",
       "us-only": "US Only",
       "signin": "Sign in"
-    },
-    "menu": {
-      "settings": "Settings",
-      "theme": "Toggle Theme",
-      "help": "Help",
-      "signout": "Sign Out"
-    }
-  },
-  "signin": {
-    "title": "Sign in",
-    "username": {
-      "placeholder": "Enter Your Email"
-    },
-    "password": {
-      "placeholder": "Enter Your Password"
-    },
-    "signin-button": {
-      "label": "Sign in"
-    },
-    "errors": {
-      "invalid_username_or_password": "Invalid user name or password"
     }
   },
   "footer": {
