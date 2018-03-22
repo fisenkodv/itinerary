@@ -11,7 +11,7 @@ export interface LayoutStateModel {
 })
 export class LayoutState {
   @Action(OpenSidenav)
-  openSidenav({ getState, setState }: StateContext<LayoutStateModel>) {
+  openSidenav( { getState, setState }: StateContext<LayoutStateModel>) {
     setState({ ...getState(), showSidenav: true });
   }
 
