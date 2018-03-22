@@ -1,9 +1,0 @@
-﻿<section class="places" fxLayout="row" fxLayoutAlign="stretch" fxFlex="grow">
-  <div class="places__sidenav" fxFlex="noshrink" fxLayout="column">
-    <search-panel [filter]="filter"></search-panel>
-    <place-list [places]="places" [selectedPlaces]="selectedPlaces"></place-list>
-  </div>
-  <div class="places__map" fxFlex="grow">
-    <map [places]="places" [selectedPlaces]="selectedPlaces" [filter]="filter" [zoom]="zoom"></map>
-  </div>
-</section>

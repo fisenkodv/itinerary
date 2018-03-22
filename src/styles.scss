@@ -1,16 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Clicker+Script|Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
 @import 'app/styles/main';
 
-html, body, div {
-  border: 0;
-  margin: 0;
-  padding: 0;
+* {
+  box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-  width: 100%;
+html {
+  -webkit-font-smoothing: antialiased;
+  -ms-overflow-style: none;
+  overflow: auto;
 }
 
 body {

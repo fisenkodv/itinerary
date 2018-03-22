@@ -1,40 +1,41 @@
-﻿import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-//import { SharedModule } from '../shared/shared.module';
-import { PlacesRoutingModule } from './places-routing.module';
+ import { ComponentsModule } from './components';
+// import { BookEffects } from './effects/book';
+// import { CollectionEffects } from './effects/collection';
+// import { BookExistsGuard } from './guards/book-exists';
 
-import { MapComponent } from './components/map/map.component';
-import { PlaceListItemComponent } from './components/place-list-item/place-list-item.component';
-import { PlaceListComponent } from './components/place-list/place-list.component';
-import { PlaceRatingComponent } from './components/place-rating/place-rating.component';
-import { PlacesComponent } from './places.component';
-import { SearchPanelComponent } from './components/search-panel/search-panel.component';
+import { FindPlacesPageComponent } from './containers/find-places-page/find-places-page.component';
+// import { ViewBookPageComponent } from './containers/view-book-page';
+// import { SelectedBookPageComponent } from './containers/selected-book-page';
+// import { CollectionPageComponent } from './containers/collection-page';
+import { MaterialModule } from '../material.module';
 
-import { GooglePlacesService, PlacesService } from './services/index';
+import { reducers } from './store/reducers';
 
 @NgModule({
   imports: [
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M',
-      libraries: ['places']
-    }),
-    //SharedModule,
-    PlacesRoutingModule
+    CommonModule,
+    MaterialModule,
+    ComponentsModule,
+    RouterModule.forChild([
+      { path: '', component: FindPlacesPageComponent },
+    ]),
+    StoreModule.forFeature('places', reducers),
+    EffectsModule.forFeature([
+      //BookEffects, CollectionEffects
+    ]),
   ],
-  exports: [],
   declarations: [
-    PlacesComponent,
-    SearchPanelComponent,
-    PlaceListComponent,
-    PlaceListItemComponent,
-    PlaceRatingComponent,
-    MapComponent
+    FindPlacesPageComponent,
+    // ViewBookPageComponent,
+    // SelectedBookPageComponent,
+    // CollectionPageComponent,
   ],
-  providers: [
-    PlacesService,
-    GooglePlacesService
-  ]
+  providers: [],
 })
-export class PlacesModule {
-}
+export class PlacesModule { }

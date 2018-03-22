@@ -12,7 +12,9 @@ import {
   MatProgressBarModule,
   MatSliderModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSidenavModule,
+  MatListModule
 } from '@angular/material';
 
 @NgModule({
@@ -26,10 +28,14 @@ import {
     MatInputModule,
     MatFormFieldModule,
     MatMenuModule,
+    MatSidenavModule,
     MatProgressBarModule,
     MatSliderModule,
     MatToolbarModule,
-    MatTooltipModule],
+    MatListModule,
+    MatTooltipModule,
+    MatSidenavModule
+  ],
   declarations: [],
   exports: [
     MatAutocompleteModule,
@@ -41,10 +47,14 @@ import {
     MatInputModule,
     MatFormFieldModule,
     MatMenuModule,
+    MatSidenavModule,
     MatProgressBarModule,
     MatSliderModule,
     MatToolbarModule,
-    MatTooltipModule]
+    MatListModule,
+    MatTooltipModule,
+    MatSidenavModule
+  ]
 })
 export class MaterialModule {
 }

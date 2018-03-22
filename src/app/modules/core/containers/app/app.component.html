@@ -1,0 +1,11 @@
+﻿<app-layout>
+  <app-sidenav [open]="showSidenav$ | async">
+    <app-nav-item (navigate)="closeSidenav()" routerLink="/" icon="places" hint="Find places">
+      Find Places
+    </app-nav-item>
+  </app-sidenav>
+
+  <app-toolbar (openMenu)="openSidenav()">{{'navbar.title' | translate }}</app-toolbar>
+  <router-outlet></router-outlet>
+  <!-- <app-footer></app-footer> -->
+</app-layout>

@@ -1,0 +1,47 @@
+// @import '~@angular/material/theming';
+// @import '../../../../styles/theme';
+// @import '../../../../styles/variables';
+
+// :host {
+//   display: flex;
+//   flex: 1;
+//   flex-direction: row-reverse;
+//   align-items: center;
+//   background: url("../../../../../assets/img/404.jpg") no-repeat center center fixed;
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
+// }
+
+// .box {
+//   $font-config: mat-typography-config();
+//   $font-size: mat-font-size($font-config, body-1);
+//   width: 45%;
+
+//   .title {
+//     font-size: $font-size * 4;
+//     font-weight: mat-font-weight($font-config, body-1);
+//     color: mat-color(map-get($light-theme, primary), default-contrast);
+//     margin-bottom: 0;
+//   }
+
+//   .sub-title {
+//     font-size: $font-size * 2;
+//     font-weight: mat-font-weight($font-config, display-4);
+//     color: mat-color(map-get($light-theme, primary), default-contrast);
+//   }
+
+//   .links {
+//     list-style: none;
+//     padding-left: 0;
+
+//     &__link {
+//       margin: $elements-padding / 2 0;
+//       > a {
+//         text-decoration: none;
+//         color: mat-color(map-get($light-theme, primary), 100);
+//       }
+//     }
+//   }
+// }

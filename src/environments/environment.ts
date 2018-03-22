@@ -5,6 +5,10 @@
 
 export const environment = {
   production: false,
+  googleMaps: {
+    apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M',
+    libraries: ['places']
+  },
   firebase: {
     apiKey: 'AIzaSyCuUCX9rXofzOB0u0TFXQcYu20u4_54S3c',
     authDomain: 'itinerary-1488041928048.firebaseapp.com',
