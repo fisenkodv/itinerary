@@ -6,7 +6,7 @@ import { FooterComponent } from '@app/modules/core/components/footer/footer.comp
 import { MaterialModule } from '../material.module';
 import { TranslationModule } from '../translation.module';
 import { LayoutComponent } from './components/layout/layout.component';
-import { NavItemComponent } from './components/nav-item/nav-item.component';
+import { SidenavItemComponent } from './components/sidenav-item/sidenav-item.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AppComponent } from './containers/app/app.component';
@@ -16,7 +16,7 @@ export const COMPONENTS = [
   AppComponent,
   NotFoundPageComponent,
   LayoutComponent,
-  NavItemComponent,
+  SidenavItemComponent,
   SidenavComponent,
   ToolbarComponent,
   FooterComponent,

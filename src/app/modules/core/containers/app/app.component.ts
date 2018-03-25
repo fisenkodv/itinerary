@@ -2,14 +2,14 @@
 import { Select, Store } from 'ngxs';
 import { Observable } from 'rxjs/Observable';
 
-import { AppState } from '../../state/app.state';
 import * as layout from '../../state/layout.actions';
+import { AppState } from '../../state/app.state';
 
 @Component({
   moduleId: module.id,
   selector: 'app-app',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent {
   @Select((state: AppState) => state.layout.showSidenav)
