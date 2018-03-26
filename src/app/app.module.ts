@@ -11,6 +11,7 @@ import { routes } from './app.routes';
 import { AppComponent } from './modules/core/containers/app/app.component';
 import { CoreModule } from './modules/core/core.module';
 import { states } from './modules/core/state/app.state';
+import { TranslationModule } from './modules/translation.module';
 
 @NgModule({
   imports: [
@@ -21,11 +22,12 @@ import { states } from './modules/core/state/app.state';
     RouterModule.forRoot(routes, { useHash: false }),
     NgxsModule.forRoot(states),
     NgxsReduxDevtoolsPluginModule.forRoot({
-      disabled: environment.production,
+      disabled: environment.production
     }),
     CoreModule.forRoot(),
+    TranslationModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

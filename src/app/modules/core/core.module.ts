@@ -27,7 +27,7 @@ export const COMPONENTS = [
     CommonModule,
     RouterModule,
     MaterialModule,
-    TranslationModule.forRoot(),
+    TranslationModule,
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,
