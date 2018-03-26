@@ -1,19 +1,17 @@
-﻿
-<h2 class="search-panel__title" translate>places.search.title</h2>
-<h2 class="search-panel__title">{{'places.search.title' | translate }}</h2>
-<!-- <section class="search-panel" fxLayout="column">
-  <h2 fxFlex="grow" class="search-panel__title">{{'places.search.title' | translate }}</h2>
+﻿<section class="search-panel">
+  <h3 class="search-panel__title" translate>places.search.title</h3>
+  <mat-form-field>
+    <input type="text" matInput placeholder="{{'places.search.location.placeholder' | translate }}">
+    <!-- <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPlace.bind(this)">
+        <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
+          {{ place.name }}
+        </mat-option>
+      </mat-autocomplete> -->
+  </mat-form-field>
 
-  <mat-input-container fxFlex="grow" fxFlexFill>
-    <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
-    <mat-placeholder>{{'places.search.location.placeholder' | translate }}</mat-placeholder>
-  </mat-input-container>
 
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPlace.bind(this)">
-    <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
-      {{ place.name }}
-    </mat-option>
-  </mat-autocomplete>
+  <!--
+  
 
   <section fxFlex="grow">
     <div fxLayout="row">
@@ -29,5 +27,5 @@
       <mat-slider fxFlex="grow" [min]="0" [max]="5" [step]="0.1" [thumb-label]="true" [vertical]="false" [value]="(filter | async)?.rating" (change)="changeRatingHandler($event)">
       </mat-slider>
     </div>
-  </section>
-</section> -->
+  </section> -->
+</section>

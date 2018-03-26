@@ -17,44 +17,27 @@ import {
   MatListModule
 } from '@angular/material';
 
+export const MODULES = [
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatMenuModule,
+  MatProgressBarModule,
+  MatSliderModule,
+  MatToolbarModule,
+  MatListModule,
+  MatTooltipModule,
+  MatSidenavModule
+];
+
 @NgModule({
-  imports: [
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatProgressBarModule,
-    MatSliderModule,
-    MatToolbarModule,
-    MatListModule,
-    MatTooltipModule,
-    MatSidenavModule
-  ],
+  imports: MODULES,
   declarations: [],
-  exports: [
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatProgressBarModule,
-    MatSliderModule,
-    MatToolbarModule,
-    MatListModule,
-    MatTooltipModule,
-    MatSidenavModule
-  ]
+  exports: MODULES
 })
-export class MaterialModule {
-}
+export class MaterialModule {}
