@@ -14,7 +14,8 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatSidenavModule,
-  MatListModule
+  MatListModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 export const MODULES = [
@@ -32,7 +33,8 @@ export const MODULES = [
   MatToolbarModule,
   MatListModule,
   MatTooltipModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

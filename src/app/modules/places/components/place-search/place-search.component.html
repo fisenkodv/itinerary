@@ -1,31 +1,14 @@
 ﻿<section class="search-panel">
-  <h3 class="search-panel__title" translate>places.search.title</h3>
-  <mat-form-field>
-    <input type="text" matInput placeholder="{{'places.search.location.placeholder' | translate }}">
-    <!-- <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPlace.bind(this)">
-        <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
-          {{ place.name }}
-        </mat-option>
-      </mat-autocomplete> -->
-  </mat-form-field>
-
-
-  <!--
-  
-
-  <section fxFlex="grow">
-    <div fxLayout="row">
-      <label class="search-panel__label" fxFlexAlign="center" fxFlex="nogrow">{{'places.search.distance.label' | translate }}</label>
-      <mat-slider fxFlex="grow" [max]="500" [min]="0" [step]="10" [thumb-label]="true" [vertical]="false" [value]="(filter | async)?.distance" (change)="changeDistanceHandler($event)">
-      </mat-slider>
-    </div>
-  </section>
-
-  <section fxFlex="grow">
-    <div fxLayout="row">
-      <label class="search-panel__label" fxFlexAlign="center" fxFlex="nogrow">{{'places.search.rating.label' | translate }}</label>
-      <mat-slider fxFlex="grow" [min]="0" [max]="5" [step]="0.1" [thumb-label]="true" [vertical]="false" [value]="(filter | async)?.rating" (change)="changeRatingHandler($event)">
-      </mat-slider>
-    </div>
-  </section> -->
+  <mat-card>
+    <mat-card-title translate>places.search.title</mat-card-title>
+    <mat-card-content>
+      <mat-input-container>
+        <input matInput placeholder="{{'places.search.location.placeholder' | translate }}">
+      </mat-input-container>
+      <!-- <mat-spinner [diameter]="30" [strokeWidth]="3"></mat-spinner> -->
+    </mat-card-content>
+    <mat-card-footer>
+      <!-- <span *ngIf="error">{{error}}</span> -->
+    </mat-card-footer>
+  </mat-card>
 </section>
