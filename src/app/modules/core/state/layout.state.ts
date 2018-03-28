@@ -1,4 +1,4 @@
-import { State, Action, StateContext } from 'ngxs';
+import { State, Action, StateContext } from '@ngxs/store';
 import { OpenSidenav, CloseSidenav } from './layout.actions';
 
 export interface LayoutStateModel {
