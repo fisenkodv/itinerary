@@ -1,4 +1,10 @@
 ﻿@import '~@angular/material/theming';
+
+:host {
+  display: flex;
+  position: relative;
+  @include mat-elevation(2);
+}
 // @import '../../../../styles/theme';
 // @import '../../../../styles/variables';
 

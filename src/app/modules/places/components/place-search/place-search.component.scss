@@ -1,12 +1,27 @@
+@import '~@angular/material/theming';
+@import '../../../../styles/theme';
+
+:host {
+  @include mat-elevation(1);
+  background-color: mat-color(map-get($light-theme, primary), default-contrast);
+  display: flex;
+  flex-direction: column;
+}
+
 .search-panel {
   &__content,
   &__title {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 300;
   }
 }
 
 .control-group {
   margin: 0 20px 0 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
 }

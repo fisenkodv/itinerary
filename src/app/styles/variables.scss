@@ -1,34 +1,34 @@
-﻿$extra-small-upper-bound: 599px;
-$small-lower-bound: $extra-small-upper-bound + 1;//600
-$small-upper-bound: 959px;
+﻿// $extra-small-upper-bound: 599px;
+// $small-lower-bound: $extra-small-upper-bound + 1;//600
+// $small-upper-bound: 959px;
 
-$medium-lower-bound: $small-upper-bound + 1;//960px
-$medium-upper-bound: 1279px;
+// $medium-lower-bound: $small-upper-bound + 1;//960px
+// $medium-upper-bound: 1279px;
 
-$large-lower-bound: $medium-upper-bound + 1;//1280
-$large-upper-bound: 1919px;
+// $large-lower-bound: $medium-upper-bound + 1;//1280
+// $large-upper-bound: 1919px;
 
-$extra-large-lower-bound: $large-upper-bound + 1;//1920
-$extra-large-upper-bound: 5000px;
+// $extra-large-lower-bound: $large-upper-bound + 1;//1920
+// $extra-large-upper-bound: 5000px;
 
-$xs: (max-width: $extra-small-upper-bound);
-$gt-xs: (min-width: $small-lower-bound);
-$sm: ((min-width: $small-lower-bound) and (max-width: $small-upper-bound));
-$lt-sm: (max-width: $medium-lower-bound);
-$gt-sm: (min-width: $medium-lower-bound);
-$md: ((min-width: $medium-lower-bound) and (max-width: $medium-upper-bound));
-$gt-md: (min-width: $large-lower-bound);
-$lg: ((min-width: $large-lower-bound) and (max-width: $large-upper-bound));
-$gt-lg: (min-width: $extra-large-lower-bound);
-$xl: ((min-width: $extra-large-lower-bound) and (max-width: $extra-large-upper-bound));
+// $xs: (max-width: $extra-small-upper-bound);
+// $gt-xs: (min-width: $small-lower-bound);
+// $sm: ((min-width: $small-lower-bound) and (max-width: $small-upper-bound));
+// $lt-sm: (max-width: $medium-lower-bound);
+// $gt-sm: (min-width: $medium-lower-bound);
+// $md: ((min-width: $medium-lower-bound) and (max-width: $medium-upper-bound));
+// $gt-md: (min-width: $large-lower-bound);
+// $lg: ((min-width: $large-lower-bound) and (max-width: $large-upper-bound));
+// $gt-lg: (min-width: $extra-large-lower-bound);
+// $xl: ((min-width: $extra-large-lower-bound) and (max-width: $extra-large-upper-bound));
 
-$elements-padding: 10px;
-$search-sidebar-width: 380px;
+// $elements-padding: 10px;
+// $search-sidebar-width: 380px;
 
-$toolbar-padding: 16px !default;
-$toolbar-height-desktop: 64px !default;
-$toolbar-height-mobile-landscape: 48px !default;
+// $toolbar-padding: 16px !default;
+// $toolbar-height-desktop: 64px !default;
+// $toolbar-height-mobile-landscape: 48px !default;
 
-$scrollbar-width: 6px;
-$scrollbar-track-background-color: #f0f0f0;
-$scrollbar-thumb-background-color: #888;
+// $scrollbar-width: 6px;
+// $scrollbar-track-background-color: #f0f0f0;
+// $scrollbar-thumb-background-color: #888;
