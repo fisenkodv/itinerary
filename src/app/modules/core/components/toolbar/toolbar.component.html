@@ -1,26 +1,4 @@
-﻿<!-- <div class="progress-bar-container">
-  <mat-progress-bar *ngIf="showProgressBar | async" mode="indeterminate" color="accent"></mat-progress-bar>
-</div>
-<mat-toolbar color="primary">
-  <a class="title" fxFlex="grow" [routerLink]="['/home']">{{'navbar.title' | translate }}</a>
-  <div class="navigation-container" fxHide.xs="true">
-    <nav class="navigation">
-      <a class="navigation__link" [routerLink]="['/home']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.home' | translate }}</a>
-      <a class="navigation__link" [routerLink]="['/places']" [routerLinkActive]="'navigation__link--active'">{{'navbar.navigation.places' | translate }}
-          <span class="navigation__link-sub-title">{{'navbar.navigation.us-only' | translate }}</span>
-        </a>
-    </nav>
-  </div>
-  <button class="more-button" mat-icon-button [matMenuTriggerFor]="navigation" fxShow.gt-xs="false">
-      <mat-icon>menu</mat-icon>
-    </button>
-</mat-toolbar>
-<mat-menu x-position="before" #navigation="matMenu">
-  <button mat-menu-item [routerLink]="['/home']">{{'navbar.navigation.home' | translate }}</button>
-  <button mat-menu-item [routerLink]="['/places']">{{'navbar.navigation.places' | translate }}</button>
-  <button mat-menu-item [routerLink]="['/travels']">{{'navbar.navigation.travels' | translate }}</button>
-</mat-menu> -->
-<mat-toolbar color="primary">
+﻿<mat-toolbar color="primary" class="mat-elevation-z2">
   <button mat-icon-button (click)="openMenu.emit()">
     <mat-icon>menu</mat-icon>
   </button>

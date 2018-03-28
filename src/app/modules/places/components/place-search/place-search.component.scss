@@ -1,0 +1,12 @@
+.search-panel {
+  &__content,
+  &__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.control-group {
+  margin: 0 20px 0 0;
+}
