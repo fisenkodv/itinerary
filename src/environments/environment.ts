@@ -5,9 +5,9 @@
 
 export const environment = {
   production: false,
-  googleMaps: {
-    apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M',
-    libraries: ['places']
+  google: {
+    maps: { apiKey: 'AIzaSyBkxFjVilFXxTMLb6JxL2x-AGeCOLIRO1M', libraries: ['places'] },
+    places: { apiKey: 'AIzaSyAHtJrpKyxsARFESBwI-a0qaWjsD5ZW-3w' }
   },
   firebase: {
     apiKey: 'AIzaSyCuUCX9rXofzOB0u0TFXQcYu20u4_54S3c',
