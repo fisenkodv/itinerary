@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { Select, Store } from 'ngxs';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as layout from '../../state/layout.actions';

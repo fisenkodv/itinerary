@@ -1,21 +1,26 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+
 import { environment } from '../../../../environments/environment';
+import { GoogleAutocomplete } from '../models';
 
 @Injectable()
 export class GooglePlacesService {
   constructor(private httpClient: HttpClient) {}
 
-  public autocomplete(query: string): Observable<any> {
+  public autocomplete(keyword: string): Observable<GoogleAutocomplete[]> {
     const queryParameters = {
-      input: query,
+      input: keyword,
       key: environment.google.places.apiKey,
       language: 'en',
-      components: 'country:us'
+      components: 'country:us',
+      types: '(cities)'
     };
-    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?${this.getQuery(queryParameters)}`;
+    const query = this.getQuery(queryParameters);
+    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?${query}`;
+
+    return this.httpClient.get<GoogleAutocomplete[]>(url);
   }
 
   private getQuery(parameters: object): string {

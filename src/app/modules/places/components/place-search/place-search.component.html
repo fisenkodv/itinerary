@@ -2,9 +2,14 @@
   <h2 class="search-panel__title" translate>places.search.title</h2>
   <div class="search-panel__content">
     <div class="control-group">
-      <mat-input-container>
-        <input matInput placeholder="{{'places.search.location.placeholder' | translate }}">
-      </mat-input-container>
+      <mat-form-field>
+        <input matInput [matAutocomplete]="autocomplete" [formControl]="placeCtrl" placeholder="{{'places.search.location.placeholder' | translate }}">
+        <mat-autocomplete #autocomplete="matAutocomplete">
+          <mat-option *ngFor="let place of filteredPlaces | async" [value]="place.place_id">
+            {{ place.description }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
     <div class="control-group">
       <label class="control-group__label">{{'places.search.distance.label' | translate }}</label>
