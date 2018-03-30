@@ -3,7 +3,7 @@
   <div class="search-panel__content">
     <div class="control-group">
       <mat-form-field>
-        <input matInput [matAutocomplete]="autocomplete" [formControl]="placeCtrl" placeholder="{{'places.search.location.placeholder' | translate }}">
+        <input id="au" matInput [matAutocomplete]="autocomplete" [formControl]="placeCtrl" placeholder="{{'places.search.location.placeholder' | translate }}">
         <mat-autocomplete #autocomplete="matAutocomplete">
           <mat-option *ngFor="let place of filteredPlaces | async" [value]="place.place_id">
             {{ place.description }}

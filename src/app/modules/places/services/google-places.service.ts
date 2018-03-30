@@ -20,7 +20,7 @@ export class GooglePlacesService {
     const query = this.getQuery(queryParameters);
     const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?${query}`;
 
-    return this.httpClient.get<GoogleAutocomplete[]>(url);
+    return this.httpClient.jsonp<GoogleAutocomplete[]>(url, 'ad');
   }
 
   private getQuery(parameters: object): string {
