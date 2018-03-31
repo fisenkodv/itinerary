@@ -4,8 +4,8 @@
     <div class="control-group">
       <mat-form-field>
         <input id="au" matInput [matAutocomplete]="autocomplete" [formControl]="placeCtrl" placeholder="{{'places.search.location.placeholder' | translate }}">
-        <mat-autocomplete #autocomplete="matAutocomplete">
-          <mat-option *ngFor="let place of filteredPlaces | async" [value]="place.place_id">
+        <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="displayPlace">
+          <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
             {{ place.description }}
           </mat-option>
         </mat-autocomplete>

@@ -36,6 +36,10 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
     return this.googleService.autocomplete(keyword);
   }
 
+  public displayPlace(place?: GoogleAutocomplete): string | undefined {
+    return place ? place.description : undefined;
+  }
+
   private setCurrentPosition() {
     // if (navigator.geolocation) {
     //   navigator.geolocation.getCurrentPosition((position) => {
