@@ -5,19 +5,33 @@ import {} from '@types/googlemaps';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/bindCallback';
 
-import { GoogleAutocomplete } from '../models';
+import { GoogleAutocomplete, GooglePlaceDetails } from '../models';
 
 @Injectable()
 export class GooglePlacesService {
-  private observableFactory: (keyword: string) => Observable<GoogleAutocomplete[]>;
+  private readonly PlaceDetailsElementId: string = 'google_place_details';
+  private autocompleteObservableFactory: (keyword: string) => Observable<GoogleAutocomplete[]>;
+  private placeDetailsObservableFactory: (placeId: string) => Observable<GooglePlaceDetails>;
 
   constructor(private apiLoader: MapsAPILoader) {
     this.apiLoader.load();
-    this.observableFactory = Observable.bindCallback(this.autocompleteCallback, this.autocompleteResultSelector);
+    this.autocompleteObservableFactory = Observable.bindCallback(
+      this.autocompleteCallback,
+      this.autocompleteResultSelector
+    );
+
+    this.placeDetailsObservableFactory = Observable.bindCallback(
+      this.getPlaceDetailsCallback,
+      this.getPlaceDetailsResultSelector
+    );
   }
 
   public autocomplete(keyword: string): Observable<GoogleAutocomplete[]> {
-    return this.observableFactory(keyword);
+    return this.autocompleteObservableFactory(keyword);
+  }
+
+  public place(placeId: string): Observable<GooglePlaceDetails> {
+    return this.placeDetailsObservableFactory(placeId);
   }
 
   private autocompleteCallback(
@@ -43,5 +57,33 @@ export class GooglePlacesService {
     return status === google.maps.places.PlacesServiceStatus.OK
       ? results.map(x => <GoogleAutocomplete>{ id: x.place_id, description: x.description })
       : [];
+  }
+
+  private getPlaceDetailsElement(): HTMLDivElement {
+    let element = <HTMLDivElement>document.getElementById(this.PlaceDetailsElementId);
+    if (!element) {
+      element = document.createElement('div');
+      element.id = this.PlaceDetailsElementId;
+    }
+    return element;
+  }
+
+  private getPlaceDetailsCallback(
+    placeId: string,
+    callback: (result: google.maps.places.PlaceResult, status: google.maps.places.PlacesServiceStatus) => void
+  ) {
+    if (placeId !== '') {
+      const placesService = new google.maps.places.PlacesService(this.getPlaceDetailsElement());
+      placesService.getDetails({ placeId: placeId }, callback);
+    }
+  }
+
+  private getPlaceDetailsResultSelector(
+    result: google.maps.places.PlaceResult,
+    status: google.maps.places.PlacesServiceStatus
+  ): GooglePlaceDetails {
+    return status === google.maps.places.PlacesServiceStatus.OK
+      ? <GooglePlaceDetails>{ latitude: result.geometry.location.lat(), longitude: result.geometry.location.lng() }
+      : undefined;
   }
 }

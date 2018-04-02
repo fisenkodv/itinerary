@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { GoogleAutocomplete } from '../../models';
 import { GooglePlacesService } from '../../services';
 import { FormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 @Component({
   moduleId: module.id,
@@ -38,6 +39,10 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
 
   public displayPlace(place?: GoogleAutocomplete): string | undefined {
     return place ? place.description : undefined;
+  }
+
+  public selectPlace(event: MatAutocompleteSelectedEvent) {
+    this.googleService.place((<GoogleAutocomplete>event.option.value).id).subscribe(x => console.log(x));
   }
 
   private setCurrentPosition() {
