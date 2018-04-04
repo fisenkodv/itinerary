@@ -28,6 +28,7 @@
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "@ngxs/devtools-plugin": "^2.0.0",
+    "@ngxs/logger-plugin": "^2.0.0",
     "@ngxs/store": "^2.0.0",
     "@types/googlemaps": "^3.30.8",
     "angularfire2": "^5.0.0-rc.6",

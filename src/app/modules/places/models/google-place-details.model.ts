@@ -1,4 +1,5 @@
+import { Location } from './location.model';
+
 export interface GooglePlaceDetails {
-  longitude: number;
-  latitude: number;
+  location: Location;
 }

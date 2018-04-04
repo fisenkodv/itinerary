@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
@@ -25,6 +26,7 @@ import { TranslationModule } from './modules/translation.module';
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production
     }),
+    NgxsLoggerPluginModule.forRoot({ logger: console, collapsed: true }),
     CoreModule.forRoot(),
     TranslationModule.forRoot()
   ],
