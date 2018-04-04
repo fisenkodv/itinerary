@@ -1,4 +1,4 @@
-export interface GoogleAutocomplete {
+export interface Autocomplete {
   id: string;
   description: string;
 }

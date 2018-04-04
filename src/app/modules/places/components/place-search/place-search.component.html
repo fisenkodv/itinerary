@@ -3,7 +3,7 @@
   <div class="search-panel__content">
     <div class="control-group">
       <mat-form-field>
-        <input id="au" matInput [matAutocomplete]="autocomplete" [formControl]="placeCtrl" placeholder="{{'places.search.location.placeholder' | translate }}">
+        <input matInput [matAutocomplete]="autocomplete" [formControl]="placeCtrl" placeholder="{{'places.search.location.placeholder' | translate }}">
         <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="displayPlace" (optionSelected)="selectPlace($event)">
           <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
             {{ place.description }}
@@ -13,15 +13,15 @@
     </div>
     <div class="control-group">
       <label class="control-group__label">{{'places.search.distance.label' | translate }}</label>
-      <mat-slider [max]="500" [min]="0" [step]="10" [thumb-label]="true"></mat-slider>
+      <mat-slider [max]="500" [min]="0" [step]="10" [thumb-label]="true" [value]="(filter$ | async).distance" (change)="changeDistanceHandler($event.value)"></mat-slider>
     </div>
     <div class="control-group">
       <label class="control-group__label">{{'places.search.rating.label' | translate }}</label>
-      <mat-slider fxFlex="grow" [min]="0" [max]="5" [step]="0.1" [thumb-label]="true"></mat-slider>
+      <mat-slider fxFlex="grow" [min]="0" [max]="5" [step]="0.1" [thumb-label]="true" [value]="(filter$ | async).rating" (change)="changeRatingHandler($event.value)"></mat-slider>
     </div>
     <div class="control-group">
       <label class="control-group__label">{{'places.search.review.label' | translate }}</label>
-      <mat-slider fxFlex="grow" [min]="0" [max]="500" [step]="10" [thumb-label]="true"> </mat-slider>
+      <mat-slider fxFlex="grow" [min]="0" [max]="500" [step]="10" [thumb-label]="true" [value]="(filter$ | async).reviews" (change)="changeReviewsHandler($event.value)"></mat-slider>
     </div>
     <!-- <mat-spinner [diameter]="30" [strokeWidth]="3"></mat-spinner> -->
   </div>

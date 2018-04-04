@@ -1,5 +1,5 @@
 import { Location } from './location.model';
 
-export interface GooglePlaceDetails {
+export interface PlaceDetails {
   location: Location;
 }

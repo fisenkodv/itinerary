@@ -1,6 +1,6 @@
-import { State, Action, StateContext } from '@ngxs/store';
-import { GoogleAutocomplete, Location } from '@app/modules/places/models';
-import { SetLocation } from '@app/modules/places/state/filter.actions';
+import { Location } from '@app/modules/places/models';
+import { SetDistance, SetLocation, SetRating, SetReviews } from '@app/modules/places/state/filter.actions';
+import { Action, State, StateContext } from '@ngxs/store';
 
 export interface FilterStateModel {
   location: Location;
@@ -22,5 +22,20 @@ export class FilterState {
   @Action(SetLocation)
   setLocation({ getState, setState }: StateContext<FilterStateModel>, { payload }: SetLocation) {
     setState({ ...getState(), location: payload });
+  }
+
+  @Action(SetDistance)
+  setDistance({ getState, setState }: StateContext<FilterStateModel>, { payload }: SetDistance) {
+    setState({ ...getState(), distance: payload });
+  }
+
+  @Action(SetRating)
+  setRating({ getState, setState }: StateContext<FilterStateModel>, { payload }: SetRating) {
+    setState({ ...getState(), rating: payload });
+  }
+
+  @Action(SetReviews)
+  setRevSetReviews({ getState, setState }: StateContext<FilterStateModel>, { payload }: SetReviews) {
+    setState({ ...getState(), reviews: payload });
   }
 }
