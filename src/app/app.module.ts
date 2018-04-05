@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsStoragePluginModule, StorageOption } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
@@ -27,6 +28,12 @@ import { TranslationModule } from './modules/translation.module';
       disabled: environment.production
     }),
     NgxsLoggerPluginModule.forRoot({ logger: console, collapsed: true }),
+    NgxsStoragePluginModule.forRoot({
+      key: '@@STATE',
+      storage: StorageOption.LocalStorage,
+      deserialize: JSON.parse,
+      serialize: JSON.stringify
+    }),
     CoreModule.forRoot(),
     TranslationModule.forRoot()
   ],

@@ -26,7 +26,10 @@ export class AutocompleteState {
   }
 
   @Action(AutocompleteSuccess)
-  autocompleteSuccess({ getState, setState }: StateContext<AutocompleteStateModel>, { payload }: AutocompleteSuccess) {
-    return setState({ ...getState(), autocomplete: payload });
+  autocompleteSuccess(
+    { patchState, setState }: StateContext<AutocompleteStateModel>,
+    { payload }: AutocompleteSuccess
+  ) {
+    return patchState({ autocomplete: payload });
   }
 }

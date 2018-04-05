@@ -3,7 +3,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as layout from '../../state/layout.actions';
-import { AppState } from '../../state/app.state';
+import { LayoutState } from '@app/modules/core/state/layout.state';
 
 @Component({
   moduleId: module.id,
@@ -12,8 +12,7 @@ import { AppState } from '../../state/app.state';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  @Select((state: AppState) => state.layout.showSidenav)
-  public showSidenav$: Observable<boolean>;
+  @Select(LayoutState.showSidenav) public showSidenav$: Observable<boolean>;
 
   constructor(private store: Store) {}
 
