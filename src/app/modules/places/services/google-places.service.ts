@@ -84,6 +84,8 @@ export class GooglePlacesService {
   ): PlaceDetails {
     return status === google.maps.places.PlacesServiceStatus.OK
       ? <PlaceDetails>{
+          id: result.place_id,
+          name: result.name,
           location: { latitude: result.geometry.location.lat(), longitude: result.geometry.location.lng() }
         }
       : undefined;
