@@ -1,4 +1,5 @@
-import { PlacesState, PlacesStateModel } from './places.state';
+import { AutocompleteState } from './autocomplete.state';
 import { FilterState } from './filter.state';
+import { PlacesState } from './places.state';
 
-export const states = [PlacesState, FilterState];
+export const states = [PlacesState, FilterState, AutocompleteState];

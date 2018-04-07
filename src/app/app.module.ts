@@ -27,13 +27,13 @@ import { TranslationModule } from './modules/translation.module';
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production
     }),
-    NgxsLoggerPluginModule.forRoot({ logger: console, collapsed: true }),
-    NgxsStoragePluginModule.forRoot({
-      key: '@@STATE',
-      storage: StorageOption.LocalStorage,
-      deserialize: JSON.parse,
-      serialize: JSON.stringify
-    }),
+    NgxsLoggerPluginModule.forRoot({ logger: console, collapsed: false }),
+    // NgxsStoragePluginModule.forRoot({
+    //   key: '@@STATE',
+    //   storage: StorageOption.LocalStorage,
+    //   deserialize: JSON.parse,
+    //   serialize: JSON.stringify
+    // }),
     CoreModule.forRoot(),
     TranslationModule.forRoot()
   ],

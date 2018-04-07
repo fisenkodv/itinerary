@@ -1,14 +1,16 @@
 ﻿import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { GetPlaces, SelectPlace } from '@app/modules/places/state/autocomplete.actions';
+import { AutocompleteState } from '@app/modules/places/state/autocomplete.state';
 import { SetDistance, SetLocation, SetRating, SetReviews } from '@app/modules/places/state/filter.actions';
-import { FilterStateModel } from '@app/modules/places/state/filter.state';
+import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
-import { switchMap } from 'rxjs/operators';
+import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
-import { Autocomplete } from '../../models';
+import { Autocomplete, PlaceDetails } from '../../models';
 import { GooglePlacesService } from '../../services';
 
 @Component({
@@ -20,18 +22,30 @@ import { GooglePlacesService } from '../../services';
 export class PlaceSearchComponent implements OnDestroy, OnInit {
   private destroy$: Subject<void> = new Subject<void>();
 
-  public placeCtrl: FormControl;
-  public filteredPlaces: Observable<Autocomplete[]>;
+  @Select(FilterState.filter) filter$: Observable<FilterStateModel>;
+  @Select(AutocompleteState.items) items$: Observable<Autocomplete[]>;
+  @Select(AutocompleteState.selected) selected$: Observable<PlaceDetails>;
 
-  @Select(state => state.places.filter)
-  filter$: Observable<FilterStateModel>;
-
-  constructor(private store: Store, private googleService: GooglePlacesService) {
-    this.placeCtrl = new FormControl();
-  }
+  public placeCtrl: FormControl = new FormControl();
+  constructor(private store: Store, private googleService: GooglePlacesService) {}
 
   public ngOnInit() {
-    this.filteredPlaces = this.placeCtrl.valueChanges.pipe(switchMap(value => this.autocomplete(value)));
+    this.placeCtrl.valueChanges
+      .pipe(
+        takeUntil(this.destroy$),
+        debounceTime(300),
+        filter(value => typeof value === 'string' && value.trim() !== ''),
+        switchMap(value => this.store.dispatch(new GetPlaces(value)))
+      )
+      .subscribe(_ => true);
+
+    this.selected$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(value => !!value),
+        switchMap(value => this.store.dispatch(new SetLocation(value.location)))
+      )
+      .subscribe(_ => true);
 
     this.setCurrentPosition();
   }
@@ -40,18 +54,12 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
     this.destroy$.next();
   }
 
-  public autocomplete(keyword: string): Observable<Autocomplete[]> {
-    return this.googleService.autocomplete(keyword);
-  }
-
   public displayPlace(place?: Autocomplete): string | undefined {
     return place ? place.description : undefined;
   }
 
   public selectPlace(event: MatAutocompleteSelectedEvent) {
-    this.googleService.place((<Autocomplete>event.option.value).id).subscribe(x => {
-      this.store.dispatch(new SetLocation(x.location));
-    });
+    this.store.dispatch(new SelectPlace((<Autocomplete>event.option.value).id));
   }
 
   public changeDistanceHandler(value: number) {

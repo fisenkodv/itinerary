@@ -1,6 +1,6 @@
 import { Location } from '@app/modules/places/models';
 import { SetDistance, SetLocation, SetRating, SetReviews } from '@app/modules/places/state/filter.actions';
-import { Action, State, StateContext } from '@ngxs/store';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 export interface FilterStateModel {
   location: Location;
@@ -19,6 +19,11 @@ export interface FilterStateModel {
   }
 })
 export class FilterState {
+  @Selector()
+  public static filter(state: FilterStateModel): FilterStateModel {
+    return state;
+  }
+
   @Action(SetLocation)
   setLocation({ getState, setState }: StateContext<FilterStateModel>, { payload }: SetLocation) {
     setState({ ...getState(), location: payload });

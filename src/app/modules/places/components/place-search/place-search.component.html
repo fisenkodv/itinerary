@@ -5,7 +5,7 @@
       <mat-form-field>
         <input matInput [matAutocomplete]="autocomplete" [formControl]="placeCtrl" placeholder="{{'places.search.location.placeholder' | translate }}">
         <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="displayPlace" (optionSelected)="selectPlace($event)">
-          <mat-option *ngFor="let place of filteredPlaces | async" [value]="place">
+          <mat-option *ngFor="let place of items$ | async" [value]="place">
             {{ place.description }}
           </mat-option>
         </mat-autocomplete>
