@@ -1,0 +1,14 @@
+<mat-card class="place-card">
+  <mat-card-header>
+    <mat-card-title class="place-card__title">{{place.name}}</mat-card-title>
+  </mat-card-header>
+
+  <img class="place-card__image" mat-card-image [style.background-image]="'url('+ place.imageUrl + ')'">
+  <mat-card-content>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>

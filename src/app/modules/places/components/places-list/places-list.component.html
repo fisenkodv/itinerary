@@ -1,0 +1,7 @@
+<div *ngIf="loading | async; else results">
+Loading
+</div>
+
+<ng-template #results>
+  <app-place-item *ngFor="let place of places$ | async" [place]="place"></app-place-item>
+</ng-template>

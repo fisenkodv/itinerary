@@ -16,18 +16,19 @@ import { GetPlaces } from '@app/modules/places/state/places.actions';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-place-search',
-  templateUrl: 'place-search.component.html',
-  styleUrls: ['place-search.component.scss']
+  selector: 'app-search-panel',
+  templateUrl: 'search-panel.component.html',
+  styleUrls: ['search-panel.component.scss']
 })
-export class PlaceSearchComponent implements OnDestroy, OnInit {
+export class SearchPanelComponent implements OnDestroy, OnInit {
   private destroy$: Subject<void> = new Subject<void>();
+
+  public placeCtrl: FormControl = new FormControl();
 
   @Select(FilterState.filter) filter$: Observable<FilterStateModel>;
   @Select(AutocompleteState.items) items$: Observable<GooglePlacesAutocomplete[]>;
   @Select(AutocompleteState.selected) selected$: Observable<GooglePlacesPlace>;
 
-  public placeCtrl: FormControl = new FormControl();
   constructor(private store: Store, private googleService: GooglePlacesService) {}
 
   public ngOnInit() {
@@ -78,11 +79,12 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
   }
 
   private setCurrentPosition() {
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition((position) => {
-    //     const location = new Location(position.coords.latitude, position.coords.longitude);
-    //     this.store.dispatch(new filterActions.SetLocationAction(location));
-    //   });
-    // }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.store.dispatch(
+          new SetLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude })
+        );
+      });
+    }
   }
 }

@@ -5,6 +5,8 @@ import { AngularFirestore, DocumentChangeAction, QueryFn } from 'angularfire2/fi
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 
+import * as _ from 'lodash';
+
 @Injectable()
 export class ItineraryPlacesService {
   constructor(private db: AngularFirestore) {}
@@ -27,7 +29,8 @@ export class ItineraryPlacesService {
     return collectionReference =>
       collectionReference
         .orderBy('longitude', 'desc')
-        .orderBy('latitude', 'desc')
+        .orderBy('rating', 'desc')
+        .orderBy('reviews', 'desc')
         .where('longitude', '<=', southEastLocation.longitude)
         .where('longitude', '>=', northWestLocation.longitude)
         // .where('latitude', '<=', northWestLocation.latitude)
@@ -51,15 +54,23 @@ export class ItineraryPlacesService {
     rating: number,
     reviews: number
   ): (source: Observable<Place[]>) => Observable<Place[]> {
-    return map(places =>
-      places.filter(place => {
-        const distanceFromBasePoint = baseLocation.distanceTo(
-          GeoLocation.fromDegrees(place.location.latitude, place.location.longitude),
-          GeoLocationMeasurement.Miles
-        );
-        return distanceFromBasePoint <= distance;
-      })
-    );
+    return map(places => {
+      const res = _.chain(places)
+        .map((place: Place) => {
+          const distanceFromBasePoint = baseLocation.distanceTo(
+            GeoLocation.fromDegrees(place.location.latitude, place.location.longitude),
+            GeoLocationMeasurement.Miles
+          );
+          return { place: place, distance: distanceFromBasePoint };
+        })
+        .filter(x => x.distance <= distance)
+        .uniq(false, x => x.place.name)
+        .sortBy(x => -x.distance)
+        //.map(x => x.place)
+        .value();
+      console.log(res);
+      return [];
+    });
   }
 
   private getLocationInfo(latitude: number, longitude: number, distance: number): [Location, Location, GeoLocation] {

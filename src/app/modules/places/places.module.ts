@@ -25,7 +25,7 @@ import { states } from './state/module.state';
     NgxsModule.forFeature(states),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFirestoreModule.enablePersistence()
+    //AngularFirestoreModule.enablePersistence()
   ],
   declarations: [FindPlacesPageComponent],
   providers: [GooglePlacesService, ItineraryPlacesService]

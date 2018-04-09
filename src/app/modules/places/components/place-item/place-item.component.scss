@@ -1,0 +1,35 @@
+$width: 300px;
+$height: 200px;
+
+:host {
+  margin: 10px;
+}
+
+.place-card {
+  max-width: $width;
+  display: inline-block;
+
+  &__title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: $width;
+    height: $height;
+    background-position: center center;
+    background-size: cover;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    &:hover {
+      // -ms-transform: scale(1.5);
+      // -moz-transform: scale(1.5);
+      // -webkit-transform: scale(1.5);
+      // -o-transform: scale(1.5);
+      // transform: scale(1.5);
+    }
+  }
+}
