@@ -1,3 +1,7 @@
-export class OpenSidenav {}
+export class OpenSidenav {
+  static readonly type = '[layout] open sidenav';
+}
 
-export class CloseSidenav {}
+export class CloseSidenav {
+  static readonly type = '[layout] close sidenav';
+}

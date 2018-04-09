@@ -10,8 +10,10 @@ import { Observable } from 'rxjs/Observable';
 import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
-import { Autocomplete, PlaceDetails } from '../../models';
+import { GooglePlacesAutocomplete, GooglePlacesPlace, Place } from '../../models';
 import { GooglePlacesService } from '../../services';
+import { GetPlaces1 } from '@app/modules/places/state/places.actions';
+import { PlacesState } from '@app/modules/places/state/places.state';
 
 @Component({
   moduleId: module.id,
@@ -23,8 +25,9 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
   private destroy$: Subject<void> = new Subject<void>();
 
   @Select(FilterState.filter) filter$: Observable<FilterStateModel>;
-  @Select(AutocompleteState.items) items$: Observable<Autocomplete[]>;
-  @Select(AutocompleteState.selected) selected$: Observable<PlaceDetails>;
+  @Select(AutocompleteState.items) items$: Observable<GooglePlacesAutocomplete[]>;
+  @Select(AutocompleteState.selected) selected$: Observable<GooglePlacesPlace>;
+  @Select(PlacesState.places) places$: Observable<Place[]>;
 
   public placeCtrl: FormControl = new FormControl();
   constructor(private store: Store, private googleService: GooglePlacesService) {}
@@ -47,6 +50,7 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
       )
       .subscribe(_ => true);
 
+    this.places$.subscribe(x => console.log(x));
     this.setCurrentPosition();
   }
 
@@ -54,12 +58,12 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
     this.destroy$.next();
   }
 
-  public displayPlace(place?: Autocomplete): string | undefined {
+  public displayPlace(place?: GooglePlacesAutocomplete): string | undefined {
     return place ? place.description : undefined;
   }
 
   public selectPlace(event: MatAutocompleteSelectedEvent) {
-    this.store.dispatch(new SelectPlace((<Autocomplete>event.option.value).id));
+    this.store.dispatch(new SelectPlace((<GooglePlacesAutocomplete>event.option.value).id));
   }
 
   public changeDistanceHandler(value: number) {
@@ -67,6 +71,8 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
   }
   public changeRatingHandler(value: number) {
     this.store.dispatch(new SetRating(value));
+
+    this.store.dispatch(new GetPlaces1());
   }
   public changeReviewsHandler(value: number) {
     this.store.dispatch(new SetReviews(value));

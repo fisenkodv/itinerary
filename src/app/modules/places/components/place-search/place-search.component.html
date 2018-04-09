@@ -13,7 +13,7 @@
     </div>
     <div class="control-group">
       <label class="control-group__label">{{'places.search.distance.label' | translate }}</label>
-      <mat-slider [max]="500" [min]="0" [step]="10" [thumb-label]="true" [value]="(filter$ | async).distance" (change)="changeDistanceHandler($event.value)"></mat-slider>
+      <mat-slider [max]="200" [min]="0" [step]="10" [thumb-label]="true" [value]="(filter$ | async).distance" (change)="changeDistanceHandler($event.value)"></mat-slider>
     </div>
     <div class="control-group">
       <label class="control-group__label">{{'places.search.rating.label' | translate }}</label>

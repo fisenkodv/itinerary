@@ -5,13 +5,13 @@ import {} from '@types/googlemaps';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/bindCallback';
 
-import { Autocomplete, PlaceDetails } from '../models';
+import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../models';
 
 @Injectable()
 export class GooglePlacesService {
   private readonly PlaceDetailsElementId: string = 'google_place_details';
-  private autocompleteObservableFactory: (keyword: string) => Observable<Autocomplete[]>;
-  private placeDetailsObservableFactory: (placeId: string) => Observable<PlaceDetails>;
+  private autocompleteObservableFactory: (keyword: string) => Observable<GooglePlacesAutocomplete[]>;
+  private placeDetailsObservableFactory: (placeId: string) => Observable<GooglePlacesPlace>;
 
   constructor(private apiLoader: MapsAPILoader) {
     this.apiLoader.load();
@@ -26,11 +26,11 @@ export class GooglePlacesService {
     );
   }
 
-  public autocomplete(keyword: string): Observable<Autocomplete[]> {
+  public autocomplete(keyword: string): Observable<GooglePlacesAutocomplete[]> {
     return this.autocompleteObservableFactory(keyword);
   }
 
-  public place(placeId: string): Observable<PlaceDetails> {
+  public place(placeId: string): Observable<GooglePlacesPlace> {
     return this.placeDetailsObservableFactory(placeId);
   }
 
@@ -53,9 +53,9 @@ export class GooglePlacesService {
   private autocompleteResultSelector(
     results: google.maps.places.AutocompletePrediction[],
     status: google.maps.places.PlacesServiceStatus
-  ): Autocomplete[] {
+  ): GooglePlacesAutocomplete[] {
     return status === google.maps.places.PlacesServiceStatus.OK
-      ? results.map(x => <Autocomplete>{ id: x.place_id, description: x.description })
+      ? results.map(x => <GooglePlacesAutocomplete>{ id: x.place_id, description: x.description })
       : [];
   }
 
@@ -81,9 +81,9 @@ export class GooglePlacesService {
   private getPlaceDetailsResultSelector(
     result: google.maps.places.PlaceResult,
     status: google.maps.places.PlacesServiceStatus
-  ): PlaceDetails {
+  ): GooglePlacesPlace {
     return status === google.maps.places.PlacesServiceStatus.OK
-      ? <PlaceDetails>{
+      ? <GooglePlacesPlace>{
           id: result.place_id,
           name: result.name,
           location: { latitude: result.geometry.location.lat(), longitude: result.geometry.location.lng() }

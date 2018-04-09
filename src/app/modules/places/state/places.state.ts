@@ -1,26 +1,44 @@
-import { State, Action, StateContext } from '@ngxs/store';
-import { Autocomplete } from '@app/modules/places/models';
-import { FilterState } from '@app/modules/places/state/filter.state';
-//import { OpenSidenav, CloseSidenav } from './layout.actions';
+import { Place } from '@app/modules/places/models';
+import { ItineraryPlacesService } from '@app/modules/places/services';
+import { AutocompleteState } from '@app/modules/places/state/autocomplete.state';
+import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
+import { GetPlaces1, GetPlacesSuccess } from '@app/modules/places/state/places.actions';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { map } from 'rxjs/operators/map';
+import { Observable } from '@firebase/util';
 
 export interface PlacesStateModel {
-  //autocomplete: GoogleAutocomplete[];
+  items: Place[];
 }
 
 @State<PlacesStateModel>({
   name: 'places',
   defaults: {
-    //  autocomplete: []
+    items: []
   },
-  children: [FilterState]
+  children: [FilterState, AutocompleteState]
 })
 export class PlacesState {
-  // @Action(OpenSidenav)
-  // openSidenav({ getState, setState }: StateContext<PlacesStateModel>) {
-  //   setState({ ...getState(), showSidenav: true });
-  // }
-  // @Action(CloseSidenav)
-  // closeSidenav({ getState, setState }: StateContext<PlacesStateModel>) {
-  //   setState({ ...getState(), showSidenav: false });
-  // }
+  @Selector()
+  public static places(state: PlacesStateModel): Place[] {
+    return state.items;
+  }
+
+  constructor(private store: Store, private service: ItineraryPlacesService) {}
+
+  @Action(GetPlaces1)
+  getPlaces({ patchState, dispatch }: StateContext<PlacesStateModel>) {
+    const filter = <FilterStateModel>this.store.selectSnapshot(state => {
+      return state.places.filter;
+    });
+
+    return this.service
+      .getPlaces(filter.distance, filter.rating, filter.reviews, filter.location)
+      .pipe(map(x => dispatch(new GetPlacesSuccess(x))));
+  }
+
+  @Action(GetPlacesSuccess)
+  getAutocompleteSuccess({ patchState, setState }: StateContext<PlacesStateModel>, { payload }: GetPlacesSuccess) {
+    return patchState({ items: payload });
+  }
 }

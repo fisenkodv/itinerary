@@ -1,4 +1,4 @@
-import { Autocomplete, PlaceDetails } from '@app/modules/places/models';
+import { GooglePlacesAutocomplete, GooglePlacesPlace } from '@app/modules/places/models';
 import { GooglePlacesService } from '@app/modules/places/services';
 import {
   GetPlaces,
@@ -11,8 +11,8 @@ import { map } from 'rxjs/operators';
 
 export interface AutocompleteStateModel {
   loading: boolean;
-  items: Autocomplete[];
-  selected: PlaceDetails;
+  items: GooglePlacesAutocomplete[];
+  selected: GooglePlacesPlace;
 }
 
 @State<AutocompleteStateModel>({
@@ -25,12 +25,12 @@ export interface AutocompleteStateModel {
 })
 export class AutocompleteState {
   @Selector()
-  public static items(state: AutocompleteStateModel): Autocomplete[] {
+  public static items(state: AutocompleteStateModel): GooglePlacesAutocomplete[] {
     return state.items;
   }
 
   @Selector()
-  public static selected(state: AutocompleteStateModel): PlaceDetails {
+  public static selected(state: AutocompleteStateModel): GooglePlacesPlace {
     return state.selected;
   }
 

@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { environment } from '../../../environments/environment';
 import { ComponentsModule } from './components';
 import { FindPlacesPageComponent } from './containers/find-places-page/find-places-page.component';
 import { routes } from './places.routes';
-import { GooglePlacesService } from './services';
+import { GooglePlacesService, ItineraryPlacesService } from './services';
 import { states } from './state/module.state';
 
 @NgModule({
@@ -20,9 +24,13 @@ import { states } from './state/module.state';
       apiKey: environment.google.places.apiKey,
       libraries: ['maps', 'places']
     }),
-    NgxsModule.forFeature(states)
+    NgxsModule.forFeature(states),
+    AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
   declarations: [FindPlacesPageComponent],
-  providers: [GooglePlacesService]
+  providers: [GooglePlacesService, ItineraryPlacesService]
 })
 export class PlacesModule {}
