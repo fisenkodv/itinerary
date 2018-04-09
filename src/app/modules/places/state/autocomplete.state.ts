@@ -1,8 +1,8 @@
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '@app/modules/places/models';
 import { GooglePlacesService } from '@app/modules/places/services';
 import {
-  GetPlaces,
-  GetPlacesSuccess,
+  GetAutocomplete,
+  GetAutocompleteSuccess,
   SelectPlace,
   SelectPlaceSuccess
 } from '@app/modules/places/state/autocomplete.actions';
@@ -25,6 +25,10 @@ export interface AutocompleteStateModel {
 })
 export class AutocompleteState {
   @Selector()
+  public static loading(state: AutocompleteStateModel): boolean {
+    return state.loading;
+  }
+  @Selector()
   public static items(state: AutocompleteStateModel): GooglePlacesAutocomplete[] {
     return state.items;
   }
@@ -34,23 +38,18 @@ export class AutocompleteState {
     return state.selected;
   }
 
-  @Selector()
-  public static loading(state: AutocompleteStateModel): boolean {
-    return state.loading;
-  }
-
   constructor(private service: GooglePlacesService) {}
 
-  @Action(GetPlaces)
-  getAutocomplete({ patchState, dispatch }: StateContext<AutocompleteStateModel>, { payload }: GetPlaces) {
+  @Action(GetAutocomplete)
+  getAutocomplete({ patchState, dispatch }: StateContext<AutocompleteStateModel>, { payload }: GetAutocomplete) {
     patchState({ loading: true });
-    return this.service.autocomplete(payload).pipe(map(x => dispatch(new GetPlacesSuccess(x))));
+    return this.service.autocomplete(payload).pipe(map(x => dispatch(new GetAutocompleteSuccess(x))));
   }
 
-  @Action(GetPlacesSuccess)
+  @Action(GetAutocompleteSuccess)
   getAutocompleteSuccess(
     { patchState, setState }: StateContext<AutocompleteStateModel>,
-    { payload }: GetPlacesSuccess
+    { payload }: GetAutocompleteSuccess
   ) {
     return patchState({ loading: false, items: payload });
   }

@@ -4,9 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { environment } from '../../../environments/environment';
 import { ComponentsModule } from './components';
@@ -25,10 +23,9 @@ import { states } from './state/module.state';
       libraries: ['maps', 'places']
     }),
     NgxsModule.forFeature(states),
-    AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
-    AngularFireStorageModule // imports firebase/storage only needed for storage features
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence()
   ],
   declarations: [FindPlacesPageComponent],
   providers: [GooglePlacesService, ItineraryPlacesService]

@@ -1,7 +1,7 @@
 ﻿import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
-import { GetPlaces, SelectPlace } from '@app/modules/places/state/autocomplete.actions';
+import { GetAutocomplete, SelectPlace } from '@app/modules/places/state/autocomplete.actions';
 import { AutocompleteState } from '@app/modules/places/state/autocomplete.state';
 import { SetDistance, SetLocation, SetRating, SetReviews } from '@app/modules/places/state/filter.actions';
 import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
@@ -10,10 +10,9 @@ import { Observable } from 'rxjs/Observable';
 import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
-import { GooglePlacesAutocomplete, GooglePlacesPlace, Place } from '../../models';
+import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../../models';
 import { GooglePlacesService } from '../../services';
-import { GetPlaces1 } from '@app/modules/places/state/places.actions';
-import { PlacesState } from '@app/modules/places/state/places.state';
+import { GetPlaces } from '@app/modules/places/state/places.actions';
 
 @Component({
   moduleId: module.id,
@@ -27,7 +26,6 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
   @Select(FilterState.filter) filter$: Observable<FilterStateModel>;
   @Select(AutocompleteState.items) items$: Observable<GooglePlacesAutocomplete[]>;
   @Select(AutocompleteState.selected) selected$: Observable<GooglePlacesPlace>;
-  @Select(PlacesState.places) places$: Observable<Place[]>;
 
   public placeCtrl: FormControl = new FormControl();
   constructor(private store: Store, private googleService: GooglePlacesService) {}
@@ -38,7 +36,7 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
         takeUntil(this.destroy$),
         debounceTime(300),
         filter(value => typeof value === 'string' && value.trim() !== ''),
-        switchMap(value => this.store.dispatch(new GetPlaces(value)))
+        switchMap(value => this.store.dispatch(new GetAutocomplete(value)))
       )
       .subscribe(_ => true);
 
@@ -50,7 +48,6 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
       )
       .subscribe(_ => true);
 
-    this.places$.subscribe(x => console.log(x));
     this.setCurrentPosition();
   }
 
@@ -71,11 +68,13 @@ export class PlaceSearchComponent implements OnDestroy, OnInit {
   }
   public changeRatingHandler(value: number) {
     this.store.dispatch(new SetRating(value));
-
-    this.store.dispatch(new GetPlaces1());
   }
   public changeReviewsHandler(value: number) {
     this.store.dispatch(new SetReviews(value));
+  }
+
+  public search() {
+    this.store.dispatch(new GetPlaces());
   }
 
   private setCurrentPosition() {

@@ -1,12 +1,12 @@
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '@app/modules/places/models';
 
-export class GetPlaces {
-  static readonly type = '[autocomplete] get places';
+export class GetAutocomplete {
+  static readonly type = '[autocomplete] get autocomplete';
   constructor(public payload: string) {}
 }
 
-export class GetPlacesSuccess {
-  static readonly type = '[autocomplete] get places success';
+export class GetAutocompleteSuccess {
+  static readonly type = '[autocomplete] get autocomplete success';
   constructor(public payload: GooglePlacesAutocomplete[]) {}
 }
 

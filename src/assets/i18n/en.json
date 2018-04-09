@@ -19,6 +19,9 @@
       },
       "review": {
         "label": "Reviews:"
+      },
+      "search": {
+        "label": "Search"
       }
     },
     "results": {

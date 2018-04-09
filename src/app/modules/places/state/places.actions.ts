@@ -1,6 +1,6 @@
 import { Place } from '@app/modules/places/models';
 
-export class GetPlaces1 {
+export class GetPlaces {
   static readonly type = '[places] get places';
 }
 
