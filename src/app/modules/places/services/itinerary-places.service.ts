@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { Location, Place } from '@app/modules/places/models';
 import { GeoLocation, GeoLocationMeasurement } from '@app/modules/places/services/geo-location';
 import { AngularFirestore, DocumentChangeAction, QueryFn } from 'angularfire2/firestore';
+import * as _ from 'lodash';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
-
-import * as _ from 'lodash';
 
 @Injectable()
 export class ItineraryPlacesService {
@@ -65,7 +64,9 @@ export class ItineraryPlacesService {
         })
         .filter(x => x.distance <= distance)
         .uniqWith((x, y) => x.place.name === y.place.name)
-        .sortBy(x => -x.distance)
+        .sortBy(x => {
+          return -x.distance && x.place.imageUrl.length ? 0 : 1;
+        })
         .map(x => x.place)
         .value();
     });

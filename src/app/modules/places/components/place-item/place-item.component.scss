@@ -1,40 +1,24 @@
-$width: 300px;
 $height: 200px;
 
-:host {
-  //margin: 10px;
-}
-.spacer {
-    flex-grow: 1!important;
-}
 .place-card {
-  // max-width: $width;
-  // display: inline-block;
-  width: 100%;
+}
 
-  &-header {
-    // text-overflow: ellipsis;
-    // white-space: nowrap;
-    // overflow: hidden;
-    &__title {
-    }
-  }
+.place-card-image {
+  overflow: hidden;
 
-  &__image {
-    //width: $width;
+  &__img {
     height: $height;
     background-position: center center;
     background-size: cover;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
-    &:hover {
-      // -ms-transform: scale(1.5);
-      // -moz-transform: scale(1.5);
-      // -webkit-transform: scale(1.5);
-      // -o-transform: scale(1.5);
-      // transform: scale(1.5);
+    transition: all 0.3s ease-in-out;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  &:hover {
+    .place-card-image__img {
+      -webkit-transform: scale3d(1.2, 1.2, 1);
+      transform: scale3d(1.2, 1.2, 1);
     }
   }
 }
