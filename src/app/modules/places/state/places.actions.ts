@@ -2,6 +2,7 @@ import { Place } from '@app/modules/places/models';
 
 export class GetPlaces {
   static readonly type = '[places] get places';
+  constructor() {}
 }
 
 export class GetPlacesSuccess {

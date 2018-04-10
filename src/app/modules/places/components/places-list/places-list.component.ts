@@ -16,4 +16,8 @@ export class PlacesListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  public trackPlace(place: Place): string {
+    return place.id;
+  }
 }

@@ -1,7 +1,8 @@
-<mat-card class="place-card">
-  <mat-card-header>
-    <mat-card-title class="place-card__title">{{place.name}}</mat-card-title>
+<mat-card class="d-flex flex-column m-2 place-card">
+  <mat-card-header class="place-card-header d-flex flex-wrap">
+    <mat-card-title class="place-card-header__title">{{place.name}}</mat-card-title>
   </mat-card-header>
+  <div class="spacer"></div>
 
   <img class="place-card__image" mat-card-image [style.background-image]="'url('+ place.imageUrl + ')'">
   <mat-card-content>

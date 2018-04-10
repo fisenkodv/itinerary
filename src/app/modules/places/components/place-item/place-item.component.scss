@@ -2,21 +2,26 @@ $width: 300px;
 $height: 200px;
 
 :host {
-  margin: 10px;
+  //margin: 10px;
 }
-
+.spacer {
+    flex-grow: 1!important;
+}
 .place-card {
-  max-width: $width;
-  display: inline-block;
+  // max-width: $width;
+  // display: inline-block;
+  width: 100%;
 
-  &__title {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  &-header {
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
+    // overflow: hidden;
+    &__title {
+    }
   }
 
   &__image {
-    width: $width;
+    //width: $width;
     height: $height;
     background-position: center center;
     background-size: cover;

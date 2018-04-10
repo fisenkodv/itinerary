@@ -1,7 +1,10 @@
 <div *ngIf="loading | async; else results">
-Loading
+  Loading
 </div>
 
 <ng-template #results>
-  <app-place-item *ngFor="let place of places$ | async" [place]="place"></app-place-item>
+  <div class="d-flex flex-row flex-wrap">
+    <app-place-item class="p-0 flex d-flex col-12 col-sm-6 col-md-3 col-lg-2 col-xl-2" *ngFor="let place of places$ | async; trackBy: trackPlace" [place]="place"></app-place-item>
+  </div>
+
 </ng-template>

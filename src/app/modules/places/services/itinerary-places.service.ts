@@ -55,7 +55,7 @@ export class ItineraryPlacesService {
     reviews: number
   ): (source: Observable<Place[]>) => Observable<Place[]> {
     return map(places => {
-      const res = _.chain(places)
+      return _.chain(places)
         .map((place: Place) => {
           const distanceFromBasePoint = baseLocation.distanceTo(
             GeoLocation.fromDegrees(place.location.latitude, place.location.longitude),
@@ -64,12 +64,10 @@ export class ItineraryPlacesService {
           return { place: place, distance: distanceFromBasePoint };
         })
         .filter(x => x.distance <= distance)
-        .uniq(false, x => x.place.name)
+        .uniqWith((x, y) => x.place.name === y.place.name)
         .sortBy(x => -x.distance)
-        //.map(x => x.place)
+        .map(x => x.place)
         .value();
-      console.log(res);
-      return [];
     });
   }
 
