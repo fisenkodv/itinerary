@@ -8,8 +8,9 @@ import { TranslationModule } from '../../translation.module';
 import { PlaceItemComponent } from './place-item/place-item.component';
 import { PlacesListComponent } from './places-list/places-list.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
+import { PlaceRatingComponent } from './place-rating/place-rating.component';
 
-export const COMPONENTS = [SearchPanelComponent, PlacesListComponent, PlaceItemComponent];
+export const COMPONENTS = [SearchPanelComponent, PlacesListComponent, PlaceItemComponent, PlaceRatingComponent];
 
 @NgModule({
   imports: [CommonModule, PipesModule, ReactiveFormsModule, MaterialModule, TranslationModule.forChild()],

@@ -4,12 +4,19 @@
   </mat-card-header>
   <div class="spacer"></div>
   <div mat-card-image class="place-card-image">
-    <div class="place-card-image__img"[style.background-image]="'url('+ place.imageUrl + ')'"></div>
+    <div class="place-card-image__img" [style.background-image]="'url('+ place.imageUrl + ')'"></div>
   </div>
-  <mat-card-content>
+  <mat-card-content class="place-card-content">
+    <div class="d-flex align-items-center place-card-content__statistics">
+      <span class="d-inline-flex place-rating">
+        <app-place-rating [rating]="place.rating"></app-place-rating>
+      </span>
+      <span class="place-reviews">({{place.reviews}})</span>
+    </div>
+    <img class="ml-1 mt-1 place-card-content__ta-logo" src="/assets/img/trip-adviser-logo.png" matTooltip="{{'places.results.tripadvisor.tooltip' | translate }}">
   </mat-card-content>
-  <mat-card-actions>
+  <!-- <mat-card-actions>
     <button mat-button>LIKE</button>
     <button mat-button>SHARE</button>
-  </mat-card-actions>
+  </mat-card-actions> -->
 </mat-card>

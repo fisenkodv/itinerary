@@ -81,9 +81,10 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
   private setCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        this.store.dispatch(
-          new SetLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude })
-        );
+        this.store.dispatch([
+          new SetLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude }),
+          new GetPlaces()
+        ]);
       });
     }
   }

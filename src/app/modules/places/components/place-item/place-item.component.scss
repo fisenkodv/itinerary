@@ -22,3 +22,12 @@ $height: 200px;
     }
   }
 }
+
+.place-card-content {
+  margin-left: -16px;
+  margin-right: -16px;
+
+  &__ta-logo {
+    width: $height / 2;
+  }
+}
