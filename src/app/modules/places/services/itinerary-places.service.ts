@@ -62,7 +62,7 @@ export class ItineraryPlacesService {
           );
           return { place: place, distance: distanceFromBasePoint };
         })
-        .filter(x => x.distance <= distance)
+        .filter(x => x.distance <= distance && x.place.rating >= rating && x.place.reviews >= reviews)
         .uniqWith((x, y) => x.place.name === y.place.name)
         .sortBy(x => {
           return -x.distance && x.place.imageUrl.length ? 0 : 1;
