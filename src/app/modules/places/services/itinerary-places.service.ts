@@ -60,14 +60,11 @@ export class ItineraryPlacesService {
             GeoLocation.fromDegrees(place.location.latitude, place.location.longitude),
             GeoLocationMeasurement.Miles
           );
-          return { place: place, distance: distanceFromBasePoint };
+          return { ...place, distance: distanceFromBasePoint };
         })
-        .filter(x => x.distance <= distance && x.place.rating >= rating && x.place.reviews >= reviews)
-        .uniqWith((x, y) => x.place.name === y.place.name)
-        .sortBy(x => {
-          return -x.distance && x.place.imageUrl.length ? 0 : 1;
-        })
-        .map(x => x.place)
+        .filter(x => x.distance <= distance && x.rating >= rating && x.reviews >= reviews)
+        .uniqWith((x, y) => x.name === y.name)
+        .sortBy(x => (-x.distance && x.imageUrl.length ? 0 : 1))
         .value();
     });
   }

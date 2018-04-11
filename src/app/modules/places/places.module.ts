@@ -7,6 +7,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { environment } from '../../../environments/environment';
+import { PipesModule } from '../../shared/pipes';
 import { ComponentsModule } from './components';
 import { FindPlacesPageComponent } from './containers/find-places-page/find-places-page.component';
 import { routes } from './places.routes';
@@ -16,6 +17,7 @@ import { states } from './state/module.state';
 @NgModule({
   imports: [
     CommonModule,
+    PipesModule,
     ComponentsModule,
     RouterModule.forChild(routes),
     AgmCoreModule.forRoot({
@@ -24,8 +26,7 @@ import { states } from './state/module.state';
     }),
     NgxsModule.forFeature(states),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    //AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule
   ],
   declarations: [FindPlacesPageComponent],
   providers: [GooglePlacesService, ItineraryPlacesService]

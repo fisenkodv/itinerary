@@ -9,4 +9,5 @@ export interface Place {
   categories: string[];
   imageUrl: string;
   url: string;
+  distance: number;
 }

@@ -1,10 +1,14 @@
 $height: 200px;
 
 .place-card {
+  padding: 16px 10px 10px;
 }
 
 .place-card-image {
   overflow: hidden;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+  margin-right: -10px;
 
   &__img {
     height: $height;
@@ -24,8 +28,11 @@ $height: 200px;
 }
 
 .place-card-content {
-  margin-left: -16px;
-  margin-right: -16px;
+  &__statistics {
+    .place-categories {
+      font-size: 12px;
+    }
+  }
 
   &__ta-logo {
     width: $height / 2;
