@@ -5,6 +5,7 @@ import { GetAutocomplete, SelectPlace } from '@app/modules/places/state/autocomp
 import { AutocompleteState } from '@app/modules/places/state/autocomplete.state';
 import { SetDistance, SetLocation, SetRating, SetReviews } from '@app/modules/places/state/filter.actions';
 import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
+import { GetPlaces } from '@app/modules/places/state/places.actions';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
 import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
@@ -12,7 +13,6 @@ import { Subject } from 'rxjs/Subject';
 
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../../models';
 import { GooglePlacesService } from '../../services';
-import { GetPlaces } from '@app/modules/places/state/places.actions';
 
 @Component({
   moduleId: module.id,
