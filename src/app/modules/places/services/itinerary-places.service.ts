@@ -3,25 +3,69 @@ import { Location, Place } from '@app/modules/places/models';
 import { GeoLocation, GeoLocationMeasurement } from '@app/modules/places/services/geo-location';
 import { AngularFirestore, DocumentChangeAction, QueryFn } from 'angularfire2/firestore';
 import * as _ from 'lodash';
+import { UnaryFunction } from 'rxjs/interfaces';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
+
+export interface Filter {
+  distance: number;
+  rating: number;
+  reviews: number;
+  location: Location;
+}
 
 @Injectable()
 export class ItineraryPlacesService {
-  constructor(private db: AngularFirestore) {}
+  private filter$: Subject<Filter>;
+  private places$: Observable<Place[]>;
 
-  public getPlaces(distance: number, rating: number, reviews: number, location: Location): Observable<Place[]> {
-    const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
-      location.latitude,
-      location.longitude,
-      distance
+  constructor(private db: AngularFirestore) {
+    this.filter$ = new Subject<Filter>();
+    this.places$ = this.filter$.pipe(
+      switchMap((filter: Filter) => {
+        const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
+          filter.location.latitude,
+          filter.location.longitude,
+          filter.distance
+        );
+
+        return this.db
+          .collection<Place>('places', this.getQuery(southEastLocation, northWestLocation))
+          .snapshotChanges()
+          .pipe(
+            this.mapToPlaces(baseLocation),
+            this.filterPlaces(
+              northWestLocation,
+              southEastLocation,
+              baseLocation,
+              filter.distance,
+              filter.rating,
+              filter.reviews
+            )
+          );
+      })
     );
-    const collection = this.db.collection<Place>('places', this.getQuery(southEastLocation, northWestLocation));
-    const result = collection
-      .snapshotChanges()
-      .pipe(this.mapToPlaces(baseLocation), this.filterPlaces(baseLocation, distance, rating, reviews));
+  }
 
-    return result;
+  public get places() {
+    return this.places$;
+  }
+
+  public setPlacesFilter(filter: Filter) {
+    this.filter$.next(filter);
+    //return this.places$;
+    // const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
+    //   location.latitude,
+    //   location.longitude,
+    //   distance
+    // );
+    // const collection = this.db.collection<Place>('places', this.getQuery(southEastLocation, northWestLocation));
+    // const result = collection
+    //   .snapshotChanges()
+    //   .pipe(this.mapToPlaces(baseLocation), this.filterPlaces(baseLocation, distance, rating, reviews));
+
+    // return result;
   }
 
   private getQuery(southEastLocation: Location, northWestLocation: Location): QueryFn {
@@ -34,10 +78,12 @@ export class ItineraryPlacesService {
         .where('longitude', '>=', northWestLocation.longitude)
         // .where('latitude', '<=', northWestLocation.latitude)
         // .where('latitude', '>=', southEastLocation.latitude)
-        .limit(500);
+        .limit(50);
   }
 
-  private mapToPlaces(baseLocation: GeoLocation): (source: Observable<DocumentChangeAction[]>) => Observable<Place[]> {
+  private mapToPlaces(
+    baseLocation: GeoLocation
+  ): UnaryFunction<Observable<DocumentChangeAction[]>, Observable<Place[]>> {
     return map(places => {
       return places.map(place => {
         const data = place.payload.doc.data();
@@ -48,6 +94,8 @@ export class ItineraryPlacesService {
   }
 
   private filterPlaces(
+    northWestLocation: Location,
+    southEastLocation: Location,
     baseLocation: GeoLocation,
     distance: number,
     rating: number,
@@ -62,7 +110,14 @@ export class ItineraryPlacesService {
           );
           return { ...place, distance: distanceFromBasePoint };
         })
-        .filter(x => x.distance <= distance && x.rating >= rating && x.reviews >= reviews)
+        .filter(
+          x =>
+            x.location.latitude <= northWestLocation.latitude &&
+            x.location.latitude >= southEastLocation.latitude &&
+            x.distance <= distance &&
+            x.rating >= rating &&
+            x.reviews >= reviews
+        )
         .uniqWith((x, y) => x.name === y.name)
         .sortBy(x => (-x.distance && x.imageUrl.length ? 0 : 1))
         .value();

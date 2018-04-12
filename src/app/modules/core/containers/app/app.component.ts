@@ -9,7 +9,7 @@ import { LayoutState } from '@app/modules/core/state/layout.state';
   moduleId: module.id,
   selector: 'app-app',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   @Select(LayoutState.showSidenav) public showSidenav$: Observable<boolean>;

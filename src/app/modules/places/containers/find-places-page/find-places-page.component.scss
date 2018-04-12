@@ -1,8 +1,5 @@
 :host {
   display: flex;
   flex-direction: column;
-}
-
-.container {
-  max-width: 100%;
+  flex-grow: 1;
 }

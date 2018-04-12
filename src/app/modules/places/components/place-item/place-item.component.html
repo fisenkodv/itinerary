@@ -1,6 +1,7 @@
 <mat-card class="d-flex flex-column m-2 w-100 place-card">
   <mat-card-header class="d-flex flex-wrap place-card-header">
     <mat-card-title>{{place.name}}</mat-card-title>
+    <mat-card-subtitle>{{place.distance | number:'.0-2'}} miles away</mat-card-subtitle>
   </mat-card-header>
   <div class="spacer"></div>
   <div mat-card-image class="place-card-image">

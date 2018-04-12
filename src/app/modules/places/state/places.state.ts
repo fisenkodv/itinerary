@@ -30,22 +30,21 @@ export class PlacesState {
     return state.items;
   }
 
-  constructor(private store: Store, private service: ItineraryPlacesService) {}
+  constructor(private store: Store, private service: ItineraryPlacesService) {
+    this.service.places.subscribe(x => {
+      this.store.dispatch(new GetPlacesSuccess(x));
+    });
+  }
 
   @Action(GetPlaces)
   getPlaces({ patchState, dispatch }: StateContext<PlacesStateModel>) {
     patchState({ loading: true });
-    const filter = <FilterStateModel>this.store.selectSnapshot(state => {
-      return state.places.filter;
-    });
-
-    return this.service
-      .getPlaces(filter.distance, filter.rating, filter.reviews, filter.location)
-      .pipe(map(places => dispatch(new GetPlacesSuccess(places))));
+    const filter = <FilterStateModel>this.store.selectSnapshot(state => state.places.filter);
+    return this.service.setPlacesFilter({ ...filter });
   }
 
   @Action(GetPlacesSuccess)
-  getAutocompleteSuccess({ patchState, setState }: StateContext<PlacesStateModel>, { payload }: GetPlacesSuccess) {
+  getPlacesSuccess({ patchState, setState }: StateContext<PlacesStateModel>, { payload }: GetPlacesSuccess) {
     return patchState({ loading: false, items: payload });
   }
 }
