@@ -1,22 +1,27 @@
 <mat-card class="d-flex flex-column m-2 w-100 place-card">
   <mat-card-header class="d-flex flex-wrap place-card-header">
-    <mat-card-title>{{place.name}}</mat-card-title>
-    <mat-card-subtitle>{{place.distance | number:'.0-2'}} miles away</mat-card-subtitle>
+    <mat-card-title class="place-card-title">
+      <h3 class="my-0">
+        <a class="place-card-title__link" href="http://tripadviser.com{{place.url}}" target="_blank">
+          <span class="place-card-title__link-text">{{place.name}}</span>
+          <mat-icon class="place-card-title__link-icon">open_in_new</mat-icon>
+        </a>
+      </h3>
+    </mat-card-title>
+    <mat-card-subtitle>{{place.distance | number:'.0-2'}} {{'places.results.title.away' | translate }}</mat-card-subtitle>
   </mat-card-header>
   <div class="spacer"></div>
   <div mat-card-image class="place-card-image">
     <div class="place-card-image__img" [style.background-image]="'url('+ place.imageUrl + ')'"></div>
   </div>
-  
+
   <mat-card-content class="place-card-content">
     <div class="d-flex flex-wrap align-items-center place-card-content__statistics">
       <span class="w-100 mb-1 text-truncate place-categories">{{place.categories | join:", "}}</span>
       <span class="d-inline-flex place-rating">
         <app-place-rating [rating]="place.rating"></app-place-rating>
       </span>
-      <span class="place-reviews">({{place.reviews}})</span>
-
-      <!-- <mat-card-subtitle>{{place.distance | number:'.0-2'}} miles away</mat-card-subtitle> -->
+      <span class="place-reviews">({{place.reviews}}+)</span>
     </div>
     <img class="ml-1 mt-1 place-card-content__ta-logo" src="/assets/img/trip-adviser-logo.png" matTooltip="{{'places.results.tripadvisor.tooltip' | translate }}">
   </mat-card-content>

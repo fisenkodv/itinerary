@@ -4,6 +4,21 @@ $height: 200px;
   padding: 16px 10px 10px;
 }
 
+.place-card-title {
+  $link-color: #000000;
+  &__link {
+    text-decoration: none;
+    &-text {
+      color: rgba($color: $link-color, $alpha: 1);
+      font-weight: 500;
+    }
+    &-icon {
+      color: rgba($color: $link-color, $alpha: 0.5);
+      font-size: 16px;
+    }
+  }
+}
+
 .place-card-image {
   overflow: hidden;
   width: calc(100% + 20px);

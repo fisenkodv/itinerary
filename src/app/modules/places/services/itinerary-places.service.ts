@@ -42,18 +42,11 @@ export class ItineraryPlacesService {
         );
 
         return this.db
-          .collection<FirestorePlace>('places1', this.getQuery(southEastLocation, northWestLocation))
+          .collection<FirestorePlace>('places', this.getQuery(southEastLocation, northWestLocation))
           .snapshotChanges()
           .pipe(
             this.mapToPlaces(baseLocation),
-            this.filterPlaces(
-              northWestLocation,
-              southEastLocation,
-              baseLocation,
-              filter.distance,
-              filter.rating,
-              filter.reviews
-            )
+            this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews)
           );
       })
     );
@@ -71,6 +64,8 @@ export class ItineraryPlacesService {
     return collectionReference =>
       collectionReference
         .orderBy('location', 'desc')
+        .orderBy('rating', 'desc')
+        .orderBy('reviews', 'desc')
         .where(
           'location',
           '<=',
@@ -96,8 +91,6 @@ export class ItineraryPlacesService {
   }
 
   private filterPlaces(
-    northWestLocation: Location,
-    southEastLocation: Location,
     baseLocation: GeoLocation,
     distance: number,
     rating: number,
@@ -113,10 +106,7 @@ export class ItineraryPlacesService {
           return { ...place, distance: distanceFromBasePoint };
         })
         .filter(x => x.distance <= distance && x.rating >= rating && x.reviews >= reviews)
-        .uniqWith((x, y) => x.name === y.name)
-        .sortBy(x => -x.distance)
-        .sortBy(x => -x.rating)
-        .sortBy(x => -x.reviews)
+        .sortBy(x => x.distance)
         .sortBy(x => (x.imageUrl.length ? 0 : 1))
         .value();
     });

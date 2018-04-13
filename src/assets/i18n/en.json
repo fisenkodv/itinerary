@@ -25,6 +25,9 @@
       }
     },
     "results": {
+      "title": {
+        "away": "miles away"
+      },
       "tripadvisor": {
         "tooltip": "Ratings Powered by TripAdvisor"
       }
