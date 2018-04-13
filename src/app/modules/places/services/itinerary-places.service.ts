@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Location, Place } from '@app/modules/places/models';
 import { GeoLocation, GeoLocationMeasurement } from '@app/modules/places/services/geo-location';
 import { AngularFirestore, DocumentChangeAction, QueryFn } from 'angularfire2/firestore';
+import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
 import { UnaryFunction } from 'rxjs/interfaces';
 import { Observable } from 'rxjs/Observable';
@@ -13,6 +14,16 @@ export interface Filter {
   rating: number;
   reviews: number;
   location: Location;
+}
+
+export interface FirestorePlace {
+  name: string;
+  location: firebase.firestore.GeoPoint;
+  rating: number;
+  reviews: number;
+  categories: string[];
+  imageUrl: string;
+  url: string;
 }
 
 @Injectable()
@@ -31,7 +42,7 @@ export class ItineraryPlacesService {
         );
 
         return this.db
-          .collection<Place>('places', this.getQuery(southEastLocation, northWestLocation))
+          .collection<FirestorePlace>('places1', this.getQuery(southEastLocation, northWestLocation))
           .snapshotChanges()
           .pipe(
             this.mapToPlaces(baseLocation),
@@ -54,31 +65,22 @@ export class ItineraryPlacesService {
 
   public setPlacesFilter(filter: Filter) {
     this.filter$.next(filter);
-    //return this.places$;
-    // const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
-    //   location.latitude,
-    //   location.longitude,
-    //   distance
-    // );
-    // const collection = this.db.collection<Place>('places', this.getQuery(southEastLocation, northWestLocation));
-    // const result = collection
-    //   .snapshotChanges()
-    //   .pipe(this.mapToPlaces(baseLocation), this.filterPlaces(baseLocation, distance, rating, reviews));
-
-    // return result;
   }
 
   private getQuery(southEastLocation: Location, northWestLocation: Location): QueryFn {
     return collectionReference =>
       collectionReference
-        .orderBy('longitude', 'desc')
-        .orderBy('rating', 'desc')
-        .orderBy('reviews', 'desc')
-        .where('longitude', '<=', southEastLocation.longitude)
-        .where('longitude', '>=', northWestLocation.longitude)
-        // .where('latitude', '<=', northWestLocation.latitude)
-        // .where('latitude', '>=', southEastLocation.latitude)
-        .limit(50);
+        .orderBy('location', 'desc')
+        .where(
+          'location',
+          '<=',
+          new firebase.firestore.GeoPoint(northWestLocation.latitude, northWestLocation.longitude)
+        )
+        .where(
+          'location',
+          '>=',
+          new firebase.firestore.GeoPoint(southEastLocation.latitude, southEastLocation.longitude)
+        );
   }
 
   private mapToPlaces(
@@ -110,16 +112,12 @@ export class ItineraryPlacesService {
           );
           return { ...place, distance: distanceFromBasePoint };
         })
-        .filter(
-          x =>
-            x.location.latitude <= northWestLocation.latitude &&
-            x.location.latitude >= southEastLocation.latitude &&
-            x.distance <= distance &&
-            x.rating >= rating &&
-            x.reviews >= reviews
-        )
+        .filter(x => x.distance <= distance && x.rating >= rating && x.reviews >= reviews)
         .uniqWith((x, y) => x.name === y.name)
-        .sortBy(x => (-x.distance && x.imageUrl.length ? 0 : 1))
+        .sortBy(x => -x.distance)
+        .sortBy(x => -x.rating)
+        .sortBy(x => -x.reviews)
+        .sortBy(x => (x.imageUrl.length ? 0 : 1))
         .value();
     });
   }
