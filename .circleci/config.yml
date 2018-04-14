@@ -46,7 +46,8 @@ jobs:
       - run:
           name: Build package
           command: |
-            npm run build
+            node ./scripts/version.js
+            node ./node_modules/@angular/cli/bin/ng build --env=prod
       - store_artifacts:
           path: dist
           destination: ./output/dist
