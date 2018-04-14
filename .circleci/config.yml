@@ -55,7 +55,7 @@ workflows:
       - build_and_deploy_prod:
           requires:
             - install_dependencies
-            filters:
-              branches:
-                only:
-                  - develop
+          filters:
+            branches:
+              only:
+                - develop
