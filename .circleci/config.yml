@@ -6,8 +6,6 @@ key: &npm-prod-cache-key prod-{{ .Branch }}-{{ .Revision }}
 
 steps: &upload-and-publish
   - restore_cache:
-      key: *src-cache-key
-  - restore_cache:
       key: *npm-prod-cache-key
   - run:
       name: "Publish to Firestore"
@@ -52,11 +50,17 @@ jobs:
             node ./scripts/version.js
             node ./node_modules/@angular/cli/bin/ng build --env=prod
       - store_artifacts:
-          path: output/dist
-          destination: app
+          path: dist
+          destination: app/dist
+      - store_artifacts:
+          path: firebase.json
+          destination: app/firebase.json
+      - store_artifacts:
+          path: database.rules.json
+          destination: app/database.rules.json
       - save_cache:
           paths:
-            - output
+            - out
           key: *npm-prod-cache-key
   upload_and_publish_prod:
     docker:
