@@ -8,6 +8,7 @@ steps: &upload-and-publish
   - run:
       name: "Install Dependencies"
       command: |
+        npm config set progress=false
         sudo npm install -g firebase-tools
   - restore_cache:
       key: *npm-prod-cache-key
@@ -50,6 +51,7 @@ jobs:
       - run:
           name: Build package
           command: |
+            npm config set progress=false
             sudo npm install -g @angular/cli
             ng build
       - store_artifacts:
