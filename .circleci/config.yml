@@ -54,6 +54,7 @@ jobs:
       - run:
           name: Copy Firebase config
           command: |
+            ls -la
             cp firebase.json output/firebase.json
             cp database.rules.json output/database.rules.json
       - save_cache:
