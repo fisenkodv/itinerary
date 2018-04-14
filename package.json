@@ -11,7 +11,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "version": "node ./scripts/version.js",
-    "prebuild": "node ./scripts/prebuild.js",
     "postinstall": "npm run version"
   },
   "private": true,
@@ -58,7 +57,6 @@
     "@types/jest": "^22.2.0",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.2.1",
-    "ejs": "^2.5.8",
     "firebase-tools": "^3.18.4",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
