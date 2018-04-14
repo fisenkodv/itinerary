@@ -1,17 +1,15 @@
 import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Directive({
-  selector: '[onEnter]'
+  selector: '[appOnEnter]'
 })
 export class OnEnterPressDirective {
-
-  @Output()
-  private onEnter = new EventEmitter<KeyboardEvent>();
+  @Output() private enter = new EventEmitter<KeyboardEvent>();
 
   @HostListener('keypress', ['$event'])
   public onkeypress(event: KeyboardEvent) {
     if (event.which === 13) {
-      this.onEnter.emit(event);
+      this.enter.emit(event);
     }
   }
 }
