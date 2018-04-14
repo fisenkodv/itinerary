@@ -37,8 +37,8 @@ jobs:
           paths:
             - ~/project
   build_app:
-    environment:
-      project_path: .
+    # environment:
+    #  project_path: .
     docker: *docker_node
     working_directory: *working_directory
     steps:
