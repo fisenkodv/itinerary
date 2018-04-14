@@ -37,7 +37,7 @@ jobs:
           command: |
             node ./scripts/version.js
             node ./node_modules/@angular/cli/bin/ng build --env=prod
-        - run:
+      - run:
           name: "Publish to Firestore"
           command: |
             ls -la
