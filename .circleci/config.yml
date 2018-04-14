@@ -35,6 +35,7 @@ jobs:
       - run:
           name: Build package
           command: |
+            node ./scripts/prebuild.js
             node ./scripts/version.js
             node ./node_modules/@angular/cli/bin/ng build --env=prod
       - run:
