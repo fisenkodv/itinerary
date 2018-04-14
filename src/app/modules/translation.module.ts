@@ -19,11 +19,11 @@ export class TranslationModule {
   }
 
   public static forRoot(): ModuleWithProviders {
-    return TranslateModule.forRoot(this.getConfig());
+    return TranslateModule.forRoot(TranslationModule.getConfig());
   }
 
   public static forChild(): ModuleWithProviders {
-    return TranslateModule.forChild(this.getConfig());
+    return TranslateModule.forChild(TranslationModule.getConfig());
   }
 
   private static getConfig(): TranslateModuleConfig {
