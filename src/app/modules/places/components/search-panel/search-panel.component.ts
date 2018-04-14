@@ -49,7 +49,7 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
       )
       .subscribe(_ => true);
 
-    //this.setCurrentPosition();
+    this.setCurrentPosition();
   }
 
   public ngOnDestroy() {
