@@ -6,10 +6,13 @@ key: &npm-prod-cache-key prod-{{ .Branch }}-{{ .Revision }}
 
 steps: &upload-and-publish
   - restore_cache:
+      key: *src-cache-key
+  - restore_cache:
       key: *npm-prod-cache-key
   - run:
       name: "Publish to Firestore"
       command: |
+        ls -la
         node node_modules/firebase-tools/bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
 
 jobs:
@@ -51,12 +54,6 @@ jobs:
       - store_artifacts:
           path: output/dist
           destination: app
-      - run:
-          name: Copy Firebase config
-          command: |
-            ls -la
-            cp firebase.json output/firebase.json
-            cp database.rules.json output/database.rules.json
       - save_cache:
           paths:
             - output
