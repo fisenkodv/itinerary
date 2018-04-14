@@ -4,15 +4,6 @@ key: &src-cache-key src-{{ .Branch }}-{{ .Revision }}
 key: &npm-dependencies-cache-key npm-dependencies-{{ checksum "package.json" }}
 key: &npm-prod-cache-key prod-{{ .Branch }}-{{ .Revision }}
 
-steps: &upload-and-publish
-  - restore_cache:
-      key: *npm-prod-cache-key
-  - run:
-      name: "Publish to Firestore"
-      command: |
-        ls -la
-        node node_modules/firebase-tools/bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
-
 jobs:
   install_dependencies:
     docker:
@@ -28,14 +19,11 @@ jobs:
           name: Install npm dependencies
           command: |
             npm install
-      # - store_artifacts:
-      #     path: /home/circleci/.npm/_logs
-      #     destination: ./npm-logs/
       - save_cache:
           paths:
             - node_modules
           key: npm-dependencies-{{ checksum "package.json" }}
-  build_prod:
+  build_and_deploy_prod:
     docker:
       - image: circleci/node:9.2.1
     working_directory: /home/circleci/project
@@ -49,38 +37,25 @@ jobs:
           command: |
             node ./scripts/version.js
             node ./node_modules/@angular/cli/bin/ng build --env=prod
-      - store_artifacts:
-          path: dist
-          destination: app/dist
-      - store_artifacts:
-          path: firebase.json
-          destination: app/firebase.json
-      - store_artifacts:
-          path: database.rules.json
-          destination: app/database.rules.json
+        - run:
+          name: "Publish to Firestore"
+          command: |
+            ls -la
+            node node_modules/firebase-tools/bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
       - save_cache:
           paths:
             - out
           key: *npm-prod-cache-key
-  upload_and_publish_prod:
-    docker:
-      - image: circleci/node:9.2.1
-    working_directory: /home/circleci/project
-    steps:
-      *upload-and-publish
 
 workflows:
   version: 2
   build:
     jobs:
       - install_dependencies
-      - build_prod:
+      - build_and_deploy_prod:
           requires:
             - install_dependencies
-      - upload_and_publish_prod:
-          requires:
-            - build_prod
-          filters:
-            branches:
-              only:
-                - develop
+            filters:
+              branches:
+                only:
+                  - develop
