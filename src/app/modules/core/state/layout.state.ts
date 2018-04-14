@@ -7,7 +7,7 @@ export interface LayoutStateModel {
 
 @State<LayoutStateModel>({
   name: 'layout',
-  defaults: { showSidenav: false }
+  defaults: { showSidenav: true }
 })
 export class LayoutState {
   @Selector()

@@ -1,43 +1,30 @@
-﻿// @import '~@angular/material/theming';
-// @import '../../../../styles/theme';
-// @import '../../../../styles/variables';
+﻿@import '~@angular/material/theming';
+@import '../../../../styles/theme';
 
-// @mixin _mat-footer-color($palette) {
-//   background: mat-color($palette);
-//   color: mat-color($palette, default-contrast);
-// }
+.footer {
+  $foreground: map-get($light-theme, foreground);
 
-// .footer {
-//   $primary: map-get($light-theme, primary);
-//   $accent: map-get($light-theme, accent);
-//   $warn: map-get($light-theme, warn);
-//   $background: map-get($light-theme, background);
-//   $foreground: map-get($light-theme, foreground);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: mat-color($foreground, secondary-text);
 
-//   background: mat-color($background, app-bar);
-//   color: mat-color($foreground, text);
+  &__title {
+    text-align: center;
+    font-size: 14px;
+  }
 
-//   &__title {
-//     padding: $elements-padding;
-//     text-align: center;
-//   }
+  &__sub-title {
+    text-align: center;
+    font-size: 12px;
+  }
 
-//   &--primary {
-//     @include _mat-footer-color($primary);
-//   }
-
-//   &--accent {
-//     @include _mat-footer-color($accent);
-//   }
-
-//   &--warn {
-//     @include _mat-footer-color($warn);
-//   }
-
-//   &__heart.mat-icon {
-//     $size: 12px;
-//     font-size: $size;
-//     width: $size;
-//     height: $size;
-//   }
-// }
+  &__heart.mat-icon {
+    $warn: map-get($light-theme, warn);
+    color: mat-color($warn);
+    $size: 12px;
+    font-size: $size;
+    width: $size;
+    height: $size;
+  }
+}
