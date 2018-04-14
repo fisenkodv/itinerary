@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+@import 'app/styles/main';
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-webkit-font-smoothing: antialised;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@include mat-core();
+@include angular-material-theme($light-theme);
+@include loader-theme($light-theme);

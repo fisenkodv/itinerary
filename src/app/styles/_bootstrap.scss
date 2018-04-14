@@ -1,0 +1,45 @@
+@at-root {
+  @-ms-viewport { width: device-width; } // stylelint-disable-line at-rule-no-vendor-prefix
+}
+
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "~bootstrap/scss/mixins/grid-framework";
+@import "~bootstrap/scss/mixins/grid";
+@import "~bootstrap/scss/mixins/hover";
+@import "~bootstrap/scss/mixins/text-emphasis";
+@import "~bootstrap/scss/mixins/text-hide";
+@import "~bootstrap/scss/mixins/text-truncate";
+
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/utilities/display";
+@import "~bootstrap/scss/utilities/flex";
+
+// @import '~bootstrap/scss/mixins/clearfix';
+// @import '~bootstrap/scss/mixins/grid-framework';
+// @import '~bootstrap/scss/mixins/grid';
+// @import '~bootstrap/scss/mixins/float';
+//@import '~bootstrap/scss/grid';
+//@import '~bootstrap/scss/utilities/align';
+//@import '~bootstrap/scss/utilities/clearfix';
+//@import '~bootstrap/scss/utilities/display';
+//@import '~bootstrap/scss/utilities/flex';
+//@import '~bootstrap/scss/utilities/float';
+//@import '~bootstrap/scss/utilities/position';
+@import '~bootstrap/scss/utilities/sizing';
+@import '~bootstrap/scss/utilities/spacing';
+@import '~bootstrap/scss/utilities/text';
+//@import '~bootstrap/scss/utilities/visibility';

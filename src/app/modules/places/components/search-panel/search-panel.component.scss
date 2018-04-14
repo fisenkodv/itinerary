@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+@import '../../../../styles/theme';
+
+:host {
+  @include mat-elevation(1);
+  background-color: mat-color(map-get($light-theme, primary), default-contrast);
+}
+
+.control-group {
+  margin: 0 20px 0 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
