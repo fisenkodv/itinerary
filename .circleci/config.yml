@@ -37,6 +37,7 @@ jobs:
           command: |
             node ./scripts/prebuild.js
             node ./scripts/version.js
+            cat src/environments/environment.prod.ts
             node ./node_modules/@angular/cli/bin/ng build --env=prod
       - run:
           name: "Publish to Firestore"
