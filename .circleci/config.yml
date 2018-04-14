@@ -49,13 +49,13 @@ jobs:
             node ./scripts/version.js
             node ./node_modules/@angular/cli/bin/ng build --env=prod
       - store_artifacts:
-          path: dist
-          destination: ./output/dist
+          path: output/dist
+          destination: app
       - run:
           name: Copy Firebase config
           command: |
-            cp firebase.json output/
-            cp database.rules.json output/
+            cp firebase.json output/firebase.json
+            cp database.rules.json output/database.rules.json
       - save_cache:
           paths:
             - output
