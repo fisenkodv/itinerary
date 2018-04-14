@@ -1,83 +1,88 @@
 version: 2
 
-working_directory: &working_directory /home/circleci/project
 key: &src-cache-key src-{{ .Branch }}-{{ .Revision }}
-key: &art-app-key art-app-{{ .Branch }}-{{ .Revision }}
+key: &npm-dependencies-cache-key npm-dependencies-{{ checksum "package.json" }}
+key: &npm-prod-cache-key prod-{{ .Branch }}-{{ .Revision }}
 
-restore_cache: &restore_src
-  key: *src-cache-key
-
-docker: &docker_node
-  - image: circleci/node:9.2.1
-
-run: &npm_install
-  name: Install npm dependencies
-  command: |
-    echo Project path: ${project_path}
-    cd ${project_path}
-    npm config set progress=false
-    npm install -g firebase-tools
-    npm install
-
-run: &npm_build
-  name: Run prod build
-  command: |
-    echo Project path: ${project_path}
-    cd ${project_path}
-    node node_modules/@angular/cli/bin/ng build
+steps: &upload-and-publish
+  - run:
+      name: "Install Dependencies"
+      command: |
+        npm install -g firebase-tools
+  - restore_cache:
+      key: *npm-prod-cache-key
+  - run:
+      name: "Publish to Firestore"
+      command: |
+        firebase deploy --token=$FIREBASE_TOKEN --non-interactive
 
 jobs:
-  checkout_source:
-    docker: *docker_node
-    working_directory: ~/project
+  install_dependencies:
+    docker:
+      - image: circleci/node:9.2.1
+    working_directory: /home/circleci/project
     steps:
       - checkout
       - save_cache:
-          key: *src-cache-key
           paths:
-            - ~/project
-  build_app:
-    # environment:
-    #  project_path: .
-    docker: *docker_node
-    working_directory: *working_directory
-    steps:
-      - restore_cache: *restore_src
-      - restore_cache:
-          key: deps-app-npm-{{ .Branch }}-{{ checksum "package.json" }}
-      - run: *npm_install
+            - ./
+          key: *src-cache-key
+      - run:
+          name: Install npm dependencies
+          command: |
+            npm install
+      # - store_artifacts:
+      #     path: /home/circleci/.npm/_logs
+      #     destination: ./npm-logs/
       - save_cache:
-          key: deps-app-npm-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - node_modules
-      - run: *npm_build
-      - save_cache:
-          key: *art-app-key
-          paths:
-            - dist
-  emit_artifacts:
-    docker: *docker_node
-    working_directory: *working_directory
+          key: npm-dependencies-{{ checksum "package.json" }}
+  build_prod:
+    docker:
+      - image: circleci/node:9.2.1
+    working_directory: /home/circleci/project
     steps:
       - restore_cache:
-          key: *art-app-key
+          key: *src-cache-key
+      - restore_cache:
+          key: *npm-dependencies-cache-key
       - run:
-          name: Publish artifacts
+          name: Build package
           command: |
-            firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+            npm install -g @angular/cli
+            ng build
+      - store_artifacts:
+          path: dist
+          destination: ./output/dist
+      - run:
+          name: Copy Firebase config
+          command: |
+            cp firebase.json output/
+            cp database.rules.json output/
+      - save_cache:
+          paths:
+            - output
+          key: *npm-prod-cache-key
+  upload_and_publish_prod:
+    docker:
+      - image: circleci/node:9.2.1
+    working_directory: /home/circleci/project
+    steps:
+      *upload-and-publish
 
 workflows:
   version: 2
   build:
     jobs:
-      - checkout_source
-      - build_app:
+      - install_dependencies
+      - build_prod:
           requires:
-            - checkout_source
-      - emit_artifacts:
+            - install_dependencies
+      - upload_and_publish_prod:
+          requires:
+            - build_prod
           filters:
             branches:
               only:
                 - develop
-          requires:
-            - build_app
