@@ -4,18 +4,19 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
+  MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
-  MatFormFieldModule,
+  MatListModule,
   MatMenuModule,
   MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
   MatSliderModule,
+  MatSlideToggleModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatSidenavModule,
-  MatListModule,
-  MatProgressSpinnerModule
 } from '@angular/material';
 
 export const MODULES = [
@@ -23,18 +24,19 @@ export const MODULES = [
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
+  MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
-  MatFormFieldModule,
+  MatListModule,
   MatMenuModule,
   MatProgressBarModule,
-  MatSliderModule,
-  MatToolbarModule,
-  MatListModule,
-  MatTooltipModule,
+  MatProgressSpinnerModule,
   MatSidenavModule,
-  MatProgressSpinnerModule
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatToolbarModule,
+  MatTooltipModule
 ];
 
 @NgModule({

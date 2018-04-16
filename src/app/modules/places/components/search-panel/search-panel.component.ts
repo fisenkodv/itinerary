@@ -12,7 +12,6 @@ import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../../models';
-import { GooglePlacesService } from '../../services';
 
 @Component({
   moduleId: module.id,
@@ -29,7 +28,7 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
   @Select(AutocompleteState.items) items$: Observable<GooglePlacesAutocomplete[]>;
   @Select(AutocompleteState.selected) selected$: Observable<GooglePlacesPlace>;
 
-  constructor(private store: Store, private googleService: GooglePlacesService) {}
+  constructor(private store: Store) {}
 
   public ngOnInit() {
     this.placeCtrl.valueChanges

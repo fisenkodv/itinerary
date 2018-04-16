@@ -16,7 +16,7 @@ export interface Filter {
   location: Location;
 }
 
-export interface FirestorePlace {
+interface FirestorePlace {
   name: string;
   location: firebase.firestore.GeoPoint;
   rating: number;
