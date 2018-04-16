@@ -1,0 +1,55 @@
+$height: 200px;
+
+.place-card {
+  padding: 16px 10px 10px;
+}
+
+.place-card-title {
+  $link-color: #000000;
+  &__link {
+    text-decoration: none;
+    &-text {
+      color: rgba($color: $link-color, $alpha: 1);
+      font-weight: 500;
+    }
+    &-icon {
+      color: rgba($color: $link-color, $alpha: 0.5);
+      font-size: 16px;
+    }
+  }
+}
+
+.place-card-image {
+  overflow: hidden;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+  margin-right: -10px;
+
+  &__img {
+    height: $height;
+    background-position: center center;
+    background-size: cover;
+    transition: all 0.3s ease-in-out;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  &:hover {
+    .place-card-image__img {
+      -webkit-transform: scale3d(1.2, 1.2, 1);
+      transform: scale3d(1.2, 1.2, 1);
+    }
+  }
+}
+
+.place-card-content {
+  &__statistics {
+    .place-categories {
+      font-size: 12px;
+    }
+  }
+
+  &__ta-logo {
+    width: $height / 2;
+  }
+}

@@ -1,0 +1,61 @@
+﻿{
+  "sidenav": {
+    "places": {
+      "title": "Find places",
+      "hint": "Find places"
+    }
+  },
+  "places": {
+    "search": {
+      "title": "Search Places",
+      "location": {
+        "placeholder": "Select location"
+      },
+      "distance": {
+        "label": "Distance:"
+      },
+      "rating": {
+        "label": "Rating:"
+      },
+      "review": {
+        "label": "Reviews:"
+      },
+      "search": {
+        "label": "Search"
+      }
+    },
+    "results": {
+      "title": {
+        "away": "miles away"
+      },
+      "tripadvisor": {
+        "tooltip": "Ratings Powered by TripAdvisor"
+      }
+    }
+  },
+  "404": {
+    "title": "Oops!",
+    "sub-title": {
+      "line-1": "We can't seem to find the page you're looking for.",
+      "line-2": "Here are some helpful links instead:"
+    }
+  },
+  "navbar": {
+    "title": "Itinerary",
+    "navigation": {
+      "home": "Home",
+      "places": "Places",
+      "us-only": "US Only",
+      "signin": "Sign in"
+    }
+  },
+  "footer": {
+    "title": {
+      "prefix": "Made with ",
+      "suffix": " in Portage"
+    },
+    "sub-title": {
+      "version": "Version"
+    }
+  }
+}

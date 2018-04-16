@@ -1,0 +1,33 @@
+﻿<section>
+  <h2 class="d-flex align-items-center justify-content-center font-weight-light" translate>places.search.title</h2>
+  <div class="d-flex align-items-center justify-content-center flex-wrap">
+    <div class="d-flex align-content-center col-12 col-sm-10 col-md-6 col-xl-2 control-group">
+      <mat-form-field class="flex-grow-1">
+        <input matInput [matAutocomplete]="autocomplete" [formControl]="placeCtrl" placeholder="{{'places.search.location.placeholder' | translate }}">
+        <mat-autocomplete #autocomplete="matAutocomplete" [displayWith]="displayPlace" (optionSelected)="selectPlace($event)">
+          <mat-option *ngFor="let place of items$ | async" [value]="place">
+            {{ place.description }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="d-flex align-content-center col-12 col-sm-10 col-md-6 col-xl-2 control-group">
+      <label class="align-self-center control-group__label">{{'places.search.distance.label' | translate }}</label>
+      <mat-slider class="flex-grow-1" [max]="200" [min]="0" [step]="10" [thumb-label]="true" [value]="(filter$ | async).distance"
+        (change)="changeDistanceHandler($event.value)"></mat-slider>
+    </div>
+    <div class="d-flex align-content-center col-12 col-sm-10 col-md-6 col-xl-2 control-group">
+      <label class="align-self-center control-group__label">{{'places.search.rating.label' | translate }}</label>
+      <mat-slider class="flex-grow-1" [min]="0" [max]="5" [step]="0.1" [thumb-label]="true" [value]="(filter$ | async).rating"
+        (change)="changeRatingHandler($event.value)"></mat-slider>
+    </div>
+    <div class="d-flex align-content-center col-12 col-sm-10 col-md-6 col-xl-2 control-group">
+      <label class="align-self-center control-group__label">{{'places.search.review.label' | translate }}</label>
+      <mat-slider class="flex-grow-1" [min]="0" [max]="300" [step]="10" [thumb-label]="true" [value]="(filter$ | async).reviews"
+        (change)="changeReviewsHandler($event.value)"></mat-slider>
+    </div>
+    <div class="col-12 col-md-6 col-sm-10 col-xl-auto d-flex justify-content-center mb-2 mb-xl-0">
+      <button mat-raised-button color="primary" (click)="search()">{{'places.search.search.label' | translate }}</button>
+    </div>
+  </div>
+</section>

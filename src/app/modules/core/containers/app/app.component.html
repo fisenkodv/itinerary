@@ -1,0 +1,12 @@
+﻿<app-layout>
+  <app-sidenav [open]="showSidenav$ | async">
+    <app-nav-item (navigate)="closeSidenav()" routerLink="/" icon="places" hint="{{'sidenav.places.hint' | translate }}">
+      {{'sidenav.places.title' | translate }}
+    </app-nav-item>
+  </app-sidenav>
+
+  <div class="d-flex flex-column content-wrapper">
+    <app-toolbar class="d-flex position-relative" (openMenu)="openSidenav()">{{'navbar.title' | translate }}</app-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+</app-layout>
