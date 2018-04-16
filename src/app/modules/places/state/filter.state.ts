@@ -24,6 +24,16 @@ export class FilterState {
     return state;
   }
 
+  @Selector()
+  public static location(state: FilterStateModel): Location {
+    return state.location;
+  }
+
+  @Selector()
+  public static distance(state: FilterStateModel): number {
+    return state.distance;
+  }
+
   @Action(SetLocation)
   setLocation({ getState, setState }: StateContext<FilterStateModel>, { payload }: SetLocation) {
     setState({ ...getState(), location: payload });

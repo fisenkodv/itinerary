@@ -1,11 +1,11 @@
 <div *ngIf="loading$ | async; else results" class="d-flex justify-content-center mt-5">
-  <mat-progress-spinner class="example-margin" [color]="'primary'" [mode]="'indeterminate'">
+  <mat-progress-spinner [color]="'primary'" [mode]="'indeterminate'">
   </mat-progress-spinner>
 </div>
 
 <ng-template #results>
   <div class="d-flex flex-row flex-wrap">
-    <app-place-item class="flex d-flex col-12 col-sm-6 col-md-5 col-lg-3 col-xl-3 p-0" *ngFor="let place of places$ | async; trackBy: trackPlace"
+    <app-place-item class="flex d-flex col-12 col-sm-6 col-md-5 col-lg-3 col-xl-3 p-0" *ngFor="let place of places; trackBy: trackPlace"
       [place]="place"></app-place-item>
   </div>
 </ng-template>

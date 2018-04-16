@@ -5,6 +5,8 @@
     </app-nav-item>
   </app-sidenav>
 
-  <app-toolbar class="d-flex position-relative" (openMenu)="openSidenav()">{{'navbar.title' | translate }}</app-toolbar>
-  <router-outlet></router-outlet>
+  <div class="d-flex flex-column content-wrapper">
+    <app-toolbar class="d-flex position-relative" (openMenu)="openSidenav()">{{'navbar.title' | translate }}</app-toolbar>
+    <router-outlet></router-outlet>
+  </div>
 </app-layout>

@@ -1,4 +1,3 @@
-import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -22,13 +21,9 @@ import { states } from './state/module.state';
     PipesModule,
     ComponentsModule,
     RouterModule.forChild(routes),
-    AgmCoreModule.forRoot({
-      apiKey: environment.google.places.apiKey,
-      libraries: ['maps', 'places']
-    }),
     NgxsModule.forFeature(states),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   declarations: [FindPlacesPageComponent],
   providers: [GooglePlacesService, ItineraryPlacesService]
