@@ -5,12 +5,7 @@
     <agm-marker *ngFor="let place of places" [latitude]="place.location.latitude" [longitude]="place.location.longitude" [title]="place.name"
       [opacity]="opacity(place)" [iconUrl]="iconUrl(place)" [openInfoWindow]="true" (markerClick)="markerClick(place)">
       <agm-info-window>
-        <h3 class="m-0 item-title">
-          <a class="item-title__link" href="http://tripadviser.com{{place.url}}" target="_blank">
-            <span class="item-title__link-text">{{place.name}}</span>
-            <mat-icon class="item-title__link-icon">open_in_new</mat-icon>
-          </a>
-        </h3>
+        <ng-content *ngTemplateOutlet="placeInfo;context:{place:place}"></ng-content>
       </agm-info-window>
     </agm-marker>
 
@@ -18,3 +13,12 @@
       [fillOpacity]="0.2"></agm-circle>
   </agm-map>
 </div>
+
+<ng-template #placeInfo let-place="place">
+  <h3 class="m-0 item-title">
+    <a class="item-title__link" href="http://tripadviser.com{{place.url}}" target="_blank">
+      <span class="item-title__link-text">{{place.name}}</span>
+      <mat-icon class="item-title__link-icon">open_in_new</mat-icon>
+    </a>
+  </h3>
+</ng-template>
