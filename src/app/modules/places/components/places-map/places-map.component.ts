@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Place } from '@app/modules/places/models';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   moduleId: module.id,
@@ -9,33 +8,23 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./places-map.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlacesMapComponent implements OnDestroy, OnInit {
+export class PlacesMapComponent {
+  private selectedPlaces: Place[] = [];
+
   @Input() public places: Place[];
   @Input() public location: Location;
   @Input() public distance: number;
-  // @Input() public selectedPlaces: Observable<PlaceDetails[]>;
-  // @Input() public filter: Observable<Filter>;
-  // @Input() public zoom: Observable<number>;
-
-  private lastSelectedPlaces: Place[] = [];
-  // private destroy: Subject<void> = new Subject<void>();
-
-  // constructor(private store: Store<IAppState>) {}
-
-  public ngOnInit(): void {
-    //this.selectedPlaces.takeUntil(this.destroy).subscribe(selectedPlaces => (this.lastSelectedPlaces = selectedPlaces));
-  }
-
-  public ngOnDestroy(): void {
-    //this.destroy.next();
-  }
 
   public getRadius(): number {
     return this.distance * 1609.34;
   }
 
+  public get hasData(): boolean {
+    return this.places.length !== 0;
+  }
+
   public markerClick(place: Place) {
-    //this.store.dispatch(new placesActions.SelectPlaceAction(place));
+    this.selectedPlaces.push(place);
   }
 
   public iconUrl(place: Place): string {
@@ -49,6 +38,6 @@ export class PlacesMapComponent implements OnDestroy, OnInit {
   }
 
   private selectedIndex(place: Place): number {
-    return this.lastSelectedPlaces.findIndex(selectedPlace => selectedPlace.name === place.name);
+    return this.selectedPlaces.findIndex(selectedPlace => selectedPlace.name === place.name);
   }
 }

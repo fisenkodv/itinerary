@@ -1,13 +1,20 @@
 <div class="map">
-  <agm-map [latitude]="location.latitude" [longitude]="location.longitude"
-  
-  >
-    <!-- <agm-marker *ngIf="!(filter | async)?.location.isDefault" [latitude]="(filter | async)?.location.latitude" [longitude]="(filter | async)?.location.longitude"
-      [title]="'Selected Location'"></agm-marker>-->
+  <agm-map [latitude]="location.latitude" [longitude]="location.longitude">
+    <agm-marker *ngIf="hasData" [latitude]="location.latitude" [longitude]="location.longitude" [title]="'Selected Location'"></agm-marker>
 
-    <agm-marker *ngFor="let place of places" [latitude]="place.location.latitude" [longitude]="place.location.longitude"
-      [title]="place.name" [opacity]="opacity(place)" [iconUrl]="iconUrl(place)" (markerClick)="markerClick(place)"></agm-marker>
+    <agm-marker *ngFor="let place of places" [latitude]="place.location.latitude" [longitude]="place.location.longitude" [title]="place.name"
+      [opacity]="opacity(place)" [iconUrl]="iconUrl(place)" [openInfoWindow]="true" (markerClick)="markerClick(place)">
+      <agm-info-window>
+        <h3 class="m-0 item-title">
+          <a class="item-title__link" href="http://tripadviser.com{{place.url}}" target="_blank">
+            <span class="item-title__link-text">{{place.name}}</span>
+            <mat-icon class="item-title__link-icon">open_in_new</mat-icon>
+          </a>
+        </h3>
+      </agm-info-window>
+    </agm-marker>
 
-    <agm-circle [latitude]="location.latitude" [longitude]="location.longitude" [radius]="getRadius()" [fillColor]="'#673ab7'" [fillOpacity]="0.2"></agm-circle> 
+    <agm-circle *ngIf="hasData" [latitude]="location.latitude" [longitude]="location.longitude" [radius]="getRadius()" [fillColor]="'#673ab7'"
+      [fillOpacity]="0.2"></agm-circle>
   </agm-map>
 </div>
