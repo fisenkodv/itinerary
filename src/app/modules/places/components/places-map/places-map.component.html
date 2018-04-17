@@ -3,8 +3,8 @@
     <agm-marker *ngIf="hasData" [latitude]="location.latitude" [longitude]="location.longitude" [title]="'Selected Location'"></agm-marker>
 
     <agm-marker *ngFor="let place of places" [latitude]="place.location.latitude" [longitude]="place.location.longitude" [title]="place.name"
-      [opacity]="opacity(place)" [iconUrl]="iconUrl(place)" [openInfoWindow]="true" (markerClick)="markerClick(place)">
-      <agm-info-window>
+      [opacity]="opacity(place)" [iconUrl]="iconUrl(place)" [openInfoWindow]="true" (markerClick)="markerClick(place, infoWindow)">
+      <agm-info-window #infoWindow>
         <ng-content *ngTemplateOutlet="placeInfo;context:{place:place}"></ng-content>
       </agm-info-window>
     </agm-marker>
@@ -21,4 +21,11 @@
       <mat-icon class="item-title__link-icon">open_in_new</mat-icon>
     </a>
   </h3>
+  <div>{{place.distance | number:'.0-2'}} {{'places.results.title.away' | translate }}</div>
+  <div class="d-flex align-items-center">
+    <span class="d-inline-flex">
+      <app-place-rating [rating]="place.rating"></app-place-rating>
+    </span>
+    <span>({{place.reviews}}+)</span>
+  </div>
 </ng-template>
