@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Place } from '@app/modules/places/models';
+import { InfoWindow } from '@agm/core/services/google-maps-types';
 
 @Component({
   moduleId: module.id,
@@ -10,6 +11,7 @@ import { Place } from '@app/modules/places/models';
 })
 export class PlacesMapComponent {
   private selectedPlaces: Place[] = [];
+  private infoWindow: InfoWindow;
 
   @Input() public places: Place[];
   @Input() public location: Location;
@@ -23,8 +25,16 @@ export class PlacesMapComponent {
     return this.places.length !== 0;
   }
 
-  public markerClick(place: Place) {
+  public markerClick(place: Place, infoWindow: InfoWindow) {
     this.selectedPlaces.push(place);
+
+    if (this.infoWindow === infoWindow) {
+      return;
+    } else if (this.infoWindow !== undefined) {
+      this.infoWindow.close();
+    }
+
+    this.infoWindow = infoWindow;
   }
 
   public iconUrl(place: Place): string {
