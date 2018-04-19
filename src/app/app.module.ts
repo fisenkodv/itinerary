@@ -3,13 +3,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
-import { routes } from './app.routes';
+import { AppRouterModule } from './app-router.module';
 import { AppComponent } from './modules/core/containers/app/app.component';
 import { CoreModule } from './modules/core/core.module';
 import { states } from './modules/core/state/app.state';
@@ -21,7 +20,6 @@ import { TranslationModule } from './modules/translation.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, { useHash: false }),
     NgxsModule.forRoot(states),
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production
@@ -33,6 +31,7 @@ import { TranslationModule } from './modules/translation.module';
     //   deserialize: JSON.parse,
     //   serialize: JSON.stringify
     // }),
+    AppRouterModule,
     CoreModule.forRoot(),
     TranslationModule.forRoot()
   ],

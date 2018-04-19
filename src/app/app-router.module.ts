@@ -1,7 +1,9 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 import { NotFoundPageComponent } from './modules/core/containers/not-found-page/not-found-page.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   { path: '', redirectTo: '/places', pathMatch: 'full' },
   {
     path: 'places',
@@ -9,3 +11,8 @@ export const routes: Routes = [
   },
   { path: '**', component: NotFoundPageComponent },
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes, { useHash: false })]
+})
+export class AppRouterModule {}
