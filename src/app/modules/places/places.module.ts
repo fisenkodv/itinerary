@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -10,7 +9,7 @@ import { DirectivesModule } from '../../shared/directives';
 import { PipesModule } from '../../shared/pipes';
 import { ComponentsModule } from './components';
 import { FindPlacesPageComponent } from './containers/find-places-page/find-places-page.component';
-import { routes } from './places.routes';
+import { PlacesRouterModule } from './places-router.module';
 import { GooglePlacesService, ItineraryPlacesService } from './services';
 import { states } from './state/module.state';
 
@@ -20,7 +19,7 @@ import { states } from './state/module.state';
     DirectivesModule,
     PipesModule,
     ComponentsModule,
-    RouterModule.forChild(routes),
+    PlacesRouterModule,
     NgxsModule.forFeature(states),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
