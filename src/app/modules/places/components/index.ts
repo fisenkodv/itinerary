@@ -13,14 +13,16 @@ import { PlacesListComponent } from './places-list/places-list.component';
 import { PlacesMapComponent } from './places-map/places-map.component';
 import { PlacesViewSwitcherComponent } from './places-view-switcher/places-view-switcher.component';
 import { SearchPanelComponent } from './search-panel/search-panel.component';
+import { SearchSpinnerComponent } from './search-spinner/search-spinner.component';
 
 export const COMPONENTS = [
   SearchPanelComponent,
   PlacesListComponent,
   PlaceItemComponent,
   PlaceRatingComponent,
-  PlacesMapComponent, 
-  PlacesViewSwitcherComponent
+  PlacesMapComponent,
+  PlacesViewSwitcherComponent,
+  SearchSpinnerComponent
 ];
 
 @NgModule({

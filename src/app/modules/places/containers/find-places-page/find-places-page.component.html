@@ -1,5 +1,12 @@
 <app-search-panel class="d-flex flex-column flex-shrink-0 flex-grow-0"></app-search-panel>
-<app-places-list class="container-fluid p-2" *ngIf="(viewMode$|async) === 'list'" [places]="places$ | async"></app-places-list>
-<app-places-map class="flex-fill" *ngIf="(viewMode$|async) === 'map'" [places]="places$ | async" [location]="location$ |async" [distance]="distance$ | async"></app-places-map>
 
-<app-places-view-switcher [viewMode]="viewMode$ | async" (viewModeChange)="toggleViewMode($event)"></app-places-view-switcher>
+<app-search-spinner class="d-flex flex-fill justify-content-center" *ngIf="loading$ | async"></app-search-spinner>
+
+<div class="d-flex flex-fill" *ngIf="(loading$ | async)===false">
+  <app-places-list class="container-fluid d-flex flex-fill justify-content-center p-2" *ngIf="(viewMode$|async) === 'list'"
+    [places]="places$ | async"></app-places-list>
+  <app-places-map class="flex-fill" *ngIf="(viewMode$|async) === 'map'" [places]="places$ | async" [location]="location$ |async"
+    [distance]="distance$ | async"></app-places-map>
+
+  <app-places-view-switcher [viewMode]="viewMode$ | async" (viewModeChange)="toggleViewMode($event)"></app-places-view-switcher>
+</div>
