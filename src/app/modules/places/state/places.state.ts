@@ -21,7 +21,7 @@ export interface PlacesStateModel {
   name: 'places',
   defaults: {
     loading: false,
-    viewMode: ViewMode.map,
+    viewMode: ViewMode.list,
     items: []
   },
   children: [FilterState, AutocompleteState]

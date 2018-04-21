@@ -12,7 +12,6 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PlacesListComponent {
   @Input() public places: Place[];
-  @Select(PlacesState.loading) loading$: Observable<boolean>; // TODO: should move out to the parent component
 
   public trackPlace(place: Place): string {
     return place.id;

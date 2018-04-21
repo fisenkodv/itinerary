@@ -16,8 +16,8 @@ import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../../models';
 @Component({
   moduleId: module.id,
   selector: 'app-search-panel',
-  templateUrl: 'search-panel.component.html',
-  styleUrls: ['search-panel.component.scss']
+  templateUrl: './search-panel.component.html',
+  styleUrls: ['./search-panel.component.scss']
 })
 export class SearchPanelComponent implements OnDestroy, OnInit {
   private destroy$: Subject<void> = new Subject<void>();
