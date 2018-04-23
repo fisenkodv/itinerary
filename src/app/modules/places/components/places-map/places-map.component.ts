@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Place } from '@app/modules/places/models';
 import { InfoWindow } from '@agm/core/services/google-maps-types';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Location, Place } from '@app/modules/places/models';
 
 @Component({
   moduleId: module.id,

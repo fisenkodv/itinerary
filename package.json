@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run prebuild && npm run version && ng build --prod",
+    "build": "npm run version && ng build --prod",
     "test": "jest",
     "test.watch": "jest --watch",
     "lint": "ng lint",
@@ -30,6 +30,7 @@
     "@angular/platform-browser": "^5.2.9",
     "@angular/platform-browser-dynamic": "^5.2.9",
     "@angular/router": "^5.2.9",
+    "@angular/service-worker": "^5.2.10",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "@ngxs/devtools-plugin": "3.0.0-beta.0",
