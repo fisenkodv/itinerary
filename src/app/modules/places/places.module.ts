@@ -9,7 +9,9 @@ import { DirectivesModule } from '../../shared/directives';
 import { PipesModule } from '../../shared/pipes';
 import { ComponentsModule } from './components';
 import { FindPlacesPageComponent } from './containers/find-places-page/find-places-page.component';
+import { PlaceDetailsPageComponent } from './containers/place-details-page/place-details-page.component';
 import { PlacesRouterModule } from './places-router.module';
+import { PlaceDetailsResolver } from './resolvers/place-details-resolver';
 import { GooglePlacesService, ItineraryPlacesService } from './services';
 import { states } from './state/module.state';
 
@@ -22,9 +24,9 @@ import { states } from './state/module.state';
     PlacesRouterModule,
     NgxsModule.forFeature(states),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule
   ],
-  declarations: [FindPlacesPageComponent],
-  providers: [GooglePlacesService, ItineraryPlacesService]
+  declarations: [FindPlacesPageComponent, PlaceDetailsPageComponent],
+  providers: [GooglePlacesService, ItineraryPlacesService, PlaceDetailsResolver]
 })
 export class PlacesModule {}

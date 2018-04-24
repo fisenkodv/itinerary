@@ -15,3 +15,13 @@ export class ChangeViewMode {
   static readonly type = '[places] change view mode';
   constructor(public payload: ViewMode) {}
 }
+
+export class GetPlaceDetails {
+  static readonly type = '[places] get place details';
+  constructor(public payload: string) {}
+}
+
+export class GetPlaceDetailsSuccess {
+  static readonly type = '[places] get place details success';
+  constructor(public payload: Place) {}
+}

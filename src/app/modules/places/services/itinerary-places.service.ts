@@ -52,7 +52,7 @@ export class ItineraryPlacesService {
     );
   }
 
-  public get places() {
+  public get places(): Observable<Place[]> {
     return this.places$;
   }
 

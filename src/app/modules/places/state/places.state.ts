@@ -1,8 +1,7 @@
 import { Place } from '@app/modules/places/models';
 import { ItineraryPlacesService } from '@app/modules/places/services';
-import { AutocompleteState } from '@app/modules/places/state/autocomplete.state';
 import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
-import { GetPlaces, GetPlacesSuccess, ChangeViewMode } from '@app/modules/places/state/places.actions';
+import { ChangeViewMode, GetPlaceDetails, GetPlaces, GetPlacesSuccess } from '@app/modules/places/state/places.actions';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { map } from 'rxjs/operators/map';
 
@@ -15,6 +14,7 @@ export interface PlacesStateModel {
   loading: boolean;
   viewMode: ViewMode;
   items: Place[];
+  selectedItem: Place;
 }
 
 @State<PlacesStateModel>({
@@ -22,9 +22,10 @@ export interface PlacesStateModel {
   defaults: {
     loading: false,
     viewMode: ViewMode.list,
-    items: []
+    items: [],
+    selectedItem: undefined
   },
-  children: [FilterState, AutocompleteState]
+  children: [FilterState]
 })
 export class PlacesState {
   @Selector()
@@ -63,5 +64,10 @@ export class PlacesState {
   @Action(ChangeViewMode)
   toggleViewMode({ patchState }: StateContext<PlacesStateModel>, { payload }: ChangeViewMode) {
     patchState({ viewMode: payload });
+  }
+
+  @Action(GetPlaceDetails)
+  getPlaceDetails({ patchState }: StateContext<PlacesStateModel>) {
+    patchState({ loading: true, selectedItem: undefined });
   }
 }

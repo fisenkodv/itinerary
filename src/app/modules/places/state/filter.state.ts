@@ -1,6 +1,7 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
 import { Location } from '../models';
+import { AutocompleteState } from './autocomplete.state';
 import { SetDistance, SetLocation, SetRating, SetReviews } from './filter.actions';
 
 export interface FilterStateModel {
@@ -17,7 +18,8 @@ export interface FilterStateModel {
     distance: 50,
     rating: 4,
     reviews: 100
-  }
+  },
+  children: [AutocompleteState]
 })
 export class FilterState {
   @Selector()

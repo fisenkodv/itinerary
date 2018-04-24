@@ -8,8 +8,8 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-find-places-page',
-  templateUrl: 'find-places-page.component.html',
-  styleUrls: ['find-places-page.component.scss']
+  templateUrl: './find-places-page.component.html',
+  styleUrls: ['./find-places-page.component.scss']
 })
 export class FindPlacesPageComponent {
   @Select(PlacesState.loading) loading$: Observable<boolean>;
