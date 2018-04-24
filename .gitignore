@@ -45,3 +45,4 @@ package-lock.json
 
 # application files
 *version.ts
+junit.xml

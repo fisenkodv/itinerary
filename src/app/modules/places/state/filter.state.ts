@@ -1,6 +1,7 @@
-import { Location } from '@app/modules/places/models';
-import { SetDistance, SetLocation, SetRating, SetReviews } from '@app/modules/places/state/filter.actions';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+
+import { Location } from '../models';
+import { SetDistance, SetLocation, SetRating, SetReviews } from './filter.actions';
 
 export interface FilterStateModel {
   location: Location;
