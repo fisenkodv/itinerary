@@ -6,8 +6,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "npm run version && ng build --prod",
-    "test": "jest",
-    "test.watch": "jest --watch",
+    "test": "jest --config jest.config.json",
+    "test.watch": "jest --watchAll --config jest.config.json",
+    "test.coverage": "jest --ci --coverage --testResultsProcessor=jest-junit --config jest.config.json",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "version": "node ./scripts/version.js",
@@ -63,6 +64,7 @@
     "jasmine-spec-reporter": "~4.2.1",
     "jest": "^22.4.3",
     "jest-preset-angular": "^5.2.1",
+    "jest-junit": "^3.6.0",
     "karma": "~2.0.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "^1.4.2",
@@ -72,9 +74,5 @@
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2"
-  },
-  "jest": {
-    "preset": "jest-preset-angular",
-    "setupTestFrameworkScriptFile": "<rootDir>/src/test.jest.ts"
   }
 }

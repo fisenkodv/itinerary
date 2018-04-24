@@ -9,7 +9,6 @@
     "/node_modules/",
     "index.ts"
   ],
-  "mapCoverage": true,
   "testURL": "http://localhost:4200",
   "roots": [
     "<rootDir>/src/"
