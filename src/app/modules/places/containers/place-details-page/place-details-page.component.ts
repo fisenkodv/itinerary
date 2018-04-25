@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs/Observable';
 
 import { Place } from '../../models';
+import { GetPlaceDetails } from '../../state/places.actions';
+import { PlacesState } from '../../state/places.state';
 
 @Component({
   selector: 'app-place-details-page',
@@ -9,13 +13,13 @@ import { Place } from '../../models';
   styleUrls: ['./place-details-page.component.scss']
 })
 export class PlaceDetailsPageComponent implements OnInit {
-  public placeId: string;
+  @Select(PlacesState.loading) loading$: Observable<boolean>;
+  @Select(PlacesState.selectedPlace) place$: Observable<Place>;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe((data: { place: Place }) => {
-      this.placeId = data.place.id;
-    });
+    const placeId = this.route.snapshot.paramMap.get('placeId');
+    this.store.dispatch(new GetPlaceDetails(placeId));
   }
 }

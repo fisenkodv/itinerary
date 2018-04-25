@@ -43,6 +43,11 @@ export class PlacesState {
     return state.items;
   }
 
+  @Selector()
+  public static selectedPlace(state: PlacesStateModel): Place {
+    return state.selectedItem;
+  }
+
   constructor(private store: Store, private service: ItineraryPlacesService) {
     this.service.places.subscribe(x => {
       this.store.dispatch(new GetPlacesSuccess(x));
