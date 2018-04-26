@@ -29,35 +29,38 @@ interface FirestorePlace {
 @Injectable()
 export class ItineraryPlacesService {
   private filter$: Subject<Filter>;
-  private places$: Observable<Place[]>;
+  private places$: Subject<Place[]>;
 
   constructor(private db: AngularFirestore) {
     this.filter$ = new Subject<Filter>();
-    this.places$ = this.filter$.pipe(
-      switchMap((filter: Filter) => {
-        const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
-          filter.location.latitude,
-          filter.location.longitude,
-          filter.distance
-        );
-
-        return this.db
-          .collection<FirestorePlace>('places', this.getQuery(southEastLocation, northWestLocation))
-          .snapshotChanges()
-          .pipe(
-            this.mapToPlaces(baseLocation),
-            this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews)
+    this.places$ = new Subject<Place[]>();
+    this.filter$
+      .pipe(
+        switchMap((filter: Filter) => {
+          const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
+            filter.location.latitude,
+            filter.location.longitude,
+            filter.distance
           );
-      })
-    );
+          return this.db
+            .collection<FirestorePlace>('places', this.getQuery(southEastLocation, northWestLocation))
+            .snapshotChanges()
+            .pipe(
+              this.mapToPlaces(baseLocation),
+              this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews)
+            );
+        })
+      )
+      .subscribe(res => this.places$.next(res));
   }
 
-  public get places(): Observable<Place[]> {
+  public getPlaces(filter: Filter): Observable<Place[]> {
+    this.filter$.next(filter);
     return this.places$;
   }
 
-  public setPlacesFilter(filter: Filter) {
-    this.filter$.next(filter);
+  public getPlaceDetails(placeId: string): Observable<Place> {
+    return null;
   }
 
   private getQuery(southEastLocation: Location, northWestLocation: Location): QueryFn {
