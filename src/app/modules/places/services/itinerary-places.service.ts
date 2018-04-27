@@ -4,10 +4,9 @@ import { GeoLocation, GeoLocationMeasurement } from '@app/modules/places/service
 import { AngularFirestore, DocumentChangeAction, QueryFn } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 import { UnaryFunction } from 'rxjs/interfaces';
-import { Observable } from 'rxjs/Observable';
-import { map, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
+import { map } from 'rxjs/operators';
 
 export interface Filter {
   distance: number;
@@ -28,35 +27,22 @@ interface FirestorePlace {
 
 @Injectable()
 export class ItineraryPlacesService {
-  private filter$: Subject<Filter>;
-  private places$: Subject<Place[]>;
-
-  constructor(private db: AngularFirestore) {
-    this.filter$ = new Subject<Filter>();
-    this.places$ = new Subject<Place[]>();
-    this.filter$
-      .pipe(
-        switchMap((filter: Filter) => {
-          const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
-            filter.location.latitude,
-            filter.location.longitude,
-            filter.distance
-          );
-          return this.db
-            .collection<FirestorePlace>('places', this.getQuery(southEastLocation, northWestLocation))
-            .snapshotChanges()
-            .pipe(
-              this.mapToPlaces(baseLocation),
-              this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews)
-            );
-        })
-      )
-      .subscribe(res => this.places$.next(res));
-  }
+  constructor(private db: AngularFirestore) {}
 
   public getPlaces(filter: Filter): Observable<Place[]> {
-    this.filter$.next(filter);
-    return this.places$;
+    const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
+      filter.location.latitude,
+      filter.location.longitude,
+      filter.distance
+    );
+
+    return this.db
+      .collection<FirestorePlace>('places', this.getQuery(southEastLocation, northWestLocation))
+      .snapshotChanges()
+      .pipe(
+        this.mapToPlaces(baseLocation),
+        this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews)
+      );
   }
 
   public getPlaceDetails(placeId: string): Observable<Place> {

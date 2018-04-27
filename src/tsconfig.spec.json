@@ -10,7 +10,8 @@
     ]
   },
   "files": [
-    "test.karma.ts"
+    "test.karma.ts",
+    "polyfills.ts"
   ],
   "include": [
     "**/*.spec.ts",
