@@ -5,10 +5,9 @@ import { ItineraryPlacesService } from '@app/modules/places/services';
 import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { map } from 'rxjs/operators/map';
+import { tap, map } from 'rxjs/operators';
 
-import { ChangeViewMode, GetPlaceDetails, GetPlaceDetailsSuccess, GetPlaces } from './places.actions';
+import { ChangeViewMode, GetPlaceDetails, GetPlaces } from './places.actions';
 
 export enum ViewMode {
   list = 'list',
