@@ -13,10 +13,10 @@ import {
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSidenavModule,
-  MatSliderModule,
   MatSlideToggleModule,
+  MatSliderModule,
   MatToolbarModule,
-  MatTooltipModule,
+  MatTooltipModule
 } from '@angular/material';
 
 export const MODULES = [
