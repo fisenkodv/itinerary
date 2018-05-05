@@ -27,7 +27,10 @@ interface FirestorePlace {
 
 @Injectable()
 export class ItineraryPlacesService {
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) {
+    const settings = { timestampsInSnapshots: true };
+    db.firestore.settings(settings);
+  }
 
   public getPlaces(filter: Filter): Observable<Place[]> {
     const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
