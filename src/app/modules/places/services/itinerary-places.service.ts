@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { UnaryFunction } from 'rxjs/interfaces';
 import { map } from 'rxjs/operators';
+import { FirestoreError } from '@firebase/firestore-types';
 
 export interface Filter {
   distance: number;
@@ -49,7 +50,10 @@ export class ItineraryPlacesService {
   }
 
   public getPlaceDetails(placeId: string): Observable<Place> {
-    return null;
+    return this.db
+      .doc<FirestorePlace>(`places/${placeId}`)
+      .valueChanges()
+      .pipe(map(this.firestorePlaceToPlace));
   }
 
   private getQuery(southEastLocation: Location, northWestLocation: Location): QueryFn {
@@ -74,12 +78,23 @@ export class ItineraryPlacesService {
     baseLocation: GeoLocation
   ): UnaryFunction<Observable<DocumentChangeAction[]>, Observable<Place[]>> {
     return map(places => {
-      return places.map(place => {
-        const data = place.payload.doc.data();
-        const id = place.payload.doc.id;
-        return <Place>{ id, location: { ...data }, ...data };
-      });
+      return places.map(this.documentToPlace);
     });
+  }
+
+  private documentToPlace(document: DocumentChangeAction): Place {
+    const data = document.payload.doc.data();
+    const id = document.payload.doc.id;
+    return <Place>{ id, location: { ...data }, ...data };
+  }
+
+  private firestorePlaceToPlace(firestorePlace: FirestorePlace): Place {
+    return <Place>{
+      id: '',
+      ...firestorePlace,
+      location: { longitude: firestorePlace.location.longitude, latitude: firestorePlace.location.latitude },
+      distance: 0
+    };
   }
 
   private filterPlaces(

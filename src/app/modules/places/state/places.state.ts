@@ -73,7 +73,7 @@ export class PlacesState {
   getPlaceDetails({ patchState, dispatch }: StateContext<PlacesStateModel>, { payload }: GetPlaceDetails) {
     patchState({ loading: true, selectedItem: undefined });
 
-    this.itineraryService
+    return this.itineraryService
       .getPlaceDetails(payload)
       .pipe(tap(result => patchState({ loading: false, selectedItem: result })));
   }

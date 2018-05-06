@@ -2,11 +2,12 @@ import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { PipesModule } from '../../../shared/pipes';
 import { MaterialModule } from '../../material.module';
 import { TranslationModule } from '../../translation.module';
+import { PlaceDetailsComponent } from './place-details/place-details.component';
 import { PlaceItemComponent } from './place-item/place-item.component';
 import { PlaceRatingComponent } from './place-rating/place-rating.component';
 import { PlacesListComponent } from './places-list/places-list.component';
@@ -22,7 +23,8 @@ export const COMPONENTS = [
   PlaceRatingComponent,
   PlacesMapComponent,
   PlacesViewSwitcherComponent,
-  SearchSpinnerComponent
+  SearchSpinnerComponent,
+  PlaceDetailsComponent
 ];
 
 @NgModule({
@@ -31,6 +33,7 @@ export const COMPONENTS = [
     PipesModule,
     ReactiveFormsModule,
     MaterialModule,
+    RouterModule.forChild([]),
     TranslationModule.forChild(),
     AgmCoreModule.forRoot({
       apiKey: environment.google.places.apiKey,
