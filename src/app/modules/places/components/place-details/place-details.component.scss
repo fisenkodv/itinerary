@@ -4,6 +4,16 @@
   width: 100%;
 }
 
+.image {
+    height: auto;
+  /* position: absolute; */
+  /* top: 0; */
+  /* bottom: 0; */
+  background-size: cover;
+  background-position: center;
+  flex: 1 1 60%;
+}
+
 .map {
   display: block;
   // position: absolute;

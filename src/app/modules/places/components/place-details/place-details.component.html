@@ -1,11 +1,14 @@
 <h1 class="m-0 px-3 py-4 font-weight-light">
   {{place.name}}
 </h1>
-<div class="details d-flex flex-fill px-3 py-0">
-  <div class="col-6 flex-grow-1 p-0">
-    <div class="col-6 p-0">
-      <img class="img-thumbnail" [attr.src]="place.imageUrl">
+<div class="d-flex details flex-fill pb-3 px-3">
+  <div class="col-6 d-flex flex-row flex-grow-1 flex-row p-0">
+    <div class="image col-6 p-0" [style.background-image]="'url('+ place.imageUrl + ')'">
+      <!-- <img class="img-thumbnail" [attr.src]="place.imageUrl"> -->
     </div>
+    <div style="
+      flex: 1 1 auto;
+    ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt eaque a libero iusto est officiis esse cumque explicabo aliquam iste, ipsa nesciunt odio, dicta aut distinctio voluptatibus, inventore at aliquid.</div>
   </div>
   <div class="col-6 flex-grow-1 p-0">
     <agm-map [latitude]="place.location.latitude" [longitude]="place.location.longitude" [zoom]="14">

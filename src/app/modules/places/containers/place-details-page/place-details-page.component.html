@@ -1,5 +1,5 @@
 <app-search-spinner class="d-flex flex-fill justify-content-center" *ngIf="loading$ | async"></app-search-spinner>
 
-<div *ngIf="place$ | async as place" class="d-flex flex-grow-1">
+<div class="d-flex flex-grow-1" *ngIf="place$ | async as place">
   <app-place-details [place]="place"></app-place-details>
 </div>
