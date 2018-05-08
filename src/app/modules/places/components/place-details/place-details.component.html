@@ -1,5 +1,15 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>{{place.name}}</mat-card-title>
-  </mat-card-header>
-</mat-card>
+<h1 class="m-0 px-3 py-4 font-weight-light">
+  {{place.name}}
+</h1>
+<div class="details d-flex flex-fill px-3 py-0">
+  <div class="col-6 flex-grow-1 p-0">
+    <div class="col-6 p-0">
+      <img class="img-thumbnail" [attr.src]="place.imageUrl">
+    </div>
+  </div>
+  <div class="col-6 flex-grow-1 p-0">
+    <agm-map [latitude]="place.location.latitude" [longitude]="place.location.longitude" [zoom]="14">
+      <agm-marker [latitude]="place.location.latitude" [longitude]="place.location.longitude" [title]="place.name"></agm-marker>
+    </agm-map>
+  </div>
+</div>
