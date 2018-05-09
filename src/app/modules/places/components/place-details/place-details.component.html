@@ -1,16 +1,22 @@
-<h1 class="m-0 px-3 py-4 font-weight-light">
+<h1 class="title m-0 px-3 py-4 font-weight-light">
   {{place.name}}
 </h1>
-<div class="d-flex details flex-fill pb-3 px-3">
-  <div class="col-6 d-flex flex-row flex-grow-1 flex-row p-0">
-    <div class="image col-6 p-0" [style.background-image]="'url('+ place.imageUrl + ')'">
-      <!-- <img class="img-thumbnail" [attr.src]="place.imageUrl"> -->
+<div class="details d-flex flex-fill flex-xs-column flex-sm-column flex-md-row pb-3 px-3">
+  <div class="details__info d-flex flex-column col-md-6 flex-grow-1 flex-sm-grow-0 p-0">
+    <div class="d-flex flex-row col-sm-12 col p-0 pr-3">
+      <div class="image-wrapper img-thumbnail col-6">
+        <div class="image-wrapper__image" [style.background-image]="'url('+ place.imageUrl + ')'">
+        </div>
+      </div>
+      <div class="col-6">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, odit repudiandae. Officia incidunt est porro labore aliquid
+        tempore dicta obcaecati asperiores. Tenetur quibusdam optio quos non eius consequuntur voluptatum rem.
+      </div>
     </div>
-    <div style="
-      flex: 1 1 auto;
-    ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt eaque a libero iusto est officiis esse cumque explicabo aliquam iste, ipsa nesciunt odio, dicta aut distinctio voluptatibus, inventore at aliquid.</div>
+
+    <div class="d-sm-none spacer"></div>
   </div>
-  <div class="col-6 flex-grow-1 p-0">
+  <div class="details__map col-6 col-sm flex-grow-1 p-0 mt-sm-3">
     <agm-map [latitude]="place.location.latitude" [longitude]="place.location.longitude" [zoom]="14">
       <agm-marker [latitude]="place.location.latitude" [longitude]="place.location.longitude" [title]="place.name"></agm-marker>
     </agm-map>
