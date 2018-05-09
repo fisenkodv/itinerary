@@ -4,10 +4,10 @@ import { GeoLocation, GeoLocationMeasurement } from '@app/modules/places/service
 import { AngularFirestore, DocumentChangeAction, QueryFn } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 import { UnaryFunction } from 'rxjs/interfaces';
-import { Observable } from 'rxjs/Observable';
-import { map, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
+import { map } from 'rxjs/operators';
+import { FirestoreError } from '@firebase/firestore-types';
 
 export interface Filter {
   distance: number;
@@ -28,36 +28,32 @@ interface FirestorePlace {
 
 @Injectable()
 export class ItineraryPlacesService {
-  private filter$: Subject<Filter>;
-  private places$: Observable<Place[]>;
-
   constructor(private db: AngularFirestore) {
-    this.filter$ = new Subject<Filter>();
-    this.places$ = this.filter$.pipe(
-      switchMap((filter: Filter) => {
-        const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
-          filter.location.latitude,
-          filter.location.longitude,
-          filter.distance
-        );
+    const settings = { timestampsInSnapshots: true };
+    db.firestore.settings(settings);
+  }
 
-        return this.db
-          .collection<FirestorePlace>('places', this.getQuery(southEastLocation, northWestLocation))
-          .snapshotChanges()
-          .pipe(
-            this.mapToPlaces(baseLocation),
-            this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews)
-          );
-      })
+  public getPlaces(filter: Filter): Observable<Place[]> {
+    const [northWestLocation, southEastLocation, baseLocation] = this.getLocationInfo(
+      filter.location.latitude,
+      filter.location.longitude,
+      filter.distance
     );
+
+    return this.db
+      .collection<FirestorePlace>('places', this.getQuery(southEastLocation, northWestLocation))
+      .snapshotChanges()
+      .pipe(
+        this.mapToPlaces(baseLocation),
+        this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews)
+      );
   }
 
-  public get places(): Observable<Place[]> {
-    return this.places$;
-  }
-
-  public setPlacesFilter(filter: Filter) {
-    this.filter$.next(filter);
+  public getPlaceDetails(placeId: string): Observable<Place> {
+    return this.db
+      .doc<FirestorePlace>(`places/${placeId}`)
+      .valueChanges()
+      .pipe(map(this.firestorePlaceToPlace));
   }
 
   private getQuery(southEastLocation: Location, northWestLocation: Location): QueryFn {
@@ -82,12 +78,23 @@ export class ItineraryPlacesService {
     baseLocation: GeoLocation
   ): UnaryFunction<Observable<DocumentChangeAction[]>, Observable<Place[]>> {
     return map(places => {
-      return places.map(place => {
-        const data = place.payload.doc.data();
-        const id = place.payload.doc.id;
-        return <Place>{ id, location: { ...data }, ...data };
-      });
+      return places.map(this.documentToPlace);
     });
+  }
+
+  private documentToPlace(document: DocumentChangeAction): Place {
+    const data = document.payload.doc.data();
+    const id = document.payload.doc.id;
+    return <Place>{ id, location: { ...data }, ...data };
+  }
+
+  private firestorePlaceToPlace(firestorePlace: FirestorePlace): Place {
+    return <Place>{
+      id: '',
+      ...firestorePlace,
+      location: { longitude: firestorePlace.location.longitude, latitude: firestorePlace.location.latitude },
+      distance: 0
+    };
   }
 
   private filterPlaces(

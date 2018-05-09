@@ -29,8 +29,14 @@
         "away": "miles away"
       },
       "tripadvisor": {
-        "tooltip": "Ratings Powered by TripAdvisor"
+        "open-link-tooltip": "See the place on TripAdvisor",
+        "powered-by-tooltip": "Ratings Powered by TripAdvisor"
       }
+    },
+    "details": {
+      "reviews": "Reviews",
+      "rating": "Rating",
+      "categories": "Categories"
     }
   },
   "404": {

@@ -1,9 +1,13 @@
+import 'rxjs/add/observable/empty';
+
 import { Place } from '@app/modules/places/models';
 import { ItineraryPlacesService } from '@app/modules/places/services';
 import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
-import { ChangeViewMode, GetPlaceDetails, GetPlaces, GetPlacesSuccess } from '@app/modules/places/state/places.actions';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { map } from 'rxjs/operators/map';
+import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
+
+import { ChangeViewMode, GetPlaceDetails, GetPlaces } from './places.actions';
 
 export enum ViewMode {
   list = 'list',
@@ -43,22 +47,21 @@ export class PlacesState {
     return state.items;
   }
 
-  constructor(private store: Store, private service: ItineraryPlacesService) {
-    this.service.places.subscribe(x => {
-      this.store.dispatch(new GetPlacesSuccess(x));
-    });
+  @Selector()
+  public static selectedPlace(state: PlacesStateModel): Place {
+    return state.selectedItem;
   }
+
+  constructor(private store: Store, private itineraryService: ItineraryPlacesService) {}
 
   @Action(GetPlaces)
   getPlaces({ patchState }: StateContext<PlacesStateModel>) {
     patchState({ loading: true, items: [] });
     const filter = <FilterStateModel>this.store.selectSnapshot(state => state.places.filter);
-    return this.service.setPlacesFilter({ ...filter });
-  }
 
-  @Action(GetPlacesSuccess)
-  getPlacesSuccess({ patchState }: StateContext<PlacesStateModel>, { payload }: GetPlacesSuccess) {
-    return patchState({ loading: false, items: payload });
+    return this.itineraryService
+      .getPlaces({ ...filter })
+      .pipe(tap(places => patchState({ items: places, loading: false })));
   }
 
   @Action(ChangeViewMode)
@@ -67,7 +70,11 @@ export class PlacesState {
   }
 
   @Action(GetPlaceDetails)
-  getPlaceDetails({ patchState }: StateContext<PlacesStateModel>) {
+  getPlaceDetails({ patchState, dispatch }: StateContext<PlacesStateModel>, { payload }: GetPlaceDetails) {
     patchState({ loading: true, selectedItem: undefined });
+
+    return this.itineraryService
+      .getPlaceDetails(payload)
+      .pipe(tap(result => patchState({ loading: false, selectedItem: result })));
   }
 }
