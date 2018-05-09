@@ -8,10 +8,10 @@ import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.
 import { GetPlaces } from '@app/modules/places/state/places.actions';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
-import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-
+import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../../models';
+import { PlacesStateModel } from '../../state/places.state';
 
 @Component({
   moduleId: module.id,
@@ -79,12 +79,15 @@ export class SearchPanelComponent implements OnDestroy, OnInit {
 
   private setCurrentPosition() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.store.dispatch([
-          new SetLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude }),
-          new GetPlaces()
-        ]);
-      });
+      const stateSnapshot = this.store.selectSnapshot<PlacesStateModel>(state => state.places);
+      if (!stateSnapshot.items.length) {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.store.dispatch([
+            new SetLocation({ latitude: position.coords.latitude, longitude: position.coords.longitude }),
+            new GetPlaces()
+          ]);
+        });
+      }
     }
   }
 }
