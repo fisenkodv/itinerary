@@ -19,7 +19,7 @@
 
   <mat-card-content class="place-card-content">
     <div class="d-flex flex-wrap align-items-center place-card-content__statistics">
-      <span class="w-100 mb-1 text-truncate place-categories">{{place.categories | join:", "}}</span>
+      <span class="w-100 mb-1 text-truncate place-categories" [matTooltip]="getCategoriesTooltipText()">{{getCategoriesText()}}</span>
       <span class="d-inline-flex place-rating">
         <app-place-rating [rating]="place.rating"></app-place-rating>
       </span>
