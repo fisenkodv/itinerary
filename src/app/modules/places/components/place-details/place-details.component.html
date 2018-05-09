@@ -1,9 +1,9 @@
 <h1 class="title m-0 px-3 py-4 font-weight-light">
   {{place.name}}
 </h1>
-<div class="details d-flex flex-fill flex-xs-column flex-sm-column flex-md-row pb-3 px-3">
-  <div class="details__info d-flex flex-column col-md-6 flex-grow-1 flex-sm-grow-0 p-0">
-    <div class="d-flex flex-row col-sm-12 col p-0 pr-3">
+<div class="details d-flex flex-fill flex-column flex-sm-column flex-md-row pb-3 px-3">
+  <div class="details__info d-flex flex-row flex-sm-column col-md-6 flex-grow-0 flex-sm-grow-0 flex-md-grow-1 p-0">
+    <div class="d-flex flex-row col-sm-12 col-12 col-md p-0 pr-3">
       <div class="image-wrapper img-thumbnail col-6">
         <div class="image-wrapper__image" [style.background-image]="'url('+ place.imageUrl + ')'">
         </div>
@@ -14,9 +14,9 @@
       </div>
     </div>
 
-    <div class="d-sm-none spacer"></div>
+    <div class="d-none d-md-flex spacer"></div>
   </div>
-  <div class="details__map col-6 col-sm flex-grow-1 p-0 mt-sm-3">
+  <div class="details__map col-12 col-sm flex-grow-1 p-0 mt-3 mt-md-0">
     <agm-map [latitude]="place.location.latitude" [longitude]="place.location.longitude" [zoom]="14">
       <agm-marker [latitude]="place.location.latitude" [longitude]="place.location.longitude" [title]="place.name"></agm-marker>
     </agm-map>
