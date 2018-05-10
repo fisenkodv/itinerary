@@ -21,7 +21,7 @@ export class GooglePlacesService {
     );
 
     this.placeDetailsObservableFactory = Observable.bindCallback(
-      this.getPlaceDetailsCallback,
+      this.getPlaceDetailsCallback.bind(this),
       this.getPlaceDetailsResultSelector
     );
   }
