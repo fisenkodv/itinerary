@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ViewMode } from '@app/modules/places/state/places.state';
+
+import { ViewMode } from '../../state/places.state';
 
 @Component({
   selector: 'app-places-view-switcher',

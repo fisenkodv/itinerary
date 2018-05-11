@@ -7,7 +7,6 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { UnaryFunction } from 'rxjs/interfaces';
 import { map } from 'rxjs/operators';
-import { FirestoreError } from '@firebase/firestore-types';
 
 export interface Filter {
   distance: number;

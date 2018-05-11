@@ -1,9 +1,9 @@
-import { MapsAPILoader } from '@agm/core';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import {} from '@types/googlemaps';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/bindCallback';
+import { } from '@types/googlemaps';
+
+import { MapsAPILoader } from '@agm/core';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../models';
 

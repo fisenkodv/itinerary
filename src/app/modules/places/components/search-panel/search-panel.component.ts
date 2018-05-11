@@ -1,16 +1,17 @@
 ﻿import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
-import { GetAutocomplete, SelectPlace } from '@app/modules/places/state/autocomplete.actions';
-import { AutocompleteState } from '@app/modules/places/state/autocomplete.state';
-import { SetDistance, SetLocation, SetRating, SetReviews } from '@app/modules/places/state/filter.actions';
-import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
-import { GetPlaces } from '@app/modules/places/state/places.actions';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs/Subject';
+
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../../models';
+import { GetAutocomplete, SelectPlace } from '../../state/autocomplete.actions';
+import { AutocompleteState } from '../../state/autocomplete.state';
+import { SetDistance, SetLocation, SetRating, SetReviews } from '../../state/filter.actions';
+import { FilterState, FilterStateModel } from '../../state/filter.state';
+import { GetPlaces } from '../../state/places.actions';
 import { PlacesStateModel } from '../../state/places.state';
 
 @Component({

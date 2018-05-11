@@ -1,8 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Place } from '@app/modules/places/models';
-import { PlacesState } from '@app/modules/places/state/places.state';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs/Observable';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+import { Place } from '../../models';
 
 @Component({
   selector: 'app-places-list',
