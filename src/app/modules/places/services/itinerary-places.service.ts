@@ -4,7 +4,7 @@ import { GeoLocation, GeoLocationMeasurement } from '@app/modules/places/service
 import { AngularFirestore, DocumentChangeAction, QueryFn } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
-import { Observable } from 'rxjs';
+import { Observable, OperatorFunction } from 'rxjs';
 import { UnaryFunction } from 'rxjs/interfaces';
 import { map } from 'rxjs/operators';
 
@@ -42,10 +42,7 @@ export class ItineraryPlacesService {
     return this.db
       .collection<FirestorePlace>('places', this.getQuery(southEastLocation, northWestLocation))
       .snapshotChanges()
-      .pipe(
-        this.mapToPlaces(baseLocation),
-        this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews)
-      );
+      .pipe(this.mapToPlaces(), this.filterPlaces(baseLocation, filter.distance, filter.rating, filter.reviews));
   }
 
   public getPlaceDetails(placeId: string): Observable<Place> {
@@ -73,15 +70,13 @@ export class ItineraryPlacesService {
         );
   }
 
-  private mapToPlaces(
-    baseLocation: GeoLocation
-  ): UnaryFunction<Observable<DocumentChangeAction[]>, Observable<Place[]>> {
+  private mapToPlaces(): OperatorFunction<DocumentChangeAction<FirestorePlace>[], Place[]> {
     return map(places => {
       return places.map(this.documentToPlace);
     });
   }
 
-  private documentToPlace(document: DocumentChangeAction): Place {
+  private documentToPlace(document: DocumentChangeAction<any>): Place {
     const data = document.payload.doc.data();
     const id = document.payload.doc.id;
     return <Place>{ id, location: { ...data }, ...data };

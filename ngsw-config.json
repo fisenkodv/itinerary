@@ -5,8 +5,7 @@
       "name": "app",
       "installMode": "prefetch",
       "resources": {
-        "files": ["/favicon.ico", "/index.html", "/assets/**"],
-        "versionedFiles": ["/*.bundle.css", "/*.bundle.js", "/*.chunk.js"],
+        "files": ["/favicon.ico", "/index.html", "/assets/**", "/*.bundle.css", "/*.bundle.js", "/*.chunk.js"],
         "urls": ["https://fonts.googleapis.com/**"]
       }
     },
