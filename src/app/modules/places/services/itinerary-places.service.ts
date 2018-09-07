@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, DocumentChangeAction, QueryFn } from '@angular/fire/firestore';
 import { Location, Place } from '@app/modules/places/models';
 import { GeoLocation, GeoLocationMeasurement } from '@app/modules/places/services/geo-location';
-import { AngularFirestore, DocumentChangeAction, QueryFn } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import * as _ from 'lodash';
 import { Observable, OperatorFunction } from 'rxjs';
-import { UnaryFunction } from 'rxjs/interfaces';
 import { map } from 'rxjs/operators';
 
 export interface Filter {

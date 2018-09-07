@@ -1,5 +1,5 @@
+/// <reference types="@types/googlemaps" />
 import 'rxjs/add/observable/bindCallback';
-import { } from '@types/googlemaps';
 
 import { MapsAPILoader } from '@agm/core';
 import { Injectable } from '@angular/core';
