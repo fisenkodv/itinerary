@@ -8,6 +8,7 @@
   "places": {
     "search": {
       "title": "Search Places",
+      "sub-title": "US Only",
       "location": {
         "placeholder": "Select location"
       },

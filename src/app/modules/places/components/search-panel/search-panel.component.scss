@@ -12,6 +12,15 @@
   background-color: mat-color(map-get($light-theme, primary), default-contrast);
 }
 
+.title {
+  &__subtitle {
+    font-size: small;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 0px 3px;
+  }
+}
+
 .control-group {
   &:last-child {
     margin-right: 0;
