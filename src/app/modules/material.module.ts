@@ -7,6 +7,7 @@ import {
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
+  MatIconRegistry,
   MatInputModule,
   MatListModule,
   MatMenuModule,
@@ -18,6 +19,7 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export const MODULES = [
   MatAutocompleteModule,
@@ -44,4 +46,8 @@ export const MODULES = [
   declarations: [],
   exports: MODULES
 })
-export class MaterialModule {}
+export class MaterialModule {
+  constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
+  }
+}

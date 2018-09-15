@@ -12,7 +12,8 @@ import { LayoutState } from '@app/modules/core/state/layout.state';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  @Select(LayoutState.showSidenav) public showSidenav$: Observable<boolean>;
+  @Select(LayoutState.showSidenav)
+  public showSidenav$: Observable<boolean>;
 
   constructor(private store: Store) {}
 
@@ -22,5 +23,10 @@ export class AppComponent {
 
   closeSidenav() {
     this.store.dispatch(new layout.CloseSidenav());
+  }
+
+  openLink(link: string) {
+    window.open(link, '_blank');
+    this.closeSidenav();
   }
 }

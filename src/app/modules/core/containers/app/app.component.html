@@ -1,7 +1,10 @@
 ﻿<app-layout>
   <app-sidenav [open]="showSidenav$ | async">
-    <app-nav-item (navigate)="closeSidenav()" routerLink="/" icon="places" hint="{{'sidenav.places.hint' | translate }}">
+    <app-nav-item (navigate)="closeSidenav()" routerLink="/" icon="map-search" hint="{{'sidenav.places.hint' | translate }}">
       {{'sidenav.places.title' | translate }}
+    </app-nav-item>
+    <app-nav-item (navigate)="openLink('https://github.com/fisenkodv/itinerary')" routerLink="/" icon="github-circle" hint="{{'sidenav.git-hub.hint' | translate }}">
+      {{'sidenav.git-hub.title' | translate }}
     </app-nav-item>
   </app-sidenav>
 

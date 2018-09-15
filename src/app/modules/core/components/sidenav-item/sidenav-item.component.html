@@ -1,5 +1,5 @@
 ﻿<a mat-list-item [routerLink]="routerLink" (click)="navigate.emit()">
-  <mat-icon mat-list-icon>{{ icon }}</mat-icon>
+  <mat-icon mat-list-icon svgIcon={{icon}}></mat-icon>
   <span mat-line>
     <ng-content></ng-content>
   </span>

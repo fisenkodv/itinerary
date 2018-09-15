@@ -2,7 +2,11 @@
   "sidenav": {
     "places": {
       "title": "Find places",
-      "hint": "Find places"
+      "hint": "Find places in the US"
+    },
+    "git-hub": {
+      "title": "Get the latest changes",
+      "hint": "Go to GitHub"
     }
   },
   "places": {
