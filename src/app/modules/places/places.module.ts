@@ -12,7 +12,7 @@ import { FindPlacesPageComponent } from './containers/find-places-page/find-plac
 import { PlaceDetailsPageComponent } from './containers/place-details-page/place-details-page.component';
 import { PlacesRouterModule } from './places-router.module';
 import { GooglePlacesService, ItineraryPlacesService } from './services';
-import { states } from './state/module.state';
+import { States } from './state/module.state';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { states } from './state/module.state';
     PipesModule,
     ComponentsModule,
     PlacesRouterModule,
-    NgxsModule.forFeature(states),
+    NgxsModule.forFeature(States),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],

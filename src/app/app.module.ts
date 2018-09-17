@@ -12,7 +12,7 @@ import { environment } from '../environments/environment';
 import { AppRouterModule } from './app-router.module';
 import { AppComponent } from './modules/core/containers/app/app.component';
 import { CoreModule } from './modules/core/core.module';
-import { states } from './modules/core/state/app.state';
+import { States } from './modules/core/state/app.state';
 import { TranslationModule } from './modules/translation.module';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { TranslationModule } from './modules/translation.module';
     BrowserAnimationsModule,
     HttpClientModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-    NgxsModule.forRoot(states),
+    NgxsModule.forRoot(States),
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production
     }),

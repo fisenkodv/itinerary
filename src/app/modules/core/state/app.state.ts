@@ -1,3 +1,3 @@
-import { LayoutState, LayoutStateModel } from './layout.state';
+import { LayoutState } from './layout.state';
 
-export const states = [LayoutState];
+export const States = [LayoutState];

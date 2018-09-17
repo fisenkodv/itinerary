@@ -4,8 +4,7 @@ import { Place } from '@app/modules/places/models';
 import { ItineraryPlacesService } from '@app/modules/places/services';
 import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 import { ChangeViewMode, GetPlaceDetails, GetPlaces } from './places.actions';
 

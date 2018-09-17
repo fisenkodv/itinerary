@@ -1,4 +1,3 @@
-import { Place } from '@app/modules/places/models';
 import { ViewMode } from '@app/modules/places/state/places.state';
 
 export class GetPlaces {
