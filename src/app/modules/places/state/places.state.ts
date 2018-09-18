@@ -69,7 +69,7 @@ export class PlacesState {
   }
 
   @Action(GetPlaceDetails)
-  getPlaceDetails({ patchState, dispatch }: StateContext<PlacesStateModel>, { payload }: GetPlaceDetails) {
+  getPlaceDetails({ patchState }: StateContext<PlacesStateModel>, { payload }: GetPlaceDetails) {
     patchState({ loading: true, selectedItem: undefined });
 
     return this.itineraryService
