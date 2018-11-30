@@ -2,9 +2,8 @@
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter, switchMap, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
 
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../../models';
 import { GetAutocomplete, SelectPlace } from '../../state/autocomplete.actions';

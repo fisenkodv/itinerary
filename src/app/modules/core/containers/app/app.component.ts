@@ -1,9 +1,9 @@
 ﻿import { Component } from '@angular/core';
+import { LayoutState } from '@app/modules/core/state/layout.state';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import * as layout from '../../state/layout.actions';
-import { LayoutState } from '@app/modules/core/state/layout.state';
 
 @Component({
   moduleId: module.id,

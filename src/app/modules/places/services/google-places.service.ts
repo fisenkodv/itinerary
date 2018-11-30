@@ -1,9 +1,7 @@
 /// <reference types="@types/googlemaps" />
-import 'rxjs/add/observable/bindCallback';
-
 import { MapsAPILoader } from '@agm/core';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { bindCallback, Observable, pipe } from 'rxjs';
 
 import { GooglePlacesAutocomplete, GooglePlacesPlace } from '../models';
 
@@ -15,14 +13,9 @@ export class GooglePlacesService {
 
   constructor(private apiLoader: MapsAPILoader) {
     this.apiLoader.load();
-    this.autocompleteObservableFactory = Observable.bindCallback(
-      this.autocompleteCallback,
-      this.autocompleteResultSelector
-    );
-
-    this.placeDetailsObservableFactory = Observable.bindCallback(
-      this.getPlaceDetailsCallback.bind(this),
-      this.getPlaceDetailsResultSelector
+    this.autocompleteObservableFactory = pipe(bindCallback(this.autocompleteCallback, this.autocompleteResultSelector));
+    this.placeDetailsObservableFactory = pipe(
+      bindCallback(this.getPlaceDetailsCallback.bind(this), this.getPlaceDetailsResultSelector)
     );
   }
 

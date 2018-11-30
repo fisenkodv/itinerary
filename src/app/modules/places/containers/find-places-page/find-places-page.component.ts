@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { Place } from '../../models';
 import { FilterState } from '../../state/filter.state';

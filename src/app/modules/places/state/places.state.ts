@@ -1,5 +1,3 @@
-import 'rxjs/add/observable/empty';
-
 import { Place } from '@app/modules/places/models';
 import { ItineraryPlacesService } from '@app/modules/places/services';
 import { FilterState, FilterStateModel } from '@app/modules/places/state/filter.state';
