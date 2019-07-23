@@ -45,7 +45,7 @@
     "@ngxs/store": "3.3.4",
     "@types/googlemaps": "^3.30.16",
     "@types/lodash": "4.14.119",
-    "bootstrap": "4.2.1",
+    "bootstrap": "4.3.1",
     "core-js": "^2.6.1",
     "firebase": "5.7.1",
     "git-describe": "^4.0.3",
