@@ -27,12 +27,6 @@ import { TranslationModule } from './modules/translation.module';
       disabled: environment.production
     }),
     NgxsLoggerPluginModule.forRoot({ logger: console, collapsed: false }),
-    // NgxsStoragePluginModule.forRoot({
-    //   key: '@@STATE',
-    //   storage: StorageOption.LocalStorage,
-    //   deserialize: JSON.parse,
-    //   serialize: JSON.stringify
-    // }),
     AppRouterModule,
     CoreModule.forRoot(),
     TranslationModule.forRoot()
