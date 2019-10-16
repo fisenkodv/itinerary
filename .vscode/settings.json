@@ -9,5 +9,8 @@
     "**/bin": true,
     "**/obj": true,
     "**/dll": true
-  }
+  },
+  "cSpell.words": [
+    "junit"
+  ]
 }

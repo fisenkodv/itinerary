@@ -8,7 +8,7 @@ export class OnEnterPressDirective {
 
   @HostListener('keypress', ['$event'])
   public onkeypress(event: KeyboardEvent) {
-    if (event.which === 13) {
+    if (event.key === 'Enter') {
       this.enter.emit(event);
     }
   }
