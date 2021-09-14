@@ -4,7 +4,7 @@
 
 ---
 
-A web application on [Angular](https://github.com/angular/angular) + [Firebase](https://github.com/angular/angularfire2) for searching places near you (US **only**) . The project is available **[HERE](https://itinerary-1488041928048.firebaseapp.com/)**.
+A web application on [Angular](https://github.com/angular/angular) + [Firebase](https://github.com/angular/angularfire2) for searching places near you (**US only**) . The project is available **[HERE](https://itinerary-1488041928048.firebaseapp.com/)**.
 
 ## License
 
